@@ -1,0 +1,60 @@
+11:37:44 **** Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:42:32 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:42:46 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:43:13 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:46:43 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:47:10 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:49:06 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:49:18 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:50:22 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
+11:52:34 **** Incremental Build of configuration Debug for project testArduinoUNO ****
+make all 
+Building file: ../testArduinoUNO.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"testArduinoUNO.d" -MT"testArduinoUNO.o" -c -o "testArduinoUNO.o" "../testArduinoUNO.c"
+make: *** [testArduinoUNO.o] Error -1073741502
