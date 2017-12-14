@@ -1,0 +1,19 @@
+dont_use_io iocell 1 0
+dont_use_io iocell 1 1
+dont_use_io iocell 1 3
+set_location "\TIMER1:TimerUDB:status_tc\" macrocell 1 3 0 0
+set_location "Net_66" macrocell 3 0 0 0
+set_location "\TIMER1:TimerUDB:sT16:timerdp:u0\" datapathcell 0 3 2 
+set_location "\RISING_EDGE:last\" macrocell 3 0 0 1
+set_location "Net_71" macrocell 3 0 0 2
+set_location "\TIMER1:TimerUDB:sT16:timerdp:u1\" datapathcell 1 3 2 
+set_location "\TIMER1:TimerUDB:rstSts:stsreg\" statusicell 1 3 4 
+set_location "\TIMER1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 1 3 6 
+set_io "Rx(0)" iocell 3 7
+set_location "RisingEdgeISR" interrupt -1 -1 1
+set_location "FallingEdgeISR" interrupt -1 -1 0
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_location "TimerISR" interrupt -1 -1 2
+set_io "IDLE(0)" iocell 3 1
+set_io "COLLISION(0)" iocell 3 0
+set_io "BUSY(0)" iocell 3 2

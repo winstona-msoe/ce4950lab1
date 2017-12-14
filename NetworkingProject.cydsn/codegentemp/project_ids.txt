@@ -1,0 +1,6 @@
+C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\NetworkingProject.cyprj|3ee010b0-63e7-4cad-8980-40e29ad1500a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|890724c8-5b25-4853-b535-17584035a0ef
+C:\Users\wellst\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|d13d0a9f-dd53-4ec4-8b6f-bc332b025a64
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|b2dd2fe2-66c6-470c-87c0-477a5e0a4bfa
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|5069f856-e1b8-479f-b78c-fb7f4eb641b2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|cdbd3288-bfcf-482e-b825-af9f37dbf353
