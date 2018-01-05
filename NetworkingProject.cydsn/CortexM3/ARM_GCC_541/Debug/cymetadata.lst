@@ -1,0 +1,824 @@
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_metadata
+  20              		.global	cy_meta_flashprotect
+  21              		.global	cy_meta_wonvl
+  22              		.global	cy_meta_custnvl
+  23              		.global	cy_meta_configecc
+  24              		.section	.cyconfigecc,"a",%progbits
+  25              		.align	2
+  26              		.type	cy_meta_configecc, %object
+  27              		.size	cy_meta_configecc, 320
+  28              	cy_meta_configecc:
+  29 0000 01       		.byte	1
+  30 0001 64       		.byte	100
+  31 0002 00       		.byte	0
+  32 0003 40       		.byte	64
+  33 0004 01       		.byte	1
+  34 0005 05       		.byte	5
+  35 0006 01       		.byte	1
+  36 0007 40       		.byte	64
+  37 0008 32       		.byte	50
+  38 0009 0A       		.byte	10
+  39 000a 01       		.byte	1
+  40 000b 40       		.byte	64
+  41 000c 17       		.byte	23
+  42 000d 0B       		.byte	11
+  43 000e 01       		.byte	1
+  44 000f 40       		.byte	64
+  45 0010 0A       		.byte	10
+  46 0011 14       		.byte	20
+  47 0012 01       		.byte	1
+  48 0013 40       		.byte	64
+  49 0014 08       		.byte	8
+  50 0015 15       		.byte	21
+  51 0016 01       		.byte	1
+  52 0017 40       		.byte	64
+  53 0018 03       		.byte	3
+  54 0019 17       		.byte	23
+  55 001a 01       		.byte	1
+  56 001b 40       		.byte	64
+  57 001c 04       		.byte	4
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 2
+
+
+  58 001d 40       		.byte	64
+  59 001e 01       		.byte	1
+  60 001f 40       		.byte	64
+  61 0020 03       		.byte	3
+  62 0021 41       		.byte	65
+  63 0022 01       		.byte	1
+  64 0023 40       		.byte	64
+  65 0024 05       		.byte	5
+  66 0025 42       		.byte	66
+  67 0026 01       		.byte	1
+  68 0027 40       		.byte	64
+  69 0028 02       		.byte	2
+  70 0029 43       		.byte	67
+  71 002a 01       		.byte	1
+  72 002b 40       		.byte	64
+  73 002c 03       		.byte	3
+  74 002d 48       		.byte	72
+  75 002e 01       		.byte	1
+  76 002f 40       		.byte	64
+  77 0030 04       		.byte	4
+  78 0031 49       		.byte	73
+  79 0032 01       		.byte	1
+  80 0033 40       		.byte	64
+  81 0034 04       		.byte	4
+  82 0035 50       		.byte	80
+  83 0036 01       		.byte	1
+  84 0037 40       		.byte	64
+  85 0038 01       		.byte	1
+  86 0039 51       		.byte	81
+  87 003a 01       		.byte	1
+  88 003b 40       		.byte	64
+  89 003c 8B       		.byte	-117
+  90 003d 0D       		.byte	13
+  91 003e E2       		.byte	-30
+  92 003f 08       		.byte	8
+  93 0040 40       		.byte	64
+  94 0041 54       		.byte	84
+  95 0042 49       		.byte	73
+  96 0043 FF       		.byte	-1
+  97 0044 4A       		.byte	74
+  98 0045 FF       		.byte	-1
+  99 0046 4B       		.byte	75
+ 100 0047 FF       		.byte	-1
+ 101 0048 4F       		.byte	79
+ 102 0049 01       		.byte	1
+ 103 004a 50       		.byte	80
+ 104 004b 18       		.byte	24
+ 105 004c 5A       		.byte	90
+ 106 004d 04       		.byte	4
+ 107 004e 5D       		.byte	93
+ 108 004f 01       		.byte	1
+ 109 0050 5F       		.byte	95
+ 110 0051 01       		.byte	1
+ 111 0052 60       		.byte	96
+ 112 0053 40       		.byte	64
+ 113 0054 62       		.byte	98
+ 114 0055 40       		.byte	64
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 3
+
+
+ 115 0056 64       		.byte	100
+ 116 0057 40       		.byte	64
+ 117 0058 65       		.byte	101
+ 118 0059 40       		.byte	64
+ 119 005a 66       		.byte	102
+ 120 005b 80       		.byte	-128
+ 121 005c 68       		.byte	104
+ 122 005d 80       		.byte	-128
+ 123 005e 6A       		.byte	106
+ 124 005f 80       		.byte	-128
+ 125 0060 6C       		.byte	108
+ 126 0061 80       		.byte	-128
+ 127 0062 6E       		.byte	110
+ 128 0063 80       		.byte	-128
+ 129 0064 92       		.byte	-110
+ 130 0065 01       		.byte	1
+ 131 0066 AE       		.byte	-82
+ 132 0067 01       		.byte	1
+ 133 0068 B0       		.byte	-80
+ 134 0069 01       		.byte	1
+ 135 006a BE       		.byte	-66
+ 136 006b 01       		.byte	1
+ 137 006c C0       		.byte	-64
+ 138 006d 15       		.byte	21
+ 139 006e C5       		.byte	-59
+ 140 006f EC       		.byte	-20
+ 141 0070 C6       		.byte	-58
+ 142 0071 02       		.byte	2
+ 143 0072 C8       		.byte	-56
+ 144 0073 07       		.byte	7
+ 145 0074 C9       		.byte	-55
+ 146 0075 FF       		.byte	-1
+ 147 0076 CA       		.byte	-54
+ 148 0077 FF       		.byte	-1
+ 149 0078 CB       		.byte	-53
+ 150 0079 FF       		.byte	-1
+ 151 007a CD       		.byte	-51
+ 152 007b 83       		.byte	-125
+ 153 007c CE       		.byte	-50
+ 154 007d 03       		.byte	3
+ 155 007e CF       		.byte	-49
+ 156 007f 01       		.byte	1
+ 157 0080 D0       		.byte	-48
+ 158 0081 18       		.byte	24
+ 159 0082 D2       		.byte	-46
+ 160 0083 80       		.byte	-128
+ 161 0084 D4       		.byte	-44
+ 162 0085 01       		.byte	1
+ 163 0086 D6       		.byte	-42
+ 164 0087 04       		.byte	4
+ 165 0088 D8       		.byte	-40
+ 166 0089 04       		.byte	4
+ 167 008a DA       		.byte	-38
+ 168 008b 04       		.byte	4
+ 169 008c DB       		.byte	-37
+ 170 008d 04       		.byte	4
+ 171 008e DD       		.byte	-35
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 4
+
+
+ 172 008f 11       		.byte	17
+ 173 0090 DF       		.byte	-33
+ 174 0091 01       		.byte	1
+ 175 0092 E0       		.byte	-32
+ 176 0093 40       		.byte	64
+ 177 0094 E2       		.byte	-30
+ 178 0095 40       		.byte	64
+ 179 0096 E4       		.byte	-28
+ 180 0097 40       		.byte	64
+ 181 0098 E5       		.byte	-27
+ 182 0099 40       		.byte	64
+ 183 009a E6       		.byte	-26
+ 184 009b 80       		.byte	-128
+ 185 009c E8       		.byte	-24
+ 186 009d 80       		.byte	-128
+ 187 009e EA       		.byte	-22
+ 188 009f 80       		.byte	-128
+ 189 00a0 EC       		.byte	-20
+ 190 00a1 80       		.byte	-128
+ 191 00a2 EE       		.byte	-18
+ 192 00a3 80       		.byte	-128
+ 193 00a4 0F       		.byte	15
+ 194 00a5 80       		.byte	-128
+ 195 00a6 17       		.byte	23
+ 196 00a7 80       		.byte	-128
+ 197 00a8 1E       		.byte	30
+ 198 00a9 80       		.byte	-128
+ 199 00aa 42       		.byte	66
+ 200 00ab 80       		.byte	-128
+ 201 00ac 47       		.byte	71
+ 202 00ad 80       		.byte	-128
+ 203 00ae 48       		.byte	72
+ 204 00af 01       		.byte	1
+ 205 00b0 4D       		.byte	77
+ 206 00b1 04       		.byte	4
+ 207 00b2 4F       		.byte	79
+ 208 00b3 81       		.byte	-127
+ 209 00b4 56       		.byte	86
+ 210 00b5 80       		.byte	-128
+ 211 00b6 57       		.byte	87
+ 212 00b7 40       		.byte	64
+ 213 00b8 5D       		.byte	93
+ 214 00b9 04       		.byte	4
+ 215 00ba 5E       		.byte	94
+ 216 00bb 80       		.byte	-128
+ 217 00bc 5F       		.byte	95
+ 218 00bd 01       		.byte	1
+ 219 00be 67       		.byte	103
+ 220 00bf 80       		.byte	-128
+ 221 00c0 74       		.byte	116
+ 222 00c1 01       		.byte	1
+ 223 00c2 77       		.byte	119
+ 224 00c3 80       		.byte	-128
+ 225 00c4 87       		.byte	-121
+ 226 00c5 40       		.byte	64
+ 227 00c6 C2       		.byte	-62
+ 228 00c7 10       		.byte	16
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 5
+
+
+ 229 00c8 C4       		.byte	-60
+ 230 00c9 80       		.byte	-128
+ 231 00ca D0       		.byte	-48
+ 232 00cb 11       		.byte	17
+ 233 00cc D2       		.byte	-46
+ 234 00cd 18       		.byte	24
+ 235 00ce D6       		.byte	-42
+ 236 00cf D0       		.byte	-48
+ 237 00d0 D8       		.byte	-40
+ 238 00d1 80       		.byte	-128
+ 239 00d2 90       		.byte	-112
+ 240 00d3 04       		.byte	4
+ 241 00d4 92       		.byte	-110
+ 242 00d5 01       		.byte	1
+ 243 00d6 A8       		.byte	-88
+ 244 00d7 01       		.byte	1
+ 245 00d8 AA       		.byte	-86
+ 246 00d9 06       		.byte	6
+ 247 00da B0       		.byte	-80
+ 248 00db 02       		.byte	2
+ 249 00dc B2       		.byte	-78
+ 250 00dd 04       		.byte	4
+ 251 00de B4       		.byte	-76
+ 252 00df 01       		.byte	1
+ 253 00e0 BE       		.byte	-66
+ 254 00e1 14       		.byte	20
+ 255 00e2 D8       		.byte	-40
+ 256 00e3 04       		.byte	4
+ 257 00e4 DF       		.byte	-33
+ 258 00e5 01       		.byte	1
+ 259 00e6 0E       		.byte	14
+ 260 00e7 80       		.byte	-128
+ 261 00e8 17       		.byte	23
+ 262 00e9 20       		.byte	32
+ 263 00ea 1E       		.byte	30
+ 264 00eb 98       		.byte	-104
+ 265 00ec 87       		.byte	-121
+ 266 00ed 20       		.byte	32
+ 267 00ee 96       		.byte	-106
+ 268 00ef 10       		.byte	16
+ 269 00f0 A6       		.byte	-90
+ 270 00f1 04       		.byte	4
+ 271 00f2 C2       		.byte	-62
+ 272 00f3 10       		.byte	16
+ 273 00f4 C4       		.byte	-60
+ 274 00f5 40       		.byte	64
+ 275 00f6 96       		.byte	-106
+ 276 00f7 10       		.byte	16
+ 277 00f8 A6       		.byte	-90
+ 278 00f9 04       		.byte	4
+ 279 00fa AA       		.byte	-86
+ 280 00fb 14       		.byte	20
+ 281 00fc 30       		.byte	48
+ 282 00fd 02       		.byte	2
+ 283 00fe 33       		.byte	51
+ 284 00ff 80       		.byte	-128
+ 285 0100 37       		.byte	55
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 6
+
+
+ 286 0101 20       		.byte	32
+ 287 0102 CC       		.byte	-52
+ 288 0103 70       		.byte	112
+ 289 0104 9F       		.byte	-97
+ 290 0105 20       		.byte	32
+ 291 0106 A4       		.byte	-92
+ 292 0107 02       		.byte	2
+ 293 0108 A7       		.byte	-89
+ 294 0109 80       		.byte	-128
+ 295 010a 84       		.byte	-124
+ 296 010b 02       		.byte	2
+ 297 010c 9F       		.byte	-97
+ 298 010d 20       		.byte	32
+ 299 010e A4       		.byte	-92
+ 300 010f 02       		.byte	2
+ 301 0110 A7       		.byte	-89
+ 302 0111 80       		.byte	-128
+ 303 0112 E2       		.byte	-30
+ 304 0113 10       		.byte	16
+ 305 0114 9F       		.byte	-97
+ 306 0115 20       		.byte	32
+ 307 0116 A7       		.byte	-89
+ 308 0117 80       		.byte	-128
+ 309 0118 AB       		.byte	-85
+ 310 0119 A0       		.byte	-96
+ 311 011a EA       		.byte	-22
+ 312 011b 80       		.byte	-128
+ 313 011c EE       		.byte	-18
+ 314 011d 20       		.byte	32
+ 315 011e 0F       		.byte	15
+ 316 011f 04       		.byte	4
+ 317 0120 87       		.byte	-121
+ 318 0121 04       		.byte	4
+ 319 0122 C2       		.byte	-62
+ 320 0123 80       		.byte	-128
+ 321 0124 E0       		.byte	-32
+ 322 0125 40       		.byte	64
+ 323 0126 00       		.byte	0
+ 324 0127 02       		.byte	2
+ 325 0128 0C       		.byte	12
+ 326 0129 02       		.byte	2
+ 327 012a 10       		.byte	16
+ 328 012b 01       		.byte	1
+ 329 012c 1A       		.byte	26
+ 330 012d 01       		.byte	1
+ 331 012e 00       		.byte	0
+ 332 012f 3F       		.byte	63
+ 333 0130 00       		.byte	0
+ 334 0131 0B       		.byte	11
+ 335 0132 0B       		.byte	11
+ 336 0133 00       		.byte	0
+ 337 0134 00       		.byte	0
+ 338 0135 00       		.byte	0
+ 339 0136 00       		.byte	0
+ 340 0137 00       		.byte	0
+ 341 0138 80       		.byte	-128
+ 342 0139 87       		.byte	-121
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 7
+
+
+ 343 013a 07       		.byte	7
+ 344 013b 00       		.byte	0
+ 345 013c 00       		.byte	0
+ 346 013d 00       		.byte	0
+ 347 013e 00       		.byte	0
+ 348 013f 00       		.byte	0
+ 349              		.section	.cywolatch,"a",%progbits
+ 350              		.align	2
+ 351              		.type	cy_meta_wonvl, %object
+ 352              		.size	cy_meta_wonvl, 4
+ 353              	cy_meta_wonvl:
+ 354 0000 BC       		.byte	-68
+ 355 0001 90       		.byte	-112
+ 356 0002 AC       		.byte	-84
+ 357 0003 AF       		.byte	-81
+ 358              		.section	.cycustnvl,"a",%progbits
+ 359              		.align	2
+ 360              		.type	cy_meta_custnvl, %object
+ 361              		.size	cy_meta_custnvl, 4
+ 362              	cy_meta_custnvl:
+ 363 0000 00       		.byte	0
+ 364 0001 00       		.byte	0
+ 365 0002 40       		.byte	64
+ 366 0003 05       		.byte	5
+ 367              		.section	.cymeta,"a",%progbits
+ 368              		.align	2
+ 369              		.type	cy_metadata, %object
+ 370              		.size	cy_metadata, 12
+ 371              	cy_metadata:
+ 372 0000 00       		.byte	0
+ 373 0001 01       		.byte	1
+ 374 0002 2E       		.byte	46
+ 375 0003 12       		.byte	18
+ 376 0004 30       		.byte	48
+ 377 0005 69       		.byte	105
+ 378 0006 00       		.byte	0
+ 379 0007 01       		.byte	1
+ 380 0008 00       		.byte	0
+ 381 0009 00       		.byte	0
+ 382 000a 00       		.byte	0
+ 383 000b 00       		.byte	0
+ 384              		.section	.cyflashprotect,"a",%progbits
+ 385              		.align	2
+ 386              		.type	cy_meta_flashprotect, %object
+ 387              		.size	cy_meta_flashprotect, 256
+ 388              	cy_meta_flashprotect:
+ 389 0000 00000000 		.space	256
+ 389      00000000 
+ 389      00000000 
+ 389      00000000 
+ 389      00000000 
+ 390              		.text
+ 391              	.Letext0:
+ 392              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 393              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 394              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 395              		.section	.debug_info,"",%progbits
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 8
+
+
+ 396              	.Ldebug_info0:
+ 397 0000 31010000 		.4byte	0x131
+ 398 0004 0400     		.2byte	0x4
+ 399 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 400 000a 04       		.byte	0x4
+ 401 000b 01       		.uleb128 0x1
+ 402 000c 6A000000 		.4byte	.LASF17
+ 403 0010 0C       		.byte	0xc
+ 404 0011 C4010000 		.4byte	.LASF18
+ 405 0015 0A000000 		.4byte	.LASF19
+ 406 0019 00000000 		.4byte	.Ldebug_line0
+ 407 001d 02       		.uleb128 0x2
+ 408 001e 01       		.byte	0x1
+ 409 001f 06       		.byte	0x6
+ 410 0020 B8010000 		.4byte	.LASF0
+ 411 0024 03       		.uleb128 0x3
+ 412 0025 00000000 		.4byte	.LASF9
+ 413 0029 01       		.byte	0x1
+ 414 002a 1D       		.byte	0x1d
+ 415 002b 2F000000 		.4byte	0x2f
+ 416 002f 02       		.uleb128 0x2
+ 417 0030 01       		.byte	0x1
+ 418 0031 08       		.byte	0x8
+ 419 0032 5C000000 		.4byte	.LASF1
+ 420 0036 02       		.uleb128 0x2
+ 421 0037 02       		.byte	0x2
+ 422 0038 05       		.byte	0x5
+ 423 0039 A5010000 		.4byte	.LASF2
+ 424 003d 02       		.uleb128 0x2
+ 425 003e 02       		.byte	0x2
+ 426 003f 07       		.byte	0x7
+ 427 0040 0A010000 		.4byte	.LASF3
+ 428 0044 02       		.uleb128 0x2
+ 429 0045 04       		.byte	0x4
+ 430 0046 05       		.byte	0x5
+ 431 0047 AF010000 		.4byte	.LASF4
+ 432 004b 02       		.uleb128 0x2
+ 433 004c 04       		.byte	0x4
+ 434 004d 07       		.byte	0x7
+ 435 004e F8000000 		.4byte	.LASF5
+ 436 0052 02       		.uleb128 0x2
+ 437 0053 08       		.byte	0x8
+ 438 0054 05       		.byte	0x5
+ 439 0055 97010000 		.4byte	.LASF6
+ 440 0059 02       		.uleb128 0x2
+ 441 005a 08       		.byte	0x8
+ 442 005b 07       		.byte	0x7
+ 443 005c 4C010000 		.4byte	.LASF7
+ 444 0060 04       		.uleb128 0x4
+ 445 0061 04       		.byte	0x4
+ 446 0062 05       		.byte	0x5
+ 447 0063 696E7400 		.ascii	"int\000"
+ 448 0067 02       		.uleb128 0x2
+ 449 0068 04       		.byte	0x4
+ 450 0069 07       		.byte	0x7
+ 451 006a 3F010000 		.4byte	.LASF8
+ 452 006e 03       		.uleb128 0x3
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 9
+
+
+ 453 006f 63010000 		.4byte	.LASF10
+ 454 0073 02       		.byte	0x2
+ 455 0074 18       		.byte	0x18
+ 456 0075 24000000 		.4byte	0x24
+ 457 0079 05       		.uleb128 0x5
+ 458 007a 91000000 		.4byte	0x91
+ 459 007e 8A000000 		.4byte	0x8a
+ 460 0082 06       		.uleb128 0x6
+ 461 0083 8A000000 		.4byte	0x8a
+ 462 0087 3F01     		.2byte	0x13f
+ 463 0089 00       		.byte	0
+ 464 008a 02       		.uleb128 0x2
+ 465 008b 04       		.byte	0x4
+ 466 008c 07       		.byte	0x7
+ 467 008d 8E010000 		.4byte	.LASF11
+ 468 0091 07       		.uleb128 0x7
+ 469 0092 6E000000 		.4byte	0x6e
+ 470 0096 08       		.uleb128 0x8
+ 471 0097 2D010000 		.4byte	.LASF12
+ 472 009b 03       		.byte	0x3
+ 473 009c 1F       		.byte	0x1f
+ 474 009d A7000000 		.4byte	0xa7
+ 475 00a1 05       		.uleb128 0x5
+ 476 00a2 03       		.byte	0x3
+ 477 00a3 00000000 		.4byte	cy_meta_configecc
+ 478 00a7 07       		.uleb128 0x7
+ 479 00a8 79000000 		.4byte	0x79
+ 480 00ac 05       		.uleb128 0x5
+ 481 00ad 91000000 		.4byte	0x91
+ 482 00b1 BC000000 		.4byte	0xbc
+ 483 00b5 09       		.uleb128 0x9
+ 484 00b6 8A000000 		.4byte	0x8a
+ 485 00ba 03       		.byte	0x3
+ 486 00bb 00       		.byte	0
+ 487 00bc 08       		.uleb128 0x8
+ 488 00bd 1D010000 		.4byte	.LASF13
+ 489 00c1 03       		.byte	0x3
+ 490 00c2 54       		.byte	0x54
+ 491 00c3 CD000000 		.4byte	0xcd
+ 492 00c7 05       		.uleb128 0x5
+ 493 00c8 03       		.byte	0x3
+ 494 00c9 00000000 		.4byte	cy_meta_custnvl
+ 495 00cd 07       		.uleb128 0x7
+ 496 00ce AC000000 		.4byte	0xac
+ 497 00d2 08       		.uleb128 0x8
+ 498 00d3 80010000 		.4byte	.LASF14
+ 499 00d7 03       		.byte	0x3
+ 500 00d8 62       		.byte	0x62
+ 501 00d9 E3000000 		.4byte	0xe3
+ 502 00dd 05       		.uleb128 0x5
+ 503 00de 03       		.byte	0x3
+ 504 00df 00000000 		.4byte	cy_meta_wonvl
+ 505 00e3 07       		.uleb128 0x7
+ 506 00e4 AC000000 		.4byte	0xac
+ 507 00e8 05       		.uleb128 0x5
+ 508 00e9 91000000 		.4byte	0x91
+ 509 00ed F8000000 		.4byte	0xf8
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 10
+
+
+ 510 00f1 09       		.uleb128 0x9
+ 511 00f2 8A000000 		.4byte	0x8a
+ 512 00f6 FF       		.byte	0xff
+ 513 00f7 00       		.byte	0
+ 514 00f8 08       		.uleb128 0x8
+ 515 00f9 6B010000 		.4byte	.LASF15
+ 516 00fd 03       		.byte	0x3
+ 517 00fe 70       		.byte	0x70
+ 518 00ff 09010000 		.4byte	0x109
+ 519 0103 05       		.uleb128 0x5
+ 520 0104 03       		.byte	0x3
+ 521 0105 00000000 		.4byte	cy_meta_flashprotect
+ 522 0109 07       		.uleb128 0x7
+ 523 010a E8000000 		.4byte	0xe8
+ 524 010e 05       		.uleb128 0x5
+ 525 010f 91000000 		.4byte	0x91
+ 526 0113 1E010000 		.4byte	0x11e
+ 527 0117 09       		.uleb128 0x9
+ 528 0118 8A000000 		.4byte	0x8a
+ 529 011c 0B       		.byte	0xb
+ 530 011d 00       		.byte	0
+ 531 011e 08       		.uleb128 0x8
+ 532 011f 50000000 		.4byte	.LASF16
+ 533 0123 03       		.byte	0x3
+ 534 0124 9D       		.byte	0x9d
+ 535 0125 2F010000 		.4byte	0x12f
+ 536 0129 05       		.uleb128 0x5
+ 537 012a 03       		.byte	0x3
+ 538 012b 00000000 		.4byte	cy_metadata
+ 539 012f 07       		.uleb128 0x7
+ 540 0130 0E010000 		.4byte	0x10e
+ 541 0134 00       		.byte	0
+ 542              		.section	.debug_abbrev,"",%progbits
+ 543              	.Ldebug_abbrev0:
+ 544 0000 01       		.uleb128 0x1
+ 545 0001 11       		.uleb128 0x11
+ 546 0002 01       		.byte	0x1
+ 547 0003 25       		.uleb128 0x25
+ 548 0004 0E       		.uleb128 0xe
+ 549 0005 13       		.uleb128 0x13
+ 550 0006 0B       		.uleb128 0xb
+ 551 0007 03       		.uleb128 0x3
+ 552 0008 0E       		.uleb128 0xe
+ 553 0009 1B       		.uleb128 0x1b
+ 554 000a 0E       		.uleb128 0xe
+ 555 000b 10       		.uleb128 0x10
+ 556 000c 17       		.uleb128 0x17
+ 557 000d 00       		.byte	0
+ 558 000e 00       		.byte	0
+ 559 000f 02       		.uleb128 0x2
+ 560 0010 24       		.uleb128 0x24
+ 561 0011 00       		.byte	0
+ 562 0012 0B       		.uleb128 0xb
+ 563 0013 0B       		.uleb128 0xb
+ 564 0014 3E       		.uleb128 0x3e
+ 565 0015 0B       		.uleb128 0xb
+ 566 0016 03       		.uleb128 0x3
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 11
+
+
+ 567 0017 0E       		.uleb128 0xe
+ 568 0018 00       		.byte	0
+ 569 0019 00       		.byte	0
+ 570 001a 03       		.uleb128 0x3
+ 571 001b 16       		.uleb128 0x16
+ 572 001c 00       		.byte	0
+ 573 001d 03       		.uleb128 0x3
+ 574 001e 0E       		.uleb128 0xe
+ 575 001f 3A       		.uleb128 0x3a
+ 576 0020 0B       		.uleb128 0xb
+ 577 0021 3B       		.uleb128 0x3b
+ 578 0022 0B       		.uleb128 0xb
+ 579 0023 49       		.uleb128 0x49
+ 580 0024 13       		.uleb128 0x13
+ 581 0025 00       		.byte	0
+ 582 0026 00       		.byte	0
+ 583 0027 04       		.uleb128 0x4
+ 584 0028 24       		.uleb128 0x24
+ 585 0029 00       		.byte	0
+ 586 002a 0B       		.uleb128 0xb
+ 587 002b 0B       		.uleb128 0xb
+ 588 002c 3E       		.uleb128 0x3e
+ 589 002d 0B       		.uleb128 0xb
+ 590 002e 03       		.uleb128 0x3
+ 591 002f 08       		.uleb128 0x8
+ 592 0030 00       		.byte	0
+ 593 0031 00       		.byte	0
+ 594 0032 05       		.uleb128 0x5
+ 595 0033 01       		.uleb128 0x1
+ 596 0034 01       		.byte	0x1
+ 597 0035 49       		.uleb128 0x49
+ 598 0036 13       		.uleb128 0x13
+ 599 0037 01       		.uleb128 0x1
+ 600 0038 13       		.uleb128 0x13
+ 601 0039 00       		.byte	0
+ 602 003a 00       		.byte	0
+ 603 003b 06       		.uleb128 0x6
+ 604 003c 21       		.uleb128 0x21
+ 605 003d 00       		.byte	0
+ 606 003e 49       		.uleb128 0x49
+ 607 003f 13       		.uleb128 0x13
+ 608 0040 2F       		.uleb128 0x2f
+ 609 0041 05       		.uleb128 0x5
+ 610 0042 00       		.byte	0
+ 611 0043 00       		.byte	0
+ 612 0044 07       		.uleb128 0x7
+ 613 0045 26       		.uleb128 0x26
+ 614 0046 00       		.byte	0
+ 615 0047 49       		.uleb128 0x49
+ 616 0048 13       		.uleb128 0x13
+ 617 0049 00       		.byte	0
+ 618 004a 00       		.byte	0
+ 619 004b 08       		.uleb128 0x8
+ 620 004c 34       		.uleb128 0x34
+ 621 004d 00       		.byte	0
+ 622 004e 03       		.uleb128 0x3
+ 623 004f 0E       		.uleb128 0xe
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 12
+
+
+ 624 0050 3A       		.uleb128 0x3a
+ 625 0051 0B       		.uleb128 0xb
+ 626 0052 3B       		.uleb128 0x3b
+ 627 0053 0B       		.uleb128 0xb
+ 628 0054 49       		.uleb128 0x49
+ 629 0055 13       		.uleb128 0x13
+ 630 0056 3F       		.uleb128 0x3f
+ 631 0057 19       		.uleb128 0x19
+ 632 0058 02       		.uleb128 0x2
+ 633 0059 18       		.uleb128 0x18
+ 634 005a 00       		.byte	0
+ 635 005b 00       		.byte	0
+ 636 005c 09       		.uleb128 0x9
+ 637 005d 21       		.uleb128 0x21
+ 638 005e 00       		.byte	0
+ 639 005f 49       		.uleb128 0x49
+ 640 0060 13       		.uleb128 0x13
+ 641 0061 2F       		.uleb128 0x2f
+ 642 0062 0B       		.uleb128 0xb
+ 643 0063 00       		.byte	0
+ 644 0064 00       		.byte	0
+ 645 0065 00       		.byte	0
+ 646              		.section	.debug_aranges,"",%progbits
+ 647 0000 14000000 		.4byte	0x14
+ 648 0004 0200     		.2byte	0x2
+ 649 0006 00000000 		.4byte	.Ldebug_info0
+ 650 000a 04       		.byte	0x4
+ 651 000b 00       		.byte	0
+ 652 000c 0000     		.2byte	0
+ 653 000e 0000     		.2byte	0
+ 654 0010 00000000 		.4byte	0
+ 655 0014 00000000 		.4byte	0
+ 656              		.section	.debug_line,"",%progbits
+ 657              	.Ldebug_line0:
+ 658 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ 658      02003701 
+ 658      00000201 
+ 658      FB0E0D00 
+ 658      01010101 
+ 659              	.LASF9:
+ 660 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 660      6E74385F 
+ 660      7400
+ 661              	.LASF19:
+ 662 000a 433A5C32 		.ascii	"C:\\2018 Winter\\CE4950\\GroupProject\\ce4950lab1\\"
+ 662      30313820 
+ 662      57696E74 
+ 662      65725C43 
+ 662      45343935 
+ 663 0038 4E657477 		.ascii	"NetworkingProject.cydsn\000"
+ 663      6F726B69 
+ 663      6E675072 
+ 663      6F6A6563 
+ 663      742E6379 
+ 664              	.LASF16:
+ 665 0050 63795F6D 		.ascii	"cy_metadata\000"
+ 665      65746164 
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 13
+
+
+ 665      61746100 
+ 666              	.LASF1:
+ 667 005c 756E7369 		.ascii	"unsigned char\000"
+ 667      676E6564 
+ 667      20636861 
+ 667      7200
+ 668              	.LASF17:
+ 669 006a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 669      43313120 
+ 669      352E342E 
+ 669      31203230 
+ 669      31363036 
+ 670 009d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 670      20726576 
+ 670      6973696F 
+ 670      6E203233 
+ 670      37373135 
+ 671 00d0 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 671      66756E63 
+ 671      74696F6E 
+ 671      2D736563 
+ 671      74696F6E 
+ 672              	.LASF5:
+ 673 00f8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 673      20756E73 
+ 673      69676E65 
+ 673      6420696E 
+ 673      7400
+ 674              	.LASF3:
+ 675 010a 73686F72 		.ascii	"short unsigned int\000"
+ 675      7420756E 
+ 675      7369676E 
+ 675      65642069 
+ 675      6E7400
+ 676              	.LASF13:
+ 677 011d 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 677      6574615F 
+ 677      63757374 
+ 677      6E766C00 
+ 678              	.LASF12:
+ 679 012d 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 679      6574615F 
+ 679      636F6E66 
+ 679      69676563 
+ 679      6300
+ 680              	.LASF8:
+ 681 013f 756E7369 		.ascii	"unsigned int\000"
+ 681      676E6564 
+ 681      20696E74 
+ 681      00
+ 682              	.LASF7:
+ 683 014c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 683      206C6F6E 
+ 683      6720756E 
+ 683      7369676E 
+ 683      65642069 
+ 684              	.LASF10:
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccJuZA2b.s 			page 14
+
+
+ 685 0163 75696E74 		.ascii	"uint8_t\000"
+ 685      385F7400 
+ 686              	.LASF15:
+ 687 016b 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 687      6574615F 
+ 687      666C6173 
+ 687      6870726F 
+ 687      74656374 
+ 688              	.LASF14:
+ 689 0180 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 689      6574615F 
+ 689      776F6E76 
+ 689      6C00
+ 690              	.LASF11:
+ 691 018e 73697A65 		.ascii	"sizetype\000"
+ 691      74797065 
+ 691      00
+ 692              	.LASF6:
+ 693 0197 6C6F6E67 		.ascii	"long long int\000"
+ 693      206C6F6E 
+ 693      6720696E 
+ 693      7400
+ 694              	.LASF2:
+ 695 01a5 73686F72 		.ascii	"short int\000"
+ 695      7420696E 
+ 695      7400
+ 696              	.LASF4:
+ 697 01af 6C6F6E67 		.ascii	"long int\000"
+ 697      20696E74 
+ 697      00
+ 698              	.LASF0:
+ 699 01b8 7369676E 		.ascii	"signed char\000"
+ 699      65642063 
+ 699      68617200 
+ 700              	.LASF18:
+ 701 01c4 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 701      72617465 
+ 701      645F536F 
+ 701      75726365 
+ 701      5C50536F 
+ 702              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

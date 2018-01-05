@@ -1,0 +1,13 @@
+# NetworkingProject
+# 2017-12-14 22:38:12Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+# IO_3@[IOP=(1)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 3
+set_io "IDLE(0)" iocell 3 1
+set_io "COLLISION(0)" iocell 3 0
+set_io "BUSY(0)" iocell 3 2
+set_io "Rx(0)" iocell 3 7

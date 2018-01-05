@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="NetworkingProject-000\NetworkingProject">
+<ExpandedNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\TopDesign</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Pins</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Analog</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Clocks</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Interrupts</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\DMA</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\System</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Directives</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Flash Security</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\EEPROM</v>
+<v>NetworkingProject-000\NetworkingProject\Header Files\cyapicallbacks.h</v>
+<v>NetworkingProject-000\NetworkingProject\Source Files</v>
+<v>NetworkingProject-000\NetworkingProject\Source Files\main.c</v>
+<v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\TopDesign</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Pins</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Analog</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Clocks</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Interrupts</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\DMA</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\System</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Directives</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\Flash Security</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.cydwr\EEPROM</v>
+<v>NetworkingProject-000\NetworkingProject\Header Files</v>
+<v>NetworkingProject-000\NetworkingProject\Source Files</v>
+<v>NetworkingProject-000\NetworkingProject\Source Files\main.c</v>
+<v>NetworkingProject-000\NetworkingProject\Generated_Source</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\TopDesign</v>
+<v>NetworkingProject-000\NetworkingProject\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\TopDesign</v>
+<v>NetworkingProject-000\NetworkingProject\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\BUSY.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK1.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK2.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\COLLISION.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\FallingEdgeISR.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\IDLE.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\RisingEdgeISR.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Rx.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER1.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER1_PM.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\TimerISR.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\NetworkingProject.elf</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\NetworkingProject.hex</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\NetworkingProject.map</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.gpdsc</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.rpt</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\BUSY.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK1.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK2.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\COLLISION.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\FallingEdgeISR.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\IDLE.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\RisingEdgeISR.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Rx.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER1.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\TIMER1_PM.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\TimerISR.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\NetworkingProject.elf</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\NetworkingProject.hex</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\NetworkingProject.map</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.gpdsc</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject.rpt</v>
+<v>NetworkingProject-000\NetworkingProject\NetworkingProject_timing.html</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\PSoC 5LP Architecture TRM</v>
+<v>NetworkingProject-000\NetworkingProject\CY8C58LP Family Datasheet</v>
+<v>NetworkingProject-000\NetworkingProject\System Reference Guides</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>NetworkingProject-000</v>
+<v>NetworkingProject-000\NetworkingProject</v>
+<v>NetworkingProject-000\NetworkingProject\PSoC 5LP Architecture TRM</v>
+<v>NetworkingProject-000\NetworkingProject\CY8C58LP Family Datasheet</v>
+<v>NetworkingProject-000\NetworkingProject\System Reference Guides</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\NetworkingProject.cydwr" />
+<name v=".\main.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1264, 413" SelectedTabbedMdiWindow="674fca0c-2180-4c50-9cf1-8c0722ddac68"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="332fc44b-057a-464b-bf3d-036bd8ce3e8f" /><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\TopDesign\TopDesign.cysch" Guid="672df484-ed7c-4b32-820f-ce42a9a7d750" /><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\NetworkingProject.cydwr" Guid="d73afa5b-6ab4-41a0-a181-903c7b4e1004" /><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\main.c" Guid="674fca0c-2180-4c50-9cf1-8c0722ddac68" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
