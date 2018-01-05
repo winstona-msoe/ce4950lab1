@@ -1,5 +1,5 @@
 -- Project:   NetworkingProject
--- Generated: 12/14/2017 13:25:23
+-- Generated: 12/14/2017 16:38:12
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -415,10 +415,10 @@ BEGIN
             clk_bus => ClockBlock_BUS_CLK_local,
             dsi_clkin_div => open,
             dsi_glb_div => open,
-            dclk_glb_0 => Net_255,
-            dclk_0 => Net_255_local,
-            dclk_glb_1 => Net_3,
-            dclk_1 => Net_3_local);
+            dclk_glb_0 => Net_3,
+            dclk_0 => Net_3_local,
+            dclk_glb_1 => Net_255,
+            dclk_1 => Net_255_local);
 
     IDLE:logicalport
         GENERIC MAP(

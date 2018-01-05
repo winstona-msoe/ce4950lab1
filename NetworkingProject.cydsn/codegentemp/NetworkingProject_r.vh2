@@ -1,5 +1,5 @@
 -- Project:   NetworkingProject
--- Generated: 12/14/2017 13:25:23
+-- Generated: 12/14/2017 16:38:13
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -46,9 +46,9 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL Net_3_local : bit;
     SIGNAL Net_659 : bit;
     SIGNAL Net_66 : bit;
-    ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(3,0,A)0";
+    ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(3,0,A)2";
     SIGNAL Net_71 : bit;
-    ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(3,0,A)2";
+    ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(3,0,A)0";
     SIGNAL Rx(0)__PA : bit;
     SIGNAL \RISING_EDGE:last\ : bit;
     ATTRIBUTE placement_force OF \RISING_EDGE:last\ : SIGNAL IS "U(3,0,A)1";
@@ -412,10 +412,10 @@ BEGIN
             clk_bus => ClockBlock_BUS_CLK_local,
             dsi_clkin_div => open,
             dsi_glb_div => open,
-            dclk_glb_0 => Net_255,
-            dclk_0 => Net_255_local,
-            dclk_glb_1 => Net_3,
-            dclk_1 => Net_3_local);
+            dclk_glb_0 => Net_3,
+            dclk_0 => Net_3_local,
+            dclk_glb_1 => Net_255,
+            dclk_1 => Net_255_local);
 
     IDLE:logicalport
         GENERIC MAP(

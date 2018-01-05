@@ -1,6 +1,6 @@
 // ======================================================================
 // NetworkingProject.v generated from TopDesign.cysch
-// 12/14/2017 at 13:25
+// 12/14/2017 at 16:38
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -644,7 +644,7 @@ module top ;
 		#(.id("0f1ea1a6-d774-4c35-8a7d-633009f2be3e"),
 		  .source_clock_id(""),
 		  .divisor(0),
-		  .period("13333333333.3333"),
+		  .period("10000000000"),
 		  .is_direct(0),
 		  .is_digital(1))
 		CLOCK2

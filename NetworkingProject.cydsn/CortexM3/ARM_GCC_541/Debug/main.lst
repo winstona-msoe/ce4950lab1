@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 1
 
 
    1              		.syntax unified
@@ -58,14 +58,14 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
   28:main.c        **** enum state { BUSY, COLLISION, IDLE } systemState;
   29:main.c        **** 
   30:main.c        **** _Bool logicLevel = 0;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 2
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 2
 
 
   31:main.c        **** 
-  32:main.c        **** #define COLL_PERIOD     52
-  33:main.c        **** #define COLL_COUNTER    51
-  34:main.c        **** #define IDLE_PERIOD     830
-  35:main.c        **** #define IDLE_COUNTER    829
+  32:main.c        **** #define COLLISION_PERIOD     55
+  33:main.c        **** #define COLLISION_COUNTER    54
+  34:main.c        **** #define IDLE_PERIOD     799
+  35:main.c        **** #define IDLE_COUNTER    800
   36:main.c        **** 
   37:main.c        **** /*******************************************************************************
   38:main.c        **** * Define Interrupt service routine and allocate an vector to the Interrupt
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
   53              	.L4:
   54 001c 6B640040 		.word	1073767531
   55 0020 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 3
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 3
 
 
   56 0024 00000000 		.word	systemState
@@ -164,21 +164,21 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
   77 0002 094B     		ldr	r3, .L9
   78 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
   79 0006 6BB9     		cbnz	r3, .L6
-  79:main.c        ****         TIMER1_WritePeriod(COLL_PERIOD);
+  79:main.c        ****         TIMER1_WritePeriod(COLLISION_PERIOD);
   80              		.loc 1 79 0
-  81 0008 3420     		movs	r0, #52
+  81 0008 3720     		movs	r0, #55
   82 000a FFF7FEFF 		bl	TIMER1_WritePeriod
   83              	.LVL0:
-  80:main.c        ****         TIMER1_WriteCounter(COLL_COUNTER);
+  80:main.c        ****         TIMER1_WriteCounter(COLLISION_COUNTER);
   84              		.loc 1 80 0
-  85 000e 3320     		movs	r0, #51
+  85 000e 3620     		movs	r0, #54
   86 0010 FFF7FEFF 		bl	TIMER1_WriteCounter
   87              	.LVL1:
   81:main.c        ****         TIMER1_Start();
   88              		.loc 1 81 0
   89 0014 FFF7FEFF 		bl	TIMER1_Start
   90              	.LVL2:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 4
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 4
 
 
   82:main.c        ****         logicLevel = 1;
@@ -238,19 +238,19 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  102:main.c        ****     if (logicLevel){
  125              		.loc 1 102 0
  126 0002 094B     		ldr	r3, .L14
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 5
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 5
 
 
  127 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  128 0006 73B1     		cbz	r3, .L11
  103:main.c        ****         TIMER1_WritePeriod(IDLE_PERIOD);
  129              		.loc 1 103 0
- 130 0008 40F23E30 		movw	r0, #830
+ 130 0008 40F21F30 		movw	r0, #799
  131 000c FFF7FEFF 		bl	TIMER1_WritePeriod
  132              	.LVL3:
  104:main.c        ****         TIMER1_WriteCounter(IDLE_COUNTER);
  133              		.loc 1 104 0
- 134 0010 40F23D30 		movw	r0, #829
+ 134 0010 4FF44870 		mov	r0, #800
  135 0014 FFF7FEFF 		bl	TIMER1_WriteCounter
  136              	.LVL4:
  105:main.c        ****         TIMER1_Start();
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  119:main.c        ****  * implemented: 14 Dec 2017
  120:main.c        ****  * edited:
  121:main.c        ****  *********************************************************/ 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 6
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 6
 
 
  122:main.c        **** int main(void)
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  207 002a 0120     		movs	r0, #1
  208 002c FFF7FEFF 		bl	IDLE_Write
  209              	.LVL9:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 7
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 7
 
 
  134:main.c        ****                 BUSY_Write(!IDLE_Read());
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  146:main.c        ****                 IDLE_Write(!COLLISION_Read());
  252              		.loc 1 146 0
  253 0078 FFF7FEFF 		bl	COLLISION_Read
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 8
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 8
 
 
  254              	.LVL20:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  306 000c C2000000 		.4byte	.LASF39
  307 0010 0C       		.byte	0xc
  308 0011 A0020000 		.4byte	.LASF40
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 9
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 9
 
 
  309 0015 32000000 		.4byte	.LASF41
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  363 0081 05       		.uleb128 0x5
  364 0082 B6020000 		.4byte	.LASF11
  365 0086 04       		.byte	0x4
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 10
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 10
 
 
  366 0087 9201     		.2byte	0x192
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  420 00f5 0A       		.uleb128 0xa
  421 00f6 29020000 		.4byte	.LASF21
  422 00fa 01       		.byte	0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 11
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 11
 
 
  423 00fb 4C       		.byte	0x4c
@@ -616,7 +616,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  435 0119 50       		.byte	0x50
  436 011a 02       		.uleb128 0x2
  437 011b 08       		.byte	0x8
- 438 011c 34       		.byte	0x34
+ 438 011c 37       		.byte	0x37
  439 011d 00       		.byte	0
  440 011e 0B       		.uleb128 0xb
  441 011f 14000000 		.4byte	.LVL1
@@ -627,7 +627,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  446 012d 50       		.byte	0x50
  447 012e 02       		.uleb128 0x2
  448 012f 08       		.byte	0x8
- 449 0130 33       		.byte	0x33
+ 449 0130 36       		.byte	0x36
  450 0131 00       		.byte	0
  451 0132 0D       		.uleb128 0xd
  452 0133 18000000 		.4byte	.LVL2
@@ -651,21 +651,21 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  470 0160 50       		.byte	0x50
  471 0161 03       		.uleb128 0x3
  472 0162 0A       		.byte	0xa
- 473 0163 3E03     		.2byte	0x33e
+ 473 0163 1F03     		.2byte	0x31f
  474 0165 00       		.byte	0
  475 0166 0B       		.uleb128 0xb
  476 0167 18000000 		.4byte	.LVL4
  477 016b CE020000 		.4byte	0x2ce
  478 016f 7B010000 		.4byte	0x17b
  479 0173 0C       		.uleb128 0xc
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 12
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 12
 
 
  480 0174 01       		.uleb128 0x1
  481 0175 50       		.byte	0x50
  482 0176 03       		.uleb128 0x3
  483 0177 0A       		.byte	0xa
- 484 0178 3D03     		.2byte	0x33d
+ 484 0178 2003     		.2byte	0x320
  485 017a 00       		.byte	0
  486 017b 0D       		.uleb128 0xd
  487 017c 1C000000 		.4byte	.LVL5
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  534 01e4 30000000 		.4byte	.LVL9
  535 01e8 05030000 		.4byte	0x305
  536 01ec F6010000 		.4byte	0x1f6
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 13
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 13
 
 
  537 01f0 0C       		.uleb128 0xc
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  591 026e 86000000 		.4byte	.LVL21
  592 0272 05030000 		.4byte	0x305
  593 0276 0D       		.uleb128 0xd
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 14
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 14
 
 
  594 0277 8A000000 		.4byte	.LVL22
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  648 02f0 B1010000 		.4byte	.LASF31
  649 02f4 B1010000 		.4byte	.LASF31
  650 02f8 08       		.byte	0x8
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 15
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 15
 
 
  651 02f9 18       		.byte	0x18
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  705 000f 10       		.uleb128 0x10
  706 0010 17       		.uleb128 0x17
  707 0011 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 16
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 16
 
 
  708 0012 00       		.byte	0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  762 0048 00       		.byte	0
  763 0049 00       		.byte	0
  764 004a 07       		.uleb128 0x7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 17
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 17
 
 
  765 004b 04       		.uleb128 0x4
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  819 0082 0E       		.uleb128 0xe
  820 0083 3A       		.uleb128 0x3a
  821 0084 0B       		.uleb128 0xb
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 18
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 18
 
 
  822 0085 3B       		.uleb128 0x3b
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  876 00c3 3B       		.uleb128 0x3b
  877 00c4 0B       		.uleb128 0xb
  878 00c5 27       		.uleb128 0x27
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 19
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 19
 
 
  879 00c6 19       		.uleb128 0x19
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  933 00fe 3F       		.uleb128 0x3f
  934 00ff 19       		.uleb128 0x19
  935 0100 3C       		.uleb128 0x3c
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 20
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 20
 
 
  936 0101 19       		.uleb128 0x19
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  983              	.LASF42:
  984 000e 73746174 		.ascii	"state\000"
  984      6500
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 21
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 21
 
 
  985              	.LASF38:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  1006      20726576 
  1006      6973696F 
  1006      6E203233 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 22
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 22
 
 
  1006      37373135 
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  1029      61746500 
  1030              	.LASF43:
  1031 01da 54696D65 		.ascii	"TimerInterruptHandler\000"
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 23
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 23
 
 
  1031      72496E74 
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 1
  1053      74797065 
  1053      00
  1054              	.LASF19:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccQ86Ixb.s 			page 24
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccwXjuaG.s 			page 24
 
 
  1055 0296 434F4C4C 		.ascii	"COLLISION\000"

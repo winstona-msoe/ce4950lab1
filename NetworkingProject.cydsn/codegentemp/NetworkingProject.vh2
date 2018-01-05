@@ -2,7 +2,7 @@
 --	Conversion of NetworkingProject.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu Dec 14 13:25:22 2017
+--	Thu Dec 14 16:38:12 2017
 --
 
 USE cypress.cypress.all;
@@ -757,7 +757,7 @@ CLOCK2:cy_clock_v1_0
 		id=>"0f1ea1a6-d774-4c35-8a7d-633009f2be3e",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"13333333333.3333",
+		period=>"10000000000",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>Net_3,

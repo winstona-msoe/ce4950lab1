@@ -29,10 +29,10 @@ enum state { BUSY, COLLISION, IDLE } systemState;
 
 _Bool logicLevel = 0;
 
-#define COLL_PERIOD     52
-#define COLL_COUNTER    51
-#define IDLE_PERIOD     830
-#define IDLE_COUNTER    829
+#define COLLISION_PERIOD     55
+#define COLLISION_COUNTER    54
+#define IDLE_PERIOD     799
+#define IDLE_COUNTER    800
 
 /*******************************************************************************
 * Define Interrupt service routine and allocate an vector to the Interrupt
@@ -76,8 +76,8 @@ CY_ISR(TimerInterruptHandler)
 CY_ISR(RisingEdgeInterruptHandler)
 {
     if ((!logicLevel)){
-        TIMER1_WritePeriod(COLL_PERIOD);
-        TIMER1_WriteCounter(COLL_COUNTER);
+        TIMER1_WritePeriod(COLLISION_PERIOD);
+        TIMER1_WriteCounter(COLLISION_COUNTER);
         TIMER1_Start();
         logicLevel = 1;
         systemState = BUSY;

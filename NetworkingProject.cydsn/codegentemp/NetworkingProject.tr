@@ -20,7 +20,7 @@
 ===================================================================== 
 Number of clocks: 7
 Clock: CLOCK1        | Frequency: 63.33 MHz  | Target: 0.10 MHz   | 
-Clock: CLOCK2        | N/A                   | Target: 0.08 MHz   | 
+Clock: CLOCK2        | N/A                   | Target: 0.10 MHz   | 
 Clock: CyBUS_CLK     | N/A                   | Target: 24.00 MHz  | 
 Clock: CyILO         | N/A                   | Target: 0.00 MHz   | 
 Clock: CyIMO         | N/A                   | Target: 3.00 MHz   | 
@@ -106,7 +106,7 @@ End-of-path arrival time (ps)           11559
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 Data path
@@ -122,7 +122,7 @@ pin name                                     model name     delay     AT    slac
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u1\/clock                    datapathcell2       0      0  RISE       1
 
 
@@ -162,7 +162,7 @@ End-of-path arrival time (ps)           11559
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 Data path
@@ -178,7 +178,7 @@ pin name                                     model name     delay     AT    slac
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u1\/clock                    datapathcell2       0      0  RISE       1
 
 
@@ -214,7 +214,7 @@ End-of-path arrival time (ps)           11559
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 Data path
@@ -230,7 +230,7 @@ pin name                                     model name     delay     AT    slac
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u1\/clock                    datapathcell2       0      0  RISE       1
 
 
@@ -258,7 +258,7 @@ End-of-path arrival time (ps)           12234
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 Data path
@@ -274,7 +274,7 @@ pin name                                   model name     delay     AT    slack 
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:rstSts:stsreg\/clock                      statusicell1        0      0  RISE       1
 
 
@@ -302,7 +302,7 @@ End-of-path arrival time (ps)           6554
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 Data path
@@ -316,7 +316,7 @@ pin name                                     model name     delay     AT    slac
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u1\/clock                    datapathcell2       0      0  RISE       1
 
 
@@ -344,7 +344,7 @@ End-of-path arrival time (ps)           6429
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 Data path
@@ -358,7 +358,7 @@ pin name                                     model name     delay     AT    slac
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 
@@ -386,7 +386,7 @@ End-of-path arrival time (ps)           4289
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\/clock           controlcell1        0      0  RISE       1
 
 Data path
@@ -398,7 +398,7 @@ pin name                                              model name     delay     A
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u1\/clock                    datapathcell2       0      0  RISE       1
 
 
@@ -426,7 +426,7 @@ End-of-path arrival time (ps)           4173
 Launch Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\/clock           controlcell1        0      0  RISE       1
 
 Data path
@@ -438,7 +438,7 @@ pin name                                              model name     delay     A
 Capture Clock Path
 pin name                                                   model name      delay     AT  edge  Fanout
 ---------------------------------------------------------  --------------  -----  -----  ----  ------
-ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+ClockBlock/dclk_glb_1                                      clockblockcell      0      0  RISE       1
 \TIMER1:TimerUDB:sT16:timerdp:u0\/clock                    datapathcell1       0      0  RISE       1
 
 
