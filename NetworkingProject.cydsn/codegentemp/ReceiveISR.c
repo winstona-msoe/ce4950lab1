@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: TimerISR.c  
+* File Name: ReceiveISR.c  
 * Version 1.70
 *
 *  Description:
@@ -18,15 +18,15 @@
 
 #include <cydevice_trm.h>
 #include <CyLib.h>
-#include <TimerISR.h>
+#include <ReceiveISR.h>
 #include "cyapicallbacks.h"
 
-#if !defined(TimerISR__REMOVED) /* Check for removal by optimization */
+#if !defined(ReceiveISR__REMOVED) /* Check for removal by optimization */
 
 /*******************************************************************************
 *  Place your includes, defines and code here 
 ********************************************************************************/
-/* `#START TimerISR_intc` */
+/* `#START ReceiveISR_intc` */
 
 /* `#END` */
 
@@ -42,7 +42,7 @@ CY_ISR_PROTO(IntDefaultHandler);
 
 
 /*******************************************************************************
-* Function Name: TimerISR_Start
+* Function Name: ReceiveISR_Start
 ********************************************************************************
 *
 * Summary:
@@ -58,24 +58,24 @@ CY_ISR_PROTO(IntDefaultHandler);
 *   None
 *
 *******************************************************************************/
-void TimerISR_Start(void)
+void ReceiveISR_Start(void)
 {
     /* For all we know the interrupt is active. */
-    TimerISR_Disable();
+    ReceiveISR_Disable();
 
-    /* Set the ISR to point to the TimerISR Interrupt. */
-    TimerISR_SetVector(&TimerISR_Interrupt);
+    /* Set the ISR to point to the ReceiveISR Interrupt. */
+    ReceiveISR_SetVector(&ReceiveISR_Interrupt);
 
     /* Set the priority. */
-    TimerISR_SetPriority((uint8)TimerISR_INTC_PRIOR_NUMBER);
+    ReceiveISR_SetPriority((uint8)ReceiveISR_INTC_PRIOR_NUMBER);
 
     /* Enable it. */
-    TimerISR_Enable();
+    ReceiveISR_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_StartEx
+* Function Name: ReceiveISR_StartEx
 ********************************************************************************
 *
 * Summary:
@@ -101,24 +101,24 @@ void TimerISR_Start(void)
 *   None
 *
 *******************************************************************************/
-void TimerISR_StartEx(cyisraddress address)
+void ReceiveISR_StartEx(cyisraddress address)
 {
     /* For all we know the interrupt is active. */
-    TimerISR_Disable();
+    ReceiveISR_Disable();
 
-    /* Set the ISR to point to the TimerISR Interrupt. */
-    TimerISR_SetVector(address);
+    /* Set the ISR to point to the ReceiveISR Interrupt. */
+    ReceiveISR_SetVector(address);
 
     /* Set the priority. */
-    TimerISR_SetPriority((uint8)TimerISR_INTC_PRIOR_NUMBER);
+    ReceiveISR_SetPriority((uint8)ReceiveISR_INTC_PRIOR_NUMBER);
 
     /* Enable it. */
-    TimerISR_Enable();
+    ReceiveISR_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_Stop
+* Function Name: ReceiveISR_Stop
 ********************************************************************************
 *
 * Summary:
@@ -131,22 +131,22 @@ void TimerISR_StartEx(cyisraddress address)
 *   None
 *
 *******************************************************************************/
-void TimerISR_Stop(void)
+void ReceiveISR_Stop(void)
 {
     /* Disable this interrupt. */
-    TimerISR_Disable();
+    ReceiveISR_Disable();
 
     /* Set the ISR to point to the passive one. */
-    TimerISR_SetVector(&IntDefaultHandler);
+    ReceiveISR_SetVector(&IntDefaultHandler);
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_Interrupt
+* Function Name: ReceiveISR_Interrupt
 ********************************************************************************
 *
 * Summary:
-*   The default Interrupt Service Routine for TimerISR.
+*   The default Interrupt Service Routine for ReceiveISR.
 *
 *   Add custom code between the coments to keep the next version of this file
 *   from over writting your code.
@@ -157,27 +157,27 @@ void TimerISR_Stop(void)
 *   None
 *
 *******************************************************************************/
-CY_ISR(TimerISR_Interrupt)
+CY_ISR(ReceiveISR_Interrupt)
 {
-    #ifdef TimerISR_INTERRUPT_INTERRUPT_CALLBACK
-        TimerISR_Interrupt_InterruptCallback();
-    #endif /* TimerISR_INTERRUPT_INTERRUPT_CALLBACK */ 
+    #ifdef ReceiveISR_INTERRUPT_INTERRUPT_CALLBACK
+        ReceiveISR_Interrupt_InterruptCallback();
+    #endif /* ReceiveISR_INTERRUPT_INTERRUPT_CALLBACK */ 
 
     /*  Place your Interrupt code here. */
-    /* `#START TimerISR_Interrupt` */
+    /* `#START ReceiveISR_Interrupt` */
 
     /* `#END` */
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_SetVector
+* Function Name: ReceiveISR_SetVector
 ********************************************************************************
 *
 * Summary:
-*   Change the ISR vector for the Interrupt. Note calling TimerISR_Start
+*   Change the ISR vector for the Interrupt. Note calling ReceiveISR_Start
 *   will override any effect this method would have had. To set the vector 
-*   before the component has been started use TimerISR_StartEx instead.
+*   before the component has been started use ReceiveISR_StartEx instead.
 * 
 *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
 *   used to provide consistent definition across compilers:
@@ -197,18 +197,18 @@ CY_ISR(TimerISR_Interrupt)
 *   None
 *
 *******************************************************************************/
-void TimerISR_SetVector(cyisraddress address)
+void ReceiveISR_SetVector(cyisraddress address)
 {
     cyisraddress * ramVectorTable;
 
     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
 
-    ramVectorTable[CYINT_IRQ_BASE + (uint32)TimerISR__INTC_NUMBER] = address;
+    ramVectorTable[CYINT_IRQ_BASE + (uint32)ReceiveISR__INTC_NUMBER] = address;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_GetVector
+* Function Name: ReceiveISR_GetVector
 ********************************************************************************
 *
 * Summary:
@@ -221,26 +221,26 @@ void TimerISR_SetVector(cyisraddress address)
 *   Address of the ISR in the interrupt vector table.
 *
 *******************************************************************************/
-cyisraddress TimerISR_GetVector(void)
+cyisraddress ReceiveISR_GetVector(void)
 {
     cyisraddress * ramVectorTable;
 
     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
 
-    return ramVectorTable[CYINT_IRQ_BASE + (uint32)TimerISR__INTC_NUMBER];
+    return ramVectorTable[CYINT_IRQ_BASE + (uint32)ReceiveISR__INTC_NUMBER];
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_SetPriority
+* Function Name: ReceiveISR_SetPriority
 ********************************************************************************
 *
 * Summary:
 *   Sets the Priority of the Interrupt. 
 *
-*   Note calling TimerISR_Start or TimerISR_StartEx will 
+*   Note calling ReceiveISR_Start or ReceiveISR_StartEx will 
 *   override any effect this API would have had. This API should only be called
-*   after TimerISR_Start or TimerISR_StartEx has been called. 
+*   after ReceiveISR_Start or ReceiveISR_StartEx has been called. 
 *   To set the initial priority for the component, use the Design-Wide Resources
 *   Interrupt Editor.
 *
@@ -255,14 +255,14 @@ cyisraddress TimerISR_GetVector(void)
 *   None
 *
 *******************************************************************************/
-void TimerISR_SetPriority(uint8 priority)
+void ReceiveISR_SetPriority(uint8 priority)
 {
-    *TimerISR_INTC_PRIOR = priority << 5;
+    *ReceiveISR_INTC_PRIOR = priority << 5;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_GetPriority
+* Function Name: ReceiveISR_GetPriority
 ********************************************************************************
 *
 * Summary:
@@ -277,19 +277,19 @@ void TimerISR_SetPriority(uint8 priority)
 *    PSoC 4: Priority is from 0 to 3.
 *
 *******************************************************************************/
-uint8 TimerISR_GetPriority(void)
+uint8 ReceiveISR_GetPriority(void)
 {
     uint8 priority;
 
 
-    priority = *TimerISR_INTC_PRIOR >> 5;
+    priority = *ReceiveISR_INTC_PRIOR >> 5;
 
     return priority;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_Enable
+* Function Name: ReceiveISR_Enable
 ********************************************************************************
 *
 * Summary:
@@ -304,15 +304,15 @@ uint8 TimerISR_GetPriority(void)
 *   None
 *
 *******************************************************************************/
-void TimerISR_Enable(void)
+void ReceiveISR_Enable(void)
 {
     /* Enable the general interrupt. */
-    *TimerISR_INTC_SET_EN = TimerISR__INTC_MASK;
+    *ReceiveISR_INTC_SET_EN = ReceiveISR__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_GetState
+* Function Name: ReceiveISR_GetState
 ********************************************************************************
 *
 * Summary:
@@ -325,15 +325,15 @@ void TimerISR_Enable(void)
 *   1 if enabled, 0 if disabled.
 *
 *******************************************************************************/
-uint8 TimerISR_GetState(void)
+uint8 ReceiveISR_GetState(void)
 {
     /* Get the state of the general interrupt. */
-    return ((*TimerISR_INTC_SET_EN & (uint32)TimerISR__INTC_MASK) != 0u) ? 1u:0u;
+    return ((*ReceiveISR_INTC_SET_EN & (uint32)ReceiveISR__INTC_MASK) != 0u) ? 1u:0u;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_Disable
+* Function Name: ReceiveISR_Disable
 ********************************************************************************
 *
 * Summary:
@@ -346,15 +346,15 @@ uint8 TimerISR_GetState(void)
 *   None
 *
 *******************************************************************************/
-void TimerISR_Disable(void)
+void ReceiveISR_Disable(void)
 {
     /* Disable the general interrupt. */
-    *TimerISR_INTC_CLR_EN = TimerISR__INTC_MASK;
+    *ReceiveISR_INTC_CLR_EN = ReceiveISR__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_SetPending
+* Function Name: ReceiveISR_SetPending
 ********************************************************************************
 *
 * Summary:
@@ -373,14 +373,14 @@ void TimerISR_Disable(void)
 *   interrupts).
 *
 *******************************************************************************/
-void TimerISR_SetPending(void)
+void ReceiveISR_SetPending(void)
 {
-    *TimerISR_INTC_SET_PD = TimerISR__INTC_MASK;
+    *ReceiveISR_INTC_SET_PD = ReceiveISR__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: TimerISR_ClearPending
+* Function Name: ReceiveISR_ClearPending
 ********************************************************************************
 *
 * Summary:
@@ -398,9 +398,9 @@ void TimerISR_SetPending(void)
 *   None
 *
 *******************************************************************************/
-void TimerISR_ClearPending(void)
+void ReceiveISR_ClearPending(void)
 {
-    *TimerISR_INTC_CLR_PD = TimerISR__INTC_MASK;
+    *ReceiveISR_INTC_CLR_PD = ReceiveISR__INTC_MASK;
 }
 
 #endif /* End check for removal by optimization */

@@ -1,36 +1,41 @@
 dont_use_io iocell 1 0
 dont_use_io iocell 1 1
 dont_use_io iocell 1 3
-set_location "\TIMER1:TimerUDB:status_tc\" macrocell 3 0 0 0
 set_location "Net_66" macrocell 3 0 1 0
+set_location "\TimerTX:TimerUDB:sT16:timerdp:u0\" datapathcell 2 0 2 
+set_location "\TimerRX:TimerUDB:rstSts:stsreg\" statusicell 2 1 4 
+set_location "\TimerRX:TimerUDB:status_tc\" macrocell 2 1 0 0
+set_location "\TimerTX:TimerUDB:sT16:timerdp:u1\" datapathcell 3 0 2 
+set_location "\TimerTX:TimerUDB:status_tc\" macrocell 3 0 0 0
+set_location "\TimerRX:TimerUDB:sT16:timerdp:u0\" datapathcell 3 1 2 
+set_location "\TimerRX:TimerUDB:sT16:timerdp:u1\" datapathcell 2 1 2 
 set_location "\RISING_EDGE:last\" macrocell 3 0 1 1
-set_location "\TIMER1:TimerUDB:sT16:timerdp:u1\" datapathcell 3 0 2 
 set_location "Net_71" macrocell 3 0 1 2
-set_location "\TIMER1:TimerUDB:sT16:timerdp:u0\" datapathcell 2 0 2 
-set_location "\TIMER1:TimerUDB:rstSts:stsreg\" statusicell 3 0 4 
+set_location "\TimerTX:TimerUDB:rstSts:stsreg\" statusicell 3 0 4 
 set_location "\USBUART:bus_reset\" interrupt -1 -1 23
+set_location "ClockBlock" clockblockcell -1 -1 0
 set_io "\LCD:LCDPort(6)\" iocell 0 6
 set_io "\LCD:LCDPort(5)\" iocell 0 5
 set_io "\LCD:LCDPort(3)\" iocell 0 3
 set_io "\LCD:LCDPort(4)\" iocell 0 4
-set_location "\TIMER1:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 3 0 6 
-set_io "Rx(0)" iocell 3 7
+set_location "\TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 2 1 6 
+set_location "\TimerTX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" controlcell 2 0 6 
 set_location "\USBUART:sof_int\" interrupt -1 -1 21
-set_location "ClockBlock" clockblockcell -1 -1 0
-set_location "RisingEdgeISR" interrupt -1 -1 1
+set_location "RisingEdgeISR" interrupt -1 -1 2
 set_location "FallingEdgeISR" interrupt -1 -1 0
 set_location "\USBUART:arb_int\" interrupt -1 -1 22
 # Note: port 15 is the logical name for port 8
 set_io "\USBUART:Dp(0)\" iocell 15 6
 set_location "\USBUART:Dp\" logicalport -1 -1 8
 set_location "\USBUART:ord_int\" interrupt -1 -1 25
-set_location "\USBUART:ep_1\" interrupt -1 -1 3
-set_location "\USBUART:ep_2\" interrupt -1 -1 4
+set_location "\USBUART:ep_1\" interrupt -1 -1 4
+set_location "\USBUART:ep_2\" interrupt -1 -1 5
 set_location "\USBUART:ep_0\" interrupt -1 -1 24
-set_location "\USBUART:ep_3\" interrupt -1 -1 5
-set_location "\USBUART:USB\" usbcell -1 -1 0
+set_location "\USBUART:ep_3\" interrupt -1 -1 6
 set_location "\USBUART:dp_int\" interrupt -1 -1 12
-set_location "TimerISR" interrupt -1 -1 2
+set_location "ReceiveISR" interrupt -1 -1 1
+set_location "TransmitISR" interrupt -1 -1 3
+set_location "\USBUART:USB\" usbcell -1 -1 0
 set_io "IDLE(0)" iocell 3 1
 set_io "COLLISION(0)" iocell 3 0
 set_io "BUSY(0)" iocell 3 2
@@ -38,5 +43,6 @@ set_io "BUSY(0)" iocell 3 2
 set_io "\USBUART:Dm(0)\" iocell 15 7
 set_io "\LCD:LCDPort(0)\" iocell 0 0
 set_io "TRANSMIT(0)" iocell 0 7
+set_io "RECEIVE(0)" iocell 3 7
 set_io "\LCD:LCDPort(2)\" iocell 0 2
 set_io "\LCD:LCDPort(1)\" iocell 0 1

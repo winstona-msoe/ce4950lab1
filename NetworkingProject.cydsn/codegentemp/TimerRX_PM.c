@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: TIMER1_PM.c
+* File Name: TimerRX_PM.c
 * Version 2.70
 *
 *  Description:
@@ -16,13 +16,13 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "TIMER1.h"
+#include "TimerRX.h"
 
-static TIMER1_backupStruct TIMER1_backup;
+static TimerRX_backupStruct TimerRX_backup;
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SaveConfig
+* Function Name: TimerRX_SaveConfig
 ********************************************************************************
 *
 * Summary:
@@ -35,29 +35,29 @@ static TIMER1_backupStruct TIMER1_backup;
 *  void
 *
 * Global variables:
-*  TIMER1_backup:  Variables of this global structure are modified to
+*  TimerRX_backup:  Variables of this global structure are modified to
 *  store the values of non retention configuration registers when Sleep() API is
 *  called.
 *
 *******************************************************************************/
-void TIMER1_SaveConfig(void) 
+void TimerRX_SaveConfig(void) 
 {
-    #if (!TIMER1_UsingFixedFunction)
-        TIMER1_backup.TimerUdb = TIMER1_ReadCounter();
-        TIMER1_backup.InterruptMaskValue = TIMER1_STATUS_MASK;
-        #if (TIMER1_UsingHWCaptureCounter)
-            TIMER1_backup.TimerCaptureCounter = TIMER1_ReadCaptureCount();
+    #if (!TimerRX_UsingFixedFunction)
+        TimerRX_backup.TimerUdb = TimerRX_ReadCounter();
+        TimerRX_backup.InterruptMaskValue = TimerRX_STATUS_MASK;
+        #if (TimerRX_UsingHWCaptureCounter)
+            TimerRX_backup.TimerCaptureCounter = TimerRX_ReadCaptureCount();
         #endif /* Back Up capture counter register  */
 
-        #if(!TIMER1_UDB_CONTROL_REG_REMOVED)
-            TIMER1_backup.TimerControlRegister = TIMER1_ReadControlRegister();
+        #if(!TimerRX_UDB_CONTROL_REG_REMOVED)
+            TimerRX_backup.TimerControlRegister = TimerRX_ReadControlRegister();
         #endif /* Backup the enable state of the Timer component */
     #endif /* Backup non retention registers in UDB implementation. All fixed function registers are retention */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_RestoreConfig
+* Function Name: TimerRX_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -70,29 +70,29 @@ void TIMER1_SaveConfig(void)
 *  void
 *
 * Global variables:
-*  TIMER1_backup:  Variables of this global structure are used to
+*  TimerRX_backup:  Variables of this global structure are used to
 *  restore the values of non retention registers on wakeup from sleep mode.
 *
 *******************************************************************************/
-void TIMER1_RestoreConfig(void) 
+void TimerRX_RestoreConfig(void) 
 {   
-    #if (!TIMER1_UsingFixedFunction)
+    #if (!TimerRX_UsingFixedFunction)
 
-        TIMER1_WriteCounter(TIMER1_backup.TimerUdb);
-        TIMER1_STATUS_MASK =TIMER1_backup.InterruptMaskValue;
-        #if (TIMER1_UsingHWCaptureCounter)
-            TIMER1_SetCaptureCount(TIMER1_backup.TimerCaptureCounter);
+        TimerRX_WriteCounter(TimerRX_backup.TimerUdb);
+        TimerRX_STATUS_MASK =TimerRX_backup.InterruptMaskValue;
+        #if (TimerRX_UsingHWCaptureCounter)
+            TimerRX_SetCaptureCount(TimerRX_backup.TimerCaptureCounter);
         #endif /* Restore Capture counter register*/
 
-        #if(!TIMER1_UDB_CONTROL_REG_REMOVED)
-            TIMER1_WriteControlRegister(TIMER1_backup.TimerControlRegister);
+        #if(!TimerRX_UDB_CONTROL_REG_REMOVED)
+            TimerRX_WriteControlRegister(TimerRX_backup.TimerControlRegister);
         #endif /* Restore the enable state of the Timer component */
     #endif /* Restore non retention registers in the UDB implementation only */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_Sleep
+* Function Name: TimerRX_Sleep
 ********************************************************************************
 *
 * Summary:
@@ -105,32 +105,32 @@ void TIMER1_RestoreConfig(void)
 *  void
 *
 * Global variables:
-*  TIMER1_backup.TimerEnableState:  Is modified depending on the
+*  TimerRX_backup.TimerEnableState:  Is modified depending on the
 *  enable state of the block before entering sleep mode.
 *
 *******************************************************************************/
-void TIMER1_Sleep(void) 
+void TimerRX_Sleep(void) 
 {
-    #if(!TIMER1_UDB_CONTROL_REG_REMOVED)
+    #if(!TimerRX_UDB_CONTROL_REG_REMOVED)
         /* Save Counter's enable state */
-        if(TIMER1_CTRL_ENABLE == (TIMER1_CONTROL & TIMER1_CTRL_ENABLE))
+        if(TimerRX_CTRL_ENABLE == (TimerRX_CONTROL & TimerRX_CTRL_ENABLE))
         {
             /* Timer is enabled */
-            TIMER1_backup.TimerEnableState = 1u;
+            TimerRX_backup.TimerEnableState = 1u;
         }
         else
         {
             /* Timer is disabled */
-            TIMER1_backup.TimerEnableState = 0u;
+            TimerRX_backup.TimerEnableState = 0u;
         }
     #endif /* Back up enable state from the Timer control register */
-    TIMER1_Stop();
-    TIMER1_SaveConfig();
+    TimerRX_Stop();
+    TimerRX_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_Wakeup
+* Function Name: TimerRX_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -143,17 +143,17 @@ void TIMER1_Sleep(void)
 *  void
 *
 * Global variables:
-*  TIMER1_backup.enableState:  Is used to restore the enable state of
+*  TimerRX_backup.enableState:  Is used to restore the enable state of
 *  block on wakeup from sleep mode.
 *
 *******************************************************************************/
-void TIMER1_Wakeup(void) 
+void TimerRX_Wakeup(void) 
 {
-    TIMER1_RestoreConfig();
-    #if(!TIMER1_UDB_CONTROL_REG_REMOVED)
-        if(TIMER1_backup.TimerEnableState == 1u)
+    TimerRX_RestoreConfig();
+    #if(!TimerRX_UDB_CONTROL_REG_REMOVED)
+        if(TimerRX_backup.TimerEnableState == 1u)
         {     /* Enable Timer's operation */
-                TIMER1_Enable();
+                TimerRX_Enable();
         } /* Do nothing if Timer was disabled before */
     #endif /* Remove this code section if Control register is removed */
 }

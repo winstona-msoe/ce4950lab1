@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: TIMER1.c
+* File Name: TimerRX.c
 * Version 2.70
 *
 * Description:
@@ -21,13 +21,13 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "TIMER1.h"
+#include "TimerRX.h"
 
-uint8 TIMER1_initVar = 0u;
+uint8 TimerRX_initVar = 0u;
 
 
 /*******************************************************************************
-* Function Name: TIMER1_Init
+* Function Name: TimerRX_Init
 ********************************************************************************
 *
 * Summary:
@@ -40,131 +40,131 @@ uint8 TIMER1_initVar = 0u;
 *  void
 *
 *******************************************************************************/
-void TIMER1_Init(void) 
+void TimerRX_Init(void) 
 {
-    #if(!TIMER1_UsingFixedFunction)
+    #if(!TimerRX_UsingFixedFunction)
             /* Interrupt State Backup for Critical Region*/
-            uint8 TIMER1_interruptState;
+            uint8 TimerRX_interruptState;
     #endif /* Interrupt state back up for Fixed Function only */
 
-    #if (TIMER1_UsingFixedFunction)
+    #if (TimerRX_UsingFixedFunction)
         /* Clear all bits but the enable bit (if it's already set) for Timer operation */
-        TIMER1_CONTROL &= TIMER1_CTRL_ENABLE;
+        TimerRX_CONTROL &= TimerRX_CTRL_ENABLE;
 
         /* Clear the mode bits for continuous run mode */
         #if (CY_PSOC5A)
-            TIMER1_CONTROL2 &= ((uint8)(~TIMER1_CTRL_MODE_MASK));
+            TimerRX_CONTROL2 &= ((uint8)(~TimerRX_CTRL_MODE_MASK));
         #endif /* Clear bits in CONTROL2 only in PSOC5A */
 
         #if (CY_PSOC3 || CY_PSOC5LP)
-            TIMER1_CONTROL3 &= ((uint8)(~TIMER1_CTRL_MODE_MASK));
+            TimerRX_CONTROL3 &= ((uint8)(~TimerRX_CTRL_MODE_MASK));
         #endif /* CONTROL3 register exists only in PSoC3 OR PSoC5LP */
 
         /* Check if One Shot mode is enabled i.e. RunMode !=0*/
-        #if (TIMER1_RunModeUsed != 0x0u)
+        #if (TimerRX_RunModeUsed != 0x0u)
             /* Set 3rd bit of Control register to enable one shot mode */
-            TIMER1_CONTROL |= 0x04u;
+            TimerRX_CONTROL |= 0x04u;
         #endif /* One Shot enabled only when RunModeUsed is not Continuous*/
 
-        #if (TIMER1_RunModeUsed == 2)
+        #if (TimerRX_RunModeUsed == 2)
             #if (CY_PSOC5A)
                 /* Set last 2 bits of control2 register if one shot(halt on
                 interrupt) is enabled*/
-                TIMER1_CONTROL2 |= 0x03u;
+                TimerRX_CONTROL2 |= 0x03u;
             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL2 for PSoC5A */
 
             #if (CY_PSOC3 || CY_PSOC5LP)
                 /* Set last 2 bits of control3 register if one shot(halt on
                 interrupt) is enabled*/
-                TIMER1_CONTROL3 |= 0x03u;
+                TimerRX_CONTROL3 |= 0x03u;
             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL3 for PSoC3 or PSoC5LP */
 
         #endif /* Remove section if One Shot Halt on Interrupt is not enabled */
 
-        #if (TIMER1_UsingHWEnable != 0)
+        #if (TimerRX_UsingHWEnable != 0)
             #if (CY_PSOC5A)
                 /* Set the default Run Mode of the Timer to Continuous */
-                TIMER1_CONTROL2 |= TIMER1_CTRL_MODE_PULSEWIDTH;
+                TimerRX_CONTROL2 |= TimerRX_CTRL_MODE_PULSEWIDTH;
             #endif /* Set Continuous Run Mode in CONTROL2 for PSoC5A */
 
             #if (CY_PSOC3 || CY_PSOC5LP)
                 /* Clear and Set ROD and COD bits of CFG2 register */
-                TIMER1_CONTROL3 &= ((uint8)(~TIMER1_CTRL_RCOD_MASK));
-                TIMER1_CONTROL3 |= TIMER1_CTRL_RCOD;
+                TimerRX_CONTROL3 &= ((uint8)(~TimerRX_CTRL_RCOD_MASK));
+                TimerRX_CONTROL3 |= TimerRX_CTRL_RCOD;
 
                 /* Clear and Enable the HW enable bit in CFG2 register */
-                TIMER1_CONTROL3 &= ((uint8)(~TIMER1_CTRL_ENBL_MASK));
-                TIMER1_CONTROL3 |= TIMER1_CTRL_ENBL;
+                TimerRX_CONTROL3 &= ((uint8)(~TimerRX_CTRL_ENBL_MASK));
+                TimerRX_CONTROL3 |= TimerRX_CTRL_ENBL;
 
                 /* Set the default Run Mode of the Timer to Continuous */
-                TIMER1_CONTROL3 |= TIMER1_CTRL_MODE_CONTINUOUS;
+                TimerRX_CONTROL3 |= TimerRX_CTRL_MODE_CONTINUOUS;
             #endif /* Set Continuous Run Mode in CONTROL3 for PSoC3ES3 or PSoC5A */
 
         #endif /* Configure Run Mode with hardware enable */
 
         /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
-        TIMER1_RT1 &= ((uint8)(~TIMER1_RT1_MASK));
-        TIMER1_RT1 |= TIMER1_SYNC;
+        TimerRX_RT1 &= ((uint8)(~TimerRX_RT1_MASK));
+        TimerRX_RT1 |= TimerRX_SYNC;
 
         /*Enable DSI Sync all all inputs of the Timer*/
-        TIMER1_RT1 &= ((uint8)(~TIMER1_SYNCDSI_MASK));
-        TIMER1_RT1 |= TIMER1_SYNCDSI_EN;
+        TimerRX_RT1 &= ((uint8)(~TimerRX_SYNCDSI_MASK));
+        TimerRX_RT1 |= TimerRX_SYNCDSI_EN;
 
         /* Set the IRQ to use the status register interrupts */
-        TIMER1_CONTROL2 |= TIMER1_CTRL2_IRQ_SEL;
+        TimerRX_CONTROL2 |= TimerRX_CTRL2_IRQ_SEL;
     #endif /* Configuring registers of fixed function implementation */
 
     /* Set Initial values from Configuration */
-    TIMER1_WritePeriod(TIMER1_INIT_PERIOD);
-    TIMER1_WriteCounter(TIMER1_INIT_PERIOD);
+    TimerRX_WritePeriod(TimerRX_INIT_PERIOD);
+    TimerRX_WriteCounter(TimerRX_INIT_PERIOD);
 
-    #if (TIMER1_UsingHWCaptureCounter)/* Capture counter is enabled */
-        TIMER1_CAPTURE_COUNT_CTRL |= TIMER1_CNTR_ENABLE;
-        TIMER1_SetCaptureCount(TIMER1_INIT_CAPTURE_COUNT);
+    #if (TimerRX_UsingHWCaptureCounter)/* Capture counter is enabled */
+        TimerRX_CAPTURE_COUNT_CTRL |= TimerRX_CNTR_ENABLE;
+        TimerRX_SetCaptureCount(TimerRX_INIT_CAPTURE_COUNT);
     #endif /* Configure capture counter value */
 
-    #if (!TIMER1_UsingFixedFunction)
-        #if (TIMER1_SoftwareCaptureMode)
-            TIMER1_SetCaptureMode(TIMER1_INIT_CAPTURE_MODE);
+    #if (!TimerRX_UsingFixedFunction)
+        #if (TimerRX_SoftwareCaptureMode)
+            TimerRX_SetCaptureMode(TimerRX_INIT_CAPTURE_MODE);
         #endif /* Set Capture Mode for UDB implementation if capture mode is software controlled */
 
-        #if (TIMER1_SoftwareTriggerMode)
-            #if (!TIMER1_UDB_CONTROL_REG_REMOVED)
-                if (0u == (TIMER1_CONTROL & TIMER1__B_TIMER__TM_SOFTWARE))
+        #if (TimerRX_SoftwareTriggerMode)
+            #if (!TimerRX_UDB_CONTROL_REG_REMOVED)
+                if (0u == (TimerRX_CONTROL & TimerRX__B_TIMER__TM_SOFTWARE))
                 {
-                    TIMER1_SetTriggerMode(TIMER1_INIT_TRIGGER_MODE);
+                    TimerRX_SetTriggerMode(TimerRX_INIT_TRIGGER_MODE);
                 }
-            #endif /* (!TIMER1_UDB_CONTROL_REG_REMOVED) */
+            #endif /* (!TimerRX_UDB_CONTROL_REG_REMOVED) */
         #endif /* Set trigger mode for UDB Implementation if trigger mode is software controlled */
 
         /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region critical*/
         /* Enter Critical Region*/
-        TIMER1_interruptState = CyEnterCriticalSection();
+        TimerRX_interruptState = CyEnterCriticalSection();
 
         /* Use the interrupt output of the status register for IRQ output */
-        TIMER1_STATUS_AUX_CTRL |= TIMER1_STATUS_ACTL_INT_EN_MASK;
+        TimerRX_STATUS_AUX_CTRL |= TimerRX_STATUS_ACTL_INT_EN_MASK;
 
         /* Exit Critical Region*/
-        CyExitCriticalSection(TIMER1_interruptState);
+        CyExitCriticalSection(TimerRX_interruptState);
 
-        #if (TIMER1_EnableTriggerMode)
-            TIMER1_EnableTrigger();
+        #if (TimerRX_EnableTriggerMode)
+            TimerRX_EnableTrigger();
         #endif /* Set Trigger enable bit for UDB implementation in the control register*/
 		
 		
-        #if (TIMER1_InterruptOnCaptureCount && !TIMER1_UDB_CONTROL_REG_REMOVED)
-            TIMER1_SetInterruptCount(TIMER1_INIT_INT_CAPTURE_COUNT);
+        #if (TimerRX_InterruptOnCaptureCount && !TimerRX_UDB_CONTROL_REG_REMOVED)
+            TimerRX_SetInterruptCount(TimerRX_INIT_INT_CAPTURE_COUNT);
         #endif /* Set interrupt count in UDB implementation if interrupt count feature is checked.*/
 
-        TIMER1_ClearFIFO();
+        TimerRX_ClearFIFO();
     #endif /* Configure additional features of UDB implementation */
 
-    TIMER1_SetInterruptMode(TIMER1_INIT_INTERRUPT_MODE);
+    TimerRX_SetInterruptMode(TimerRX_INIT_INTERRUPT_MODE);
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_Enable
+* Function Name: TimerRX_Enable
 ********************************************************************************
 *
 * Summary:
@@ -177,23 +177,23 @@ void TIMER1_Init(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_Enable(void) 
+void TimerRX_Enable(void) 
 {
     /* Globally Enable the Fixed Function Block chosen */
-    #if (TIMER1_UsingFixedFunction)
-        TIMER1_GLOBAL_ENABLE |= TIMER1_BLOCK_EN_MASK;
-        TIMER1_GLOBAL_STBY_ENABLE |= TIMER1_BLOCK_STBY_EN_MASK;
+    #if (TimerRX_UsingFixedFunction)
+        TimerRX_GLOBAL_ENABLE |= TimerRX_BLOCK_EN_MASK;
+        TimerRX_GLOBAL_STBY_ENABLE |= TimerRX_BLOCK_STBY_EN_MASK;
     #endif /* Set Enable bit for enabling Fixed function timer*/
 
     /* Remove assignment if control register is removed */
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED || TIMER1_UsingFixedFunction)
-        TIMER1_CONTROL |= TIMER1_CTRL_ENABLE;
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED || TimerRX_UsingFixedFunction)
+        TimerRX_CONTROL |= TimerRX_CTRL_ENABLE;
     #endif /* Remove assignment if control register is removed */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_Start
+* Function Name: TimerRX_Start
 ********************************************************************************
 *
 * Summary:
@@ -208,26 +208,26 @@ void TIMER1_Enable(void)
 *  void
 *
 * Global variables:
-*  TIMER1_initVar: Is modified when this function is called for the
+*  TimerRX_initVar: Is modified when this function is called for the
 *   first time. Is used to ensure that initialization happens only once.
 *
 *******************************************************************************/
-void TIMER1_Start(void) 
+void TimerRX_Start(void) 
 {
-    if(TIMER1_initVar == 0u)
+    if(TimerRX_initVar == 0u)
     {
-        TIMER1_Init();
+        TimerRX_Init();
 
-        TIMER1_initVar = 1u;   /* Clear this bit for Initialization */
+        TimerRX_initVar = 1u;   /* Clear this bit for Initialization */
     }
 
     /* Enable the Timer */
-    TIMER1_Enable();
+    TimerRX_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_Stop
+* Function Name: TimerRX_Stop
 ********************************************************************************
 *
 * Summary:
@@ -244,23 +244,23 @@ void TIMER1_Start(void)
 *               has no effect on the operation of the timer.
 *
 *******************************************************************************/
-void TIMER1_Stop(void) 
+void TimerRX_Stop(void) 
 {
     /* Disable Timer */
-    #if(!TIMER1_UDB_CONTROL_REG_REMOVED || TIMER1_UsingFixedFunction)
-        TIMER1_CONTROL &= ((uint8)(~TIMER1_CTRL_ENABLE));
+    #if(!TimerRX_UDB_CONTROL_REG_REMOVED || TimerRX_UsingFixedFunction)
+        TimerRX_CONTROL &= ((uint8)(~TimerRX_CTRL_ENABLE));
     #endif /* Remove assignment if control register is removed */
 
     /* Globally disable the Fixed Function Block chosen */
-    #if (TIMER1_UsingFixedFunction)
-        TIMER1_GLOBAL_ENABLE &= ((uint8)(~TIMER1_BLOCK_EN_MASK));
-        TIMER1_GLOBAL_STBY_ENABLE &= ((uint8)(~TIMER1_BLOCK_STBY_EN_MASK));
+    #if (TimerRX_UsingFixedFunction)
+        TimerRX_GLOBAL_ENABLE &= ((uint8)(~TimerRX_BLOCK_EN_MASK));
+        TimerRX_GLOBAL_STBY_ENABLE &= ((uint8)(~TimerRX_BLOCK_STBY_EN_MASK));
     #endif /* Disable global enable for the Timer Fixed function block to stop the Timer*/
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SetInterruptMode
+* Function Name: TimerRX_SetInterruptMode
 ********************************************************************************
 *
 * Summary:
@@ -276,14 +276,14 @@ void TIMER1_Stop(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_SetInterruptMode(uint8 interruptMode) 
+void TimerRX_SetInterruptMode(uint8 interruptMode) 
 {
-    TIMER1_STATUS_MASK = interruptMode;
+    TimerRX_STATUS_MASK = interruptMode;
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SoftwareCapture
+* Function Name: TimerRX_SoftwareCapture
 ********************************************************************************
 *
 * Summary:
@@ -299,20 +299,20 @@ void TIMER1_SetInterruptMode(uint8 interruptMode)
 *  An existing hardware capture could be overwritten.
 *
 *******************************************************************************/
-void TIMER1_SoftwareCapture(void) 
+void TimerRX_SoftwareCapture(void) 
 {
     /* Generate a software capture by reading the counter register */
-    #if(TIMER1_UsingFixedFunction)
-        (void)CY_GET_REG16(TIMER1_COUNTER_LSB_PTR);
+    #if(TimerRX_UsingFixedFunction)
+        (void)CY_GET_REG16(TimerRX_COUNTER_LSB_PTR);
     #else
-        (void)CY_GET_REG8(TIMER1_COUNTER_LSB_PTR_8BIT);
-    #endif/* (TIMER1_UsingFixedFunction) */
+        (void)CY_GET_REG8(TimerRX_COUNTER_LSB_PTR_8BIT);
+    #endif/* (TimerRX_UsingFixedFunction) */
     /* Capture Data is now in the FIFO */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ReadStatusRegister
+* Function Name: TimerRX_ReadStatusRegister
 ********************************************************************************
 *
 * Summary:
@@ -330,17 +330,17 @@ void TIMER1_SoftwareCapture(void)
 *  Status register bits may be clear on read.
 *
 *******************************************************************************/
-uint8   TIMER1_ReadStatusRegister(void) 
+uint8   TimerRX_ReadStatusRegister(void) 
 {
-    return (TIMER1_STATUS);
+    return (TimerRX_STATUS);
 }
 
 
-#if (!TIMER1_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
+#if (!TimerRX_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ReadControlRegister
+* Function Name: TimerRX_ReadControlRegister
 ********************************************************************************
 *
 * Summary:
@@ -353,18 +353,18 @@ uint8   TIMER1_ReadStatusRegister(void)
 *  The contents of the control register
 *
 *******************************************************************************/
-uint8 TIMER1_ReadControlRegister(void) 
+uint8 TimerRX_ReadControlRegister(void) 
 {
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED) 
-        return ((uint8)TIMER1_CONTROL);
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED) 
+        return ((uint8)TimerRX_CONTROL);
     #else
         return (0);
-    #endif /* (!TIMER1_UDB_CONTROL_REG_REMOVED) */
+    #endif /* (!TimerRX_UDB_CONTROL_REG_REMOVED) */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_WriteControlRegister
+* Function Name: TimerRX_WriteControlRegister
 ********************************************************************************
 *
 * Summary:
@@ -376,20 +376,20 @@ uint8 TIMER1_ReadControlRegister(void)
 * Return:
 *
 *******************************************************************************/
-void TIMER1_WriteControlRegister(uint8 control) 
+void TimerRX_WriteControlRegister(uint8 control) 
 {
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED) 
-        TIMER1_CONTROL = control;
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED) 
+        TimerRX_CONTROL = control;
     #else
         control = 0u;
-    #endif /* (!TIMER1_UDB_CONTROL_REG_REMOVED) */
+    #endif /* (!TimerRX_UDB_CONTROL_REG_REMOVED) */
 }
 
 #endif /* Remove API if control register is unused */
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ReadPeriod
+* Function Name: TimerRX_ReadPeriod
 ********************************************************************************
 *
 * Summary:
@@ -402,18 +402,18 @@ void TIMER1_WriteControlRegister(uint8 control)
 *  The present value of the counter.
 *
 *******************************************************************************/
-uint16 TIMER1_ReadPeriod(void) 
+uint16 TimerRX_ReadPeriod(void) 
 {
-   #if(TIMER1_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(TIMER1_PERIOD_LSB_PTR));
+   #if(TimerRX_UsingFixedFunction)
+       return ((uint16)CY_GET_REG16(TimerRX_PERIOD_LSB_PTR));
    #else
-       return (CY_GET_REG16(TIMER1_PERIOD_LSB_PTR));
-   #endif /* (TIMER1_UsingFixedFunction) */
+       return (CY_GET_REG16(TimerRX_PERIOD_LSB_PTR));
+   #endif /* (TimerRX_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_WritePeriod
+* Function Name: TimerRX_WritePeriod
 ********************************************************************************
 *
 * Summary:
@@ -428,19 +428,19 @@ uint16 TIMER1_ReadPeriod(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_WritePeriod(uint16 period) 
+void TimerRX_WritePeriod(uint16 period) 
 {
-    #if(TIMER1_UsingFixedFunction)
+    #if(TimerRX_UsingFixedFunction)
         uint16 period_temp = (uint16)period;
-        CY_SET_REG16(TIMER1_PERIOD_LSB_PTR, period_temp);
+        CY_SET_REG16(TimerRX_PERIOD_LSB_PTR, period_temp);
     #else
-        CY_SET_REG16(TIMER1_PERIOD_LSB_PTR, period);
+        CY_SET_REG16(TimerRX_PERIOD_LSB_PTR, period);
     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed function implementation */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ReadCapture
+* Function Name: TimerRX_ReadCapture
 ********************************************************************************
 *
 * Summary:
@@ -453,18 +453,18 @@ void TIMER1_WritePeriod(uint16 period)
 *  Present Capture value.
 *
 *******************************************************************************/
-uint16 TIMER1_ReadCapture(void) 
+uint16 TimerRX_ReadCapture(void) 
 {
-   #if(TIMER1_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(TIMER1_CAPTURE_LSB_PTR));
+   #if(TimerRX_UsingFixedFunction)
+       return ((uint16)CY_GET_REG16(TimerRX_CAPTURE_LSB_PTR));
    #else
-       return (CY_GET_REG16(TIMER1_CAPTURE_LSB_PTR));
-   #endif /* (TIMER1_UsingFixedFunction) */
+       return (CY_GET_REG16(TimerRX_CAPTURE_LSB_PTR));
+   #endif /* (TimerRX_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_WriteCounter
+* Function Name: TimerRX_WriteCounter
 ********************************************************************************
 *
 * Summary:
@@ -477,22 +477,22 @@ uint16 TIMER1_ReadCapture(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_WriteCounter(uint16 counter) 
+void TimerRX_WriteCounter(uint16 counter) 
 {
-   #if(TIMER1_UsingFixedFunction)
+   #if(TimerRX_UsingFixedFunction)
         /* This functionality is removed until a FixedFunction HW update to
          * allow this register to be written
          */
-        CY_SET_REG16(TIMER1_COUNTER_LSB_PTR, (uint16)counter);
+        CY_SET_REG16(TimerRX_COUNTER_LSB_PTR, (uint16)counter);
         
     #else
-        CY_SET_REG16(TIMER1_COUNTER_LSB_PTR, counter);
+        CY_SET_REG16(TimerRX_COUNTER_LSB_PTR, counter);
     #endif /* Set Write Counter only for the UDB implementation (Write Counter not available in fixed function Timer */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ReadCounter
+* Function Name: TimerRX_ReadCounter
 ********************************************************************************
 *
 * Summary:
@@ -505,27 +505,27 @@ void TIMER1_WriteCounter(uint16 counter)
 *  Present compare value.
 *
 *******************************************************************************/
-uint16 TIMER1_ReadCounter(void) 
+uint16 TimerRX_ReadCounter(void) 
 {
     /* Force capture by reading Accumulator */
     /* Must first do a software capture to be able to read the counter */
     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
-    #if(TIMER1_UsingFixedFunction)
-        (void)CY_GET_REG16(TIMER1_COUNTER_LSB_PTR);
+    #if(TimerRX_UsingFixedFunction)
+        (void)CY_GET_REG16(TimerRX_COUNTER_LSB_PTR);
     #else
-        (void)CY_GET_REG8(TIMER1_COUNTER_LSB_PTR_8BIT);
-    #endif/* (TIMER1_UsingFixedFunction) */
+        (void)CY_GET_REG8(TimerRX_COUNTER_LSB_PTR_8BIT);
+    #endif/* (TimerRX_UsingFixedFunction) */
 
     /* Read the data from the FIFO (or capture register for Fixed Function)*/
-    #if(TIMER1_UsingFixedFunction)
-        return ((uint16)CY_GET_REG16(TIMER1_CAPTURE_LSB_PTR));
+    #if(TimerRX_UsingFixedFunction)
+        return ((uint16)CY_GET_REG16(TimerRX_CAPTURE_LSB_PTR));
     #else
-        return (CY_GET_REG16(TIMER1_CAPTURE_LSB_PTR));
-    #endif /* (TIMER1_UsingFixedFunction) */
+        return (CY_GET_REG16(TimerRX_CAPTURE_LSB_PTR));
+    #endif /* (TimerRX_UsingFixedFunction) */
 }
 
 
-#if(!TIMER1_UsingFixedFunction) /* UDB Specific Functions */
+#if(!TimerRX_UsingFixedFunction) /* UDB Specific Functions */
 
     
 /*******************************************************************************
@@ -534,11 +534,11 @@ uint16 TIMER1_ReadCounter(void)
  ******************************************************************************/
 
 
-#if (TIMER1_SoftwareCaptureMode)
+#if (TimerRX_SoftwareCaptureMode)
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SetCaptureMode
+* Function Name: TimerRX_SetCaptureMode
 ********************************************************************************
 *
 * Summary:
@@ -547,44 +547,44 @@ uint16 TIMER1_ReadCounter(void)
 * Parameters:
 *  captureMode: This parameter sets the capture mode of the UDB capture feature
 *  The parameter values are defined using the
-*  #define TIMER1__B_TIMER__CM_NONE 0
-#define TIMER1__B_TIMER__CM_RISINGEDGE 1
-#define TIMER1__B_TIMER__CM_FALLINGEDGE 2
-#define TIMER1__B_TIMER__CM_EITHEREDGE 3
-#define TIMER1__B_TIMER__CM_SOFTWARE 4
+*  #define TimerRX__B_TIMER__CM_NONE 0
+#define TimerRX__B_TIMER__CM_RISINGEDGE 1
+#define TimerRX__B_TIMER__CM_FALLINGEDGE 2
+#define TimerRX__B_TIMER__CM_EITHEREDGE 3
+#define TimerRX__B_TIMER__CM_SOFTWARE 4
  identifiers
 *  The following are the possible values of the parameter
-*  TIMER1__B_TIMER__CM_NONE        - Set Capture mode to None
-*  TIMER1__B_TIMER__CM_RISINGEDGE  - Rising edge of Capture input
-*  TIMER1__B_TIMER__CM_FALLINGEDGE - Falling edge of Capture input
-*  TIMER1__B_TIMER__CM_EITHEREDGE  - Either edge of Capture input
+*  TimerRX__B_TIMER__CM_NONE        - Set Capture mode to None
+*  TimerRX__B_TIMER__CM_RISINGEDGE  - Rising edge of Capture input
+*  TimerRX__B_TIMER__CM_FALLINGEDGE - Falling edge of Capture input
+*  TimerRX__B_TIMER__CM_EITHEREDGE  - Either edge of Capture input
 *
 * Return:
 *  void
 *
 *******************************************************************************/
-void TIMER1_SetCaptureMode(uint8 captureMode) 
+void TimerRX_SetCaptureMode(uint8 captureMode) 
 {
     /* This must only set to two bits of the control register associated */
-    captureMode = ((uint8)((uint8)captureMode << TIMER1_CTRL_CAP_MODE_SHIFT));
-    captureMode &= (TIMER1_CTRL_CAP_MODE_MASK);
+    captureMode = ((uint8)((uint8)captureMode << TimerRX_CTRL_CAP_MODE_SHIFT));
+    captureMode &= (TimerRX_CTRL_CAP_MODE_MASK);
 
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED)
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED)
         /* Clear the Current Setting */
-        TIMER1_CONTROL &= ((uint8)(~TIMER1_CTRL_CAP_MODE_MASK));
+        TimerRX_CONTROL &= ((uint8)(~TimerRX_CTRL_CAP_MODE_MASK));
 
         /* Write The New Setting */
-        TIMER1_CONTROL |= captureMode;
-    #endif /* (!TIMER1_UDB_CONTROL_REG_REMOVED) */
+        TimerRX_CONTROL |= captureMode;
+    #endif /* (!TimerRX_UDB_CONTROL_REG_REMOVED) */
 }
 #endif /* Remove API if Capture Mode is not Software Controlled */
 
 
-#if (TIMER1_SoftwareTriggerMode)
+#if (TimerRX_SoftwareTriggerMode)
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SetTriggerMode
+* Function Name: TimerRX_SetTriggerMode
 ********************************************************************************
 *
 * Summary:
@@ -592,37 +592,37 @@ void TIMER1_SetCaptureMode(uint8 captureMode)
 *
 * Parameters:
 *  triggerMode: Pass one of the pre-defined Trigger Modes (except Software)
-    #define TIMER1__B_TIMER__TM_NONE 0x00u
-    #define TIMER1__B_TIMER__TM_RISINGEDGE 0x04u
-    #define TIMER1__B_TIMER__TM_FALLINGEDGE 0x08u
-    #define TIMER1__B_TIMER__TM_EITHEREDGE 0x0Cu
-    #define TIMER1__B_TIMER__TM_SOFTWARE 0x10u
+    #define TimerRX__B_TIMER__TM_NONE 0x00u
+    #define TimerRX__B_TIMER__TM_RISINGEDGE 0x04u
+    #define TimerRX__B_TIMER__TM_FALLINGEDGE 0x08u
+    #define TimerRX__B_TIMER__TM_EITHEREDGE 0x0Cu
+    #define TimerRX__B_TIMER__TM_SOFTWARE 0x10u
 *
 * Return:
 *  void
 *
 *******************************************************************************/
-void TIMER1_SetTriggerMode(uint8 triggerMode) 
+void TimerRX_SetTriggerMode(uint8 triggerMode) 
 {
     /* This must only set to two bits of the control register associated */
-    triggerMode &= TIMER1_CTRL_TRIG_MODE_MASK;
+    triggerMode &= TimerRX_CTRL_TRIG_MODE_MASK;
 
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
     
         /* Clear the Current Setting */
-        TIMER1_CONTROL &= ((uint8)(~TIMER1_CTRL_TRIG_MODE_MASK));
+        TimerRX_CONTROL &= ((uint8)(~TimerRX_CTRL_TRIG_MODE_MASK));
 
         /* Write The New Setting */
-        TIMER1_CONTROL |= (triggerMode | TIMER1__B_TIMER__TM_SOFTWARE);
+        TimerRX_CONTROL |= (triggerMode | TimerRX__B_TIMER__TM_SOFTWARE);
     #endif /* Remove code section if control register is not used */
 }
 #endif /* Remove API if Trigger Mode is not Software Controlled */
 
-#if (TIMER1_EnableTriggerMode)
+#if (TimerRX_EnableTriggerMode)
 
 
 /*******************************************************************************
-* Function Name: TIMER1_EnableTrigger
+* Function Name: TimerRX_EnableTrigger
 ********************************************************************************
 *
 * Summary:
@@ -635,16 +635,16 @@ void TIMER1_SetTriggerMode(uint8 triggerMode)
 *  void
 *
 *******************************************************************************/
-void TIMER1_EnableTrigger(void) 
+void TimerRX_EnableTrigger(void) 
 {
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
-        TIMER1_CONTROL |= TIMER1_CTRL_TRIG_EN;
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
+        TimerRX_CONTROL |= TimerRX_CTRL_TRIG_EN;
     #endif /* Remove code section if control register is not used */
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_DisableTrigger
+* Function Name: TimerRX_DisableTrigger
 ********************************************************************************
 *
 * Summary:
@@ -657,19 +657,19 @@ void TIMER1_EnableTrigger(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_DisableTrigger(void) 
+void TimerRX_DisableTrigger(void) 
 {
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED )   /* Remove assignment if control register is removed */
-        TIMER1_CONTROL &= ((uint8)(~TIMER1_CTRL_TRIG_EN));
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED )   /* Remove assignment if control register is removed */
+        TimerRX_CONTROL &= ((uint8)(~TimerRX_CTRL_TRIG_EN));
     #endif /* Remove code section if control register is not used */
 }
 #endif /* Remove API is Trigger Mode is set to None */
 
-#if(TIMER1_InterruptOnCaptureCount)
+#if(TimerRX_InterruptOnCaptureCount)
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SetInterruptCount
+* Function Name: TimerRX_SetInterruptCount
 ********************************************************************************
 *
 * Summary:
@@ -685,26 +685,26 @@ void TIMER1_DisableTrigger(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_SetInterruptCount(uint8 interruptCount) 
+void TimerRX_SetInterruptCount(uint8 interruptCount) 
 {
     /* This must only set to two bits of the control register associated */
-    interruptCount &= TIMER1_CTRL_INTCNT_MASK;
+    interruptCount &= TimerRX_CTRL_INTCNT_MASK;
 
-    #if (!TIMER1_UDB_CONTROL_REG_REMOVED)
+    #if (!TimerRX_UDB_CONTROL_REG_REMOVED)
         /* Clear the Current Setting */
-        TIMER1_CONTROL &= ((uint8)(~TIMER1_CTRL_INTCNT_MASK));
+        TimerRX_CONTROL &= ((uint8)(~TimerRX_CTRL_INTCNT_MASK));
         /* Write The New Setting */
-        TIMER1_CONTROL |= interruptCount;
-    #endif /* (!TIMER1_UDB_CONTROL_REG_REMOVED) */
+        TimerRX_CONTROL |= interruptCount;
+    #endif /* (!TimerRX_UDB_CONTROL_REG_REMOVED) */
 }
-#endif /* TIMER1_InterruptOnCaptureCount */
+#endif /* TimerRX_InterruptOnCaptureCount */
 
 
-#if (TIMER1_UsingHWCaptureCounter)
+#if (TimerRX_UsingHWCaptureCounter)
 
 
 /*******************************************************************************
-* Function Name: TIMER1_SetCaptureCount
+* Function Name: TimerRX_SetCaptureCount
 ********************************************************************************
 *
 * Summary:
@@ -719,14 +719,14 @@ void TIMER1_SetInterruptCount(uint8 interruptCount)
 *  void
 *
 *******************************************************************************/
-void TIMER1_SetCaptureCount(uint8 captureCount) 
+void TimerRX_SetCaptureCount(uint8 captureCount) 
 {
-    TIMER1_CAP_COUNT = captureCount;
+    TimerRX_CAP_COUNT = captureCount;
 }
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ReadCaptureCount
+* Function Name: TimerRX_ReadCaptureCount
 ********************************************************************************
 *
 * Summary:
@@ -739,15 +739,15 @@ void TIMER1_SetCaptureCount(uint8 captureCount)
 *  Returns the Capture Count Setting
 *
 *******************************************************************************/
-uint8 TIMER1_ReadCaptureCount(void) 
+uint8 TimerRX_ReadCaptureCount(void) 
 {
-    return ((uint8)TIMER1_CAP_COUNT);
+    return ((uint8)TimerRX_CAP_COUNT);
 }
-#endif /* TIMER1_UsingHWCaptureCounter */
+#endif /* TimerRX_UsingHWCaptureCounter */
 
 
 /*******************************************************************************
-* Function Name: TIMER1_ClearFIFO
+* Function Name: TimerRX_ClearFIFO
 ********************************************************************************
 *
 * Summary:
@@ -760,11 +760,11 @@ uint8 TIMER1_ReadCaptureCount(void)
 *  void
 *
 *******************************************************************************/
-void TIMER1_ClearFIFO(void) 
+void TimerRX_ClearFIFO(void) 
 {
-    while(0u != (TIMER1_ReadStatusRegister() & TIMER1_STATUS_FIFONEMP))
+    while(0u != (TimerRX_ReadStatusRegister() & TimerRX_STATUS_FIFONEMP))
     {
-        (void)TIMER1_ReadCapture();
+        (void)TimerRX_ReadCapture();
     }
 }
 

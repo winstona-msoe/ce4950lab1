@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Rx.c  
+* File Name: RECEIVE.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Rx.h"
+#include "RECEIVE.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 Rx__PORT == 15 && ((Rx__MASK & 0xC0) != 0))
+	 RECEIVE__PORT == 15 && ((RECEIVE__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: Rx_Write
+* Function Name: RECEIVE_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet Rx_SUT.c usage_Rx_Write
+*  \snippet RECEIVE_SUT.c usage_RECEIVE_Write
 *******************************************************************************/
-void Rx_Write(uint8 value)
+void RECEIVE_Write(uint8 value)
 {
-    uint8 staticBits = (Rx_DR & (uint8)(~Rx_MASK));
-    Rx_DR = staticBits | ((uint8)(value << Rx_SHIFT) & Rx_MASK);
+    uint8 staticBits = (RECEIVE_DR & (uint8)(~RECEIVE_MASK));
+    RECEIVE_DR = staticBits | ((uint8)(value << RECEIVE_SHIFT) & RECEIVE_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: Rx_SetDriveMode
+* Function Name: RECEIVE_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void Rx_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet Rx_SUT.c usage_Rx_SetDriveMode
+*  \snippet RECEIVE_SUT.c usage_RECEIVE_SetDriveMode
 *******************************************************************************/
-void Rx_SetDriveMode(uint8 mode)
+void RECEIVE_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(Rx_0, mode);
+	CyPins_SetPinDriveMode(RECEIVE_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: Rx_Read
+* Function Name: RECEIVE_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void Rx_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet Rx_SUT.c usage_Rx_Read  
+*  \snippet RECEIVE_SUT.c usage_RECEIVE_Read  
 *******************************************************************************/
-uint8 Rx_Read(void)
+uint8 RECEIVE_Read(void)
 {
-    return (Rx_PS & Rx_MASK) >> Rx_SHIFT;
+    return (RECEIVE_PS & RECEIVE_MASK) >> RECEIVE_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: Rx_ReadDataReg
+* Function Name: RECEIVE_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 Rx_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred Rx_Read() API because the 
-* Rx_ReadDataReg() reads the data register instead of the status 
+* preferred RECEIVE_Read() API because the 
+* RECEIVE_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 Rx_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet Rx_SUT.c usage_Rx_ReadDataReg 
+*  \snippet RECEIVE_SUT.c usage_RECEIVE_ReadDataReg 
 *******************************************************************************/
-uint8 Rx_ReadDataReg(void)
+uint8 RECEIVE_ReadDataReg(void)
 {
-    return (Rx_DR & Rx_MASK) >> Rx_SHIFT;
+    return (RECEIVE_DR & RECEIVE_MASK) >> RECEIVE_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(Rx_INTSTAT) 
+#if defined(RECEIVE_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: Rx_SetInterruptMode
+    * Function Name: RECEIVE_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 Rx_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use Rx_INTR_ALL to configure the
+    *  component. Or you may use RECEIVE_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - Rx_0_INTR       (First pin in the list)
-    *  - Rx_1_INTR       (Second pin in the list)
+    *  - RECEIVE_0_INTR       (First pin in the list)
+    *  - RECEIVE_1_INTR       (Second pin in the list)
     *  - ...
-    *  - Rx_INTR_ALL     (All pins in Pins component)
+    *  - RECEIVE_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 Rx_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet Rx_SUT.c usage_Rx_SetInterruptMode
+    *  \snippet RECEIVE_SUT.c usage_RECEIVE_SetInterruptMode
     *******************************************************************************/
-    void Rx_SetInterruptMode(uint16 position, uint16 mode)
+    void RECEIVE_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & Rx_0_INTR) != 0u) 
+		if((position & RECEIVE_0_INTR) != 0u) 
 		{ 
-			 Rx_0_INTTYPE_REG = (uint8)mode; 
+			 RECEIVE_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: Rx_ClearInterrupt
+    * Function Name: RECEIVE_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 Rx_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet Rx_SUT.c usage_Rx_ClearInterrupt
+    *  \snippet RECEIVE_SUT.c usage_RECEIVE_ClearInterrupt
     *******************************************************************************/
-    uint8 Rx_ClearInterrupt(void)
+    uint8 RECEIVE_ClearInterrupt(void)
     {
-        return (Rx_INTSTAT & Rx_MASK) >> Rx_SHIFT;
+        return (RECEIVE_INTSTAT & RECEIVE_MASK) >> RECEIVE_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 

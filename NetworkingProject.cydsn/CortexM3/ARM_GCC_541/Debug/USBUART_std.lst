@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
   28:Generated_Source\PSoC5/USBUART_std.c ****     /***************************************************************************
   29:Generated_Source\PSoC5/USBUART_std.c ****     * Function Name: USBUART_SerialNumString
   30:Generated_Source\PSoC5/USBUART_std.c ****     ************************************************************************//**
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 2
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 2
 
 
   31:Generated_Source\PSoC5/USBUART_std.c ****     *
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
   85:Generated_Source\PSoC5/USBUART_std.c **** {
   86:Generated_Source\PSoC5/USBUART_std.c ****     uint8 requestHandled = USBUART_FALSE;
   87:Generated_Source\PSoC5/USBUART_std.c ****     uint8 interfaceNumber;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 3
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 3
 
 
   88:Generated_Source\PSoC5/USBUART_std.c ****     uint8 configurationN;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  142:Generated_Source\PSoC5/USBUART_std.c ****                                                                              (USBUART_currentTD.pDa
  143:Generated_Source\PSoC5/USBUART_std.c ****                         requestHandled  = USBUART_InitControlRead();
  144:Generated_Source\PSoC5/USBUART_std.c ****                     }
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 4
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 4
 
 
  145:Generated_Source\PSoC5/USBUART_std.c ****                 }
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  199:Generated_Source\PSoC5/USBUART_std.c ****                     if (*pStr != 0u)
  200:Generated_Source\PSoC5/USBUART_std.c ****                     {
  201:Generated_Source\PSoC5/USBUART_std.c ****                         USBUART_currentTD.count = *pStr;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 5
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 5
 
 
  202:Generated_Source\PSoC5/USBUART_std.c ****                         USBUART_currentTD.pData = pStr;
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  256:Generated_Source\PSoC5/USBUART_std.c ****         switch (USBUART_bRequestReg)
  257:Generated_Source\PSoC5/USBUART_std.c ****         {
  258:Generated_Source\PSoC5/USBUART_std.c ****             case USBUART_SET_ADDRESS:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 6
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 6
 
 
  259:Generated_Source\PSoC5/USBUART_std.c ****                 /* Store address to be set in USBUART_NoDataControlStatusStage(). */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  313:Generated_Source\PSoC5/USBUART_std.c ****                 {
  314:Generated_Source\PSoC5/USBUART_std.c ****                     case USBUART_RQST_RCPT_EP:
  315:Generated_Source\PSoC5/USBUART_std.c ****                         if (USBUART_wValueLoReg == USBUART_ENDPOINT_HALT)
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 7
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 7
 
 
  316:Generated_Source\PSoC5/USBUART_std.c ****                         {
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  370:Generated_Source\PSoC5/USBUART_std.c ****                         break;
  371:Generated_Source\PSoC5/USBUART_std.c ****                 }
  372:Generated_Source\PSoC5/USBUART_std.c ****                 break;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 8
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 8
 
 
  373:Generated_Source\PSoC5/USBUART_std.c ****                 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  404:Generated_Source\PSoC5/USBUART_std.c **** 
  405:Generated_Source\PSoC5/USBUART_std.c ****         if (NULL != descr)
   51              		.loc 1 405 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 9
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 9
 
 
   52 0012 35B3     		cbz	r5, .L1
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
   90 0052 DA1C     		adds	r2, r3, #3
   91 0054 A954     		strb	r1, [r5, r2]
  421:Generated_Source\PSoC5/USBUART_std.c ****                 ++j;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 10
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 10
 
 
   92              		.loc 1 421 0 discriminator 3
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  437:Generated_Source\PSoC5/USBUART_std.c **** void USBUART_ConfigReg(void) 
  438:Generated_Source\PSoC5/USBUART_std.c **** {
  129              		.loc 1 438 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 11
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 11
 
 
  130              		.cfi_startproc
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  458:Generated_Source\PSoC5/USBUART_std.c ****             {
  459:Generated_Source\PSoC5/USBUART_std.c ****                 USBUART_SIE_EP_BASE.sieEp[ep].epCr0 = USBUART_MODE_NAK_IN;
  165              		.loc 1 459 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 12
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 12
 
 
  166 0034 1801     		lsls	r0, r3, #4
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  191 005a 0F48     		ldr	r0, .L15+4
  192 005c 0244     		add	r2, r2, r0
  193 005e D488     		ldrh	r4, [r2, #6]
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 13
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 13
 
 
  194 0060 E4B2     		uxtb	r4, r4
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  515:Generated_Source\PSoC5/USBUART_std.c **** 
  516:Generated_Source\PSoC5/USBUART_std.c **** #endif /* (USBUART_EP_MANAGEMENT_DMA_AUTO) */
  517:Generated_Source\PSoC5/USBUART_std.c **** 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 14
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 14
 
 
  518:Generated_Source\PSoC5/USBUART_std.c ****     /* Enable interrupt SIE interurpt source from EP0-EP1 */
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  255 0000 0123     		movs	r3, #1
  256 0002 19E0     		b	.L18
  257              	.LVL17:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 15
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 15
 
 
  258              	.L21:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  296 003e 00BF     		.align	2
  297              	.L22:
  298 0040 00000000 		.word	USBUART_EP
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 16
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 16
 
 
  299              		.cfi_endproc
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  594:Generated_Source\PSoC5/USBUART_std.c ****         USBUART_EP[ep].epMode     = USBUART_MODE_DISABLE;   
  595:Generated_Source\PSoC5/USBUART_std.c ****     }
  596:Generated_Source\PSoC5/USBUART_std.c **** 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 17
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 17
 
 
  597:Generated_Source\PSoC5/USBUART_std.c ****     /* Clear Alternate settings for all interfaces. */
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  651:Generated_Source\PSoC5/USBUART_std.c ****                         USBUART_EP[curEp].epMode     = USBUART_GET_ACTIVE_IN_EP_CR0_MODE(epType);
  652:Generated_Source\PSoC5/USBUART_std.c ****                         USBUART_EP[curEp].apiEpState = USBUART_EVENT_PENDING;
  653:Generated_Source\PSoC5/USBUART_std.c ****                     
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 18
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 18
 
 
  654:Generated_Source\PSoC5/USBUART_std.c ****                     #if (defined(USBUART_ENABLE_MIDI_STREAMING) && (USBUART_MIDI_IN_BUFF_SIZE > 0))
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  708:Generated_Source\PSoC5/USBUART_std.c ****                             USBUART_EP[i].attrib = pEP->attributes;
  709:Generated_Source\PSoC5/USBUART_std.c ****                             
  710:Generated_Source\PSoC5/USBUART_std.c ****                             epType = pEP->attributes & USBUART_EP_TYPE_MASK;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 19
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 19
 
 
  711:Generated_Source\PSoC5/USBUART_std.c ****                             
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  765:Generated_Source\PSoC5/USBUART_std.c ****             /* Configure interface number for each EP */
  766:Generated_Source\PSoC5/USBUART_std.c ****             USBUART_EP[pEP->addr & USBUART_DIR_UNUSED].interface = pEP->interface;
  767:Generated_Source\PSoC5/USBUART_std.c ****             pEP = &pEP[1u];
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 20
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 20
 
 
  768:Generated_Source\PSoC5/USBUART_std.c ****         }
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  822:Generated_Source\PSoC5/USBUART_std.c ****         ep = pTmp->c;
  823:Generated_Source\PSoC5/USBUART_std.c **** 
  824:Generated_Source\PSoC5/USBUART_std.c ****         /* Get pointer to endpoints setting table (pEP). */
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 21
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 21
 
 
  825:Generated_Source\PSoC5/USBUART_std.c ****         pEP = (const T_USBUART_EP_SETTINGS_BLOCK CYCODE *) pTmp->p_list;
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  879:Generated_Source\PSoC5/USBUART_std.c ****                 /* Change EP Type with new direction */
  880:Generated_Source\PSoC5/USBUART_std.c ****                 if (0u != (pEP->addr & USBUART_DIR_IN))
  881:Generated_Source\PSoC5/USBUART_std.c ****                 {
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 22
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 22
 
 
  882:Generated_Source\PSoC5/USBUART_std.c ****                     /* Set endpoint type: 0 - IN and 1 - OUT. */
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  936:Generated_Source\PSoC5/USBUART_std.c **** *  \param confIndex:  Configuration Index
  937:Generated_Source\PSoC5/USBUART_std.c **** *
  938:Generated_Source\PSoC5/USBUART_std.c **** * \return
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 23
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 23
 
 
  939:Generated_Source\PSoC5/USBUART_std.c **** *  Device Descriptor pointer or NULL when descriptor does not exist.
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  338 001c 0020     		movs	r0, #0
  339              	.LVL25:
  964:Generated_Source\PSoC5/USBUART_std.c ****     }
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 24
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 24
 
 
  965:Generated_Source\PSoC5/USBUART_std.c **** 
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  386 001a C268     		ldr	r2, [r0, #12]
  387              	.LVL28:
  831:Generated_Source\PSoC5/USBUART_std.c ****         for (i = 0u; i < ep; i++)
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 25
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 25
 
 
  388              		.loc 1 831 0
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  845:Generated_Source\PSoC5/USBUART_std.c **** 
  433              		.loc 1 845 0
  434 006a 9788     		ldrh	r7, [r2, #4]
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 26
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 26
 
 
  435 006c 2F81     		strh	r7, [r5, #8]	@ movhi
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  861:Generated_Source\PSoC5/USBUART_std.c **** 
  482              		.loc 1 861 0
  483 00ac DFF868E0 		ldr	lr, .L41+20
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 27
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 27
 
 
  484 00b0 0F01     		lsls	r7, r1, #4
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  832:Generated_Source\PSoC5/USBUART_std.c ****         {
  530              		.loc 1 832 0 is_stmt 0 discriminator 1
  531 00fc A342     		cmp	r3, r4
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 28
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 28
 
 
  532 00fe 92D3     		bcc	.L37
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  998:Generated_Source\PSoC5/USBUART_std.c **** #endif /* (USBUART_BOS_ENABLE) */
  999:Generated_Source\PSoC5/USBUART_std.c **** 
 1000:Generated_Source\PSoC5/USBUART_std.c **** 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 29
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 29
 
 
 1001:Generated_Source\PSoC5/USBUART_std.c **** /*******************************************************************************
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
 1026:Generated_Source\PSoC5/USBUART_std.c **** * \return
 1027:Generated_Source\PSoC5/USBUART_std.c **** *  Interface Class table pointer.
 1028:Generated_Source\PSoC5/USBUART_std.c **** *
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 30
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 30
 
 
 1029:Generated_Source\PSoC5/USBUART_std.c **** *******************************************************************************/
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  619              	.LVL48:
 1049:Generated_Source\PSoC5/USBUART_std.c ****     }
 1050:Generated_Source\PSoC5/USBUART_std.c **** 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 31
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 31
 
 
 1051:Generated_Source\PSoC5/USBUART_std.c ****     return (pInterfaceClass);
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  590:Generated_Source\PSoC5/USBUART_std.c ****         USBUART_EP[ep].bufferSize = 0u;
  668              		.loc 1 590 0 discriminator 3
  669 0018 E270     		strb	r2, [r4, #3]
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 32
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 32
 
 
  591:Generated_Source\PSoC5/USBUART_std.c ****         USBUART_EP[ep].interface  = 0u;
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  713 0044 012B     		cmp	r3, #1
  714 0046 F4D9     		bls	.L57
  715              	.LVL59:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 33
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 33
 
 
  716              	.L56:
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  761              		.loc 1 687 0
  762 008a 0126     		movs	r6, #1
  763 008c 6FE0     		b	.L61
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 34
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 34
 
 
  764              	.LVL68:
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  811 00e0 0EEB0003 		add	r3, lr, r0
  812 00e4 83F804C0 		strb	ip, [r3, #4]
  708:Generated_Source\PSoC5/USBUART_std.c ****                             
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 35
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 35
 
 
  813              		.loc 1 708 0
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  860 013c 4FEA8C00 		lsl	r0, ip, #2
  861 0140 7044     		add	r0, r0, lr
  862 0142 80F80590 		strb	r9, [r0, #5]
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 36
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 36
 
 
  863              	.LVL76:
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  907 0172 D8F80C00 		ldr	r0, [r8, #12]
  908              	.LVL84:
  763:Generated_Source\PSoC5/USBUART_std.c ****         {
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 37
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 37
 
 
  909              		.loc 1 763 0
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  955 01b2 2289     		ldrh	r2, [r4, #8]
  956 01b4 92B2     		uxth	r2, r2
  957 01b6 1144     		add	r1, r1, r2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 38
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 38
 
 
  958              	.LVL93:
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
 1066:Generated_Source\PSoC5/USBUART_std.c **** *
 1067:Generated_Source\PSoC5/USBUART_std.c **** * \sideeffect
 1068:Generated_Source\PSoC5/USBUART_std.c **** * 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 39
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 39
 
 
 1069:Generated_Source\PSoC5/USBUART_std.c **** * The device responds with a NAK for any transactions on the selected endpoint.
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1029              		.loc 1 1089 0
  1030 002e 0001     		lsls	r0, r0, #4
  1031              	.LVL100:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 40
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 40
 
 
  1032 0030 054B     		ldr	r3, .L85+4
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
 1114:Generated_Source\PSoC5/USBUART_std.c **** {
  1062              		.loc 1 1114 0
  1063              		.cfi_startproc
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 41
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 41
 
 
  1064              		@ args = 0, pretend = 0, frame = 0
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
 1132:Generated_Source\PSoC5/USBUART_std.c ****             /* IN Endpoint */
 1133:Generated_Source\PSoC5/USBUART_std.c ****             USBUART_SIE_EP_BASE.sieEp[ep].epCr0 = (USBUART_MODE_STALL_DATA_EP | 
  1101              		.loc 1 1133 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 42
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 42
 
 
  1102 0038 1B01     		lsls	r3, r3, #4
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1142              		.global	USBUART_ClearEndpointHalt
  1143              		.thumb
  1144              		.thumb_func
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 43
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 43
 
 
  1145              		.type	USBUART_ClearEndpointHalt, %function
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1171 0016 8A00     		lsls	r2, r1, #2
  1172 0018 2149     		ldr	r1, .L104+4
  1173 001a 0A44     		add	r2, r2, r1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 44
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 44
 
 
  1174 001c 9178     		ldrb	r1, [r2, #2]	@ zero_extendqisi2
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1211              	.L98:
 1191:Generated_Source\PSoC5/USBUART_std.c ****             }
 1192:Generated_Source\PSoC5/USBUART_std.c ****             else    /* Continue armed transfer */
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 45
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 45
 
 
 1193:Generated_Source\PSoC5/USBUART_std.c ****             {
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
 1210:Generated_Source\PSoC5/USBUART_std.c ****         
 1211:Generated_Source\PSoC5/USBUART_std.c ****         requestHandled = USBUART_InitNoDataControlTransfer();
  1249              		.loc 1 1211 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 46
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 46
 
 
  1250 0092 FFF7FEFF 		bl	USBUART_InitNoDataControlTransfer
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1282 0000 10B5     		push	{r4, lr}
  1283              		.cfi_def_cfa_offset 8
  1284              		.cfi_offset 4, -8
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 47
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 47
 
 
  1285              		.cfi_offset 14, -4
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1318 002a 044B     		ldr	r3, .L111
  1319 002c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
  1320 002e DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 48
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 48
 
 
  1321 0030 1355     		strb	r3, [r2, r4]
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1366              	.LVL134:
  102:Generated_Source\PSoC5/USBUART_std.c **** 
  1367              		.loc 1 102 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 49
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 49
 
 
  1368 0008 0021     		movs	r1, #0
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1415 0058 10BD     		pop	{r4, pc}
  1416              	.LVL138:
  1417              	.L121:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 50
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 50
 
 
  118:Generated_Source\PSoC5/USBUART_std.c ****                 {
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1462              	.LVL143:
  161:Generated_Source\PSoC5/USBUART_std.c ****                         nStr++;
  1463              		.loc 1 161 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 51
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 51
 
 
  1464 009a 1144     		add	r1, r1, r2
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  176:Generated_Source\PSoC5/USBUART_std.c ****                         (USBUART_wValueLoReg == USBUART_DEVICE0_DESCR[USBUART_DEVICE_DESCR_SN_SHIFT
  1511              		.loc 1 176 0 discriminator 1
  1512 00d8 9342     		cmp	r3, r2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 52
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 52
 
 
  1513 00da 04D1     		bne	.L128
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1557 0118 03F07F03 		and	r3, r3, #127
  1558 011c 03EB4303 		add	r3, r3, r3, lsl #1
  1559 0120 9A00     		lsls	r2, r3, #2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 53
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 53
 
 
  1560 0122 544B     		ldr	r3, .L170+24
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1603 0158 0122     		movs	r2, #1
  1604 015a 1A80     		strh	r2, [r3]	@ movhi
  239:Generated_Source\PSoC5/USBUART_std.c ****                 requestHandled  = USBUART_InitControlRead();
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 54
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 54
 
 
  1605              		.loc 1 239 0
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1652              		.p2align 1
  1653              	.L134:
  260:Generated_Source\PSoC5/USBUART_std.c ****                 requestHandled = USBUART_InitNoDataControlTransfer();
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 55
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 55
 
 
  1654              		.loc 1 260 0
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1698 01d8 294B     		ldr	r3, .L170+36
  1699 01da 1C70     		strb	r4, [r3]
  280:Generated_Source\PSoC5/USBUART_std.c ****                         USBUART_Config(USBUART_TRUE);
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 56
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 56
 
 
  1700              		.loc 1 280 0
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1746              	.LVL181:
  1747              	.L141:
  307:Generated_Source\PSoC5/USBUART_std.c ****                 }
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 57
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 57
 
 
  1748              		.loc 1 307 0
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1796 0270 00000000 		.word	USBUART_idSerialNumberStringDescriptor
  1797 0274 00000000 		.word	USBUART_EP
  1798 0278 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 58
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 58
 
 
  1799 027c 00000000 		.word	USBUART_deviceStatus
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1847              	.L146:
  353:Generated_Source\PSoC5/USBUART_std.c ****                         {
  1848              		.loc 1 353 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 59
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 59
 
 
  1849 02d8 1D4B     		ldr	r3, .L172
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1897 031e 10BD     		pop	{r4, pc}
  1898              	.LVL201:
  1899              	.L166:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 60
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 60
 
 
  1900 0320 0020     		movs	r0, #0
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  1952      34353637 
  1952      38394142 
  1952      43444546 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 61
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 61
 
 
  1952      00
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2006 0051 05       		.byte	0x5
  2007 0052 05040000 		.4byte	.LASF6
  2008 0056 02       		.uleb128 0x2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 62
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 62
 
 
  2009 0057 08       		.byte	0x8
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2063 00c8 02       		.uleb128 0x2
  2064 00c9 04       		.byte	0x4
  2065 00ca 07       		.byte	0x7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 63
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 63
 
 
  2066 00cb D4050000 		.4byte	.LASF18
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2120 0137 07       		.uleb128 0x7
  2121 0138 A6000000 		.4byte	.LASF27
  2122 013c 03       		.byte	0x3
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 64
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 64
 
 
  2123 013d 9B       		.byte	0x9b
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2177 01a6 A6       		.byte	0xa6
  2178 01a7 4F010000 		.4byte	0x14f
  2179 01ab 06       		.uleb128 0x6
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 65
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 65
 
 
  2180 01ac 04       		.byte	0x4
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2234 0215 03       		.byte	0x3
  2235 0216 B3       		.byte	0xb3
  2236 0217 D7010000 		.4byte	0x1d7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 66
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 66
 
 
  2237 021b 06       		.uleb128 0x6
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2291 027f D8       		.byte	0xd8
  2292 0280 B5020000 		.4byte	0x2b5
  2293 0284 07       		.uleb128 0x7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 67
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 67
 
 
  2294 0285 19040000 		.4byte	.LASF44
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2348 02f1 11060000 		.4byte	.LASF50
  2349 02f5 03       		.byte	0x3
  2350 02f6 EE       		.byte	0xee
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 68
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 68
 
 
  2351 02f7 6B000000 		.4byte	0x6b
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2405 0366 03       		.byte	0x3
  2406 0367 F6       		.byte	0xf6
  2407 0368 D0020000 		.4byte	0x2d0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 69
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 69
 
 
  2408 036c 0E       		.uleb128 0xe
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2462 03e2 01       		.uleb128 0x1
  2463 03e3 9C       		.byte	0x9c
  2464 03e4 43040000 		.4byte	0x443
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 70
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 70
 
 
  2465 03e8 11       		.uleb128 0x11
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2519 0458 00       		.byte	0
  2520 0459 17       		.uleb128 0x17
  2521 045a 9D000000 		.4byte	0x9d
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 71
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 71
 
 
  2522 045e 17       		.uleb128 0x17
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2576 04e0 E9040000 		.4byte	0x4e9
  2577 04e4 0E010000 		.4byte	.LLST6
  2578 04e8 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 72
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 72
 
 
  2579 04e9 09       		.uleb128 0x9
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2633 056f 81050000 		.4byte	0x581
  2634 0573 DC010000 		.4byte	.LLST13
  2635 0577 1A       		.uleb128 0x1a
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 73
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 73
 
 
  2636 0578 18000000 		.4byte	.LVL26
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2690 0601 10       		.uleb128 0x10
  2691 0602 A2040000 		.4byte	.LASF77
  2692 0606 01       		.byte	0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 74
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 74
 
 
  2693 0607 3A02     		.2byte	0x23a
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2747 0694 13       		.uleb128 0x13
  2748 0695 70455000 		.ascii	"pEP\000"
  2749 0699 01       		.byte	0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 75
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 75
 
 
  2750 069a 4702     		.2byte	0x247
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2804 070c 21070000 		.4byte	0x721
  2805 0710 11       		.uleb128 0x11
  2806 0711 3D040000 		.4byte	.LASF83
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 76
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 76
 
 
  2807 0715 01       		.byte	0x1
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2861 079e 96000000 		.4byte	.LVL121
  2862 07a2 130B0000 		.4byte	0xb13
  2863 07a6 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 77
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 77
 
 
  2864 07a7 18       		.uleb128 0x18
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2918 0833 1F       		.uleb128 0x1f
  2919 0834 18010000 		.4byte	.LASF90
  2920 0838 01       		.byte	0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 78
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 78
 
 
  2921 0839 57       		.byte	0x57
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  2975 08c0 6C000000 		.4byte	.LVL139
  2976 08c4 AE040000 		.4byte	0x4ae
  2977 08c8 1A       		.uleb128 0x1a
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 79
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 79
 
 
  2978 08c9 8A000000 		.4byte	.LVL140
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3032 094a 00       		.byte	0
  3033 094b 1A       		.uleb128 0x1a
  3034 094c EA010000 		.4byte	.LVL176
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 80
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 80
 
 
  3035 0950 130B0000 		.4byte	0xb13
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3089 09e0 B0000000 		.4byte	.LASF100
  3090 09e4 03       		.byte	0x3
  3091 09e5 DA02     		.2byte	0x2da
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 81
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 81
 
 
  3092 09e7 BC000000 		.4byte	0xbc
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3146 0a65 C8000000 		.4byte	0xc8
  3147 0a69 21       		.byte	0x21
  3148 0a6a 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 82
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 82
 
 
  3149 0a6b 22       		.uleb128 0x22
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3203 0ae3 E70A0000 		.4byte	0xae7
  3204 0ae7 05       		.uleb128 0x5
  3205 0ae8 C70A0000 		.4byte	0xac7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 83
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 83
 
 
  3206 0aec 22       		.uleb128 0x22
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3260 0013 02       		.uleb128 0x2
  3261 0014 24       		.uleb128 0x24
  3262 0015 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 84
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 84
 
 
  3263 0016 0B       		.uleb128 0xb
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3317 004c 00       		.byte	0
  3318 004d 03       		.uleb128 0x3
  3319 004e 0E       		.uleb128 0xe
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 85
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 85
 
 
  3320 004f 3A       		.uleb128 0x3a
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3374 0085 01       		.byte	0x1
  3375 0086 49       		.uleb128 0x49
  3376 0087 13       		.uleb128 0x13
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 86
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 86
 
 
  3377 0088 01       		.uleb128 0x1
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3431 00be 11       		.uleb128 0x11
  3432 00bf 01       		.uleb128 0x1
  3433 00c0 12       		.uleb128 0x12
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 87
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 87
 
 
  3434 00c1 06       		.uleb128 0x6
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3488 00f8 14       		.uleb128 0x14
  3489 00f9 34       		.uleb128 0x34
  3490 00fa 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 88
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 88
 
 
  3491 00fb 03       		.uleb128 0x3
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3545 0136 12       		.uleb128 0x12
  3546 0137 06       		.uleb128 0x6
  3547 0138 40       		.uleb128 0x40
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 89
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 89
 
 
  3548 0139 18       		.uleb128 0x18
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3602 0173 00       		.byte	0
  3603 0174 00       		.byte	0
  3604 0175 1C       		.uleb128 0x1c
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 90
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 90
 
 
  3605 0176 0B       		.uleb128 0xb
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3659 01af 0B       		.uleb128 0xb
  3660 01b0 49       		.uleb128 0x49
  3661 01b1 13       		.uleb128 0x13
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 91
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 91
 
 
  3662 01b2 02       		.uleb128 0x2
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3716 01e8 2E       		.uleb128 0x2e
  3717 01e9 00       		.byte	0
  3718 01ea 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 92
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 92
 
 
  3719 01eb 19       		.uleb128 0x19
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3773 0034 0200     		.2byte	0x2
  3774 0036 32       		.byte	0x32
  3775 0037 9F       		.byte	0x9f
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 93
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 93
 
 
  3776 0038 28000000 		.4byte	.LVL4
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3830 00c9 0100     		.2byte	0x1
  3831 00cb 53       		.byte	0x53
  3832 00cc 00000000 		.4byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 94
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 94
 
 
  3833 00d0 00000000 		.4byte	0
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3887 0151 00000000 		.4byte	0
  3888 0155 00000000 		.4byte	0
  3889              	.LLST8:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 95
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 95
 
 
  3890 0159 3E000000 		.4byte	.LVL32
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  3944 01e7 00000000 		.4byte	0
  3945 01eb 00000000 		.4byte	0
  3946              	.LLST14:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 96
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 96
 
 
  3947 01ef 0E000000 		.4byte	.LVL42
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4001 027b 08000000 		.4byte	.LVL51
  4002 027f 0200     		.2byte	0x2
  4003 0281 30       		.byte	0x30
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 97
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 97
 
 
  4004 0282 9F       		.byte	0x9f
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4058 0312 42000000 		.4byte	.LVL57
  4059 0316 0100     		.2byte	0x1
  4060 0318 53       		.byte	0x53
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 98
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 98
 
 
  4061 0319 44000000 		.4byte	.LVL58
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4115 03a1 75       		.byte	0x75
  4116 03a2 03       		.sleb128 3
  4117 03a3 94       		.byte	0x94
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 99
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 99
 
 
  4118 03a4 01       		.byte	0x1
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4172 0428 08       		.sleb128 8
  4173 0429 9F       		.byte	0x9f
  4174 042a 00000000 		.4byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 100
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 100
 
 
  4175 042e 00000000 		.4byte	0
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4229 04bb 9F       		.byte	0x9f
  4230 04bc 52000000 		.4byte	.LVL108
  4231 04c0 54000000 		.4byte	.LVL109
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 101
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 101
 
 
  4232 04c4 0100     		.2byte	0x1
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4286 0550 6A000000 		.4byte	.LVL117
  4287 0554 7E000000 		.4byte	.LVL118
  4288 0558 0100     		.2byte	0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 102
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 102
 
 
  4289 055a 53       		.byte	0x53
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4343 05e1 4C000000 		.4byte	.LFE12
  4344 05e5 0100     		.2byte	0x1
  4345 05e7 53       		.byte	0x53
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 103
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 103
 
 
  4346 05e8 00000000 		.4byte	0
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4400 0675 9F       		.byte	0x9f
  4401 0676 38010000 		.4byte	.LVL158
  4402 067a 3A010000 		.4byte	.LVL159
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 104
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 104
 
 
  4403 067e 0100     		.2byte	0x1
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4457 0708 0100     		.2byte	0x1
  4458 070a 50       		.byte	0x50
  4459 070b 24020000 		.4byte	.LVL183
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 105
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 105
 
 
  4460 070f 40020000 		.4byte	.LVL185
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4514 0799 4E030000 		.4byte	.LVL205
  4515 079d 0200     		.2byte	0x2
  4516 079f 30       		.byte	0x30
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 106
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 106
 
 
  4517 07a0 9F       		.byte	0x9f
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4571 0832 BA020000 		.4byte	.LVL190
  4572 0836 BE020000 		.4byte	.LVL191
  4573 083a 0100     		.2byte	0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 107
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 107
 
 
  4574 083c 53       		.byte	0x53
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4628 08c9 53       		.byte	0x53
  4629 08ca A0000000 		.4byte	.LVL146
  4630 08ce A2000000 		.4byte	.LVL147
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 108
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 108
 
 
  4631 08d2 0100     		.2byte	0x1
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4685 0030 00000000 		.4byte	.LFB5
  4686 0034 1C010000 		.4byte	.LFE5-.LFB5
  4687 0038 00000000 		.4byte	.LFB7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 109
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 109
 
 
  4688 003c 18000000 		.4byte	.LFE7-.LFB7
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4738              	.LASF56:
  4739 0000 72774472 		.ascii	"rwDr\000"
  4739      00
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 110
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 110
 
 
  4740              	.LASF105:
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4761      57696E74 
  4761      65725C43 
  4761      45343935 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 111
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 111
 
 
  4762 00f3 4E657477 		.ascii	"NetworkingProject.cydsn\000"
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4782      6E64706F 
  4782      696E7448 
  4783              	.LASF110:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 112
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 112
 
 
  4784 01c0 55534255 		.ascii	"USBUART_interfaceStatus\000"
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4806      31363036 
  4807 0294 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
  4807      20726576 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 113
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 113
 
 
  4807      6973696F 
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4828      00
  4829              	.LASF60:
  4830 0383 61726245 		.ascii	"arbEp\000"
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 114
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 114
 
 
  4830      7000
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4857              	.LASF45:
  4858 0420 6570436E 		.ascii	"epCnt1\000"
  4858      743100
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 115
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 115
 
 
  4859              	.LASF47:
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4882      636F6E66 
  4882      69677572 
  4882      6174696F 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 116
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 116
 
 
  4883              	.LASF101:
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4908      645F536F 
  4908      75726365 
  4908      5C50536F 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 117
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 117
 
 
  4909              	.LASF63:
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4934      4D736200 
  4935              	.LASF1:
  4936 064b 756E7369 		.ascii	"unsigned char\000"
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 118
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 118
 
 
  4936      676E6564 
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4958      68617200 
  4959              	.LASF3:
  4960 06fb 73686F72 		.ascii	"short unsigned int\000"
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 119
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 119
 
 
  4960      7420756E 
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 1
  4983              	.LASF42:
  4984 07af 65704461 		.ascii	"epData\000"
  4984      746100
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccOGeRWs.s 			page 120
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccxAS5x6.s 			page 120
 
 
  4985              	.LASF108:

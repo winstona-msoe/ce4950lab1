@@ -58,13 +58,8 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cyfitteriar.inc</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cyfitter.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cydisabledsheets.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerISR.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerISR.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TIMER1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TIMER1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TIMER1_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\IDLE_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\IDLE.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\IDLE.h</File>
@@ -74,9 +69,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\BUSY_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\BUSY.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\BUSY.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Rx_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Rx.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Rx.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK2.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK2.h</File>
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">Generated_Source\PSoC5\cm3gcc.ld</File>
@@ -151,6 +143,21 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\LCD_LCDPort_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\LCD_LCDPort.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\LCD_LCDPort.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RECEIVE_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RECEIVE.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RECEIVE.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ReceiveISR.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ReceiveISR.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerRX.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerRX.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerRX_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK3.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK3.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerTX.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerTX.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerTX_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TransmitISR.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TransmitISR.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\Export\ARM_GCC_Generic">
