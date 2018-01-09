@@ -76,6 +76,7 @@
 <v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\TRANSMIT</v>
 <v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\USBUART</v>
 <v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\USBUART_Dm</v>
+<v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\USBUART_Dp</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -185,6 +186,7 @@
 <v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART.lst</v>
 <v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_audio.lst</v>
 <v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_boot.lst</v>
+<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\USBUART_cdc.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
