@@ -35,13 +35,6 @@
 enum state { BUSY, COLLISION, IDLE } systemState;
 
 _Bool logicLevel = 0;
-char currentDataCharacter; //current char
-int bufferPosition = 0; //serial_pos
-unsigned char buffer[500]; //serial buffer
-unsigned char data[500][16]; //converted data
-int dataSize; //data size
-int dataPosition = 0; //tx_bit_counter
-int count; //dataConvertedReadOutCount
 int idx = 0; //count
     
     
@@ -120,48 +113,6 @@ CY_ISR(FallingEdgeInterruptHandler)
 }
 
 
-
-
- /**********************************************************
- * function name: TransmitInterruptHandler
- * operation: Handles interrupt for transmition of data
- * inputs: none
- * returns: none
- * implemented: 10 Jan 2018
- * edited:
- *********************************************************/
-CY_ISR(TransmitInterruptHandler)
-{
-    TimerTX_STATUS;
-	currentDataCharacter = buffer[bufferPosition];  
-	if(bufferPosition < dataSize) { 	
-	    if(dataPosition == 0) {
-    		TRANSMIT_Write(1);
-    		data[500][dataPosition] = 0x31;
-    	} else if(dataPosition%2 != 0){
-    		TRANSMIT_Write(0);
-    		data[500][dataPosition] = 0x30;
-    	} else {
-    		if(currentDataCharacter & (1<<(6-idx))){
-    			TRANSMIT_Write(1);
-    			data[500][dataPosition] = 0x31;
-    		}else{
-    			TRANSMIT_Write(0);
-    			data[500][dataPosition] = 0x30;   
-    		}
-    			++idx;
-    	}
-        CyDelayUs(450);
-        ++dataPosition;
-        if(dataPosition >= 16) {
-    	    ++bufferPosition;
-    	    idx = 0;
-    	    dataPosition = 0;
-            TRANSMIT_Write(0);
-        }
-    }
-}
-
  /**********************************************************
  * function name: main
  * operation: Handles the main state machine diagram for the
@@ -174,21 +125,21 @@ CY_ISR(TransmitInterruptHandler)
  *********************************************************/ 
 int main(void)
 {
-    //systemState = IDLE;
-    CyGlobalIntEnable;
+    CyGlobalIntEnable; //enable global interrupts
+    //starting the interrupt handlers
     RisingEdgeISR_StartEx(RisingEdgeInterruptHandler);
     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
-    TimerTX_Start();
-    TimerTX_WritePeriod(45);
-    TimerTX_WriteCounter(44);
-    ReceiveISR_StartEx(ReceiveInterruptHandler);
-    TransmitISR_StartEx(TransmitInterruptHandler);
-
-    
-    USBUART_Start(USBUART_device, USBUART_5V_OPERATION);
-    
-
-    
+    ReceiveISR_StartEx(ReceiveInterruptHandler);  
+    USBUART_Start(USBUART_device, USBUART_5V_OPERATION); //configuring USBUART to start
+    int delay = 500; //delay of 500ms, configured later through random and uniformly distributed to be 0-1s
+    int dataSize = 0; //size of retrieved data to then be transmitted
+    int dataPosition = 0; //position looping through the data to transmit
+    _Bool endOfData = 0; //boolean to determine if the entire characters has been received
+    unsigned char buffer[10]; //buffer used to hold single blob of data 
+    char data[44]; //designed to transmit a message as long as 44 characters
+    _Bool endOfTransmission = 0; //boolean sigifying complete transmission of data 
+    char binaryOfChar[8]; //represents the 8 bit representation of the character 
+        
     while (1) {
         
         //Ensure device is connected and configured 
@@ -202,52 +153,88 @@ int main(void)
             }
         }      
         
-        
-        if(USBUART_DataIsReady() != 0){
-            dataSize = USBUART_GetAll(buffer);
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF();
-            count = 0;            
-            bufferPosition = 0;
-        }
-
-        if(USBUART_CDCIsReady() != 0){
-            if(count < dataSize && bufferPosition == dataSize){
-                for(int y = 0; y < 16; y++){
-                 while(!USBUART_CDCIsReady());
-                 USBUART_PutChar(data[count][y]); 
+        while (endOfData == 0) {
+            // Check for input data
+            if (0u != USBUART_DataIsReady())
+            {
+                // Read received data
+                dataSize = USBUART_GetAll(buffer);
+                
+                if (0u != dataSize) 
+                {
+                    for(int i=0; i<dataSize; i++)
+                    {
+                        if(buffer[i]==0x0D)
+                        {
+                            endOfData=1;
+                            USBUART_PutCRLF();
+                        }
+                        else
+                        {
+                            data[dataPosition]=buffer[i];
+                            dataPosition++;
+                        }
+                    }                  
                 }
-                ++count;
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF();
+            }
+        }
+        
+        data[dataPosition]='\0';
+        
+        dataPosition = 0;
+        TRANSMIT_Write(0);
+        
+        while (systemState != IDLE);
+        
+        while (!endOfTransmission) 
+        {     
+            switch(systemState)
+            {
+                case IDLE:
+                    IDLE_Write(1);
+                    BUSY_Write(!IDLE_Read());
+                    COLLISION_Write(!IDLE_Read());
+                    if((*(data+dataPosition)) != '\0')
+                    {
+                        TRANSMIT_Write(1);
+                        CyDelay(delay);
+                        TRANSMIT_Write(0);
+                        CyDelay(delay);
+                        
+                        itoa((*(data+dataPosition)), binaryOfChar, 2);
+                        for (int i = 0; i < 7; ++i) 
+                        {
+                            if(binaryOfChar[i] == '1')
+                            {
+                                TRANSMIT_Write(1);
+                                CyDelay(500);
+                                TRANSMIT_Write(0);
+                                CyDelay(delay);                                                       
+                            } else {
+                                TRANSMIT_Write(0);
+                                CyDelay(2*delay);
+                            }
+                        }
+                        ++dataPosition;
+                    } else {
+                        endOfTransmission = 1;
+                    }
+                                       
+                break;
+                
+                case BUSY:
+                    BUSY_Write(1);
+                    IDLE_Write(!BUSY_Read());
+                    COLLISION_Write(!BUSY_Read());
+                break;
+                
+                case COLLISION:
+                    COLLISION_Write(1);
+                    IDLE_Write(!COLLISION_Read());
+                    BUSY_Write(!COLLISION_Read());
+                    
+                break;
             }
         }
     }
 }
-
-        
-//    while(1) {
-//        switch(systemState){
-//            case IDLE:
-//                IDLE_Write(1);
-//                BUSY_Write(!IDLE_Read());
-//                COLLISION_Write(!IDLE_Read());
-//            break;
-//            
-//            case BUSY:
-//                BUSY_Write(1);
-//                IDLE_Write(!BUSY_Read());
-//                COLLISION_Write(!BUSY_Read());
-//            break;
-//            
-//            case COLLISION:
-//                COLLISION_Write(1);
-//                IDLE_Write(!COLLISION_Read());
-//                BUSY_Write(!COLLISION_Read());
-//            break;
-//        }
-//    }
-   
-
-
-/* [] END OF FILE */
