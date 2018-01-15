@@ -131,6 +131,7 @@ int main(void)
     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
     ReceiveISR_StartEx(ReceiveInterruptHandler);  
     USBUART_Start(USBUART_device, USBUART_5V_OPERATION); //configuring USBUART to start
+    systemState = IDLE;
     int delay = 500; //delay of 500ms, configured later through random and uniformly distributed to be 0-1s
     int dataSize = 0; //size of retrieved data to then be transmitted
     int dataPosition = 0; //position looping through the data to transmit
@@ -184,8 +185,7 @@ int main(void)
         dataPosition = 0;
         TRANSMIT_Write(0);
         
-        while (systemState != IDLE);
-        
+        while (systemState != IDLE);       
         while (!endOfTransmission) 
         {     
             switch(systemState)
@@ -197,9 +197,9 @@ int main(void)
                     if((*(data+dataPosition)) != '\0')
                     {
                         TRANSMIT_Write(1);
-                        CyDelay(delay);
+                        CyDelayUs(delay);
                         TRANSMIT_Write(0);
-                        CyDelay(delay);
+                        CyDelayUs(delay);
                         
                         itoa((*(data+dataPosition)), binaryOfChar, 2);
                         for (int i = 0; i < 7; ++i) 
@@ -207,12 +207,12 @@ int main(void)
                             if(binaryOfChar[i] == '1')
                             {
                                 TRANSMIT_Write(1);
-                                CyDelay(500);
+                                CyDelayUs(500);
                                 TRANSMIT_Write(0);
-                                CyDelay(delay);                                                       
+                                CyDelayUs(delay);                                                       
                             } else {
                                 TRANSMIT_Write(0);
-                                CyDelay(2*delay);
+                                CyDelayUs(2*delay);
                             }
                         }
                         ++dataPosition;
@@ -232,6 +232,7 @@ int main(void)
                     COLLISION_Write(1);
                     IDLE_Write(!COLLISION_Read());
                     BUSY_Write(!COLLISION_Read());
+                    delay = ((rand() / 128) * 1000);
                     
                 break;
             }
