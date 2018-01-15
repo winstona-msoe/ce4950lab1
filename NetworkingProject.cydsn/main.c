@@ -18,6 +18,13 @@
 */
 
 #include "project.h"
+#include <stdlib.h>
+#include "stdio.h"
+
+#define COLLISION_PERIOD                   52
+#define COLLISION_COUNTER                  51
+#define IDLE_PERIOD                        830
+#define IDLE_COUNTER                       829
 
 //States include: 
 //Busy - signals that the channel monitor is busy
@@ -28,18 +35,22 @@
 enum state { BUSY, COLLISION, IDLE } systemState;
 
 _Bool logicLevel = 0;
-
-#define COLLISION_PERIOD     55
-#define COLLISION_COUNTER    54
-#define IDLE_PERIOD     799
-#define IDLE_COUNTER    800
-
+char currentDataCharacter; //current char
+int bufferPosition = 0; //serial_pos
+unsigned char buffer[500]; //serial buffer
+unsigned char data[500][16]; //converted data
+int dataSize; //data size
+int dataPosition = 0; //tx_bit_counter
+int count; //dataConvertedReadOutCount
+int idx = 0; //count
+    
+    
 /*******************************************************************************
 * Define Interrupt service routine and allocate an vector to the Interrupt
 ********************************************************************************/
 
  /**********************************************************
- * function name: TimerInterruptHandler
+ * function name: ReceiveInterruptHandler
  * operation: Handles interrupt timer if the timer expires
  *            indicates an idle condition or colllision
  *            reads the logic levon the input pin/signal
@@ -50,10 +61,10 @@ _Bool logicLevel = 0;
  * implemented: 14 Dec 2017
  * edited:
  *********************************************************/ 
-CY_ISR(TimerInterruptHandler)
+CY_ISR(ReceiveInterruptHandler)
 {
-   	TIMER1_STATUS; 
-    if (logicLevel){
+   	TimerRX_STATUS; 
+    if (logicLevel) {
         systemState = COLLISION;
     } else {
         systemState = IDLE;
@@ -76,9 +87,9 @@ CY_ISR(TimerInterruptHandler)
 CY_ISR(RisingEdgeInterruptHandler)
 {
     if ((!logicLevel)){
-        TIMER1_WritePeriod(COLLISION_PERIOD);
-        TIMER1_WriteCounter(COLLISION_COUNTER);
-        TIMER1_Start();
+        TimerRX_WritePeriod(COLLISION_PERIOD);
+        TimerRX_WriteCounter(COLLISION_COUNTER);
+        TimerRX_Start();
         logicLevel = 1;
         systemState = BUSY;
     }
@@ -100,14 +111,56 @@ CY_ISR(RisingEdgeInterruptHandler)
 CY_ISR(FallingEdgeInterruptHandler)
 {
     if (logicLevel){
-        TIMER1_WritePeriod(IDLE_PERIOD);
-        TIMER1_WriteCounter(IDLE_COUNTER);
-        TIMER1_Start();
+        TimerRX_WritePeriod(IDLE_PERIOD);
+        TimerRX_WriteCounter(IDLE_COUNTER);
+        TimerRX_Start();
         logicLevel = 0;
         systemState = BUSY;
     }
 }
 
+
+
+
+ /**********************************************************
+ * function name: TransmitInterruptHandler
+ * operation: Handles interrupt for transmition of data
+ * inputs: none
+ * returns: none
+ * implemented: 10 Jan 2018
+ * edited:
+ *********************************************************/
+CY_ISR(TransmitInterruptHandler)
+{
+    TimerTX_STATUS;
+	currentDataCharacter = buffer[bufferPosition];  
+	if(bufferPosition < dataSize) { 	
+	    if(dataPosition == 0) {
+    		TRANSMIT_Write(1);
+    		data[500][dataPosition] = 0x31;
+    	} else if(dataPosition%2 != 0){
+    		TRANSMIT_Write(0);
+    		data[500][dataPosition] = 0x30;
+    	} else {
+    		if(currentDataCharacter & (1<<(6-idx))){
+    			TRANSMIT_Write(1);
+    			data[500][dataPosition] = 0x31;
+    		}else{
+    			TRANSMIT_Write(0);
+    			data[500][dataPosition] = 0x30;   
+    		}
+    			++idx;
+    	}
+        CyDelayUs(450);
+        ++dataPosition;
+        if(dataPosition >= 16) {
+    	    ++bufferPosition;
+    	    idx = 0;
+    	    dataPosition = 0;
+            TRANSMIT_Write(0);
+        }
+    }
+}
 
  /**********************************************************
  * function name: main
@@ -121,33 +174,80 @@ CY_ISR(FallingEdgeInterruptHandler)
  *********************************************************/ 
 int main(void)
 {
-    systemState = IDLE;
+    //systemState = IDLE;
     CyGlobalIntEnable;
-    TimerISR_StartEx(TimerInterruptHandler);
     RisingEdgeISR_StartEx(RisingEdgeInterruptHandler);
     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
+    TimerTX_Start();
+    TimerTX_WritePeriod(45);
+    TimerTX_WriteCounter(44);
+    ReceiveISR_StartEx(ReceiveInterruptHandler);
+    TransmitISR_StartEx(TransmitInterruptHandler);
 
-    while(1) {
-        switch(systemState){
-            case IDLE:
-                IDLE_Write(1);
-                BUSY_Write(!IDLE_Read());
-                COLLISION_Write(!IDLE_Read());
-            break;
-            
-            case BUSY:
-                BUSY_Write(1);
-                IDLE_Write(!BUSY_Read());
-                COLLISION_Write(!BUSY_Read());
-            break;
-            
-            case COLLISION:
-                COLLISION_Write(1);
-                IDLE_Write(!COLLISION_Read());
-                BUSY_Write(!COLLISION_Read());
-            break;
+    
+    USBUART_Start(USBUART_device, USBUART_5V_OPERATION);
+    
+
+    
+    while (1) {
+        
+        //Ensure device is connected and configured 
+        if (0u != USBUART_IsConfigurationChanged())
+        {           
+            // Initialize IN endpoints
+            if (0u != USBUART_GetConfiguration())
+            {
+                // Enable OUT endpoint to receive data from host
+                USBUART_CDC_Init();
+            }
+        }      
+        
+        
+        if(USBUART_DataIsReady() != 0){
+            dataSize = USBUART_GetAll(buffer);
+            while(!USBUART_CDCIsReady());
+            USBUART_PutCRLF();
+            count = 0;            
+            bufferPosition = 0;
+        }
+
+        if(USBUART_CDCIsReady() != 0){
+            if(count < dataSize && bufferPosition == dataSize){
+                for(int y = 0; y < 16; y++){
+                 while(!USBUART_CDCIsReady());
+                 USBUART_PutChar(data[count][y]); 
+                }
+                ++count;
+                while(!USBUART_CDCIsReady());
+                USBUART_PutCRLF();
+            }
         }
     }
 }
+
+        
+//    while(1) {
+//        switch(systemState){
+//            case IDLE:
+//                IDLE_Write(1);
+//                BUSY_Write(!IDLE_Read());
+//                COLLISION_Write(!IDLE_Read());
+//            break;
+//            
+//            case BUSY:
+//                BUSY_Write(1);
+//                IDLE_Write(!BUSY_Read());
+//                COLLISION_Write(!BUSY_Read());
+//            break;
+//            
+//            case COLLISION:
+//                COLLISION_Write(1);
+//                IDLE_Write(!COLLISION_Read());
+//                BUSY_Write(!COLLISION_Read());
+//            break;
+//        }
+//    }
+   
+
 
 /* [] END OF FILE */
