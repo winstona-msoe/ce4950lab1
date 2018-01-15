@@ -38,11 +38,19 @@ _Bool logicLevel = 0;
 char currentDataCharacter; //current char
 int bufferPosition = 0; //serial_pos
 unsigned char buffer[500]; //serial buffer
-unsigned char data[500][16]; //converted data
+
+// data converted to non-terminated string showing 1s and 0s
+unsigned char data[16];
+
 int dataSize; //data size
-int dataPosition = 0; //tx_bit_counter
+
+// Symbol position in unipolar RZ signal. There are 16 symbols, 2 per bit.
+int symbolPosition = 0;
+
 int count; //dataConvertedReadOutCount
-int idx = 0; //count
+
+// bit pos in transmitted character (0 is MSB, 6 is LSB, excludes start bit)
+int idx = 0;
     
     
 /*******************************************************************************
@@ -134,29 +142,32 @@ CY_ISR(TransmitInterruptHandler)
 {
     TimerTX_STATUS;
 	currentDataCharacter = buffer[bufferPosition];  
-	if(bufferPosition < dataSize) { 	
-	    if(dataPosition == 0) {
+	if(bufferPosition < dataSize) { 
+        // Always send 1 in first part of start bit.
+	    if(symbolPosition == 0) {
     		TRANSMIT_Write(1);
-    		data[500][dataPosition] = 0x31;
-    	} else if(dataPosition%2 != 0){
+    		data[symbolPosition] = '1';
+        // At second half of each bit, return to 0.
+    	} else if(symbolPosition % 2 != 0){
     		TRANSMIT_Write(0);
-    		data[500][dataPosition] = 0x30;
+    		data[symbolPosition] = '0';
+        // All other cases, high or low depending on bit
     	} else {
-    		if(currentDataCharacter & (1<<(6-idx))){
+    		if(currentDataCharacter & (1 << (6 - idx))){
     			TRANSMIT_Write(1);
-    			data[500][dataPosition] = 0x31;
+    			data[symbolPosition] = '1';
     		}else{
     			TRANSMIT_Write(0);
-    			data[500][dataPosition] = 0x30;   
+    			data[symbolPosition] = '0';   
     		}
-    			++idx;
+    		++idx;
     	}
         CyDelayUs(450);
-        ++dataPosition;
-        if(dataPosition >= 16) {
+        ++symbolPosition;
+        if(symbolPosition >= 16) {
     	    ++bufferPosition;
     	    idx = 0;
-    	    dataPosition = 0;
+    	    symbolPosition = 0;
             TRANSMIT_Write(0);
         }
     }
