@@ -72,13 +72,13 @@
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TRANSMIT_aliases.h" value="HEADER;;;;;TRANSMIT" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TRANSMIT.c" value="SOURCE_C;CortexM3;;;;TRANSMIT" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TRANSMIT.h" value="HEADER;;;;;TRANSMIT" />
-  <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\CLOCK2.c" value="SOURCE_C;CortexM3;;;;CLOCK2" />
-  <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\CLOCK2.h" value="HEADER;;;;;CLOCK2" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TimerTX.c" value="SOURCE_C;CortexM3;;;;TimerTX" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TimerTX.h" value="HEADER;;;;;TimerTX" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TimerTX_PM.c" value="SOURCE_C;CortexM3;;;;TimerTX" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TransmitISR.c" value="SOURCE_C;CortexM3;;;;TransmitISR" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\TransmitISR.h" value="HEADER;;;;;TransmitISR" />
+  <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\CLOCK2.c" value="SOURCE_C;CortexM3;;;;CLOCK2" />
+  <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\CLOCK2.h" value="HEADER;;;;;CLOCK2" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\USBUART_Dm_aliases.h" value="HEADER;;;;;USBUART_Dm" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\USBUART_Dm.c" value="SOURCE_C;CortexM3;;;;USBUART_Dm" />
   <file name="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\codegentemp\USBUART_Dm.h" value="HEADER;;;;;USBUART_Dm" />
