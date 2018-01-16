@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 1
 
 
    1              		.syntax unified
@@ -27,1065 +27,983 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 1
   24              		.section	.cyconfigecc,"a",%progbits
   25              		.align	2
   26              		.type	cy_meta_configecc, %object
-  27              		.size	cy_meta_configecc, 572
+  27              		.size	cy_meta_configecc, 496
   28              	cy_meta_configecc:
   29 0000 01       		.byte	1
   30 0001 45       		.byte	69
   31 0002 00       		.byte	0
   32 0003 40       		.byte	64
-  33 0004 01       		.byte	1
-  34 0005 52       		.byte	82
+  33 0004 04       		.byte	4
+  34 0005 4F       		.byte	79
   35 0006 00       		.byte	0
   36 0007 40       		.byte	64
-  37 0008 02       		.byte	2
-  38 0009 65       		.byte	101
+  37 0008 01       		.byte	1
+  38 0009 52       		.byte	82
   39 000a 00       		.byte	0
   40 000b 40       		.byte	64
-  41 000c 02       		.byte	2
-  42 000d 03       		.byte	3
-  43 000e 01       		.byte	1
+  41 000c 01       		.byte	1
+  42 000d 65       		.byte	101
+  43 000e 00       		.byte	0
   44 000f 40       		.byte	64
-  45 0010 01       		.byte	1
-  46 0011 05       		.byte	5
+  45 0010 02       		.byte	2
+  46 0011 03       		.byte	3
   47 0012 01       		.byte	1
   48 0013 40       		.byte	64
-  49 0014 02       		.byte	2
-  50 0015 07       		.byte	7
+  49 0014 01       		.byte	1
+  50 0015 05       		.byte	5
   51 0016 01       		.byte	1
   52 0017 40       		.byte	64
-  53 0018 01       		.byte	1
-  54 0019 09       		.byte	9
+  53 0018 02       		.byte	2
+  54 0019 07       		.byte	7
   55 001a 01       		.byte	1
   56 001b 40       		.byte	64
-  57 001c 3B       		.byte	59
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 2
+  57 001c 01       		.byte	1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 2
 
 
-  58 001d 14       		.byte	20
+  58 001d 09       		.byte	9
   59 001e 01       		.byte	1
   60 001f 40       		.byte	64
-  61 0020 1E       		.byte	30
-  62 0021 15       		.byte	21
+  61 0020 3C       		.byte	60
+  62 0021 14       		.byte	20
   63 0022 01       		.byte	1
   64 0023 40       		.byte	64
-  65 0024 32       		.byte	50
-  66 0025 16       		.byte	22
+  65 0024 28       		.byte	40
+  66 0025 15       		.byte	21
   67 0026 01       		.byte	1
   68 0027 40       		.byte	64
-  69 0028 18       		.byte	24
-  70 0029 17       		.byte	23
+  69 0028 04       		.byte	4
+  70 0029 16       		.byte	22
   71 002a 01       		.byte	1
   72 002b 40       		.byte	64
-  73 002c 02       		.byte	2
-  74 002d 19       		.byte	25
+  73 002c 07       		.byte	7
+  74 002d 17       		.byte	23
   75 002e 01       		.byte	1
   76 002f 40       		.byte	64
-  77 0030 07       		.byte	7
-  78 0031 40       		.byte	64
+  77 0030 02       		.byte	2
+  78 0031 19       		.byte	25
   79 0032 01       		.byte	1
   80 0033 40       		.byte	64
-  81 0034 08       		.byte	8
-  82 0035 41       		.byte	65
+  81 0034 07       		.byte	7
+  82 0035 40       		.byte	64
   83 0036 01       		.byte	1
   84 0037 40       		.byte	64
-  85 0038 04       		.byte	4
-  86 0039 42       		.byte	66
+  85 0038 09       		.byte	9
+  86 0039 41       		.byte	65
   87 003a 01       		.byte	1
   88 003b 40       		.byte	64
-  89 003c 06       		.byte	6
-  90 003d 43       		.byte	67
+  89 003c 07       		.byte	7
+  90 003d 42       		.byte	66
   91 003e 01       		.byte	1
   92 003f 40       		.byte	64
-  93 0040 04       		.byte	4
-  94 0041 47       		.byte	71
+  93 0040 06       		.byte	6
+  94 0041 43       		.byte	67
   95 0042 01       		.byte	1
   96 0043 40       		.byte	64
-  97 0044 06       		.byte	6
-  98 0045 48       		.byte	72
+  97 0044 04       		.byte	4
+  98 0045 47       		.byte	71
   99 0046 01       		.byte	1
  100 0047 40       		.byte	64
- 101 0048 09       		.byte	9
- 102 0049 49       		.byte	73
+ 101 0048 0D       		.byte	13
+ 102 0049 48       		.byte	72
  103 004a 01       		.byte	1
  104 004b 40       		.byte	64
- 105 004c 01       		.byte	1
- 106 004d 4C       		.byte	76
+ 105 004c 07       		.byte	7
+ 106 004d 49       		.byte	73
  107 004e 01       		.byte	1
  108 004f 40       		.byte	64
- 109 0050 02       		.byte	2
- 110 0051 50       		.byte	80
+ 109 0050 01       		.byte	1
+ 110 0051 4C       		.byte	76
  111 0052 01       		.byte	1
  112 0053 40       		.byte	64
  113 0054 02       		.byte	2
- 114 0055 51       		.byte	81
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 3
+ 114 0055 50       		.byte	80
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 3
 
 
  115 0056 01       		.byte	1
  116 0057 40       		.byte	64
- 117 0058 7E       		.byte	126
- 118 0059 02       		.byte	2
- 119 005a 7C       		.byte	124
+ 117 0058 02       		.byte	2
+ 118 0059 51       		.byte	81
+ 119 005a 01       		.byte	1
  120 005b 40       		.byte	64
- 121 005c 85       		.byte	-123
- 122 005d 0D       		.byte	13
- 123 005e 87       		.byte	-121
- 124 005f 0D       		.byte	13
- 125 0060 8C       		.byte	-116
- 126 0061 40       		.byte	64
- 127 0062 E2       		.byte	-30
- 128 0063 40       		.byte	64
- 129 0064 94       		.byte	-108
- 130 0065 40       		.byte	64
- 131 0066 94       		.byte	-108
+ 121 005c 7E       		.byte	126
+ 122 005d 02       		.byte	2
+ 123 005e 01       		.byte	1
+ 124 005f 30       		.byte	48
+ 125 0060 0A       		.byte	10
+ 126 0061 36       		.byte	54
+ 127 0062 0D       		.byte	13
+ 128 0063 10       		.byte	16
+ 129 0064 16       		.byte	22
+ 130 0065 36       		.byte	54
+ 131 0066 7C       		.byte	124
  132 0067 40       		.byte	64
- 133 0068 E6       		.byte	-26
- 134 0069 02       		.byte	2
- 135 006a E6       		.byte	-26
- 136 006b 02       		.byte	2
- 137 006c 40       		.byte	64
- 138 006d 54       		.byte	84
- 139 006e 49       		.byte	73
- 140 006f FF       		.byte	-1
- 141 0070 4A       		.byte	74
- 142 0071 FF       		.byte	-1
- 143 0072 4B       		.byte	75
- 144 0073 FF       		.byte	-1
- 145 0074 4F       		.byte	79
- 146 0075 01       		.byte	1
- 147 0076 50       		.byte	80
- 148 0077 18       		.byte	24
- 149 0078 52       		.byte	82
- 150 0079 80       		.byte	-128
- 151 007a 5A       		.byte	90
- 152 007b 04       		.byte	4
- 153 007c 5B       		.byte	91
- 154 007d 04       		.byte	4
- 155 007e 5F       		.byte	95
- 156 007f 01       		.byte	1
- 157 0080 60       		.byte	96
- 158 0081 40       		.byte	64
- 159 0082 62       		.byte	98
- 160 0083 40       		.byte	64
- 161 0084 64       		.byte	100
- 162 0085 40       		.byte	64
- 163 0086 65       		.byte	101
- 164 0087 40       		.byte	64
- 165 0088 66       		.byte	102
- 166 0089 80       		.byte	-128
- 167 008a 68       		.byte	104
- 168 008b 80       		.byte	-128
- 169 008c 6A       		.byte	106
- 170 008d 80       		.byte	-128
- 171 008e 6C       		.byte	108
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 4
+ 133 0068 85       		.byte	-123
+ 134 0069 0D       		.byte	13
+ 135 006a 8C       		.byte	-116
+ 136 006b 04       		.byte	4
+ 137 006c E6       		.byte	-26
+ 138 006d 40       		.byte	64
+ 139 006e 94       		.byte	-108
+ 140 006f 04       		.byte	4
+ 141 0070 94       		.byte	-108
+ 142 0071 04       		.byte	4
+ 143 0072 E2       		.byte	-30
+ 144 0073 04       		.byte	4
+ 145 0074 E2       		.byte	-30
+ 146 0075 04       		.byte	4
+ 147 0076 05       		.byte	5
+ 148 0077 01       		.byte	1
+ 149 0078 08       		.byte	8
+ 150 0079 01       		.byte	1
+ 151 007a 27       		.byte	39
+ 152 007b 01       		.byte	1
+ 153 007c 2A       		.byte	42
+ 154 007d 03       		.byte	3
+ 155 007e 32       		.byte	50
+ 156 007f 02       		.byte	2
+ 157 0080 34       		.byte	52
+ 158 0081 01       		.byte	1
+ 159 0082 35       		.byte	53
+ 160 0083 01       		.byte	1
+ 161 0084 3E       		.byte	62
+ 162 0085 10       		.byte	16
+ 163 0086 3F       		.byte	63
+ 164 0087 10       		.byte	16
+ 165 0088 40       		.byte	64
+ 166 0089 54       		.byte	84
+ 167 008a 49       		.byte	73
+ 168 008b FF       		.byte	-1
+ 169 008c 4A       		.byte	74
+ 170 008d FF       		.byte	-1
+ 171 008e 4B       		.byte	75
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 4
 
 
- 172 008f 80       		.byte	-128
- 173 0090 6E       		.byte	110
- 174 0091 80       		.byte	-128
- 175 0092 82       		.byte	-126
- 176 0093 01       		.byte	1
- 177 0094 89       		.byte	-119
+ 172 008f FF       		.byte	-1
+ 173 0090 4F       		.byte	79
+ 174 0091 01       		.byte	1
+ 175 0092 50       		.byte	80
+ 176 0093 18       		.byte	24
+ 177 0094 58       		.byte	88
  178 0095 04       		.byte	4
- 179 0096 8B       		.byte	-117
- 180 0097 03       		.byte	3
- 181 0098 91       		.byte	-111
- 182 0099 01       		.byte	1
- 183 009a 92       		.byte	-110
- 184 009b 01       		.byte	1
- 185 009c 93       		.byte	-109
- 186 009d 04       		.byte	4
- 187 009e B0       		.byte	-80
- 188 009f 01       		.byte	1
- 189 00a0 B1       		.byte	-79
- 190 00a1 02       		.byte	2
- 191 00a2 B3       		.byte	-77
- 192 00a3 01       		.byte	1
- 193 00a4 B5       		.byte	-75
- 194 00a5 04       		.byte	4
- 195 00a6 BE       		.byte	-66
- 196 00a7 01       		.byte	1
- 197 00a8 BF       		.byte	-65
- 198 00a9 14       		.byte	20
- 199 00aa C0       		.byte	-64
- 200 00ab 54       		.byte	84
- 201 00ac C5       		.byte	-59
- 202 00ad EC       		.byte	-20
- 203 00ae C6       		.byte	-58
- 204 00af 02       		.byte	2
- 205 00b0 C8       		.byte	-56
- 206 00b1 07       		.byte	7
- 207 00b2 C9       		.byte	-55
- 208 00b3 FF       		.byte	-1
- 209 00b4 CA       		.byte	-54
- 210 00b5 FF       		.byte	-1
- 211 00b6 CB       		.byte	-53
- 212 00b7 FF       		.byte	-1
- 213 00b8 CD       		.byte	-51
- 214 00b9 83       		.byte	-125
- 215 00ba CE       		.byte	-50
- 216 00bb 03       		.byte	3
- 217 00bc CF       		.byte	-49
- 218 00bd 01       		.byte	1
- 219 00be D0       		.byte	-48
- 220 00bf 18       		.byte	24
- 221 00c0 D4       		.byte	-44
- 222 00c1 01       		.byte	1
- 223 00c2 D6       		.byte	-42
- 224 00c3 04       		.byte	4
- 225 00c4 D8       		.byte	-40
- 226 00c5 04       		.byte	4
- 227 00c6 D9       		.byte	-39
- 228 00c7 04       		.byte	4
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 5
+ 179 0096 59       		.byte	89
+ 180 0097 04       		.byte	4
+ 181 0098 5A       		.byte	90
+ 182 0099 04       		.byte	4
+ 183 009a 5C       		.byte	92
+ 184 009b 02       		.byte	2
+ 185 009c 5F       		.byte	95
+ 186 009d 01       		.byte	1
+ 187 009e 60       		.byte	96
+ 188 009f 40       		.byte	64
+ 189 00a0 62       		.byte	98
+ 190 00a1 40       		.byte	64
+ 191 00a2 64       		.byte	100
+ 192 00a3 40       		.byte	64
+ 193 00a4 65       		.byte	101
+ 194 00a5 40       		.byte	64
+ 195 00a6 66       		.byte	102
+ 196 00a7 80       		.byte	-128
+ 197 00a8 68       		.byte	104
+ 198 00a9 80       		.byte	-128
+ 199 00aa 6A       		.byte	106
+ 200 00ab 80       		.byte	-128
+ 201 00ac 6C       		.byte	108
+ 202 00ad 80       		.byte	-128
+ 203 00ae 6E       		.byte	110
+ 204 00af 80       		.byte	-128
+ 205 00b0 9E       		.byte	-98
+ 206 00b1 01       		.byte	1
+ 207 00b2 AE       		.byte	-82
+ 208 00b3 01       		.byte	1
+ 209 00b4 B0       		.byte	-80
+ 210 00b5 01       		.byte	1
+ 211 00b6 BE       		.byte	-66
+ 212 00b7 01       		.byte	1
+ 213 00b8 C0       		.byte	-64
+ 214 00b9 41       		.byte	65
+ 215 00ba C5       		.byte	-59
+ 216 00bb EC       		.byte	-20
+ 217 00bc C6       		.byte	-58
+ 218 00bd 02       		.byte	2
+ 219 00be C8       		.byte	-56
+ 220 00bf 07       		.byte	7
+ 221 00c0 C9       		.byte	-55
+ 222 00c1 FF       		.byte	-1
+ 223 00c2 CA       		.byte	-54
+ 224 00c3 FF       		.byte	-1
+ 225 00c4 CB       		.byte	-53
+ 226 00c5 FF       		.byte	-1
+ 227 00c6 CD       		.byte	-51
+ 228 00c7 83       		.byte	-125
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 5
 
 
- 229 00c8 DA       		.byte	-38
- 230 00c9 04       		.byte	4
- 231 00ca DB       		.byte	-37
- 232 00cb 04       		.byte	4
- 233 00cc DC       		.byte	-36
- 234 00cd 20       		.byte	32
- 235 00ce DF       		.byte	-33
- 236 00cf 01       		.byte	1
- 237 00d0 E0       		.byte	-32
- 238 00d1 40       		.byte	64
- 239 00d2 E2       		.byte	-30
- 240 00d3 40       		.byte	64
- 241 00d4 E4       		.byte	-28
- 242 00d5 40       		.byte	64
- 243 00d6 E5       		.byte	-27
- 244 00d7 40       		.byte	64
- 245 00d8 E6       		.byte	-26
- 246 00d9 80       		.byte	-128
- 247 00da E8       		.byte	-24
- 248 00db 80       		.byte	-128
- 249 00dc EA       		.byte	-22
- 250 00dd 80       		.byte	-128
- 251 00de EC       		.byte	-20
- 252 00df 80       		.byte	-128
- 253 00e0 EE       		.byte	-18
- 254 00e1 80       		.byte	-128
- 255 00e2 06       		.byte	6
- 256 00e3 80       		.byte	-128
- 257 00e4 0C       		.byte	12
- 258 00e5 02       		.byte	2
- 259 00e6 1E       		.byte	30
+ 229 00c8 CE       		.byte	-50
+ 230 00c9 03       		.byte	3
+ 231 00ca CF       		.byte	-49
+ 232 00cb 01       		.byte	1
+ 233 00cc D0       		.byte	-48
+ 234 00cd 18       		.byte	24
+ 235 00ce D2       		.byte	-46
+ 236 00cf 80       		.byte	-128
+ 237 00d0 D4       		.byte	-44
+ 238 00d1 01       		.byte	1
+ 239 00d2 D6       		.byte	-42
+ 240 00d3 04       		.byte	4
+ 241 00d4 D8       		.byte	-40
+ 242 00d5 04       		.byte	4
+ 243 00d6 DA       		.byte	-38
+ 244 00d7 04       		.byte	4
+ 245 00d8 DB       		.byte	-37
+ 246 00d9 04       		.byte	4
+ 247 00da DF       		.byte	-33
+ 248 00db 01       		.byte	1
+ 249 00dc E0       		.byte	-32
+ 250 00dd 40       		.byte	64
+ 251 00de E2       		.byte	-30
+ 252 00df 40       		.byte	64
+ 253 00e0 E4       		.byte	-28
+ 254 00e1 40       		.byte	64
+ 255 00e2 E5       		.byte	-27
+ 256 00e3 40       		.byte	64
+ 257 00e4 E6       		.byte	-26
+ 258 00e5 80       		.byte	-128
+ 259 00e6 E8       		.byte	-24
  260 00e7 80       		.byte	-128
- 261 00e8 26       		.byte	38
- 262 00e9 11       		.byte	17
- 263 00ea 27       		.byte	39
- 264 00eb 20       		.byte	32
- 265 00ec 36       		.byte	54
- 266 00ed 01       		.byte	1
- 267 00ee 3F       		.byte	63
- 268 00ef 20       		.byte	32
- 269 00f0 42       		.byte	66
+ 261 00e8 EA       		.byte	-22
+ 262 00e9 80       		.byte	-128
+ 263 00ea EC       		.byte	-20
+ 264 00eb 80       		.byte	-128
+ 265 00ec EE       		.byte	-18
+ 266 00ed 80       		.byte	-128
+ 267 00ee 00       		.byte	0
+ 268 00ef 10       		.byte	16
+ 269 00f0 0D       		.byte	13
  270 00f1 80       		.byte	-128
- 271 00f2 46       		.byte	70
- 272 00f3 80       		.byte	-128
- 273 00f4 48       		.byte	72
- 274 00f5 02       		.byte	2
- 275 00f6 4C       		.byte	76
- 276 00f7 02       		.byte	2
- 277 00f8 4D       		.byte	77
- 278 00f9 04       		.byte	4
- 279 00fa 4F       		.byte	79
- 280 00fb 01       		.byte	1
- 281 00fc 56       		.byte	86
+ 271 00f2 13       		.byte	19
+ 272 00f3 20       		.byte	32
+ 273 00f4 17       		.byte	23
+ 274 00f5 80       		.byte	-128
+ 275 00f6 18       		.byte	24
+ 276 00f7 10       		.byte	16
+ 277 00f8 19       		.byte	25
+ 278 00f9 08       		.byte	8
+ 279 00fa 1B       		.byte	27
+ 280 00fb 10       		.byte	16
+ 281 00fc 1E       		.byte	30
  282 00fd 80       		.byte	-128
- 283 00fe 5D       		.byte	93
+ 283 00fe 20       		.byte	32
  284 00ff 04       		.byte	4
- 285 0100 5E       		.byte	94
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 6
+ 285 0100 29       		.byte	41
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 6
 
 
- 286 0101 80       		.byte	-128
- 287 0102 5F       		.byte	95
- 288 0103 01       		.byte	1
- 289 0104 67       		.byte	103
+ 286 0101 08       		.byte	8
+ 287 0102 3A       		.byte	58
+ 288 0103 04       		.byte	4
+ 289 0104 42       		.byte	66
  290 0105 80       		.byte	-128
- 291 0106 70       		.byte	112
- 292 0107 02       		.byte	2
- 293 0108 83       		.byte	-125
- 294 0109 30       		.byte	48
- 295 010a 87       		.byte	-121
- 296 010b 40       		.byte	64
- 297 010c A6       		.byte	-90
- 298 010d 10       		.byte	16
- 299 010e C0       		.byte	-64
- 300 010f 10       		.byte	16
- 301 0110 C2       		.byte	-62
- 302 0111 10       		.byte	16
- 303 0112 CC       		.byte	-52
+ 291 0106 45       		.byte	69
+ 292 0107 80       		.byte	-128
+ 293 0108 46       		.byte	70
+ 294 0109 40       		.byte	64
+ 295 010a 48       		.byte	72
+ 296 010b 01       		.byte	1
+ 297 010c 4D       		.byte	77
+ 298 010d 04       		.byte	4
+ 299 010e 4F       		.byte	79
+ 300 010f 01       		.byte	1
+ 301 0110 55       		.byte	85
+ 302 0111 80       		.byte	-128
+ 303 0112 56       		.byte	86
  304 0113 80       		.byte	-128
- 305 0114 CE       		.byte	-50
- 306 0115 20       		.byte	32
- 307 0116 D0       		.byte	-48
- 308 0117 81       		.byte	-127
- 309 0118 D2       		.byte	-46
- 310 0119 18       		.byte	24
- 311 011a D6       		.byte	-42
- 312 011b D0       		.byte	-48
- 313 011c D8       		.byte	-40
- 314 011d 80       		.byte	-128
- 315 011e 40       		.byte	64
- 316 011f 45       		.byte	69
- 317 0120 49       		.byte	73
- 318 0121 FF       		.byte	-1
- 319 0122 4A       		.byte	74
- 320 0123 FF       		.byte	-1
- 321 0124 4B       		.byte	75
- 322 0125 FF       		.byte	-1
- 323 0126 4F       		.byte	79
- 324 0127 01       		.byte	1
- 325 0128 50       		.byte	80
- 326 0129 18       		.byte	24
- 327 012a 5A       		.byte	90
- 328 012b 04       		.byte	4
- 329 012c 5D       		.byte	93
- 330 012d 01       		.byte	1
- 331 012e 5F       		.byte	95
- 332 012f 01       		.byte	1
- 333 0130 60       		.byte	96
- 334 0131 40       		.byte	64
- 335 0132 62       		.byte	98
- 336 0133 40       		.byte	64
- 337 0134 64       		.byte	100
- 338 0135 40       		.byte	64
- 339 0136 65       		.byte	101
- 340 0137 40       		.byte	64
- 341 0138 66       		.byte	102
- 342 0139 80       		.byte	-128
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 7
+ 305 0114 5D       		.byte	93
+ 306 0115 04       		.byte	4
+ 307 0116 5E       		.byte	94
+ 308 0117 80       		.byte	-128
+ 309 0118 5F       		.byte	95
+ 310 0119 01       		.byte	1
+ 311 011a 67       		.byte	103
+ 312 011b 80       		.byte	-128
+ 313 011c 74       		.byte	116
+ 314 011d 01       		.byte	1
+ 315 011e 76       		.byte	118
+ 316 011f 40       		.byte	64
+ 317 0120 77       		.byte	119
+ 318 0121 80       		.byte	-128
+ 319 0122 82       		.byte	-126
+ 320 0123 04       		.byte	4
+ 321 0124 83       		.byte	-125
+ 322 0125 20       		.byte	32
+ 323 0126 87       		.byte	-121
+ 324 0127 40       		.byte	64
+ 325 0128 94       		.byte	-108
+ 326 0129 04       		.byte	4
+ 327 012a A7       		.byte	-89
+ 328 012b 10       		.byte	16
+ 329 012c C0       		.byte	-64
+ 330 012d 02       		.byte	2
+ 331 012e C2       		.byte	-62
+ 332 012f 80       		.byte	-128
+ 333 0130 C4       		.byte	-60
+ 334 0131 82       		.byte	-126
+ 335 0132 CA       		.byte	-54
+ 336 0133 02       		.byte	2
+ 337 0134 CE       		.byte	-50
+ 338 0135 02       		.byte	2
+ 339 0136 D0       		.byte	-48
+ 340 0137 91       		.byte	-111
+ 341 0138 D2       		.byte	-46
+ 342 0139 08       		.byte	8
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 7
 
 
- 343 013a 68       		.byte	104
- 344 013b 80       		.byte	-128
- 345 013c 6A       		.byte	106
+ 343 013a D6       		.byte	-42
+ 344 013b D0       		.byte	-48
+ 345 013c D8       		.byte	-40
  346 013d 80       		.byte	-128
- 347 013e 6C       		.byte	108
- 348 013f 80       		.byte	-128
- 349 0140 6E       		.byte	110
- 350 0141 80       		.byte	-128
- 351 0142 8E       		.byte	-114
- 352 0143 01       		.byte	1
- 353 0144 92       		.byte	-110
+ 347 013e 39       		.byte	57
+ 348 013f 02       		.byte	2
+ 349 0140 3F       		.byte	63
+ 350 0141 01       		.byte	1
+ 351 0142 59       		.byte	89
+ 352 0143 04       		.byte	4
+ 353 0144 5F       		.byte	95
  354 0145 01       		.byte	1
- 355 0146 B6       		.byte	-74
- 356 0147 01       		.byte	1
- 357 0148 BE       		.byte	-66
- 358 0149 40       		.byte	64
- 359 014a C0       		.byte	-64
- 360 014b 45       		.byte	69
- 361 014c C5       		.byte	-59
- 362 014d EC       		.byte	-20
- 363 014e C7       		.byte	-57
- 364 014f 20       		.byte	32
- 365 0150 C8       		.byte	-56
- 366 0151 23       		.byte	35
- 367 0152 C9       		.byte	-55
- 368 0153 FF       		.byte	-1
- 369 0154 CA       		.byte	-54
- 370 0155 FF       		.byte	-1
- 371 0156 CB       		.byte	-53
- 372 0157 FF       		.byte	-1
- 373 0158 CD       		.byte	-51
- 374 0159 83       		.byte	-125
- 375 015a CE       		.byte	-50
- 376 015b 03       		.byte	3
- 377 015c CF       		.byte	-49
- 378 015d 01       		.byte	1
- 379 015e D0       		.byte	-48
- 380 015f 18       		.byte	24
- 381 0160 D2       		.byte	-46
- 382 0161 80       		.byte	-128
- 383 0162 D4       		.byte	-44
- 384 0163 01       		.byte	1
- 385 0164 D6       		.byte	-42
- 386 0165 04       		.byte	4
- 387 0166 D8       		.byte	-40
- 388 0167 04       		.byte	4
- 389 0168 DA       		.byte	-38
- 390 0169 04       		.byte	4
- 391 016a DB       		.byte	-37
- 392 016b 04       		.byte	4
- 393 016c DD       		.byte	-35
- 394 016d 11       		.byte	17
- 395 016e DF       		.byte	-33
- 396 016f 01       		.byte	1
- 397 0170 E0       		.byte	-32
- 398 0171 40       		.byte	64
- 399 0172 E2       		.byte	-30
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 8
+ 355 0146 27       		.byte	39
+ 356 0147 80       		.byte	-128
+ 357 0148 83       		.byte	-125
+ 358 0149 80       		.byte	-128
+ 359 014a 8F       		.byte	-113
+ 360 014b 10       		.byte	16
+ 361 014c 94       		.byte	-108
+ 362 014d 04       		.byte	4
+ 363 014e E2       		.byte	-30
+ 364 014f 10       		.byte	16
+ 365 0150 EA       		.byte	-22
+ 366 0151 02       		.byte	2
+ 367 0152 EE       		.byte	-18
+ 368 0153 02       		.byte	2
+ 369 0154 EA       		.byte	-22
+ 370 0155 02       		.byte	2
+ 371 0156 EE       		.byte	-18
+ 372 0157 02       		.byte	2
+ 373 0158 32       		.byte	50
+ 374 0159 80       		.byte	-128
+ 375 015a 33       		.byte	51
+ 376 015b 02       		.byte	2
+ 377 015c 34       		.byte	52
+ 378 015d 02       		.byte	2
+ 379 015e 35       		.byte	53
+ 380 015f 80       		.byte	-128
+ 381 0160 3B       		.byte	59
+ 382 0161 20       		.byte	32
+ 383 0162 CC       		.byte	-52
+ 384 0163 F0       		.byte	-16
+ 385 0164 CE       		.byte	-50
+ 386 0165 10       		.byte	16
+ 387 0166 33       		.byte	51
+ 388 0167 10       		.byte	16
+ 389 0168 37       		.byte	55
+ 390 0169 20       		.byte	32
+ 391 016a 8D       		.byte	-115
+ 392 016b 80       		.byte	-128
+ 393 016c 97       		.byte	-105
+ 394 016d 20       		.byte	32
+ 395 016e 9C       		.byte	-100
+ 396 016f 02       		.byte	2
+ 397 0170 9D       		.byte	-99
+ 398 0171 80       		.byte	-128
+ 399 0172 A6       		.byte	-90
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 8
 
 
- 400 0173 40       		.byte	64
- 401 0174 E4       		.byte	-28
- 402 0175 40       		.byte	64
- 403 0176 E5       		.byte	-27
- 404 0177 40       		.byte	64
- 405 0178 E6       		.byte	-26
+ 400 0173 80       		.byte	-128
+ 401 0174 A7       		.byte	-89
+ 402 0175 02       		.byte	2
+ 403 0176 CC       		.byte	-52
+ 404 0177 30       		.byte	48
+ 405 0178 12       		.byte	18
  406 0179 80       		.byte	-128
- 407 017a E8       		.byte	-24
- 408 017b 80       		.byte	-128
- 409 017c EA       		.byte	-22
- 410 017d 80       		.byte	-128
- 411 017e EC       		.byte	-20
- 412 017f 80       		.byte	-128
- 413 0180 EE       		.byte	-18
+ 407 017a 97       		.byte	-105
+ 408 017b 20       		.byte	32
+ 409 017c 9C       		.byte	-100
+ 410 017d 02       		.byte	2
+ 411 017e 9F       		.byte	-97
+ 412 017f 30       		.byte	48
+ 413 0180 A6       		.byte	-90
  414 0181 80       		.byte	-128
- 415 0182 02       		.byte	2
+ 415 0182 A7       		.byte	-89
  416 0183 02       		.byte	2
- 417 0184 09       		.byte	9
- 418 0185 02       		.byte	2
- 419 0186 19       		.byte	25
- 420 0187 40       		.byte	64
- 421 0188 41       		.byte	65
- 422 0189 02       		.byte	2
- 423 018a 46       		.byte	70
- 424 018b 80       		.byte	-128
- 425 018c 49       		.byte	73
- 426 018d 05       		.byte	5
- 427 018e 4A       		.byte	74
+ 417 0184 C4       		.byte	-60
+ 418 0185 10       		.byte	16
+ 419 0186 83       		.byte	-125
+ 420 0187 10       		.byte	16
+ 421 0188 97       		.byte	-105
+ 422 0189 20       		.byte	32
+ 423 018a 9C       		.byte	-100
+ 424 018b 02       		.byte	2
+ 425 018c 9F       		.byte	-97
+ 426 018d 30       		.byte	48
+ 427 018e A7       		.byte	-89
  428 018f 02       		.byte	2
- 429 0190 4E       		.byte	78
- 430 0191 02       		.byte	2
- 431 0192 52       		.byte	82
- 432 0193 02       		.byte	2
- 433 0194 59       		.byte	89
- 434 0195 45       		.byte	69
- 435 0196 60       		.byte	96
+ 429 0190 E2       		.byte	-30
+ 430 0191 20       		.byte	32
+ 431 0192 0B       		.byte	11
+ 432 0193 44       		.byte	68
+ 433 0194 0F       		.byte	15
+ 434 0195 80       		.byte	-128
+ 435 0196 83       		.byte	-125
  436 0197 40       		.byte	64
- 437 0198 71       		.byte	113
- 438 0199 02       		.byte	2
- 439 019a 72       		.byte	114
- 440 019b 80       		.byte	-128
- 441 019c 94       		.byte	-108
- 442 019d 40       		.byte	64
- 443 019e A6       		.byte	-90
- 444 019f 10       		.byte	16
- 445 01a0 B2       		.byte	-78
- 446 01a1 10       		.byte	16
- 447 01a2 C0       		.byte	-64
- 448 01a3 01       		.byte	1
- 449 01a4 C2       		.byte	-62
- 450 01a5 08       		.byte	8
- 451 01a6 D0       		.byte	-48
- 452 01a7 81       		.byte	-127
- 453 01a8 D2       		.byte	-46
- 454 01a9 18       		.byte	24
- 455 01aa D6       		.byte	-42
- 456 01ab 0B       		.byte	11
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 9
+ 437 0198 C2       		.byte	-62
+ 438 0199 0E       		.byte	14
+ 439 019a 66       		.byte	102
+ 440 019b 04       		.byte	4
+ 441 019c 6B       		.byte	107
+ 442 019d 20       		.byte	32
+ 443 019e 82       		.byte	-126
+ 444 019f 04       		.byte	4
+ 445 01a0 83       		.byte	-125
+ 446 01a1 20       		.byte	32
+ 447 01a2 8C       		.byte	-116
+ 448 01a3 02       		.byte	2
+ 449 01a4 9C       		.byte	-100
+ 450 01a5 02       		.byte	2
+ 451 01a6 A7       		.byte	-89
+ 452 01a7 02       		.byte	2
+ 453 01a8 AF       		.byte	-81
+ 454 01a9 30       		.byte	48
+ 455 01aa D8       		.byte	-40
+ 456 01ab 80       		.byte	-128
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 9
 
 
- 457 01ac D8       		.byte	-40
- 458 01ad 01       		.byte	1
- 459 01ae EA       		.byte	-22
- 460 01af 82       		.byte	-126
- 461 01b0 EE       		.byte	-18
- 462 01b1 02       		.byte	2
- 463 01b2 EA       		.byte	-22
- 464 01b3 02       		.byte	2
- 465 01b4 EE       		.byte	-18
- 466 01b5 02       		.byte	2
- 467 01b6 30       		.byte	48
- 468 01b7 40       		.byte	64
- 469 01b8 33       		.byte	51
- 470 01b9 04       		.byte	4
- 471 01ba 34       		.byte	52
- 472 01bb 20       		.byte	32
- 473 01bc 36       		.byte	54
- 474 01bd 08       		.byte	8
- 475 01be 3B       		.byte	59
- 476 01bf 20       		.byte	32
- 477 01c0 CC       		.byte	-52
- 478 01c1 F0       		.byte	-16
- 479 01c2 CE       		.byte	-50
- 480 01c3 10       		.byte	16
- 481 01c4 30       		.byte	48
- 482 01c5 10       		.byte	16
- 483 01c6 37       		.byte	55
- 484 01c7 20       		.byte	32
- 485 01c8 8C       		.byte	-116
- 486 01c9 20       		.byte	32
- 487 01ca 97       		.byte	-105
- 488 01cb 20       		.byte	32
- 489 01cc 9C       		.byte	-100
- 490 01cd 60       		.byte	96
- 491 01ce 9F       		.byte	-97
- 492 01cf 04       		.byte	4
- 493 01d0 A6       		.byte	-90
- 494 01d1 08       		.byte	8
- 495 01d2 CC       		.byte	-52
- 496 01d3 30       		.byte	48
- 497 01d4 97       		.byte	-105
- 498 01d5 20       		.byte	32
- 499 01d6 9C       		.byte	-100
- 500 01d7 50       		.byte	80
- 501 01d8 9F       		.byte	-97
- 502 01d9 24       		.byte	36
- 503 01da A6       		.byte	-90
- 504 01db 08       		.byte	8
- 505 01dc 84       		.byte	-124
- 506 01dd 10       		.byte	16
- 507 01de 97       		.byte	-105
- 508 01df 20       		.byte	32
- 509 01e0 9C       		.byte	-100
- 510 01e1 50       		.byte	80
- 511 01e2 9F       		.byte	-97
- 512 01e3 24       		.byte	36
- 513 01e4 A6       		.byte	-90
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 10
+ 457 01ac DA       		.byte	-38
+ 458 01ad 40       		.byte	64
+ 459 01ae E2       		.byte	-30
+ 460 01af 80       		.byte	-128
+ 461 01b0 EA       		.byte	-22
+ 462 01b1 40       		.byte	64
+ 463 01b2 EE       		.byte	-18
+ 464 01b3 40       		.byte	64
+ 465 01b4 0C       		.byte	12
+ 466 01b5 20       		.byte	32
+ 467 01b6 80       		.byte	-128
+ 468 01b7 20       		.byte	32
+ 469 01b8 87       		.byte	-121
+ 470 01b9 02       		.byte	2
+ 471 01ba A7       		.byte	-89
+ 472 01bb 02       		.byte	2
+ 473 01bc C2       		.byte	-62
+ 474 01bd 80       		.byte	-128
+ 475 01be E0       		.byte	-32
+ 476 01bf 80       		.byte	-128
+ 477 01c0 E2       		.byte	-30
+ 478 01c1 10       		.byte	16
+ 479 01c2 AF       		.byte	-81
+ 480 01c3 44       		.byte	68
+ 481 01c4 10       		.byte	16
+ 482 01c5 05       		.byte	5
+ 483 01c6 1A       		.byte	26
+ 484 01c7 05       		.byte	5
+ 485 01c8 00       		.byte	0
+ 486 01c9 FE       		.byte	-2
+ 487 01ca 01       		.byte	1
+ 488 01cb 2A       		.byte	42
+ 489 01cc 00       		.byte	0
+ 490 01cd FF       		.byte	-1
+ 491 01ce FF       		.byte	-1
+ 492 01cf 00       		.byte	0
+ 493 01d0 00       		.byte	0
+ 494 01d1 00       		.byte	0
+ 495 01d2 00       		.byte	0
+ 496 01d3 00       		.byte	0
+ 497 01d4 40       		.byte	64
+ 498 01d5 00       		.byte	0
+ 499 01d6 00       		.byte	0
+ 500 01d7 00       		.byte	0
+ 501 01d8 00       		.byte	0
+ 502 01d9 00       		.byte	0
+ 503 01da 00       		.byte	0
+ 504 01db 00       		.byte	0
+ 505 01dc C0       		.byte	-64
+ 506 01dd 00       		.byte	0
+ 507 01de 00       		.byte	0
+ 508 01df 00       		.byte	0
+ 509 01e0 00       		.byte	0
+ 510 01e1 0B       		.byte	11
+ 511 01e2 0B       		.byte	11
+ 512 01e3 00       		.byte	0
+ 513 01e4 00       		.byte	0
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 10
 
 
- 514 01e5 08       		.byte	8
- 515 01e6 E6       		.byte	-26
- 516 01e7 40       		.byte	64
- 517 01e8 0B       		.byte	11
- 518 01e9 44       		.byte	68
- 519 01ea 0E       		.byte	14
- 520 01eb 80       		.byte	-128
- 521 01ec 86       		.byte	-122
- 522 01ed 40       		.byte	64
- 523 01ee C2       		.byte	-62
- 524 01ef 0E       		.byte	14
- 525 01f0 9F       		.byte	-97
- 526 01f1 04       		.byte	4
- 527 01f2 A6       		.byte	-90
- 528 01f3 08       		.byte	8
- 529 01f4 AF       		.byte	-81
- 530 01f5 30       		.byte	48
- 531 01f6 B0       		.byte	-80
- 532 01f7 40       		.byte	64
- 533 01f8 EA       		.byte	-22
- 534 01f9 40       		.byte	64
- 535 01fa EE       		.byte	-18
- 536 01fb 40       		.byte	64
- 537 01fc 0E       		.byte	14
- 538 01fd 02       		.byte	2
- 539 01fe 82       		.byte	-126
- 540 01ff 01       		.byte	1
- 541 0200 83       		.byte	-125
- 542 0201 04       		.byte	4
- 543 0202 86       		.byte	-122
- 544 0203 08       		.byte	8
- 545 0204 9F       		.byte	-97
- 546 0205 04       		.byte	4
- 547 0206 A6       		.byte	-90
- 548 0207 08       		.byte	8
- 549 0208 C2       		.byte	-62
- 550 0209 80       		.byte	-128
- 551 020a E2       		.byte	-30
- 552 020b 90       		.byte	-112
- 553 020c E4       		.byte	-28
- 554 020d 80       		.byte	-128
- 555 020e AF       		.byte	-81
- 556 020f 44       		.byte	68
- 557 0210 10       		.byte	16
- 558 0211 07       		.byte	7
- 559 0212 1A       		.byte	26
- 560 0213 07       		.byte	7
- 561 0214 00       		.byte	0
- 562 0215 FF       		.byte	-1
- 563 0216 01       		.byte	1
- 564 0217 2A       		.byte	42
- 565 0218 00       		.byte	0
- 566 0219 FF       		.byte	-1
- 567 021a FF       		.byte	-1
- 568 021b 00       		.byte	0
- 569 021c 00       		.byte	0
- 570 021d 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 11
+ 514 01e5 00       		.byte	0
+ 515 01e6 00       		.byte	0
+ 516 01e7 00       		.byte	0
+ 517 01e8 80       		.byte	-128
+ 518 01e9 87       		.byte	-121
+ 519 01ea 07       		.byte	7
+ 520 01eb 00       		.byte	0
+ 521 01ec 00       		.byte	0
+ 522 01ed 00       		.byte	0
+ 523 01ee 00       		.byte	0
+ 524 01ef 00       		.byte	0
+ 525              		.section	.cywolatch,"a",%progbits
+ 526              		.align	2
+ 527              		.type	cy_meta_wonvl, %object
+ 528              		.size	cy_meta_wonvl, 4
+ 529              	cy_meta_wonvl:
+ 530 0000 BC       		.byte	-68
+ 531 0001 90       		.byte	-112
+ 532 0002 AC       		.byte	-84
+ 533 0003 AF       		.byte	-81
+ 534              		.section	.cycustnvl,"a",%progbits
+ 535              		.align	2
+ 536              		.type	cy_meta_custnvl, %object
+ 537              		.size	cy_meta_custnvl, 4
+ 538              	cy_meta_custnvl:
+ 539 0000 00       		.byte	0
+ 540 0001 00       		.byte	0
+ 541 0002 40       		.byte	64
+ 542 0003 05       		.byte	5
+ 543              		.section	.cymeta,"a",%progbits
+ 544              		.align	2
+ 545              		.type	cy_metadata, %object
+ 546              		.size	cy_metadata, 12
+ 547              	cy_metadata:
+ 548 0000 00       		.byte	0
+ 549 0001 01       		.byte	1
+ 550 0002 2E       		.byte	46
+ 551 0003 12       		.byte	18
+ 552 0004 30       		.byte	48
+ 553 0005 69       		.byte	105
+ 554 0006 00       		.byte	0
+ 555 0007 01       		.byte	1
+ 556 0008 00       		.byte	0
+ 557 0009 00       		.byte	0
+ 558 000a 00       		.byte	0
+ 559 000b 00       		.byte	0
+ 560              		.section	.cyflashprotect,"a",%progbits
+ 561              		.align	2
+ 562              		.type	cy_meta_flashprotect, %object
+ 563              		.size	cy_meta_flashprotect, 256
+ 564              	cy_meta_flashprotect:
+ 565 0000 00000000 		.space	256
+ 565      00000000 
+ 565      00000000 
+ 565      00000000 
+ 565      00000000 
+ 566              		.text
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 11
 
 
- 571 021e 00       		.byte	0
- 572 021f 00       		.byte	0
- 573 0220 40       		.byte	64
- 574 0221 00       		.byte	0
- 575 0222 00       		.byte	0
- 576 0223 00       		.byte	0
- 577 0224 00       		.byte	0
- 578 0225 00       		.byte	0
- 579 0226 00       		.byte	0
- 580 0227 00       		.byte	0
- 581 0228 C0       		.byte	-64
- 582 0229 00       		.byte	0
- 583 022a 00       		.byte	0
- 584 022b 00       		.byte	0
- 585 022c 00       		.byte	0
- 586 022d 0B       		.byte	11
- 587 022e 0B       		.byte	11
- 588 022f 00       		.byte	0
- 589 0230 00       		.byte	0
- 590 0231 00       		.byte	0
- 591 0232 00       		.byte	0
- 592 0233 00       		.byte	0
- 593 0234 80       		.byte	-128
- 594 0235 87       		.byte	-121
- 595 0236 07       		.byte	7
- 596 0237 00       		.byte	0
- 597 0238 00       		.byte	0
- 598 0239 00       		.byte	0
- 599 023a 00       		.byte	0
- 600 023b 00       		.byte	0
- 601              		.section	.cywolatch,"a",%progbits
- 602              		.align	2
- 603              		.type	cy_meta_wonvl, %object
- 604              		.size	cy_meta_wonvl, 4
- 605              	cy_meta_wonvl:
- 606 0000 BC       		.byte	-68
- 607 0001 90       		.byte	-112
- 608 0002 AC       		.byte	-84
- 609 0003 AF       		.byte	-81
- 610              		.section	.cycustnvl,"a",%progbits
- 611              		.align	2
- 612              		.type	cy_meta_custnvl, %object
- 613              		.size	cy_meta_custnvl, 4
- 614              	cy_meta_custnvl:
- 615 0000 00       		.byte	0
- 616 0001 00       		.byte	0
- 617 0002 40       		.byte	64
- 618 0003 05       		.byte	5
- 619              		.section	.cymeta,"a",%progbits
- 620              		.align	2
- 621              		.type	cy_metadata, %object
- 622              		.size	cy_metadata, 12
- 623              	cy_metadata:
- 624 0000 00       		.byte	0
- 625 0001 01       		.byte	1
- 626 0002 2E       		.byte	46
- 627 0003 12       		.byte	18
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 12
+ 567              	.Letext0:
+ 568              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 569              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 570              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 571              		.section	.debug_info,"",%progbits
+ 572              	.Ldebug_info0:
+ 573 0000 31010000 		.4byte	0x131
+ 574 0004 0400     		.2byte	0x4
+ 575 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 576 000a 04       		.byte	0x4
+ 577 000b 01       		.uleb128 0x1
+ 578 000c 24000000 		.4byte	.LASF17
+ 579 0010 0C       		.byte	0xc
+ 580 0011 DB010000 		.4byte	.LASF18
+ 581 0015 51010000 		.4byte	.LASF19
+ 582 0019 00000000 		.4byte	.Ldebug_line0
+ 583 001d 02       		.uleb128 0x2
+ 584 001e 01       		.byte	0x1
+ 585 001f 06       		.byte	0x6
+ 586 0020 CF010000 		.4byte	.LASF0
+ 587 0024 03       		.uleb128 0x3
+ 588 0025 00000000 		.4byte	.LASF9
+ 589 0029 01       		.byte	0x1
+ 590 002a 1D       		.byte	0x1d
+ 591 002b 2F000000 		.4byte	0x2f
+ 592 002f 02       		.uleb128 0x2
+ 593 0030 01       		.byte	0x1
+ 594 0031 08       		.byte	0x8
+ 595 0032 16000000 		.4byte	.LASF1
+ 596 0036 02       		.uleb128 0x2
+ 597 0037 02       		.byte	0x2
+ 598 0038 05       		.byte	0x5
+ 599 0039 BC010000 		.4byte	.LASF2
+ 600 003d 02       		.uleb128 0x2
+ 601 003e 02       		.byte	0x2
+ 602 003f 07       		.byte	0x7
+ 603 0040 C4000000 		.4byte	.LASF3
+ 604 0044 02       		.uleb128 0x2
+ 605 0045 04       		.byte	0x4
+ 606 0046 05       		.byte	0x5
+ 607 0047 C6010000 		.4byte	.LASF4
+ 608 004b 02       		.uleb128 0x2
+ 609 004c 04       		.byte	0x4
+ 610 004d 07       		.byte	0x7
+ 611 004e B2000000 		.4byte	.LASF5
+ 612 0052 02       		.uleb128 0x2
+ 613 0053 08       		.byte	0x8
+ 614 0054 05       		.byte	0x5
+ 615 0055 AE010000 		.4byte	.LASF6
+ 616 0059 02       		.uleb128 0x2
+ 617 005a 08       		.byte	0x8
+ 618 005b 07       		.byte	0x7
+ 619 005c 06010000 		.4byte	.LASF7
+ 620 0060 04       		.uleb128 0x4
+ 621 0061 04       		.byte	0x4
+ 622 0062 05       		.byte	0x5
+ 623 0063 696E7400 		.ascii	"int\000"
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 12
 
 
- 628 0004 30       		.byte	48
- 629 0005 69       		.byte	105
- 630 0006 00       		.byte	0
- 631 0007 01       		.byte	1
- 632 0008 00       		.byte	0
- 633 0009 00       		.byte	0
- 634 000a 00       		.byte	0
- 635 000b 00       		.byte	0
- 636              		.section	.cyflashprotect,"a",%progbits
- 637              		.align	2
- 638              		.type	cy_meta_flashprotect, %object
- 639              		.size	cy_meta_flashprotect, 256
- 640              	cy_meta_flashprotect:
- 641 0000 00000000 		.space	256
- 641      00000000 
- 641      00000000 
- 641      00000000 
- 641      00000000 
- 642              		.text
- 643              	.Letext0:
- 644              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 645              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 646              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
- 647              		.section	.debug_info,"",%progbits
- 648              	.Ldebug_info0:
- 649 0000 31010000 		.4byte	0x131
- 650 0004 0400     		.2byte	0x4
- 651 0006 00000000 		.4byte	.Ldebug_abbrev0
- 652 000a 04       		.byte	0x4
- 653 000b 01       		.uleb128 0x1
- 654 000c 6A000000 		.4byte	.LASF17
- 655 0010 0C       		.byte	0xc
- 656 0011 C4010000 		.4byte	.LASF18
- 657 0015 0A000000 		.4byte	.LASF19
- 658 0019 00000000 		.4byte	.Ldebug_line0
- 659 001d 02       		.uleb128 0x2
- 660 001e 01       		.byte	0x1
- 661 001f 06       		.byte	0x6
- 662 0020 B8010000 		.4byte	.LASF0
- 663 0024 03       		.uleb128 0x3
- 664 0025 00000000 		.4byte	.LASF9
- 665 0029 01       		.byte	0x1
- 666 002a 1D       		.byte	0x1d
- 667 002b 2F000000 		.4byte	0x2f
- 668 002f 02       		.uleb128 0x2
- 669 0030 01       		.byte	0x1
- 670 0031 08       		.byte	0x8
- 671 0032 5C000000 		.4byte	.LASF1
- 672 0036 02       		.uleb128 0x2
- 673 0037 02       		.byte	0x2
- 674 0038 05       		.byte	0x5
- 675 0039 A5010000 		.4byte	.LASF2
- 676 003d 02       		.uleb128 0x2
- 677 003e 02       		.byte	0x2
- 678 003f 07       		.byte	0x7
- 679 0040 0A010000 		.4byte	.LASF3
- 680 0044 02       		.uleb128 0x2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 13
+ 624 0067 02       		.uleb128 0x2
+ 625 0068 04       		.byte	0x4
+ 626 0069 07       		.byte	0x7
+ 627 006a F9000000 		.4byte	.LASF8
+ 628 006e 03       		.uleb128 0x3
+ 629 006f 1D010000 		.4byte	.LASF10
+ 630 0073 02       		.byte	0x2
+ 631 0074 18       		.byte	0x18
+ 632 0075 24000000 		.4byte	0x24
+ 633 0079 05       		.uleb128 0x5
+ 634 007a 91000000 		.4byte	0x91
+ 635 007e 8A000000 		.4byte	0x8a
+ 636 0082 06       		.uleb128 0x6
+ 637 0083 8A000000 		.4byte	0x8a
+ 638 0087 EF01     		.2byte	0x1ef
+ 639 0089 00       		.byte	0
+ 640 008a 02       		.uleb128 0x2
+ 641 008b 04       		.byte	0x4
+ 642 008c 07       		.byte	0x7
+ 643 008d 48010000 		.4byte	.LASF11
+ 644 0091 07       		.uleb128 0x7
+ 645 0092 6E000000 		.4byte	0x6e
+ 646 0096 08       		.uleb128 0x8
+ 647 0097 E7000000 		.4byte	.LASF12
+ 648 009b 03       		.byte	0x3
+ 649 009c 1F       		.byte	0x1f
+ 650 009d A7000000 		.4byte	0xa7
+ 651 00a1 05       		.uleb128 0x5
+ 652 00a2 03       		.byte	0x3
+ 653 00a3 00000000 		.4byte	cy_meta_configecc
+ 654 00a7 07       		.uleb128 0x7
+ 655 00a8 79000000 		.4byte	0x79
+ 656 00ac 05       		.uleb128 0x5
+ 657 00ad 91000000 		.4byte	0x91
+ 658 00b1 BC000000 		.4byte	0xbc
+ 659 00b5 09       		.uleb128 0x9
+ 660 00b6 8A000000 		.4byte	0x8a
+ 661 00ba 03       		.byte	0x3
+ 662 00bb 00       		.byte	0
+ 663 00bc 08       		.uleb128 0x8
+ 664 00bd D7000000 		.4byte	.LASF13
+ 665 00c1 03       		.byte	0x3
+ 666 00c2 6A       		.byte	0x6a
+ 667 00c3 CD000000 		.4byte	0xcd
+ 668 00c7 05       		.uleb128 0x5
+ 669 00c8 03       		.byte	0x3
+ 670 00c9 00000000 		.4byte	cy_meta_custnvl
+ 671 00cd 07       		.uleb128 0x7
+ 672 00ce AC000000 		.4byte	0xac
+ 673 00d2 08       		.uleb128 0x8
+ 674 00d3 3A010000 		.4byte	.LASF14
+ 675 00d7 03       		.byte	0x3
+ 676 00d8 78       		.byte	0x78
+ 677 00d9 E3000000 		.4byte	0xe3
+ 678 00dd 05       		.uleb128 0x5
+ 679 00de 03       		.byte	0x3
+ 680 00df 00000000 		.4byte	cy_meta_wonvl
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 13
 
 
- 681 0045 04       		.byte	0x4
- 682 0046 05       		.byte	0x5
- 683 0047 AF010000 		.4byte	.LASF4
- 684 004b 02       		.uleb128 0x2
- 685 004c 04       		.byte	0x4
- 686 004d 07       		.byte	0x7
- 687 004e F8000000 		.4byte	.LASF5
- 688 0052 02       		.uleb128 0x2
- 689 0053 08       		.byte	0x8
- 690 0054 05       		.byte	0x5
- 691 0055 97010000 		.4byte	.LASF6
- 692 0059 02       		.uleb128 0x2
- 693 005a 08       		.byte	0x8
- 694 005b 07       		.byte	0x7
- 695 005c 4C010000 		.4byte	.LASF7
- 696 0060 04       		.uleb128 0x4
- 697 0061 04       		.byte	0x4
- 698 0062 05       		.byte	0x5
- 699 0063 696E7400 		.ascii	"int\000"
- 700 0067 02       		.uleb128 0x2
- 701 0068 04       		.byte	0x4
- 702 0069 07       		.byte	0x7
- 703 006a 3F010000 		.4byte	.LASF8
- 704 006e 03       		.uleb128 0x3
- 705 006f 63010000 		.4byte	.LASF10
- 706 0073 02       		.byte	0x2
- 707 0074 18       		.byte	0x18
- 708 0075 24000000 		.4byte	0x24
- 709 0079 05       		.uleb128 0x5
- 710 007a 91000000 		.4byte	0x91
- 711 007e 8A000000 		.4byte	0x8a
- 712 0082 06       		.uleb128 0x6
- 713 0083 8A000000 		.4byte	0x8a
- 714 0087 3B02     		.2byte	0x23b
- 715 0089 00       		.byte	0
- 716 008a 02       		.uleb128 0x2
- 717 008b 04       		.byte	0x4
- 718 008c 07       		.byte	0x7
- 719 008d 8E010000 		.4byte	.LASF11
- 720 0091 07       		.uleb128 0x7
- 721 0092 6E000000 		.4byte	0x6e
- 722 0096 08       		.uleb128 0x8
- 723 0097 2D010000 		.4byte	.LASF12
- 724 009b 03       		.byte	0x3
- 725 009c 1F       		.byte	0x1f
- 726 009d A7000000 		.4byte	0xa7
- 727 00a1 05       		.uleb128 0x5
- 728 00a2 03       		.byte	0x3
- 729 00a3 00000000 		.4byte	cy_meta_configecc
- 730 00a7 07       		.uleb128 0x7
- 731 00a8 79000000 		.4byte	0x79
- 732 00ac 05       		.uleb128 0x5
- 733 00ad 91000000 		.4byte	0x91
- 734 00b1 BC000000 		.4byte	0xbc
- 735 00b5 09       		.uleb128 0x9
- 736 00b6 8A000000 		.4byte	0x8a
- 737 00ba 03       		.byte	0x3
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 14
+ 681 00e3 07       		.uleb128 0x7
+ 682 00e4 AC000000 		.4byte	0xac
+ 683 00e8 05       		.uleb128 0x5
+ 684 00e9 91000000 		.4byte	0x91
+ 685 00ed F8000000 		.4byte	0xf8
+ 686 00f1 09       		.uleb128 0x9
+ 687 00f2 8A000000 		.4byte	0x8a
+ 688 00f6 FF       		.byte	0xff
+ 689 00f7 00       		.byte	0
+ 690 00f8 08       		.uleb128 0x8
+ 691 00f9 25010000 		.4byte	.LASF15
+ 692 00fd 03       		.byte	0x3
+ 693 00fe 86       		.byte	0x86
+ 694 00ff 09010000 		.4byte	0x109
+ 695 0103 05       		.uleb128 0x5
+ 696 0104 03       		.byte	0x3
+ 697 0105 00000000 		.4byte	cy_meta_flashprotect
+ 698 0109 07       		.uleb128 0x7
+ 699 010a E8000000 		.4byte	0xe8
+ 700 010e 05       		.uleb128 0x5
+ 701 010f 91000000 		.4byte	0x91
+ 702 0113 1E010000 		.4byte	0x11e
+ 703 0117 09       		.uleb128 0x9
+ 704 0118 8A000000 		.4byte	0x8a
+ 705 011c 0B       		.byte	0xb
+ 706 011d 00       		.byte	0
+ 707 011e 08       		.uleb128 0x8
+ 708 011f 0A000000 		.4byte	.LASF16
+ 709 0123 03       		.byte	0x3
+ 710 0124 B3       		.byte	0xb3
+ 711 0125 2F010000 		.4byte	0x12f
+ 712 0129 05       		.uleb128 0x5
+ 713 012a 03       		.byte	0x3
+ 714 012b 00000000 		.4byte	cy_metadata
+ 715 012f 07       		.uleb128 0x7
+ 716 0130 0E010000 		.4byte	0x10e
+ 717 0134 00       		.byte	0
+ 718              		.section	.debug_abbrev,"",%progbits
+ 719              	.Ldebug_abbrev0:
+ 720 0000 01       		.uleb128 0x1
+ 721 0001 11       		.uleb128 0x11
+ 722 0002 01       		.byte	0x1
+ 723 0003 25       		.uleb128 0x25
+ 724 0004 0E       		.uleb128 0xe
+ 725 0005 13       		.uleb128 0x13
+ 726 0006 0B       		.uleb128 0xb
+ 727 0007 03       		.uleb128 0x3
+ 728 0008 0E       		.uleb128 0xe
+ 729 0009 1B       		.uleb128 0x1b
+ 730 000a 0E       		.uleb128 0xe
+ 731 000b 10       		.uleb128 0x10
+ 732 000c 17       		.uleb128 0x17
+ 733 000d 00       		.byte	0
+ 734 000e 00       		.byte	0
+ 735 000f 02       		.uleb128 0x2
+ 736 0010 24       		.uleb128 0x24
+ 737 0011 00       		.byte	0
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 14
 
 
- 738 00bb 00       		.byte	0
- 739 00bc 08       		.uleb128 0x8
- 740 00bd 1D010000 		.4byte	.LASF13
- 741 00c1 03       		.byte	0x3
- 742 00c2 74       		.byte	0x74
- 743 00c3 CD000000 		.4byte	0xcd
- 744 00c7 05       		.uleb128 0x5
- 745 00c8 03       		.byte	0x3
- 746 00c9 00000000 		.4byte	cy_meta_custnvl
- 747 00cd 07       		.uleb128 0x7
- 748 00ce AC000000 		.4byte	0xac
- 749 00d2 08       		.uleb128 0x8
- 750 00d3 80010000 		.4byte	.LASF14
- 751 00d7 03       		.byte	0x3
- 752 00d8 82       		.byte	0x82
- 753 00d9 E3000000 		.4byte	0xe3
- 754 00dd 05       		.uleb128 0x5
- 755 00de 03       		.byte	0x3
- 756 00df 00000000 		.4byte	cy_meta_wonvl
- 757 00e3 07       		.uleb128 0x7
- 758 00e4 AC000000 		.4byte	0xac
- 759 00e8 05       		.uleb128 0x5
- 760 00e9 91000000 		.4byte	0x91
- 761 00ed F8000000 		.4byte	0xf8
- 762 00f1 09       		.uleb128 0x9
- 763 00f2 8A000000 		.4byte	0x8a
- 764 00f6 FF       		.byte	0xff
- 765 00f7 00       		.byte	0
- 766 00f8 08       		.uleb128 0x8
- 767 00f9 6B010000 		.4byte	.LASF15
- 768 00fd 03       		.byte	0x3
- 769 00fe 90       		.byte	0x90
- 770 00ff 09010000 		.4byte	0x109
- 771 0103 05       		.uleb128 0x5
- 772 0104 03       		.byte	0x3
- 773 0105 00000000 		.4byte	cy_meta_flashprotect
- 774 0109 07       		.uleb128 0x7
- 775 010a E8000000 		.4byte	0xe8
- 776 010e 05       		.uleb128 0x5
- 777 010f 91000000 		.4byte	0x91
- 778 0113 1E010000 		.4byte	0x11e
- 779 0117 09       		.uleb128 0x9
- 780 0118 8A000000 		.4byte	0x8a
- 781 011c 0B       		.byte	0xb
- 782 011d 00       		.byte	0
- 783 011e 08       		.uleb128 0x8
- 784 011f 50000000 		.4byte	.LASF16
- 785 0123 03       		.byte	0x3
- 786 0124 BD       		.byte	0xbd
- 787 0125 2F010000 		.4byte	0x12f
- 788 0129 05       		.uleb128 0x5
- 789 012a 03       		.byte	0x3
- 790 012b 00000000 		.4byte	cy_metadata
- 791 012f 07       		.uleb128 0x7
- 792 0130 0E010000 		.4byte	0x10e
- 793 0134 00       		.byte	0
- 794              		.section	.debug_abbrev,"",%progbits
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 15
+ 738 0012 0B       		.uleb128 0xb
+ 739 0013 0B       		.uleb128 0xb
+ 740 0014 3E       		.uleb128 0x3e
+ 741 0015 0B       		.uleb128 0xb
+ 742 0016 03       		.uleb128 0x3
+ 743 0017 0E       		.uleb128 0xe
+ 744 0018 00       		.byte	0
+ 745 0019 00       		.byte	0
+ 746 001a 03       		.uleb128 0x3
+ 747 001b 16       		.uleb128 0x16
+ 748 001c 00       		.byte	0
+ 749 001d 03       		.uleb128 0x3
+ 750 001e 0E       		.uleb128 0xe
+ 751 001f 3A       		.uleb128 0x3a
+ 752 0020 0B       		.uleb128 0xb
+ 753 0021 3B       		.uleb128 0x3b
+ 754 0022 0B       		.uleb128 0xb
+ 755 0023 49       		.uleb128 0x49
+ 756 0024 13       		.uleb128 0x13
+ 757 0025 00       		.byte	0
+ 758 0026 00       		.byte	0
+ 759 0027 04       		.uleb128 0x4
+ 760 0028 24       		.uleb128 0x24
+ 761 0029 00       		.byte	0
+ 762 002a 0B       		.uleb128 0xb
+ 763 002b 0B       		.uleb128 0xb
+ 764 002c 3E       		.uleb128 0x3e
+ 765 002d 0B       		.uleb128 0xb
+ 766 002e 03       		.uleb128 0x3
+ 767 002f 08       		.uleb128 0x8
+ 768 0030 00       		.byte	0
+ 769 0031 00       		.byte	0
+ 770 0032 05       		.uleb128 0x5
+ 771 0033 01       		.uleb128 0x1
+ 772 0034 01       		.byte	0x1
+ 773 0035 49       		.uleb128 0x49
+ 774 0036 13       		.uleb128 0x13
+ 775 0037 01       		.uleb128 0x1
+ 776 0038 13       		.uleb128 0x13
+ 777 0039 00       		.byte	0
+ 778 003a 00       		.byte	0
+ 779 003b 06       		.uleb128 0x6
+ 780 003c 21       		.uleb128 0x21
+ 781 003d 00       		.byte	0
+ 782 003e 49       		.uleb128 0x49
+ 783 003f 13       		.uleb128 0x13
+ 784 0040 2F       		.uleb128 0x2f
+ 785 0041 05       		.uleb128 0x5
+ 786 0042 00       		.byte	0
+ 787 0043 00       		.byte	0
+ 788 0044 07       		.uleb128 0x7
+ 789 0045 26       		.uleb128 0x26
+ 790 0046 00       		.byte	0
+ 791 0047 49       		.uleb128 0x49
+ 792 0048 13       		.uleb128 0x13
+ 793 0049 00       		.byte	0
+ 794 004a 00       		.byte	0
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 15
 
 
- 795              	.Ldebug_abbrev0:
- 796 0000 01       		.uleb128 0x1
- 797 0001 11       		.uleb128 0x11
- 798 0002 01       		.byte	0x1
- 799 0003 25       		.uleb128 0x25
- 800 0004 0E       		.uleb128 0xe
- 801 0005 13       		.uleb128 0x13
- 802 0006 0B       		.uleb128 0xb
- 803 0007 03       		.uleb128 0x3
- 804 0008 0E       		.uleb128 0xe
- 805 0009 1B       		.uleb128 0x1b
- 806 000a 0E       		.uleb128 0xe
- 807 000b 10       		.uleb128 0x10
- 808 000c 17       		.uleb128 0x17
- 809 000d 00       		.byte	0
- 810 000e 00       		.byte	0
- 811 000f 02       		.uleb128 0x2
- 812 0010 24       		.uleb128 0x24
- 813 0011 00       		.byte	0
- 814 0012 0B       		.uleb128 0xb
- 815 0013 0B       		.uleb128 0xb
- 816 0014 3E       		.uleb128 0x3e
- 817 0015 0B       		.uleb128 0xb
- 818 0016 03       		.uleb128 0x3
- 819 0017 0E       		.uleb128 0xe
- 820 0018 00       		.byte	0
- 821 0019 00       		.byte	0
- 822 001a 03       		.uleb128 0x3
- 823 001b 16       		.uleb128 0x16
- 824 001c 00       		.byte	0
- 825 001d 03       		.uleb128 0x3
- 826 001e 0E       		.uleb128 0xe
- 827 001f 3A       		.uleb128 0x3a
- 828 0020 0B       		.uleb128 0xb
- 829 0021 3B       		.uleb128 0x3b
- 830 0022 0B       		.uleb128 0xb
- 831 0023 49       		.uleb128 0x49
- 832 0024 13       		.uleb128 0x13
- 833 0025 00       		.byte	0
- 834 0026 00       		.byte	0
- 835 0027 04       		.uleb128 0x4
- 836 0028 24       		.uleb128 0x24
- 837 0029 00       		.byte	0
- 838 002a 0B       		.uleb128 0xb
- 839 002b 0B       		.uleb128 0xb
- 840 002c 3E       		.uleb128 0x3e
- 841 002d 0B       		.uleb128 0xb
- 842 002e 03       		.uleb128 0x3
- 843 002f 08       		.uleb128 0x8
- 844 0030 00       		.byte	0
- 845 0031 00       		.byte	0
- 846 0032 05       		.uleb128 0x5
- 847 0033 01       		.uleb128 0x1
- 848 0034 01       		.byte	0x1
- 849 0035 49       		.uleb128 0x49
- 850 0036 13       		.uleb128 0x13
- 851 0037 01       		.uleb128 0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 16
+ 795 004b 08       		.uleb128 0x8
+ 796 004c 34       		.uleb128 0x34
+ 797 004d 00       		.byte	0
+ 798 004e 03       		.uleb128 0x3
+ 799 004f 0E       		.uleb128 0xe
+ 800 0050 3A       		.uleb128 0x3a
+ 801 0051 0B       		.uleb128 0xb
+ 802 0052 3B       		.uleb128 0x3b
+ 803 0053 0B       		.uleb128 0xb
+ 804 0054 49       		.uleb128 0x49
+ 805 0055 13       		.uleb128 0x13
+ 806 0056 3F       		.uleb128 0x3f
+ 807 0057 19       		.uleb128 0x19
+ 808 0058 02       		.uleb128 0x2
+ 809 0059 18       		.uleb128 0x18
+ 810 005a 00       		.byte	0
+ 811 005b 00       		.byte	0
+ 812 005c 09       		.uleb128 0x9
+ 813 005d 21       		.uleb128 0x21
+ 814 005e 00       		.byte	0
+ 815 005f 49       		.uleb128 0x49
+ 816 0060 13       		.uleb128 0x13
+ 817 0061 2F       		.uleb128 0x2f
+ 818 0062 0B       		.uleb128 0xb
+ 819 0063 00       		.byte	0
+ 820 0064 00       		.byte	0
+ 821 0065 00       		.byte	0
+ 822              		.section	.debug_aranges,"",%progbits
+ 823 0000 14000000 		.4byte	0x14
+ 824 0004 0200     		.2byte	0x2
+ 825 0006 00000000 		.4byte	.Ldebug_info0
+ 826 000a 04       		.byte	0x4
+ 827 000b 00       		.byte	0
+ 828 000c 0000     		.2byte	0
+ 829 000e 0000     		.2byte	0
+ 830 0010 00000000 		.4byte	0
+ 831 0014 00000000 		.4byte	0
+ 832              		.section	.debug_line,"",%progbits
+ 833              	.Ldebug_line0:
+ 834 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ 834      02003701 
+ 834      00000201 
+ 834      FB0E0D00 
+ 834      01010101 
+ 835              	.LASF9:
+ 836 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 836      6E74385F 
+ 836      7400
+ 837              	.LASF16:
+ 838 000a 63795F6D 		.ascii	"cy_metadata\000"
+ 838      65746164 
+ 838      61746100 
+ 839              	.LASF1:
+ 840 0016 756E7369 		.ascii	"unsigned char\000"
+ 840      676E6564 
+ 840      20636861 
+ 840      7200
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 16
 
 
- 852 0038 13       		.uleb128 0x13
- 853 0039 00       		.byte	0
- 854 003a 00       		.byte	0
- 855 003b 06       		.uleb128 0x6
- 856 003c 21       		.uleb128 0x21
- 857 003d 00       		.byte	0
- 858 003e 49       		.uleb128 0x49
- 859 003f 13       		.uleb128 0x13
- 860 0040 2F       		.uleb128 0x2f
- 861 0041 05       		.uleb128 0x5
- 862 0042 00       		.byte	0
- 863 0043 00       		.byte	0
- 864 0044 07       		.uleb128 0x7
- 865 0045 26       		.uleb128 0x26
- 866 0046 00       		.byte	0
- 867 0047 49       		.uleb128 0x49
- 868 0048 13       		.uleb128 0x13
- 869 0049 00       		.byte	0
- 870 004a 00       		.byte	0
- 871 004b 08       		.uleb128 0x8
- 872 004c 34       		.uleb128 0x34
- 873 004d 00       		.byte	0
- 874 004e 03       		.uleb128 0x3
- 875 004f 0E       		.uleb128 0xe
- 876 0050 3A       		.uleb128 0x3a
- 877 0051 0B       		.uleb128 0xb
- 878 0052 3B       		.uleb128 0x3b
- 879 0053 0B       		.uleb128 0xb
- 880 0054 49       		.uleb128 0x49
- 881 0055 13       		.uleb128 0x13
- 882 0056 3F       		.uleb128 0x3f
- 883 0057 19       		.uleb128 0x19
- 884 0058 02       		.uleb128 0x2
- 885 0059 18       		.uleb128 0x18
- 886 005a 00       		.byte	0
- 887 005b 00       		.byte	0
- 888 005c 09       		.uleb128 0x9
- 889 005d 21       		.uleb128 0x21
- 890 005e 00       		.byte	0
- 891 005f 49       		.uleb128 0x49
- 892 0060 13       		.uleb128 0x13
- 893 0061 2F       		.uleb128 0x2f
- 894 0062 0B       		.uleb128 0xb
- 895 0063 00       		.byte	0
- 896 0064 00       		.byte	0
- 897 0065 00       		.byte	0
- 898              		.section	.debug_aranges,"",%progbits
- 899 0000 14000000 		.4byte	0x14
- 900 0004 0200     		.2byte	0x2
- 901 0006 00000000 		.4byte	.Ldebug_info0
- 902 000a 04       		.byte	0x4
- 903 000b 00       		.byte	0
- 904 000c 0000     		.2byte	0
- 905 000e 0000     		.2byte	0
- 906 0010 00000000 		.4byte	0
- 907 0014 00000000 		.4byte	0
- 908              		.section	.debug_line,"",%progbits
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 17
+ 841              	.LASF17:
+ 842 0024 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 842      43313120 
+ 842      352E342E 
+ 842      31203230 
+ 842      31363036 
+ 843 0057 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 843      20726576 
+ 843      6973696F 
+ 843      6E203233 
+ 843      37373135 
+ 844 008a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 844      66756E63 
+ 844      74696F6E 
+ 844      2D736563 
+ 844      74696F6E 
+ 845              	.LASF5:
+ 846 00b2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 846      20756E73 
+ 846      69676E65 
+ 846      6420696E 
+ 846      7400
+ 847              	.LASF3:
+ 848 00c4 73686F72 		.ascii	"short unsigned int\000"
+ 848      7420756E 
+ 848      7369676E 
+ 848      65642069 
+ 848      6E7400
+ 849              	.LASF13:
+ 850 00d7 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 850      6574615F 
+ 850      63757374 
+ 850      6E766C00 
+ 851              	.LASF12:
+ 852 00e7 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 852      6574615F 
+ 852      636F6E66 
+ 852      69676563 
+ 852      6300
+ 853              	.LASF8:
+ 854 00f9 756E7369 		.ascii	"unsigned int\000"
+ 854      676E6564 
+ 854      20696E74 
+ 854      00
+ 855              	.LASF7:
+ 856 0106 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 856      206C6F6E 
+ 856      6720756E 
+ 856      7369676E 
+ 856      65642069 
+ 857              	.LASF10:
+ 858 011d 75696E74 		.ascii	"uint8_t\000"
+ 858      385F7400 
+ 859              	.LASF15:
+ 860 0125 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 860      6574615F 
+ 860      666C6173 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccU5aMRx.s 			page 17
 
 
- 909              	.Ldebug_line0:
- 910 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
- 910      02003701 
- 910      00000201 
- 910      FB0E0D00 
- 910      01010101 
- 911              	.LASF9:
- 912 0000 5F5F7569 		.ascii	"__uint8_t\000"
- 912      6E74385F 
- 912      7400
- 913              	.LASF19:
- 914 000a 433A5C32 		.ascii	"C:\\2018 Winter\\CE4950\\GroupProject\\ce4950lab1\\"
- 914      30313820 
- 914      57696E74 
- 914      65725C43 
- 914      45343935 
- 915 0038 4E657477 		.ascii	"NetworkingProject.cydsn\000"
- 915      6F726B69 
- 915      6E675072 
- 915      6F6A6563 
- 915      742E6379 
- 916              	.LASF16:
- 917 0050 63795F6D 		.ascii	"cy_metadata\000"
- 917      65746164 
- 917      61746100 
- 918              	.LASF1:
- 919 005c 756E7369 		.ascii	"unsigned char\000"
- 919      676E6564 
- 919      20636861 
- 919      7200
- 920              	.LASF17:
- 921 006a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 921      43313120 
- 921      352E342E 
- 921      31203230 
- 921      31363036 
- 922 009d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 922      20726576 
- 922      6973696F 
- 922      6E203233 
- 922      37373135 
- 923 00d0 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 923      66756E63 
- 923      74696F6E 
- 923      2D736563 
- 923      74696F6E 
- 924              	.LASF5:
- 925 00f8 6C6F6E67 		.ascii	"long unsigned int\000"
- 925      20756E73 
- 925      69676E65 
- 925      6420696E 
- 925      7400
- 926              	.LASF3:
- 927 010a 73686F72 		.ascii	"short unsigned int\000"
- 927      7420756E 
- 927      7369676E 
- 927      65642069 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 18
-
-
- 927      6E7400
- 928              	.LASF13:
- 929 011d 63795F6D 		.ascii	"cy_meta_custnvl\000"
- 929      6574615F 
- 929      63757374 
- 929      6E766C00 
- 930              	.LASF12:
- 931 012d 63795F6D 		.ascii	"cy_meta_configecc\000"
- 931      6574615F 
- 931      636F6E66 
- 931      69676563 
- 931      6300
- 932              	.LASF8:
- 933 013f 756E7369 		.ascii	"unsigned int\000"
- 933      676E6564 
- 933      20696E74 
- 933      00
- 934              	.LASF7:
- 935 014c 6C6F6E67 		.ascii	"long long unsigned int\000"
- 935      206C6F6E 
- 935      6720756E 
- 935      7369676E 
- 935      65642069 
- 936              	.LASF10:
- 937 0163 75696E74 		.ascii	"uint8_t\000"
- 937      385F7400 
- 938              	.LASF15:
- 939 016b 63795F6D 		.ascii	"cy_meta_flashprotect\000"
- 939      6574615F 
- 939      666C6173 
- 939      6870726F 
- 939      74656374 
- 940              	.LASF14:
- 941 0180 63795F6D 		.ascii	"cy_meta_wonvl\000"
- 941      6574615F 
- 941      776F6E76 
- 941      6C00
- 942              	.LASF11:
- 943 018e 73697A65 		.ascii	"sizetype\000"
- 943      74797065 
- 943      00
- 944              	.LASF6:
- 945 0197 6C6F6E67 		.ascii	"long long int\000"
- 945      206C6F6E 
- 945      6720696E 
- 945      7400
- 946              	.LASF2:
- 947 01a5 73686F72 		.ascii	"short int\000"
- 947      7420696E 
- 947      7400
- 948              	.LASF4:
- 949 01af 6C6F6E67 		.ascii	"long int\000"
- 949      20696E74 
- 949      00
- 950              	.LASF0:
- 951 01b8 7369676E 		.ascii	"signed char\000"
- 951      65642063 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgThUoy.s 			page 19
-
-
- 951      68617200 
- 952              	.LASF18:
- 953 01c4 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
- 953      72617465 
- 953      645F536F 
- 953      75726365 
- 953      5C50536F 
- 954              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 860      6870726F 
+ 860      74656374 
+ 861              	.LASF14:
+ 862 013a 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 862      6574615F 
+ 862      776F6E76 
+ 862      6C00
+ 863              	.LASF11:
+ 864 0148 73697A65 		.ascii	"sizetype\000"
+ 864      74797065 
+ 864      00
+ 865              	.LASF19:
+ 866 0151 433A5C55 		.ascii	"C:\\Users\\winstona\\Documents\\School Documents\\N"
+ 866      73657273 
+ 866      5C77696E 
+ 866      73746F6E 
+ 866      615C446F 
+ 867 017f 6574776F 		.ascii	"etworking I\\ce4950lab1\\NetworkingProject.cydsn\000"
+ 867      726B696E 
+ 867      6720495C 
+ 867      63653439 
+ 867      35306C61 
+ 868              	.LASF6:
+ 869 01ae 6C6F6E67 		.ascii	"long long int\000"
+ 869      206C6F6E 
+ 869      6720696E 
+ 869      7400
+ 870              	.LASF2:
+ 871 01bc 73686F72 		.ascii	"short int\000"
+ 871      7420696E 
+ 871      7400
+ 872              	.LASF4:
+ 873 01c6 6C6F6E67 		.ascii	"long int\000"
+ 873      20696E74 
+ 873      00
+ 874              	.LASF0:
+ 875 01cf 7369676E 		.ascii	"signed char\000"
+ 875      65642063 
+ 875      68617200 
+ 876              	.LASF18:
+ 877 01db 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 877      72617465 
+ 877      645F536F 
+ 877      75726365 
+ 877      5C50536F 
+ 878              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

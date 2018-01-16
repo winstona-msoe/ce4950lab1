@@ -6,7 +6,7 @@
 
 #Build Date:         Jul 19 2017 14:31:00
 
-#File Generated:     Jan 9 2018 12:54:50
+#File Generated:     Jan 15 2018 16:17:28
 
 #Purpose:            
 
@@ -46,15 +46,15 @@ Phase 3
 Design Statistics after Packing
     Number of Combinational MCs 	:	4
     Number of Sequential MCs    	:	1
-    Number of DPs               	:	4
-    Number of Controls          	:	2
-    Number of Status            	:	2
+    Number of DPs               	:	2
+    Number of Controls          	:	1
+    Number of Status            	:	1
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
 
 Device Utilization Summary after Packing
     Macrocells                  :	5/192
-    UDBS                        :	5/24
+    UDBS                        :	3/24
     IOs                         :	14/72
 
 
@@ -79,15 +79,18 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 8
+Number of clocks: 11
 Clock: CLOCK1               | Frequency:  59.7 MHz | Target:   0.1 MHz
-Clock: CLOCK2               | Frequency:  59.7 MHz | Target:   0.1 MHz
 Clock: CLOCK3               | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyBUS_CLK            | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
+Clock: collision_clock      | Frequency: N/A       | Target:   0.0 MHz
+Clock: collision_clock(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
+Clock: timer_clock          | Frequency: N/A       | Target:   0.1 MHz
+Clock: timer_clock(fixed-function) | Frequency: N/A       | Target:   0.1 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -101,9 +104,9 @@ D2088: Phase 7, elapsed time : 0.0 (sec)
 Final Design Statistics
     Number of Combinational MCs 	:	4
     Number of Sequential MCs    	:	1
-    Number of DPs               	:	4
-    Number of Controls          	:	2
-    Number of Status            	:	2
+    Number of DPs               	:	2
+    Number of Controls          	:	1
+    Number of Status            	:	1
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
     Number of IOs       	:	14
@@ -126,15 +129,18 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 8
+Number of clocks: 11
 Clock: CLOCK1               | Frequency:  59.7 MHz | Target:   0.1 MHz
-Clock: CLOCK2               | Frequency:  59.7 MHz | Target:   0.1 MHz
 Clock: CLOCK3               | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyBUS_CLK            | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
+Clock: collision_clock      | Frequency: N/A       | Target:   0.0 MHz
+Clock: collision_clock(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
+Clock: timer_clock          | Frequency: N/A       | Target:   0.1 MHz
+Clock: timer_clock(fixed-function) | Frequency: N/A       | Target:   0.1 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -153,15 +159,18 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 8
+Number of clocks: 11
 Clock: CLOCK1               | Frequency:  59.7 MHz | Target:   0.1 MHz
-Clock: CLOCK2               | Frequency:  59.7 MHz | Target:   0.1 MHz
 Clock: CLOCK3               | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyBUS_CLK            | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
+Clock: collision_clock      | Frequency: N/A       | Target:   0.0 MHz
+Clock: collision_clock(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
+Clock: timer_clock          | Frequency: N/A       | Target:   0.1 MHz
+Clock: timer_clock(fixed-function) | Frequency: N/A       | Target:   0.1 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -173,27 +182,30 @@ Phase 7
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 8
+Number of clocks: 11
 Clock: CLOCK1               | Frequency:  59.7 MHz | Target:   0.1 MHz
-Clock: CLOCK2               | Frequency:  59.7 MHz | Target:   0.1 MHz
 Clock: CLOCK3               | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyBUS_CLK            | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
+Clock: collision_clock      | Frequency: N/A       | Target:   0.0 MHz
+Clock: collision_clock(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
+Clock: timer_clock          | Frequency: N/A       | Target:   0.1 MHz
+Clock: timer_clock(fixed-function) | Frequency: N/A       | Target:   0.1 MHz
 
 ======================================================================
                      End of Clock Summary
 ######################################################################
-D2088: Phase 7, elapsed time : 0.1 (sec)
+D2088: Phase 7, elapsed time : 0.0 (sec)
 
 Final Design Statistics
     Number of Combinational MCs 	:	4
     Number of Sequential MCs    	:	1
-    Number of DPs               	:	4
-    Number of Controls          	:	2
-    Number of Status            	:	2
+    Number of DPs               	:	2
+    Number of Controls          	:	1
+    Number of Status            	:	1
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
     Number of IOs       	:	14
@@ -216,15 +228,18 @@ analysis after routing.
 ######################################################################
                      Clock Summary 
 ======================================================================
-Number of clocks: 8
+Number of clocks: 11
 Clock: CLOCK1               | Frequency:  59.7 MHz | Target:   0.1 MHz
-Clock: CLOCK2               | Frequency:  59.7 MHz | Target:   0.1 MHz
 Clock: CLOCK3               | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyBUS_CLK            | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.1 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
+Clock: collision_clock      | Frequency: N/A       | Target:   0.0 MHz
+Clock: collision_clock(fixed-function) | Frequency: N/A       | Target:   0.0 MHz
+Clock: timer_clock          | Frequency: N/A       | Target:   0.1 MHz
+Clock: timer_clock(fixed-function) | Frequency: N/A       | Target:   0.1 MHz
 
 ======================================================================
                      End of Clock Summary

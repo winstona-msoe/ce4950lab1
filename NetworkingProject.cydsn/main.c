@@ -19,12 +19,14 @@
 
 #include "project.h"
 #include <stdlib.h>
+#include <stdbool.h>
 #include "stdio.h"
 
 #define COLLISION_PERIOD                   52
 #define COLLISION_COUNTER                  51
 #define IDLE_PERIOD                        830
 #define IDLE_COUNTER                       829
+#define IDLE_LEVEL 0
 
 //States include: 
 //Busy - signals that the channel monitor is busy
@@ -34,8 +36,12 @@
 //       edge to occur
 enum state { BUSY, COLLISION, IDLE } systemState;
 
-_Bool logicLevel = 0;
-int idx = 0; //count
+bool logicLevel = 0;
+
+int idx = 0; //Bit position
+bool firstHalfBit;
+char *dataPtr;
+bool collisionDelay = false;
     
     
 /*******************************************************************************
@@ -61,6 +67,37 @@ CY_ISR(ReceiveInterruptHandler)
         systemState = COLLISION;
     } else {
         systemState = IDLE;
+    }
+}
+
+/**
+
+*/
+CY_ISR(TransmitInterruptHandler)
+{
+    TimerTX_STATUS;
+    if (*dataPtr == '\0') {
+        TRANSMIT_Write(IDLE_LEVEL);
+        TransmitISR_Stop();
+    } else {
+        if (firstHalfBit) {
+            if (idx == 7) {
+                TRANSMIT_Write(1);
+            } else {
+                // Sets the level to the current bit.
+                TRANSMIT_Write((*dataPtr & (1 << idx)) ? 1 : 0);
+            }
+            firstHalfBit = false;
+        } else {
+            TRANSMIT_Write(0);
+            if (idx == 0) {
+                idx = 7;
+                dataPtr++;
+            } else {
+                idx--;
+            }
+            firstHalfBit = true;
+        }
     }
 }
 
@@ -112,6 +149,11 @@ CY_ISR(FallingEdgeInterruptHandler)
     }
 }
 
+CY_ISR(CollisionInterruptHandler)
+{
+    collisionDelay = false;
+}
+
 
  /**********************************************************
  * function name: main
@@ -136,9 +178,9 @@ int main(void)
     int dataPosition = 0; //position looping through the data to transmit
     _Bool endOfData = 0; //boolean to determine if the entire characters has been received
     unsigned char buffer[10]; //buffer used to hold single blob of data 
-    char data[44]; //designed to transmit a message as long as 44 characters
-    _Bool endOfTransmission = 0; //boolean sigifying complete transmission of data 
-    char binaryOfChar[8]; //represents the 8 bit representation of the character 
+    char data[44 + 1]; //designed to transmit a message as long as 44 characters
+    bool endOfTransmission = 0; //boolean sigifying complete transmission of data 
+    char binaryOfChar[8 + 1]; //represents the 8 bit representation of the character 
         
     while (1) {
         
@@ -164,9 +206,9 @@ int main(void)
                 {
                     for(int i=0; i<dataSize; i++)
                     {
-                        if(buffer[i]==0x0D)
+                        if((buffer[i] == '\r') || (buffer[i] == '\n'))
                         {
-                            endOfData=1;
+                            endOfData = true;
                             USBUART_PutCRLF();
                         }
                         else
@@ -179,8 +221,19 @@ int main(void)
             }
         }
         
-        data[dataPosition]='\0';
+        data[dataPosition]='\0'; // Writes an ending null terminator char.
         
+        dataPtr = data;
+        firstHalfBit = true;
+        idx = 7;
+        
+        TransmitISR_StartEx(TransmitInterruptHandler);
+        while (systemState != IDLE); // Wait for lines to be idle
+        while (!endOfTransmission);
+            if (systemState == COLLISION){
+        }
+        
+        /*
         dataPosition = 0;
         TRANSMIT_Write(0);
         
@@ -236,5 +289,6 @@ int main(void)
                 break;
             }
         }
+        */
     }
 }

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 1
 
 
    1              		.syntax unified
@@ -49,80 +49,78 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 1
   19:main.c        **** 
   20:main.c        **** #include "project.h"
   21:main.c        **** #include <stdlib.h>
-  22:main.c        **** #include "stdio.h"
-  23:main.c        **** 
-  24:main.c        **** #define COLLISION_PERIOD                   52
-  25:main.c        **** #define COLLISION_COUNTER                  51
-  26:main.c        **** #define IDLE_PERIOD                        830
-  27:main.c        **** #define IDLE_COUNTER                       829
-  28:main.c        **** 
-  29:main.c        **** //States include: 
-  30:main.c        **** //Busy - signals that the channel monitor is busy
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 2
+  22:main.c        **** #include <stdbool.h>
+  23:main.c        **** #include "stdio.h"
+  24:main.c        **** 
+  25:main.c        **** #define COLLISION_PERIOD                   52
+  26:main.c        **** #define COLLISION_COUNTER                  51
+  27:main.c        **** #define IDLE_PERIOD                        830
+  28:main.c        **** #define IDLE_COUNTER                       829
+  29:main.c        **** #define IDLE_LEVEL 0
+  30:main.c        **** 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 2
 
 
-  31:main.c        **** //       and in either line high or line low 
-  32:main.c        **** //Collision - collision detected, line high
-  33:main.c        **** //Idle - initialized state looking for rising
-  34:main.c        **** //       edge to occur
-  35:main.c        **** enum state { BUSY, COLLISION, IDLE } systemState;
-  36:main.c        **** 
-  37:main.c        **** _Bool logicLevel = 0;
-  38:main.c        **** char currentDataCharacter; //current char
-  39:main.c        **** int bufferPosition = 0; //serial_pos
-  40:main.c        **** unsigned char buffer[500]; //serial buffer
-  41:main.c        **** unsigned char data[500][16]; //converted data
-  42:main.c        **** int dataSize; //data size
-  43:main.c        **** int dataPosition = 0; //tx_bit_counter
-  44:main.c        **** int count; //dataConvertedReadOutCount
-  45:main.c        **** int idx = 0; //count
-  46:main.c        ****     
-  47:main.c        ****     
-  48:main.c        **** /*******************************************************************************
-  49:main.c        **** * Define Interrupt service routine and allocate an vector to the Interrupt
-  50:main.c        **** ********************************************************************************/
-  51:main.c        **** 
-  52:main.c        ****  /**********************************************************
-  53:main.c        ****  * function name: ReceiveInterruptHandler
-  54:main.c        ****  * operation: Handles interrupt timer if the timer expires
-  55:main.c        ****  *            indicates an idle condition or colllision
-  56:main.c        ****  *            reads the logic levon the input pin/signal
-  57:main.c        ****  *            high -> collision set
-  58:main.c        ****  *            low -> idle set
-  59:main.c        ****  * inputs: none
-  60:main.c        ****  * returns: none
-  61:main.c        ****  * implemented: 14 Dec 2017
-  62:main.c        ****  * edited:
-  63:main.c        ****  *********************************************************/ 
-  64:main.c        **** CY_ISR(ReceiveInterruptHandler)
-  65:main.c        **** {
-  28              		.loc 1 65 0
+  31:main.c        **** //States include: 
+  32:main.c        **** //Busy - signals that the channel monitor is busy
+  33:main.c        **** //       and in either line high or line low 
+  34:main.c        **** //Collision - collision detected, line high
+  35:main.c        **** //Idle - initialized state looking for rising
+  36:main.c        **** //       edge to occur
+  37:main.c        **** enum state { BUSY, COLLISION, IDLE } systemState;
+  38:main.c        **** 
+  39:main.c        **** bool logicLevel = 0;
+  40:main.c        **** 
+  41:main.c        **** int idx = 0; //Bit position
+  42:main.c        **** bool firstHalfBit;
+  43:main.c        **** char *dataPtr;
+  44:main.c        ****     
+  45:main.c        ****     
+  46:main.c        **** /*******************************************************************************
+  47:main.c        **** * Define Interrupt service routine and allocate an vector to the Interrupt
+  48:main.c        **** ********************************************************************************/
+  49:main.c        **** 
+  50:main.c        ****  /**********************************************************
+  51:main.c        ****  * function name: ReceiveInterruptHandler
+  52:main.c        ****  * operation: Handles interrupt timer if the timer expires
+  53:main.c        ****  *            indicates an idle condition or colllision
+  54:main.c        ****  *            reads the logic levon the input pin/signal
+  55:main.c        ****  *            high -> collision set
+  56:main.c        ****  *            low -> idle set
+  57:main.c        ****  * inputs: none
+  58:main.c        ****  * returns: none
+  59:main.c        ****  * implemented: 14 Dec 2017
+  60:main.c        ****  * edited:
+  61:main.c        ****  *********************************************************/ 
+  62:main.c        **** CY_ISR(ReceiveInterruptHandler)
+  63:main.c        **** {
+  28              		.loc 1 63 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
-  66:main.c        ****    	TimerRX_STATUS; 
-  33              		.loc 1 66 0
+  64:main.c        ****    	TimerRX_STATUS; 
+  33              		.loc 1 64 0
   34 0000 064B     		ldr	r3, .L4
   35 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  67:main.c        ****     if (logicLevel) {
-  36              		.loc 1 67 0
+  65:main.c        ****     if (logicLevel) {
+  36              		.loc 1 65 0
   37 0004 064B     		ldr	r3, .L4+4
   38 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
   39 0008 1BB1     		cbz	r3, .L2
-  68:main.c        ****         systemState = COLLISION;
-  40              		.loc 1 68 0
+  66:main.c        ****         systemState = COLLISION;
+  40              		.loc 1 66 0
   41 000a 0122     		movs	r2, #1
   42 000c 054B     		ldr	r3, .L4+8
   43 000e 1A70     		strb	r2, [r3]
   44 0010 7047     		bx	lr
   45              	.L2:
-  69:main.c        ****     } else {
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 3
+  67:main.c        ****     } else {
+  68:main.c        ****         systemState = IDLE;
+  46              		.loc 1 68 0
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 3
 
 
-  70:main.c        ****         systemState = IDLE;
-  46              		.loc 1 70 0
   47 0012 0222     		movs	r2, #2
   48 0014 034B     		ldr	r3, .L4+8
   49 0016 1A70     		strb	r2, [r3]
@@ -130,39 +128,29 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 1
   51              	.L5:
   52 001a 00BF     		.align	2
   53              	.L4:
-  54 001c 67650040 		.word	1073767783
+  54 001c 65650040 		.word	1073767781
   55 0020 00000000 		.word	.LANCHOR0
   56 0024 00000000 		.word	systemState
   57              		.cfi_endproc
   58              	.LFE64:
   59              		.size	ReceiveInterruptHandler, .-ReceiveInterruptHandler
-  60              		.section	.text.RisingEdgeInterruptHandler,"ax",%progbits
+  60              		.section	.text.TransmitInterruptHandler,"ax",%progbits
   61              		.align	2
-  62              		.global	RisingEdgeInterruptHandler
+  62              		.global	TransmitInterruptHandler
   63              		.thumb
   64              		.thumb_func
-  65              		.type	RisingEdgeInterruptHandler, %function
-  66              	RisingEdgeInterruptHandler:
+  65              		.type	TransmitInterruptHandler, %function
+  66              	TransmitInterruptHandler:
   67              	.LFB65:
-  71:main.c        ****     }
-  72:main.c        **** }
+  69:main.c        ****     }
+  70:main.c        **** }
+  71:main.c        **** 
+  72:main.c        **** /**
   73:main.c        **** 
-  74:main.c        **** 
-  75:main.c        ****  /**********************************************************
-  76:main.c        ****  * function name: RisingEdgeInterruptHandler
-  77:main.c        ****  * operation: Handles interrupt for when a rising edge on 
-  78:main.c        ****  *            the timer occurs. Triggers system to look for
-  79:main.c        ****  *            falling edge (1 -> 0). Schedules a timer
-  80:main.c        ****  *            interupt to occur in .6ms and sets state to 
-  81:main.c        ****  *            busy
-  82:main.c        ****  * inputs: none
-  83:main.c        ****  * returns: none
-  84:main.c        ****  * implemented: 14 Dec 2017
-  85:main.c        ****  * edited:
-  86:main.c        ****  *********************************************************/ 
-  87:main.c        **** CY_ISR(RisingEdgeInterruptHandler)
-  88:main.c        **** {
-  68              		.loc 1 88 0
+  74:main.c        **** */
+  75:main.c        **** CY_ISR(TransmitInterruptHandler)
+  76:main.c        **** {
+  68              		.loc 1 76 0
   69              		.cfi_startproc
   70              		@ args = 0, pretend = 0, frame = 0
   71              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -170,2040 +158,2097 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 1
   73              		.cfi_def_cfa_offset 8
   74              		.cfi_offset 3, -8
   75              		.cfi_offset 14, -4
-  89:main.c        ****     if ((!logicLevel)){
-  76              		.loc 1 89 0
-  77 0002 094B     		ldr	r3, .L9
+  77:main.c        ****     TimerTX_STATUS;
+  76              		.loc 1 77 0
+  77 0002 1B4B     		ldr	r3, .L15
   78 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  79 0006 6BB9     		cbnz	r3, .L6
-  90:main.c        ****         TimerRX_WritePeriod(COLLISION_PERIOD);
-  80              		.loc 1 90 0
-  81 0008 3420     		movs	r0, #52
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 4
+  78:main.c        ****     if (*dataPtr == '\0') {
+  79              		.loc 1 78 0
+  80 0006 1B4B     		ldr	r3, .L15+4
+  81 0008 1B68     		ldr	r3, [r3]
+  82 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  83 000c 2BB9     		cbnz	r3, .L7
+  79:main.c        ****         TRANSMIT_Write(IDLE_LEVEL);
+  84              		.loc 1 79 0
+  85 000e 0020     		movs	r0, #0
+  86 0010 FFF7FEFF 		bl	TRANSMIT_Write
+  87              	.LVL0:
+  80:main.c        ****         TransmitISR_Stop();
+  88              		.loc 1 80 0
+  89 0014 FFF7FEFF 		bl	TransmitISR_Stop
+  90              	.LVL1:
+  91 0018 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 4
 
 
-  82 000a FFF7FEFF 		bl	TimerRX_WritePeriod
-  83              	.LVL0:
-  91:main.c        ****         TimerRX_WriteCounter(COLLISION_COUNTER);
-  84              		.loc 1 91 0
-  85 000e 3320     		movs	r0, #51
-  86 0010 FFF7FEFF 		bl	TimerRX_WriteCounter
-  87              	.LVL1:
-  92:main.c        ****         TimerRX_Start();
-  88              		.loc 1 92 0
-  89 0014 FFF7FEFF 		bl	TimerRX_Start
-  90              	.LVL2:
-  93:main.c        ****         logicLevel = 1;
-  91              		.loc 1 93 0
-  92 0018 0122     		movs	r2, #1
-  93 001a 034B     		ldr	r3, .L9
-  94 001c 1A70     		strb	r2, [r3]
-  94:main.c        ****         systemState = BUSY;
-  95              		.loc 1 94 0
-  96 001e 0022     		movs	r2, #0
-  97 0020 024B     		ldr	r3, .L9+4
-  98 0022 1A70     		strb	r2, [r3]
-  99              	.L6:
- 100 0024 08BD     		pop	{r3, pc}
- 101              	.L10:
- 102 0026 00BF     		.align	2
- 103              	.L9:
- 104 0028 00000000 		.word	.LANCHOR0
- 105 002c 00000000 		.word	systemState
- 106              		.cfi_endproc
- 107              	.LFE65:
- 108              		.size	RisingEdgeInterruptHandler, .-RisingEdgeInterruptHandler
- 109              		.section	.text.FallingEdgeInterruptHandler,"ax",%progbits
- 110              		.align	2
- 111              		.global	FallingEdgeInterruptHandler
- 112              		.thumb
- 113              		.thumb_func
- 114              		.type	FallingEdgeInterruptHandler, %function
- 115              	FallingEdgeInterruptHandler:
- 116              	.LFB66:
-  95:main.c        ****     }
-  96:main.c        **** }
-  97:main.c        ****  
-  98:main.c        **** 
-  99:main.c        ****  /**********************************************************
- 100:main.c        ****  * function name: FallingEdgeInterruptHandler
- 101:main.c        ****  * operation: Handles interrupt for when a falling edge on 
- 102:main.c        ****  *            the timer occurs. Triggers system to look for
- 103:main.c        ****  *            rising edge (0 -> 1). Schedules a timer
- 104:main.c        ****  *            interupt to occur in 7.7 ms and sets state to 
- 105:main.c        ****  *            busy
- 106:main.c        ****  * inputs: none
- 107:main.c        ****  * returns: none
- 108:main.c        ****  * implemented: 14 Dec 2017
- 109:main.c        ****  * edited:
- 110:main.c        ****  *********************************************************/ 
- 111:main.c        **** CY_ISR(FallingEdgeInterruptHandler)
- 112:main.c        **** {
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 5
+  92              	.L7:
+  81:main.c        ****     } else {
+  82:main.c        ****         if (firstHalfBit) {
+  93              		.loc 1 82 0
+  94 001a 174A     		ldr	r2, .L15+8
+  95 001c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+  96 001e 8AB1     		cbz	r2, .L9
+  83:main.c        ****             if (idx == 7) {
+  97              		.loc 1 83 0
+  98 0020 164A     		ldr	r2, .L15+12
+  99 0022 5068     		ldr	r0, [r2, #4]
+ 100 0024 0728     		cmp	r0, #7
+ 101 0026 03D1     		bne	.L10
+  84:main.c        ****                 TRANSMIT_Write(1);
+ 102              		.loc 1 84 0
+ 103 0028 0120     		movs	r0, #1
+ 104 002a FFF7FEFF 		bl	TRANSMIT_Write
+ 105              	.LVL2:
+ 106 002e 05E0     		b	.L11
+ 107              	.L10:
+  85:main.c        ****             } else {
+  86:main.c        ****                 // Sets the level to the current bit.
+  87:main.c        ****                 TRANSMIT_Write((*dataPtr & (1 << idx)) ? 1 : 0);
+ 108              		.loc 1 87 0
+ 109 0030 43FA00F0 		asr	r0, r3, r0
+ 110 0034 00F00100 		and	r0, r0, #1
+ 111 0038 FFF7FEFF 		bl	TRANSMIT_Write
+ 112              	.LVL3:
+ 113              	.L11:
+  88:main.c        ****             }
+  89:main.c        ****             firstHalfBit = false;
+ 114              		.loc 1 89 0
+ 115 003c 0022     		movs	r2, #0
+ 116 003e 0E4B     		ldr	r3, .L15+8
+ 117 0040 1A70     		strb	r2, [r3]
+ 118 0042 08BD     		pop	{r3, pc}
+ 119              	.L9:
+  90:main.c        ****         } else {
+  91:main.c        ****             TRANSMIT_Write(0);
+ 120              		.loc 1 91 0
+ 121 0044 0020     		movs	r0, #0
+ 122 0046 FFF7FEFF 		bl	TRANSMIT_Write
+ 123              	.LVL4:
+  92:main.c        ****             if (idx == 0) {
+ 124              		.loc 1 92 0
+ 125 004a 0C4B     		ldr	r3, .L15+12
+ 126 004c 5B68     		ldr	r3, [r3, #4]
+ 127 004e 3BB9     		cbnz	r3, .L12
+  93:main.c        ****                 idx = 7;
+ 128              		.loc 1 93 0
+ 129 0050 0722     		movs	r2, #7
+ 130 0052 0A4B     		ldr	r3, .L15+12
+ 131 0054 5A60     		str	r2, [r3, #4]
+  94:main.c        ****                 dataPtr++;
+ 132              		.loc 1 94 0
+ 133 0056 074A     		ldr	r2, .L15+4
+ 134 0058 1368     		ldr	r3, [r2]
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 5
 
 
- 117              		.loc 1 112 0
- 118              		.cfi_startproc
- 119              		@ args = 0, pretend = 0, frame = 0
- 120              		@ frame_needed = 0, uses_anonymous_args = 0
- 121 0000 08B5     		push	{r3, lr}
- 122              		.cfi_def_cfa_offset 8
- 123              		.cfi_offset 3, -8
- 124              		.cfi_offset 14, -4
- 113:main.c        ****     if (logicLevel){
- 125              		.loc 1 113 0
- 126 0002 094B     		ldr	r3, .L14
- 127 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 128 0006 73B1     		cbz	r3, .L11
- 114:main.c        ****         TimerRX_WritePeriod(IDLE_PERIOD);
- 129              		.loc 1 114 0
- 130 0008 40F23E30 		movw	r0, #830
- 131 000c FFF7FEFF 		bl	TimerRX_WritePeriod
- 132              	.LVL3:
- 115:main.c        ****         TimerRX_WriteCounter(IDLE_COUNTER);
- 133              		.loc 1 115 0
- 134 0010 40F23D30 		movw	r0, #829
- 135 0014 FFF7FEFF 		bl	TimerRX_WriteCounter
- 136              	.LVL4:
- 116:main.c        ****         TimerRX_Start();
- 137              		.loc 1 116 0
- 138 0018 FFF7FEFF 		bl	TimerRX_Start
- 139              	.LVL5:
- 117:main.c        ****         logicLevel = 0;
- 140              		.loc 1 117 0
- 141 001c 0023     		movs	r3, #0
- 142 001e 024A     		ldr	r2, .L14
- 143 0020 1370     		strb	r3, [r2]
- 118:main.c        ****         systemState = BUSY;
- 144              		.loc 1 118 0
- 145 0022 024A     		ldr	r2, .L14+4
- 146 0024 1370     		strb	r3, [r2]
- 147              	.L11:
- 148 0026 08BD     		pop	{r3, pc}
- 149              	.L15:
- 150              		.align	2
- 151              	.L14:
- 152 0028 00000000 		.word	.LANCHOR0
- 153 002c 00000000 		.word	systemState
- 154              		.cfi_endproc
- 155              	.LFE66:
- 156              		.size	FallingEdgeInterruptHandler, .-FallingEdgeInterruptHandler
- 157              		.section	.text.TransmitInterruptHandler,"ax",%progbits
- 158              		.align	2
- 159              		.global	TransmitInterruptHandler
- 160              		.thumb
- 161              		.thumb_func
- 162              		.type	TransmitInterruptHandler, %function
- 163              	TransmitInterruptHandler:
- 164              	.LFB67:
- 119:main.c        ****     }
- 120:main.c        **** }
- 121:main.c        **** 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 6
+ 135 005a 0133     		adds	r3, r3, #1
+ 136 005c 1360     		str	r3, [r2]
+ 137 005e 02E0     		b	.L13
+ 138              	.L12:
+  95:main.c        ****             } else {
+  96:main.c        ****                 idx--;
+ 139              		.loc 1 96 0
+ 140 0060 013B     		subs	r3, r3, #1
+ 141 0062 064A     		ldr	r2, .L15+12
+ 142 0064 5360     		str	r3, [r2, #4]
+ 143              	.L13:
+  97:main.c        ****             }
+  98:main.c        ****             firstHalfBit = true;
+ 144              		.loc 1 98 0
+ 145 0066 0122     		movs	r2, #1
+ 146 0068 034B     		ldr	r3, .L15+8
+ 147 006a 1A70     		strb	r2, [r3]
+ 148 006c 08BD     		pop	{r3, pc}
+ 149              	.L16:
+ 150 006e 00BF     		.align	2
+ 151              	.L15:
+ 152 0070 0F4F0040 		.word	1073762063
+ 153 0074 00000000 		.word	dataPtr
+ 154 0078 00000000 		.word	firstHalfBit
+ 155 007c 00000000 		.word	.LANCHOR0
+ 156              		.cfi_endproc
+ 157              	.LFE65:
+ 158              		.size	TransmitInterruptHandler, .-TransmitInterruptHandler
+ 159              		.section	.text.RisingEdgeInterruptHandler,"ax",%progbits
+ 160              		.align	2
+ 161              		.global	RisingEdgeInterruptHandler
+ 162              		.thumb
+ 163              		.thumb_func
+ 164              		.type	RisingEdgeInterruptHandler, %function
+ 165              	RisingEdgeInterruptHandler:
+ 166              	.LFB66:
+  99:main.c        ****         }
+ 100:main.c        ****     }
+ 101:main.c        **** }
+ 102:main.c        **** 
+ 103:main.c        **** 
+ 104:main.c        ****  /**********************************************************
+ 105:main.c        ****  * function name: RisingEdgeInterruptHandler
+ 106:main.c        ****  * operation: Handles interrupt for when a rising edge on 
+ 107:main.c        ****  *            the timer occurs. Triggers system to look for
+ 108:main.c        ****  *            falling edge (1 -> 0). Schedules a timer
+ 109:main.c        ****  *            interupt to occur in .6ms and sets state to 
+ 110:main.c        ****  *            busy
+ 111:main.c        ****  * inputs: none
+ 112:main.c        ****  * returns: none
+ 113:main.c        ****  * implemented: 14 Dec 2017
+ 114:main.c        ****  * edited:
+ 115:main.c        ****  *********************************************************/ 
+ 116:main.c        **** CY_ISR(RisingEdgeInterruptHandler)
+ 117:main.c        **** {
+ 167              		.loc 1 117 0
+ 168              		.cfi_startproc
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 6
 
 
- 122:main.c        **** 
- 123:main.c        **** 
- 124:main.c        **** 
- 125:main.c        ****  /**********************************************************
- 126:main.c        ****  * function name: TransmitInterruptHandler
- 127:main.c        ****  * operation: Handles interrupt for transmition of data
- 128:main.c        ****  * inputs: none
- 129:main.c        ****  * returns: none
- 130:main.c        ****  * implemented: 10 Jan 2018
- 131:main.c        ****  * edited:
- 132:main.c        ****  *********************************************************/
- 133:main.c        **** CY_ISR(TransmitInterruptHandler)
- 134:main.c        **** {
- 165              		.loc 1 134 0
- 166              		.cfi_startproc
- 167              		@ args = 0, pretend = 0, frame = 0
- 168              		@ frame_needed = 0, uses_anonymous_args = 0
- 169 0000 08B5     		push	{r3, lr}
- 170              		.cfi_def_cfa_offset 8
- 171              		.cfi_offset 3, -8
- 172              		.cfi_offset 14, -4
- 135:main.c        ****     TimerTX_STATUS;
- 173              		.loc 1 135 0
- 174 0002 304B     		ldr	r3, .L24
- 175 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 136:main.c        **** 	currentDataCharacter = buffer[bufferPosition];  
- 176              		.loc 1 136 0
- 177 0006 304B     		ldr	r3, .L24+4
- 178 0008 5B68     		ldr	r3, [r3, #4]
- 179 000a 304A     		ldr	r2, .L24+8
- 180 000c D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
- 181 000e 3049     		ldr	r1, .L24+12
- 182 0010 0A70     		strb	r2, [r1]
- 137:main.c        **** 	if(bufferPosition < dataSize) { 	
- 183              		.loc 1 137 0
- 184 0012 3049     		ldr	r1, .L24+16
- 185 0014 0968     		ldr	r1, [r1]
- 186 0016 8B42     		cmp	r3, r1
- 187 0018 53DA     		bge	.L16
- 138:main.c        **** 	    if(dataPosition == 0) {
- 188              		.loc 1 138 0
- 189 001a 2B4B     		ldr	r3, .L24+4
- 190 001c 9B68     		ldr	r3, [r3, #8]
- 191 001e 5BB9     		cbnz	r3, .L18
- 139:main.c        ****     		TRANSMIT_Write(1);
- 192              		.loc 1 139 0
- 193 0020 0120     		movs	r0, #1
- 194 0022 FFF7FEFF 		bl	TRANSMIT_Write
- 195              	.LVL6:
- 140:main.c        ****     		data[500][dataPosition] = 0x31;
- 196              		.loc 1 140 0
- 197 0026 284B     		ldr	r3, .L24+4
- 198 0028 9B68     		ldr	r3, [r3, #8]
- 199 002a 2B4A     		ldr	r2, .L24+20
- 200 002c 1344     		add	r3, r3, r2
- 201 002e 03F5FA53 		add	r3, r3, #8000
- 202 0032 3122     		movs	r2, #49
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 7
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171 0000 08B5     		push	{r3, lr}
+ 172              		.cfi_def_cfa_offset 8
+ 173              		.cfi_offset 3, -8
+ 174              		.cfi_offset 14, -4
+ 118:main.c        ****     if ((!logicLevel)){
+ 175              		.loc 1 118 0
+ 176 0002 094B     		ldr	r3, .L20
+ 177 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 178 0006 6BB9     		cbnz	r3, .L17
+ 119:main.c        ****         TimerRX_WritePeriod(COLLISION_PERIOD);
+ 179              		.loc 1 119 0
+ 180 0008 3420     		movs	r0, #52
+ 181 000a FFF7FEFF 		bl	TimerRX_WritePeriod
+ 182              	.LVL5:
+ 120:main.c        ****         TimerRX_WriteCounter(COLLISION_COUNTER);
+ 183              		.loc 1 120 0
+ 184 000e 3320     		movs	r0, #51
+ 185 0010 FFF7FEFF 		bl	TimerRX_WriteCounter
+ 186              	.LVL6:
+ 121:main.c        ****         TimerRX_Start();
+ 187              		.loc 1 121 0
+ 188 0014 FFF7FEFF 		bl	TimerRX_Start
+ 189              	.LVL7:
+ 122:main.c        ****         logicLevel = 1;
+ 190              		.loc 1 122 0
+ 191 0018 0122     		movs	r2, #1
+ 192 001a 034B     		ldr	r3, .L20
+ 193 001c 1A70     		strb	r2, [r3]
+ 123:main.c        ****         systemState = BUSY;
+ 194              		.loc 1 123 0
+ 195 001e 0022     		movs	r2, #0
+ 196 0020 024B     		ldr	r3, .L20+4
+ 197 0022 1A70     		strb	r2, [r3]
+ 198              	.L17:
+ 199 0024 08BD     		pop	{r3, pc}
+ 200              	.L21:
+ 201 0026 00BF     		.align	2
+ 202              	.L20:
+ 203 0028 00000000 		.word	.LANCHOR0
+ 204 002c 00000000 		.word	systemState
+ 205              		.cfi_endproc
+ 206              	.LFE66:
+ 207              		.size	RisingEdgeInterruptHandler, .-RisingEdgeInterruptHandler
+ 208              		.section	.text.FallingEdgeInterruptHandler,"ax",%progbits
+ 209              		.align	2
+ 210              		.global	FallingEdgeInterruptHandler
+ 211              		.thumb
+ 212              		.thumb_func
+ 213              		.type	FallingEdgeInterruptHandler, %function
+ 214              	FallingEdgeInterruptHandler:
+ 215              	.LFB67:
+ 124:main.c        ****     }
+ 125:main.c        **** }
+ 126:main.c        ****  
+ 127:main.c        **** 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 7
 
 
- 203 0034 1A70     		strb	r2, [r3]
- 204 0036 31E0     		b	.L19
- 205              	.L18:
- 141:main.c        ****     	} else if(dataPosition%2 != 0){
- 206              		.loc 1 141 0
- 207 0038 13F0010F 		tst	r3, #1
- 208 003c 0BD0     		beq	.L20
- 142:main.c        ****     		TRANSMIT_Write(0);
- 209              		.loc 1 142 0
- 210 003e 0020     		movs	r0, #0
- 211 0040 FFF7FEFF 		bl	TRANSMIT_Write
- 212              	.LVL7:
- 143:main.c        ****     		data[500][dataPosition] = 0x30;
- 213              		.loc 1 143 0
- 214 0044 204B     		ldr	r3, .L24+4
- 215 0046 9B68     		ldr	r3, [r3, #8]
- 216 0048 234A     		ldr	r2, .L24+20
- 217 004a 1344     		add	r3, r3, r2
- 218 004c 03F5FA53 		add	r3, r3, #8000
- 219 0050 3022     		movs	r2, #48
- 220 0052 1A70     		strb	r2, [r3]
- 221 0054 22E0     		b	.L19
- 222              	.L20:
- 144:main.c        ****     	} else {
- 145:main.c        ****     		if(currentDataCharacter & (1<<(6-idx))){
- 223              		.loc 1 145 0
- 224 0056 1C4B     		ldr	r3, .L24+4
- 225 0058 DB68     		ldr	r3, [r3, #12]
- 226 005a C3F10603 		rsb	r3, r3, #6
- 227 005e 1A41     		asrs	r2, r2, r3
- 228 0060 12F0010F 		tst	r2, #1
- 229 0064 0BD0     		beq	.L21
- 146:main.c        ****     			TRANSMIT_Write(1);
- 230              		.loc 1 146 0
- 231 0066 0120     		movs	r0, #1
- 232 0068 FFF7FEFF 		bl	TRANSMIT_Write
- 233              	.LVL8:
- 147:main.c        ****     			data[500][dataPosition] = 0x31;
- 234              		.loc 1 147 0
- 235 006c 164B     		ldr	r3, .L24+4
- 236 006e 9B68     		ldr	r3, [r3, #8]
- 237 0070 194A     		ldr	r2, .L24+20
- 238 0072 1344     		add	r3, r3, r2
- 239 0074 03F5FA53 		add	r3, r3, #8000
- 240 0078 3122     		movs	r2, #49
- 241 007a 1A70     		strb	r2, [r3]
- 242 007c 0AE0     		b	.L22
- 243              	.L21:
- 148:main.c        ****     		}else{
- 149:main.c        ****     			TRANSMIT_Write(0);
- 244              		.loc 1 149 0
- 245 007e 0020     		movs	r0, #0
- 246 0080 FFF7FEFF 		bl	TRANSMIT_Write
- 247              	.LVL9:
- 150:main.c        ****     			data[500][dataPosition] = 0x30;   
- 248              		.loc 1 150 0
- 249 0084 104B     		ldr	r3, .L24+4
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 8
+ 128:main.c        ****  /**********************************************************
+ 129:main.c        ****  * function name: FallingEdgeInterruptHandler
+ 130:main.c        ****  * operation: Handles interrupt for when a falling edge on 
+ 131:main.c        ****  *            the timer occurs. Triggers system to look for
+ 132:main.c        ****  *            rising edge (0 -> 1). Schedules a timer
+ 133:main.c        ****  *            interupt to occur in 7.7 ms and sets state to 
+ 134:main.c        ****  *            busy
+ 135:main.c        ****  * inputs: none
+ 136:main.c        ****  * returns: none
+ 137:main.c        ****  * implemented: 14 Dec 2017
+ 138:main.c        ****  * edited:
+ 139:main.c        ****  *********************************************************/ 
+ 140:main.c        **** CY_ISR(FallingEdgeInterruptHandler)
+ 141:main.c        **** {
+ 216              		.loc 1 141 0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 0
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 220 0000 08B5     		push	{r3, lr}
+ 221              		.cfi_def_cfa_offset 8
+ 222              		.cfi_offset 3, -8
+ 223              		.cfi_offset 14, -4
+ 142:main.c        ****     if (logicLevel){
+ 224              		.loc 1 142 0
+ 225 0002 094B     		ldr	r3, .L25
+ 226 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 227 0006 73B1     		cbz	r3, .L22
+ 143:main.c        ****         TimerRX_WritePeriod(IDLE_PERIOD);
+ 228              		.loc 1 143 0
+ 229 0008 40F23E30 		movw	r0, #830
+ 230 000c FFF7FEFF 		bl	TimerRX_WritePeriod
+ 231              	.LVL8:
+ 144:main.c        ****         TimerRX_WriteCounter(IDLE_COUNTER);
+ 232              		.loc 1 144 0
+ 233 0010 40F23D30 		movw	r0, #829
+ 234 0014 FFF7FEFF 		bl	TimerRX_WriteCounter
+ 235              	.LVL9:
+ 145:main.c        ****         TimerRX_Start();
+ 236              		.loc 1 145 0
+ 237 0018 FFF7FEFF 		bl	TimerRX_Start
+ 238              	.LVL10:
+ 146:main.c        ****         logicLevel = 0;
+ 239              		.loc 1 146 0
+ 240 001c 0023     		movs	r3, #0
+ 241 001e 024A     		ldr	r2, .L25
+ 242 0020 1370     		strb	r3, [r2]
+ 147:main.c        ****         systemState = BUSY;
+ 243              		.loc 1 147 0
+ 244 0022 024A     		ldr	r2, .L25+4
+ 245 0024 1370     		strb	r3, [r2]
+ 246              	.L22:
+ 247 0026 08BD     		pop	{r3, pc}
+ 248              	.L26:
+ 249              		.align	2
+ 250              	.L25:
+ 251 0028 00000000 		.word	.LANCHOR0
+ 252 002c 00000000 		.word	systemState
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 8
 
 
- 250 0086 9B68     		ldr	r3, [r3, #8]
- 251 0088 134A     		ldr	r2, .L24+20
- 252 008a 1344     		add	r3, r3, r2
- 253 008c 03F5FA53 		add	r3, r3, #8000
- 254 0090 3022     		movs	r2, #48
- 255 0092 1A70     		strb	r2, [r3]
- 256              	.L22:
- 151:main.c        ****     		}
- 152:main.c        ****     			++idx;
- 257              		.loc 1 152 0
- 258 0094 0C4A     		ldr	r2, .L24+4
- 259 0096 D368     		ldr	r3, [r2, #12]
- 260 0098 0133     		adds	r3, r3, #1
- 261 009a D360     		str	r3, [r2, #12]
- 262              	.L19:
- 153:main.c        ****     	}
- 154:main.c        ****         CyDelayUs(450);
- 263              		.loc 1 154 0
- 264 009c 4FF4E170 		mov	r0, #450
- 265 00a0 FFF7FEFF 		bl	CyDelayUs
- 266              	.LVL10:
- 155:main.c        ****         ++dataPosition;
- 267              		.loc 1 155 0
- 268 00a4 084A     		ldr	r2, .L24+4
- 269 00a6 9368     		ldr	r3, [r2, #8]
- 270 00a8 0133     		adds	r3, r3, #1
- 271 00aa 9360     		str	r3, [r2, #8]
- 156:main.c        ****         if(dataPosition >= 16) {
- 272              		.loc 1 156 0
- 273 00ac 0F2B     		cmp	r3, #15
- 274 00ae 08DD     		ble	.L16
- 157:main.c        ****     	    ++bufferPosition;
- 275              		.loc 1 157 0
- 276 00b0 1346     		mov	r3, r2
- 277 00b2 5268     		ldr	r2, [r2, #4]
- 278 00b4 0132     		adds	r2, r2, #1
- 279 00b6 5A60     		str	r2, [r3, #4]
- 158:main.c        ****     	    idx = 0;
- 280              		.loc 1 158 0
- 281 00b8 0020     		movs	r0, #0
- 282 00ba D860     		str	r0, [r3, #12]
- 159:main.c        ****     	    dataPosition = 0;
- 283              		.loc 1 159 0
- 284 00bc 9860     		str	r0, [r3, #8]
- 160:main.c        ****             TRANSMIT_Write(0);
- 285              		.loc 1 160 0
- 286 00be FFF7FEFF 		bl	TRANSMIT_Write
+ 253              		.cfi_endproc
+ 254              	.LFE67:
+ 255              		.size	FallingEdgeInterruptHandler, .-FallingEdgeInterruptHandler
+ 256              		.section	.text.main,"ax",%progbits
+ 257              		.align	2
+ 258              		.global	main
+ 259              		.thumb
+ 260              		.thumb_func
+ 261              		.type	main, %function
+ 262              	main:
+ 263              	.LFB68:
+ 148:main.c        ****     }
+ 149:main.c        **** }
+ 150:main.c        **** 
+ 151:main.c        **** 
+ 152:main.c        ****  /**********************************************************
+ 153:main.c        ****  * function name: main
+ 154:main.c        ****  * operation: Handles the main state machine diagram for the
+ 155:main.c        ****  *            system. Changes  states when needed and calls
+ 156:main.c        ****  *            appropriate interrupt routines when triggered.                
+ 157:main.c        ****  * inputs: none
+ 158:main.c        ****  * returns: none
+ 159:main.c        ****  * implemented: 14 Dec 2017
+ 160:main.c        ****  * edited:
+ 161:main.c        ****  *********************************************************/ 
+ 162:main.c        **** int main(void)
+ 163:main.c        **** {
+ 264              		.loc 1 163 0
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 64
+ 267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 269              		.cfi_def_cfa_offset 20
+ 270              		.cfi_offset 4, -20
+ 271              		.cfi_offset 5, -16
+ 272              		.cfi_offset 6, -12
+ 273              		.cfi_offset 7, -8
+ 274              		.cfi_offset 14, -4
+ 275 0002 91B0     		sub	sp, sp, #68
+ 276              		.cfi_def_cfa_offset 88
+ 164:main.c        ****     CyGlobalIntEnable; //enable global interrupts
+ 277              		.loc 1 164 0
+ 278              		.syntax unified
+ 279              	@ 164 "main.c" 1
+ 280 0004 62B6     		CPSIE   i
+ 281              	@ 0 "" 2
+ 165:main.c        ****     //starting the interrupt handlers
+ 166:main.c        ****     RisingEdgeISR_StartEx(RisingEdgeInterruptHandler);
+ 282              		.loc 1 166 0
+ 283              		.thumb
+ 284              		.syntax unified
+ 285 0006 2848     		ldr	r0, .L42
+ 286 0008 FFF7FEFF 		bl	RisingEdgeISR_StartEx
  287              	.LVL11:
- 288              	.L16:
- 289 00c2 08BD     		pop	{r3, pc}
- 290              	.L25:
- 291              		.align	2
- 292              	.L24:
- 293 00c4 65650040 		.word	1073767781
- 294 00c8 00000000 		.word	.LANCHOR0
- 295 00cc 00000000 		.word	buffer
- 296 00d0 00000000 		.word	currentDataCharacter
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 9
+ 167:main.c        ****     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
+ 288              		.loc 1 167 0
+ 289 000c 2748     		ldr	r0, .L42+4
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 9
 
 
- 297 00d4 00000000 		.word	dataSize
- 298 00d8 00000000 		.word	data
- 299              		.cfi_endproc
- 300              	.LFE67:
- 301              		.size	TransmitInterruptHandler, .-TransmitInterruptHandler
- 302              		.section	.text.main,"ax",%progbits
- 303              		.align	2
- 304              		.global	main
- 305              		.thumb
- 306              		.thumb_func
- 307              		.type	main, %function
- 308              	main:
- 309              	.LFB68:
- 161:main.c        ****         }
- 162:main.c        ****     }
- 163:main.c        **** }
- 164:main.c        **** 
- 165:main.c        ****  /**********************************************************
- 166:main.c        ****  * function name: main
- 167:main.c        ****  * operation: Handles the main state machine diagram for the
- 168:main.c        ****  *            system. Changes  states when needed and calls
- 169:main.c        ****  *            appropriate interrupt routines when triggered.                
- 170:main.c        ****  * inputs: none
- 171:main.c        ****  * returns: none
- 172:main.c        ****  * implemented: 14 Dec 2017
- 173:main.c        ****  * edited:
- 174:main.c        ****  *********************************************************/ 
- 175:main.c        **** int main(void)
- 176:main.c        **** {
- 310              		.loc 1 176 0
- 311              		.cfi_startproc
- 312              		@ args = 0, pretend = 0, frame = 0
- 313              		@ frame_needed = 0, uses_anonymous_args = 0
- 314 0000 10B5     		push	{r4, lr}
- 315              		.cfi_def_cfa_offset 8
- 316              		.cfi_offset 4, -8
- 317              		.cfi_offset 14, -4
- 177:main.c        ****     //systemState = IDLE;
- 178:main.c        ****     CyGlobalIntEnable;
- 318              		.loc 1 178 0
- 319              		.syntax unified
- 320              	@ 178 "main.c" 1
- 321 0002 62B6     		CPSIE   i
- 322              	@ 0 "" 2
- 179:main.c        ****     RisingEdgeISR_StartEx(RisingEdgeInterruptHandler);
- 323              		.loc 1 179 0
- 324              		.thumb
- 325              		.syntax unified
- 326 0004 2F48     		ldr	r0, .L37
- 327 0006 FFF7FEFF 		bl	RisingEdgeISR_StartEx
- 328              	.LVL12:
- 180:main.c        ****     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
- 329              		.loc 1 180 0
- 330 000a 2F48     		ldr	r0, .L37+4
- 331 000c FFF7FEFF 		bl	FallingEdgeISR_StartEx
- 332              	.LVL13:
- 181:main.c        ****     TimerTX_Start();
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 10
+ 290 000e FFF7FEFF 		bl	FallingEdgeISR_StartEx
+ 291              	.LVL12:
+ 168:main.c        ****     ReceiveISR_StartEx(ReceiveInterruptHandler);  
+ 292              		.loc 1 168 0
+ 293 0012 2748     		ldr	r0, .L42+8
+ 294 0014 FFF7FEFF 		bl	ReceiveISR_StartEx
+ 295              	.LVL13:
+ 169:main.c        ****     USBUART_Start(USBUART_device, USBUART_5V_OPERATION); //configuring USBUART to start
+ 296              		.loc 1 169 0
+ 297 0018 264B     		ldr	r3, .L42+12
+ 298 001a 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 299 001c 0121     		movs	r1, #1
+ 300 001e FFF7FEFF 		bl	USBUART_Start
+ 301              	.LVL14:
+ 170:main.c        ****     int delay = 500; //delay of 500ms, configured later through random and uniformly distributed to
+ 171:main.c        ****     int dataSize = 0; //size of retrieved data to then be transmitted
+ 172:main.c        ****     int dataPosition = 0; //position looping through the data to transmit
+ 173:main.c        ****     _Bool endOfData = 0; //boolean to determine if the entire characters has been received
+ 302              		.loc 1 173 0
+ 303 0022 0024     		movs	r4, #0
+ 172:main.c        ****     _Bool endOfData = 0; //boolean to determine if the entire characters has been received
+ 304              		.loc 1 172 0
+ 305 0024 2646     		mov	r6, r4
+ 306              	.LVL15:
+ 307              	.L39:
+ 174:main.c        ****     unsigned char buffer[10]; //buffer used to hold single blob of data 
+ 175:main.c        ****     char data[44 + 1]; //designed to transmit a message as long as 44 characters
+ 176:main.c        ****     bool endOfTransmission = 0; //boolean sigifying complete transmission of data 
+ 177:main.c        ****     char binaryOfChar[8 + 1]; //represents the 8 bit representation of the character 
+ 178:main.c        ****         
+ 179:main.c        ****     while (1) {
+ 180:main.c        ****         
+ 181:main.c        ****         //Ensure device is connected and configured 
+ 182:main.c        ****         if (0u != USBUART_IsConfigurationChanged())
+ 308              		.loc 1 182 0
+ 309 0026 FFF7FEFF 		bl	USBUART_IsConfigurationChanged
+ 310              	.LVL16:
+ 311 002a 20B3     		cbz	r0, .L29
+ 183:main.c        ****         {           
+ 184:main.c        ****             // Initialize IN endpoints
+ 185:main.c        ****             if (0u != USBUART_GetConfiguration())
+ 312              		.loc 1 185 0
+ 313 002c FFF7FEFF 		bl	USBUART_GetConfiguration
+ 314              	.LVL17:
+ 315 0030 08B3     		cbz	r0, .L29
+ 186:main.c        ****             {
+ 187:main.c        ****                 // Enable OUT endpoint to receive data from host
+ 188:main.c        ****                 USBUART_CDC_Init();
+ 316              		.loc 1 188 0
+ 317 0032 FFF7FEFF 		bl	USBUART_CDC_Init
+ 318              	.LVL18:
+ 319 0036 1EE0     		b	.L29
+ 320              	.L37:
+ 189:main.c        ****             }
+ 190:main.c        ****         }      
+ 191:main.c        ****         
+ 192:main.c        ****         while (endOfData == 0) {
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 10
 
 
- 333              		.loc 1 181 0
- 334 0010 FFF7FEFF 		bl	TimerTX_Start
- 335              	.LVL14:
- 182:main.c        ****     TimerTX_WritePeriod(45);
- 336              		.loc 1 182 0
- 337 0014 2D20     		movs	r0, #45
- 338 0016 FFF7FEFF 		bl	TimerTX_WritePeriod
- 339              	.LVL15:
- 183:main.c        ****     TimerTX_WriteCounter(44);
- 340              		.loc 1 183 0
- 341 001a 2C20     		movs	r0, #44
- 342 001c FFF7FEFF 		bl	TimerTX_WriteCounter
- 343              	.LVL16:
- 184:main.c        ****     ReceiveISR_StartEx(ReceiveInterruptHandler);
- 344              		.loc 1 184 0
- 345 0020 2A48     		ldr	r0, .L37+8
- 346 0022 FFF7FEFF 		bl	ReceiveISR_StartEx
- 347              	.LVL17:
- 185:main.c        ****     TransmitISR_StartEx(TransmitInterruptHandler);
- 348              		.loc 1 185 0
- 349 0026 2A48     		ldr	r0, .L37+12
- 350 0028 FFF7FEFF 		bl	TransmitISR_StartEx
- 351              	.LVL18:
- 186:main.c        **** 
- 187:main.c        ****     
- 188:main.c        ****     USBUART_Start(USBUART_device, USBUART_5V_OPERATION);
- 352              		.loc 1 188 0
- 353 002c 294B     		ldr	r3, .L37+16
- 354 002e 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 355 0030 0121     		movs	r1, #1
- 356 0032 FFF7FEFF 		bl	USBUART_Start
- 357              	.LVL19:
- 358              	.L27:
- 189:main.c        ****     
- 190:main.c        **** 
- 191:main.c        ****     
- 192:main.c        ****     while (1) {
- 193:main.c        ****         
- 194:main.c        ****         //Ensure device is connected and configured 
- 195:main.c        ****         if (0u != USBUART_IsConfigurationChanged())
- 359              		.loc 1 195 0
- 360 0036 FFF7FEFF 		bl	USBUART_IsConfigurationChanged
- 361              	.LVL20:
- 362 003a 20B1     		cbz	r0, .L28
- 196:main.c        ****         {           
- 197:main.c        ****             // Initialize IN endpoints
- 198:main.c        ****             if (0u != USBUART_GetConfiguration())
- 363              		.loc 1 198 0
- 364 003c FFF7FEFF 		bl	USBUART_GetConfiguration
- 365              	.LVL21:
- 366 0040 08B1     		cbz	r0, .L28
- 199:main.c        ****             {
- 200:main.c        ****                 // Enable OUT endpoint to receive data from host
- 201:main.c        ****                 USBUART_CDC_Init();
- 367              		.loc 1 201 0
- 368 0042 FFF7FEFF 		bl	USBUART_CDC_Init
- 369              	.LVL22:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 11
+ 193:main.c        ****             // Check for input data
+ 194:main.c        ****             if (0u != USBUART_DataIsReady())
+ 321              		.loc 1 194 0
+ 322 0038 FFF7FEFF 		bl	USBUART_DataIsReady
+ 323              	.LVL19:
+ 324 003c D8B1     		cbz	r0, .L29
+ 195:main.c        ****             {
+ 196:main.c        ****                 // Read received data
+ 197:main.c        ****                 dataSize = USBUART_GetAll(buffer);
+ 325              		.loc 1 197 0
+ 326 003e 0DA8     		add	r0, sp, #52
+ 327 0040 FFF7FEFF 		bl	USBUART_GetAll
+ 328              	.LVL20:
+ 329 0044 0746     		mov	r7, r0
+ 330              	.LVL21:
+ 198:main.c        ****                 
+ 199:main.c        ****                 if (0u != dataSize) 
+ 331              		.loc 1 199 0
+ 332 0046 B0B1     		cbz	r0, .L29
+ 333 0048 12E0     		b	.L40
+ 334              	.LVL22:
+ 335              	.L35:
+ 336              	.LBB2:
+ 200:main.c        ****                 {
+ 201:main.c        ****                     for(int i=0; i<dataSize; i++)
+ 202:main.c        ****                     {
+ 203:main.c        ****                         if((buffer[i] == '\r') || (buffer[i] == '\n'))
+ 337              		.loc 1 203 0
+ 338 004a 10AB     		add	r3, sp, #64
+ 339 004c 2B44     		add	r3, r3, r5
+ 340 004e 13F80C3C 		ldrb	r3, [r3, #-12]	@ zero_extendqisi2
+ 341 0052 0D2B     		cmp	r3, #13
+ 342 0054 01D0     		beq	.L32
+ 343              		.loc 1 203 0 is_stmt 0 discriminator 1
+ 344 0056 0A2B     		cmp	r3, #10
+ 345 0058 03D1     		bne	.L33
+ 346              	.L32:
+ 347              	.LVL23:
+ 204:main.c        ****                         {
+ 205:main.c        ****                             endOfData = true;
+ 206:main.c        ****                             USBUART_PutCRLF();
+ 348              		.loc 1 206 0 is_stmt 1
+ 349 005a FFF7FEFF 		bl	USBUART_PutCRLF
+ 350              	.LVL24:
+ 205:main.c        ****                             USBUART_PutCRLF();
+ 351              		.loc 1 205 0
+ 352 005e 0124     		movs	r4, #1
+ 353              		.loc 1 206 0
+ 354 0060 04E0     		b	.L34
+ 355              	.LVL25:
+ 356              	.L33:
+ 207:main.c        ****                         }
+ 208:main.c        ****                         else
+ 209:main.c        ****                         {
+ 210:main.c        ****                             data[dataPosition]=buffer[i];
+ 357              		.loc 1 210 0
+ 358 0062 10AA     		add	r2, sp, #64
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 11
 
 
- 370              	.L28:
- 202:main.c        ****             }
- 203:main.c        ****         }      
- 204:main.c        ****         
- 205:main.c        ****         
- 206:main.c        ****         if(USBUART_DataIsReady() != 0){
- 371              		.loc 1 206 0
- 372 0046 FFF7FEFF 		bl	USBUART_DataIsReady
- 373              	.LVL23:
- 374 004a 78B1     		cbz	r0, .L29
- 207:main.c        ****             dataSize = USBUART_GetAll(buffer);
- 375              		.loc 1 207 0
- 376 004c 2248     		ldr	r0, .L37+20
- 377 004e FFF7FEFF 		bl	USBUART_GetAll
- 378              	.LVL24:
- 379 0052 224B     		ldr	r3, .L37+24
- 380 0054 1860     		str	r0, [r3]
- 381              	.L30:
- 208:main.c        ****             while(!USBUART_CDCIsReady());
- 382              		.loc 1 208 0 discriminator 1
- 383 0056 FFF7FEFF 		bl	USBUART_CDCIsReady
- 384              	.LVL25:
- 385 005a 0028     		cmp	r0, #0
- 386 005c FBD0     		beq	.L30
- 209:main.c        ****             USBUART_PutCRLF();
- 387              		.loc 1 209 0
- 388 005e FFF7FEFF 		bl	USBUART_PutCRLF
- 389              	.LVL26:
- 210:main.c        ****             count = 0;            
- 390              		.loc 1 210 0
- 391 0062 0023     		movs	r3, #0
- 392 0064 1E4A     		ldr	r2, .L37+28
- 393 0066 1360     		str	r3, [r2]
- 211:main.c        ****             bufferPosition = 0;
- 394              		.loc 1 211 0
- 395 0068 1E4A     		ldr	r2, .L37+32
- 396 006a 5360     		str	r3, [r2, #4]
- 397              	.L29:
- 212:main.c        ****         }
- 213:main.c        **** 
- 214:main.c        ****         if(USBUART_CDCIsReady() != 0){
- 398              		.loc 1 214 0
- 399 006c FFF7FEFF 		bl	USBUART_CDCIsReady
- 400              	.LVL27:
- 401 0070 0028     		cmp	r0, #0
- 402 0072 E0D0     		beq	.L27
- 215:main.c        ****             if(count < dataSize && bufferPosition == dataSize){
- 403              		.loc 1 215 0
- 404 0074 1A4B     		ldr	r3, .L37+28
- 405 0076 1A68     		ldr	r2, [r3]
- 406 0078 184B     		ldr	r3, .L37+24
- 407 007a 1B68     		ldr	r3, [r3]
- 408 007c 9A42     		cmp	r2, r3
- 409 007e DADA     		bge	.L27
- 410              		.loc 1 215 0 is_stmt 0 discriminator 1
- 411 0080 184A     		ldr	r2, .L37+32
- 412 0082 5268     		ldr	r2, [r2, #4]
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 12
+ 359 0064 3244     		add	r2, r2, r6
+ 360 0066 02F83C3C 		strb	r3, [r2, #-60]
+ 211:main.c        ****                             dataPosition++;
+ 361              		.loc 1 211 0
+ 362 006a 0136     		adds	r6, r6, #1
+ 363              	.LVL26:
+ 364              	.L34:
+ 201:main.c        ****                     {
+ 365              		.loc 1 201 0 discriminator 2
+ 366 006c 0135     		adds	r5, r5, #1
+ 367              	.LVL27:
+ 368 006e 00E0     		b	.L30
+ 369              	.LVL28:
+ 370              	.L40:
+ 371              	.LBE2:
+ 372 0070 0025     		movs	r5, #0
+ 373              	.LVL29:
+ 374              	.L30:
+ 375              	.LBB3:
+ 201:main.c        ****                     {
+ 376              		.loc 1 201 0 is_stmt 0 discriminator 1
+ 377 0072 BD42     		cmp	r5, r7
+ 378 0074 E9DB     		blt	.L35
+ 379              	.LVL30:
+ 380              	.L29:
+ 381              	.LBE3:
+ 192:main.c        ****             // Check for input data
+ 382              		.loc 1 192 0 is_stmt 1
+ 383 0076 002C     		cmp	r4, #0
+ 384 0078 DED0     		beq	.L37
+ 212:main.c        ****                         }
+ 213:main.c        ****                     }                  
+ 214:main.c        ****                 }
+ 215:main.c        ****             }
+ 216:main.c        ****         }
+ 217:main.c        ****         
+ 218:main.c        ****         data[dataPosition]='\0'; // Writes an ending null terminator char.
+ 385              		.loc 1 218 0
+ 386 007a 0022     		movs	r2, #0
+ 387 007c 10AB     		add	r3, sp, #64
+ 388 007e 3344     		add	r3, r3, r6
+ 389 0080 03F83C2C 		strb	r2, [r3, #-60]
+ 219:main.c        ****         
+ 220:main.c        ****         dataPtr = data;
+ 390              		.loc 1 220 0
+ 391 0084 01AA     		add	r2, sp, #4
+ 392 0086 0C4B     		ldr	r3, .L42+16
+ 393 0088 1A60     		str	r2, [r3]
+ 221:main.c        ****         firstHalfBit = true;
+ 394              		.loc 1 221 0
+ 395 008a 0122     		movs	r2, #1
+ 396 008c 0B4B     		ldr	r3, .L42+20
+ 397 008e 1A70     		strb	r2, [r3]
+ 222:main.c        ****         idx = 7;
+ 398              		.loc 1 222 0
+ 399 0090 0722     		movs	r2, #7
+ 400 0092 0B4B     		ldr	r3, .L42+24
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 12
 
 
- 413 0084 9342     		cmp	r3, r2
- 414 0086 D6D1     		bne	.L27
- 415 0088 0DE0     		b	.L35
- 416              	.LVL28:
- 417              	.L33:
- 418              	.LBB2:
- 216:main.c        ****                 for(int y = 0; y < 16; y++){
- 217:main.c        ****                  while(!USBUART_CDCIsReady());
- 419              		.loc 1 217 0 is_stmt 1 discriminator 1
- 420 008a FFF7FEFF 		bl	USBUART_CDCIsReady
- 421              	.LVL29:
- 422 008e 0028     		cmp	r0, #0
- 423 0090 FBD0     		beq	.L33
- 218:main.c        ****                  USBUART_PutChar(data[count][y]); 
- 424              		.loc 1 218 0 discriminator 2
- 425 0092 134B     		ldr	r3, .L37+28
- 426 0094 1A68     		ldr	r2, [r3]
- 427 0096 144B     		ldr	r3, .L37+36
- 428 0098 03EB0213 		add	r3, r3, r2, lsl #4
- 429 009c 185D     		ldrb	r0, [r3, r4]	@ zero_extendqisi2
- 430 009e FFF7FEFF 		bl	USBUART_PutChar
- 431              	.LVL30:
- 216:main.c        ****                 for(int y = 0; y < 16; y++){
- 432              		.loc 1 216 0 discriminator 2
- 433 00a2 0134     		adds	r4, r4, #1
- 434              	.LVL31:
- 435 00a4 00E0     		b	.L32
- 436              	.LVL32:
- 437              	.L35:
- 438              	.LBE2:
- 439 00a6 0024     		movs	r4, #0
- 440              	.L32:
- 441              	.LVL33:
- 442              	.LBB3:
- 216:main.c        ****                 for(int y = 0; y < 16; y++){
- 443              		.loc 1 216 0 is_stmt 0 discriminator 1
- 444 00a8 0F2C     		cmp	r4, #15
- 445 00aa EEDD     		ble	.L33
- 446              	.LBE3:
- 219:main.c        ****                 }
- 220:main.c        ****                 ++count;
- 447              		.loc 1 220 0 is_stmt 1
- 448 00ac 0C4A     		ldr	r2, .L37+28
- 449 00ae 1368     		ldr	r3, [r2]
- 450 00b0 0133     		adds	r3, r3, #1
- 451 00b2 1360     		str	r3, [r2]
- 452              	.L34:
- 221:main.c        ****                 while(!USBUART_CDCIsReady());
- 453              		.loc 1 221 0 discriminator 1
- 454 00b4 FFF7FEFF 		bl	USBUART_CDCIsReady
- 455              	.LVL34:
- 456 00b8 0028     		cmp	r0, #0
- 457 00ba FBD0     		beq	.L34
- 222:main.c        ****                 USBUART_PutCRLF();
- 458              		.loc 1 222 0
- 459 00bc FFF7FEFF 		bl	USBUART_PutCRLF
- 460              	.LVL35:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 13
+ 401 0094 5A60     		str	r2, [r3, #4]
+ 402              	.L38:
+ 223:main.c        ****         
+ 224:main.c        ****         while (systemState != IDLE); // Wait for lines to be idle.
+ 403              		.loc 1 224 0 discriminator 1
+ 404 0096 0B4B     		ldr	r3, .L42+28
+ 405 0098 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 406 009a 022B     		cmp	r3, #2
+ 407 009c FBD1     		bne	.L38
+ 225:main.c        ****         
+ 226:main.c        ****         TransmitISR_StartEx(TransmitInterruptHandler);
+ 408              		.loc 1 226 0
+ 409 009e 0A48     		ldr	r0, .L42+32
+ 410 00a0 FFF7FEFF 		bl	TransmitISR_StartEx
+ 411              	.LVL31:
+ 227:main.c        ****         
+ 228:main.c        ****         /*
+ 229:main.c        ****         dataPosition = 0;
+ 230:main.c        ****         TRANSMIT_Write(0);
+ 231:main.c        ****         
+ 232:main.c        ****         while (systemState != IDLE);
+ 233:main.c        ****         
+ 234:main.c        ****         while (!endOfTransmission) 
+ 235:main.c        ****         {     
+ 236:main.c        ****             switch(systemState)
+ 237:main.c        ****             {
+ 238:main.c        ****                 case IDLE:
+ 239:main.c        ****                     IDLE_Write(1);
+ 240:main.c        ****                     BUSY_Write(!IDLE_Read());
+ 241:main.c        ****                     COLLISION_Write(!IDLE_Read());
+ 242:main.c        ****                     if((*(data+dataPosition)) != '\0')
+ 243:main.c        ****                     {
+ 244:main.c        ****                         TRANSMIT_Write(1);
+ 245:main.c        ****                         CyDelay(delay);
+ 246:main.c        ****                         TRANSMIT_Write(0);
+ 247:main.c        ****                         CyDelay(delay);
+ 248:main.c        ****                         
+ 249:main.c        ****                         itoa((*(data+dataPosition)), binaryOfChar, 2);
+ 250:main.c        ****                         for (int i = 0; i < 7; ++i) 
+ 251:main.c        ****                         {
+ 252:main.c        ****                             if(binaryOfChar[i] == '1')
+ 253:main.c        ****                             {
+ 254:main.c        ****                                 TRANSMIT_Write(1);
+ 255:main.c        ****                                 CyDelay(500);
+ 256:main.c        ****                                 TRANSMIT_Write(0);
+ 257:main.c        ****                                 CyDelay(delay);                                                    
+ 258:main.c        ****                             } else {
+ 259:main.c        ****                                 TRANSMIT_Write(0);
+ 260:main.c        ****                                 CyDelay(2*delay);
+ 261:main.c        ****                             }
+ 262:main.c        ****                         }
+ 263:main.c        ****                         ++dataPosition;
+ 264:main.c        ****                     } else {
+ 265:main.c        ****                         endOfTransmission = 1;
+ 266:main.c        ****                     }
+ 267:main.c        ****                                        
+ 268:main.c        ****                 break;
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 13
 
 
- 461 00c0 B9E7     		b	.L27
- 462              	.L38:
- 463 00c2 00BF     		.align	2
- 464              	.L37:
- 465 00c4 00000000 		.word	RisingEdgeInterruptHandler
- 466 00c8 00000000 		.word	FallingEdgeInterruptHandler
- 467 00cc 00000000 		.word	ReceiveInterruptHandler
- 468 00d0 00000000 		.word	TransmitInterruptHandler
- 469 00d4 00000000 		.word	USBUART_device
- 470 00d8 00000000 		.word	buffer
- 471 00dc 00000000 		.word	dataSize
- 472 00e0 00000000 		.word	count
- 473 00e4 00000000 		.word	.LANCHOR0
- 474 00e8 00000000 		.word	data
- 475              		.cfi_endproc
- 476              	.LFE68:
- 477              		.size	main, .-main
- 478              		.global	idx
- 479              		.comm	count,4,4
- 480              		.global	dataPosition
- 481              		.comm	dataSize,4,4
- 482              		.comm	data,8000,4
- 483              		.comm	buffer,500,4
- 484              		.global	bufferPosition
- 485              		.comm	currentDataCharacter,1,1
- 486              		.global	logicLevel
- 487              		.comm	systemState,1,1
- 488              		.bss
- 489              		.align	2
- 490              		.set	.LANCHOR0,. + 0
- 491              		.type	logicLevel, %object
- 492              		.size	logicLevel, 1
- 493              	logicLevel:
- 494 0000 00       		.space	1
- 495 0001 000000   		.space	3
- 496              		.type	bufferPosition, %object
- 497              		.size	bufferPosition, 4
- 498              	bufferPosition:
- 499 0004 00000000 		.space	4
- 500              		.type	dataPosition, %object
- 501              		.size	dataPosition, 4
- 502              	dataPosition:
- 503 0008 00000000 		.space	4
- 504              		.type	idx, %object
- 505              		.size	idx, 4
- 506              	idx:
- 507 000c 00000000 		.space	4
- 508              		.text
- 509              	.Letext0:
- 510              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 511              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
- 512              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
- 513              		.file 5 "Generated_Source\\PSoC5/USBUART.h"
- 514              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
- 515              		.file 7 "Generated_Source\\PSoC5/TimerRX.h"
- 516              		.file 8 "Generated_Source\\PSoC5/TRANSMIT.h"
- 517              		.file 9 "Generated_Source\\PSoC5/CyLib.h"
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 14
+ 269:main.c        ****                 
+ 270:main.c        ****                 case BUSY:
+ 271:main.c        ****                     BUSY_Write(1);
+ 272:main.c        ****                     IDLE_Write(!BUSY_Read());
+ 273:main.c        ****                     COLLISION_Write(!BUSY_Read());
+ 274:main.c        ****                 break;
+ 275:main.c        ****                 
+ 276:main.c        ****                 case COLLISION:
+ 277:main.c        ****                     COLLISION_Write(1);
+ 278:main.c        ****                     IDLE_Write(!COLLISION_Read());
+ 279:main.c        ****                     BUSY_Write(!COLLISION_Read());
+ 280:main.c        ****                     
+ 281:main.c        ****                 break;
+ 282:main.c        ****             }
+ 283:main.c        ****         }
+ 284:main.c        ****         */
+ 285:main.c        ****     }
+ 412              		.loc 1 285 0
+ 413 00a4 BFE7     		b	.L39
+ 414              	.L43:
+ 415 00a6 00BF     		.align	2
+ 416              	.L42:
+ 417 00a8 00000000 		.word	RisingEdgeInterruptHandler
+ 418 00ac 00000000 		.word	FallingEdgeInterruptHandler
+ 419 00b0 00000000 		.word	ReceiveInterruptHandler
+ 420 00b4 00000000 		.word	USBUART_device
+ 421 00b8 00000000 		.word	dataPtr
+ 422 00bc 00000000 		.word	firstHalfBit
+ 423 00c0 00000000 		.word	.LANCHOR0
+ 424 00c4 00000000 		.word	systemState
+ 425 00c8 00000000 		.word	TransmitInterruptHandler
+ 426              		.cfi_endproc
+ 427              	.LFE68:
+ 428              		.size	main, .-main
+ 429              		.comm	dataPtr,4,4
+ 430              		.comm	firstHalfBit,1,1
+ 431              		.global	idx
+ 432              		.global	logicLevel
+ 433              		.comm	systemState,1,1
+ 434              		.bss
+ 435              		.align	2
+ 436              		.set	.LANCHOR0,. + 0
+ 437              		.type	logicLevel, %object
+ 438              		.size	logicLevel, 1
+ 439              	logicLevel:
+ 440 0000 00       		.space	1
+ 441 0001 000000   		.space	3
+ 442              		.type	idx, %object
+ 443              		.size	idx, 4
+ 444              	idx:
+ 445 0004 00000000 		.space	4
+ 446              		.text
+ 447              	.Letext0:
+ 448              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 449              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 450              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 451              		.file 5 "Generated_Source\\PSoC5/USBUART.h"
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 14
 
 
- 518              		.file 10 "Generated_Source\\PSoC5/USBUART_cdc.h"
- 519              		.file 11 "Generated_Source\\PSoC5/RisingEdgeISR.h"
- 520              		.file 12 "Generated_Source\\PSoC5/FallingEdgeISR.h"
- 521              		.file 13 "Generated_Source\\PSoC5/TimerTX.h"
- 522              		.file 14 "Generated_Source\\PSoC5/ReceiveISR.h"
- 523              		.file 15 "Generated_Source\\PSoC5/TransmitISR.h"
- 524              		.section	.debug_info,"",%progbits
- 525              	.Ldebug_info0:
- 526 0000 33050000 		.4byte	0x533
- 527 0004 0400     		.2byte	0x4
- 528 0006 00000000 		.4byte	.Ldebug_abbrev0
- 529 000a 04       		.byte	0x4
- 530 000b 01       		.uleb128 0x1
- 531 000c 7A030000 		.4byte	.LASF57
- 532 0010 0C       		.byte	0xc
- 533 0011 9A020000 		.4byte	.LASF58
- 534 0015 BF020000 		.4byte	.LASF59
- 535 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
- 536 001d 00000000 		.4byte	0
- 537 0021 00000000 		.4byte	.Ldebug_line0
- 538 0025 02       		.uleb128 0x2
- 539 0026 01       		.byte	0x1
- 540 0027 06       		.byte	0x6
- 541 0028 A3010000 		.4byte	.LASF0
- 542 002c 02       		.uleb128 0x2
- 543 002d 01       		.byte	0x1
- 544 002e 08       		.byte	0x8
- 545 002f 89010000 		.4byte	.LASF1
- 546 0033 02       		.uleb128 0x2
- 547 0034 02       		.byte	0x2
- 548 0035 05       		.byte	0x5
- 549 0036 75000000 		.4byte	.LASF2
- 550 003a 02       		.uleb128 0x2
- 551 003b 02       		.byte	0x2
- 552 003c 07       		.byte	0x7
- 553 003d F4010000 		.4byte	.LASF3
- 554 0041 03       		.uleb128 0x3
- 555 0042 05030000 		.4byte	.LASF9
- 556 0046 02       		.byte	0x2
- 557 0047 3F       		.byte	0x3f
- 558 0048 4C000000 		.4byte	0x4c
- 559 004c 02       		.uleb128 0x2
- 560 004d 04       		.byte	0x4
- 561 004e 05       		.byte	0x5
- 562 004f 1C010000 		.4byte	.LASF4
- 563 0053 02       		.uleb128 0x2
- 564 0054 04       		.byte	0x4
- 565 0055 07       		.byte	0x7
- 566 0056 A6020000 		.4byte	.LASF5
- 567 005a 02       		.uleb128 0x2
- 568 005b 08       		.byte	0x8
- 569 005c 05       		.byte	0x5
- 570 005d EA000000 		.4byte	.LASF6
- 571 0061 02       		.uleb128 0x2
- 572 0062 08       		.byte	0x8
- 573 0063 07       		.byte	0x7
- 574 0064 AF010000 		.4byte	.LASF7
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 15
+ 452              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 453              		.file 7 "Generated_Source\\PSoC5/TRANSMIT.h"
+ 454              		.file 8 "Generated_Source\\PSoC5/TransmitISR.h"
+ 455              		.file 9 "Generated_Source\\PSoC5/TimerRX.h"
+ 456              		.file 10 "Generated_Source\\PSoC5/USBUART_cdc.h"
+ 457              		.file 11 "Generated_Source\\PSoC5/RisingEdgeISR.h"
+ 458              		.file 12 "Generated_Source\\PSoC5/FallingEdgeISR.h"
+ 459              		.file 13 "Generated_Source\\PSoC5/ReceiveISR.h"
+ 460              		.section	.debug_info,"",%progbits
+ 461              	.Ldebug_info0:
+ 462 0000 8C040000 		.4byte	0x48c
+ 463 0004 0400     		.2byte	0x4
+ 464 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 465 000a 04       		.byte	0x4
+ 466 000b 01       		.uleb128 0x1
+ 467 000c 58030000 		.4byte	.LASF54
+ 468 0010 0C       		.byte	0xc
+ 469 0011 CF020000 		.4byte	.LASF55
+ 470 0015 C4010000 		.4byte	.LASF56
+ 471 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 472 001d 00000000 		.4byte	0
+ 473 0021 00000000 		.4byte	.Ldebug_line0
+ 474 0025 02       		.uleb128 0x2
+ 475 0026 01       		.byte	0x1
+ 476 0027 06       		.byte	0x6
+ 477 0028 A1010000 		.4byte	.LASF0
+ 478 002c 02       		.uleb128 0x2
+ 479 002d 01       		.byte	0x1
+ 480 002e 08       		.byte	0x8
+ 481 002f 87010000 		.4byte	.LASF1
+ 482 0033 02       		.uleb128 0x2
+ 483 0034 02       		.byte	0x2
+ 484 0035 05       		.byte	0x5
+ 485 0036 53000000 		.4byte	.LASF2
+ 486 003a 02       		.uleb128 0x2
+ 487 003b 02       		.byte	0x2
+ 488 003c 07       		.byte	0x7
+ 489 003d 49020000 		.4byte	.LASF3
+ 490 0041 03       		.uleb128 0x3
+ 491 0042 FE020000 		.4byte	.LASF9
+ 492 0046 02       		.byte	0x2
+ 493 0047 3F       		.byte	0x3f
+ 494 0048 4C000000 		.4byte	0x4c
+ 495 004c 02       		.uleb128 0x2
+ 496 004d 04       		.byte	0x4
+ 497 004e 05       		.byte	0x5
+ 498 004f 11010000 		.4byte	.LASF4
+ 499 0053 02       		.uleb128 0x2
+ 500 0054 04       		.byte	0x4
+ 501 0055 07       		.byte	0x7
+ 502 0056 DB020000 		.4byte	.LASF5
+ 503 005a 02       		.uleb128 0x2
+ 504 005b 08       		.byte	0x8
+ 505 005c 05       		.byte	0x5
+ 506 005d DF000000 		.4byte	.LASF6
+ 507 0061 02       		.uleb128 0x2
+ 508 0062 08       		.byte	0x8
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 15
 
 
- 575 0068 04       		.uleb128 0x4
- 576 0069 04       		.byte	0x4
- 577 006a 05       		.byte	0x5
- 578 006b 696E7400 		.ascii	"int\000"
- 579 006f 02       		.uleb128 0x2
- 580 0070 04       		.byte	0x4
- 581 0071 07       		.byte	0x7
- 582 0072 C6010000 		.4byte	.LASF8
- 583 0076 03       		.uleb128 0x3
- 584 0077 26020000 		.4byte	.LASF10
- 585 007b 03       		.byte	0x3
- 586 007c 2C       		.byte	0x2c
- 587 007d 41000000 		.4byte	0x41
- 588 0081 05       		.uleb128 0x5
- 589 0082 41030000 		.4byte	.LASF11
- 590 0086 04       		.byte	0x4
- 591 0087 9201     		.2byte	0x192
- 592 0089 2C000000 		.4byte	0x2c
- 593 008d 02       		.uleb128 0x2
- 594 008e 04       		.byte	0x4
- 595 008f 04       		.byte	0x4
- 596 0090 CB000000 		.4byte	.LASF12
- 597 0094 02       		.uleb128 0x2
- 598 0095 08       		.byte	0x8
- 599 0096 04       		.byte	0x4
- 600 0097 B8020000 		.4byte	.LASF13
- 601 009b 02       		.uleb128 0x2
- 602 009c 01       		.byte	0x1
- 603 009d 08       		.byte	0x8
- 604 009e 1B020000 		.4byte	.LASF14
- 605 00a2 05       		.uleb128 0x5
- 606 00a3 A1020000 		.4byte	.LASF15
- 607 00a7 04       		.byte	0x4
- 608 00a8 3C02     		.2byte	0x23c
- 609 00aa AE000000 		.4byte	0xae
- 610 00ae 06       		.uleb128 0x6
- 611 00af 81000000 		.4byte	0x81
- 612 00b3 02       		.uleb128 0x2
- 613 00b4 08       		.byte	0x8
- 614 00b5 04       		.byte	0x4
- 615 00b6 73010000 		.4byte	.LASF16
- 616 00ba 02       		.uleb128 0x2
- 617 00bb 04       		.byte	0x4
- 618 00bc 07       		.byte	0x7
- 619 00bd 7F000000 		.4byte	.LASF17
- 620 00c1 07       		.uleb128 0x7
- 621 00c2 57000000 		.4byte	.LASF60
- 622 00c6 01       		.byte	0x1
- 623 00c7 2C000000 		.4byte	0x2c
- 624 00cb 01       		.byte	0x1
- 625 00cc 23       		.byte	0x23
- 626 00cd E4000000 		.4byte	0xe4
- 627 00d1 08       		.uleb128 0x8
- 628 00d2 6E010000 		.4byte	.LASF18
- 629 00d6 00       		.byte	0
- 630 00d7 08       		.uleb128 0x8
- 631 00d8 64010000 		.4byte	.LASF19
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 16
+ 509 0063 07       		.byte	0x7
+ 510 0064 AD010000 		.4byte	.LASF7
+ 511 0068 04       		.uleb128 0x4
+ 512 0069 04       		.byte	0x4
+ 513 006a 05       		.byte	0x5
+ 514 006b 696E7400 		.ascii	"int\000"
+ 515 006f 02       		.uleb128 0x2
+ 516 0070 04       		.byte	0x4
+ 517 0071 07       		.byte	0x7
+ 518 0072 21020000 		.4byte	.LASF8
+ 519 0076 03       		.uleb128 0x3
+ 520 0077 7A020000 		.4byte	.LASF10
+ 521 007b 03       		.byte	0x3
+ 522 007c 2C       		.byte	0x2c
+ 523 007d 41000000 		.4byte	0x41
+ 524 0081 05       		.uleb128 0x5
+ 525 0082 AC000000 		.4byte	.LASF11
+ 526 0086 04       		.byte	0x4
+ 527 0087 9201     		.2byte	0x192
+ 528 0089 2C000000 		.4byte	0x2c
+ 529 008d 02       		.uleb128 0x2
+ 530 008e 04       		.byte	0x4
+ 531 008f 04       		.byte	0x4
+ 532 0090 C0000000 		.4byte	.LASF12
+ 533 0094 02       		.uleb128 0x2
+ 534 0095 08       		.byte	0x8
+ 535 0096 04       		.byte	0x4
+ 536 0097 ED020000 		.4byte	.LASF13
+ 537 009b 02       		.uleb128 0x2
+ 538 009c 01       		.byte	0x1
+ 539 009d 08       		.byte	0x8
+ 540 009e 75020000 		.4byte	.LASF14
+ 541 00a2 05       		.uleb128 0x5
+ 542 00a3 D6020000 		.4byte	.LASF15
+ 543 00a7 04       		.byte	0x4
+ 544 00a8 3C02     		.2byte	0x23c
+ 545 00aa AE000000 		.4byte	0xae
+ 546 00ae 06       		.uleb128 0x6
+ 547 00af 81000000 		.4byte	0x81
+ 548 00b3 02       		.uleb128 0x2
+ 549 00b4 08       		.byte	0x8
+ 550 00b5 04       		.byte	0x4
+ 551 00b6 6E010000 		.4byte	.LASF16
+ 552 00ba 02       		.uleb128 0x2
+ 553 00bb 04       		.byte	0x4
+ 554 00bc 07       		.byte	0x7
+ 555 00bd 5D000000 		.4byte	.LASF17
+ 556 00c1 07       		.uleb128 0x7
+ 557 00c2 04       		.byte	0x4
+ 558 00c3 9B000000 		.4byte	0x9b
+ 559 00c7 08       		.uleb128 0x8
+ 560 00c8 35000000 		.4byte	.LASF57
+ 561 00cc 01       		.byte	0x1
+ 562 00cd 2C000000 		.4byte	0x2c
+ 563 00d1 01       		.byte	0x1
+ 564 00d2 25       		.byte	0x25
+ 565 00d3 EA000000 		.4byte	0xea
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 16
 
 
- 632 00dc 01       		.byte	0x1
- 633 00dd 08       		.uleb128 0x8
- 634 00de C6000000 		.4byte	.LASF20
- 635 00e2 02       		.byte	0x2
- 636 00e3 00       		.byte	0
- 637 00e4 09       		.uleb128 0x9
- 638 00e5 5D000000 		.4byte	.LASF61
- 639 00e9 01       		.byte	0x1
- 640 00ea 40       		.byte	0x40
- 641 00eb 00000000 		.4byte	.LFB64
- 642 00ef 28000000 		.4byte	.LFE64-.LFB64
- 643 00f3 01       		.uleb128 0x1
- 644 00f4 9C       		.byte	0x9c
- 645 00f5 0A       		.uleb128 0xa
- 646 00f6 08040000 		.4byte	.LASF21
- 647 00fa 01       		.byte	0x1
- 648 00fb 57       		.byte	0x57
- 649 00fc 00000000 		.4byte	.LFB65
- 650 0100 30000000 		.4byte	.LFE65-.LFB65
- 651 0104 01       		.uleb128 0x1
- 652 0105 9C       		.byte	0x9c
- 653 0106 3C010000 		.4byte	0x13c
- 654 010a 0B       		.uleb128 0xb
- 655 010b 0E000000 		.4byte	.LVL0
- 656 010f 4C040000 		.4byte	0x44c
- 657 0113 1E010000 		.4byte	0x11e
- 658 0117 0C       		.uleb128 0xc
- 659 0118 01       		.uleb128 0x1
- 660 0119 50       		.byte	0x50
- 661 011a 02       		.uleb128 0x2
- 662 011b 08       		.byte	0x8
- 663 011c 34       		.byte	0x34
- 664 011d 00       		.byte	0
- 665 011e 0B       		.uleb128 0xb
- 666 011f 14000000 		.4byte	.LVL1
- 667 0123 57040000 		.4byte	0x457
- 668 0127 32010000 		.4byte	0x132
- 669 012b 0C       		.uleb128 0xc
- 670 012c 01       		.uleb128 0x1
- 671 012d 50       		.byte	0x50
- 672 012e 02       		.uleb128 0x2
- 673 012f 08       		.byte	0x8
- 674 0130 33       		.byte	0x33
- 675 0131 00       		.byte	0
- 676 0132 0D       		.uleb128 0xd
- 677 0133 18000000 		.4byte	.LVL2
- 678 0137 62040000 		.4byte	0x462
- 679 013b 00       		.byte	0
- 680 013c 0A       		.uleb128 0xa
- 681 013d 48010000 		.4byte	.LASF22
- 682 0141 01       		.byte	0x1
- 683 0142 6F       		.byte	0x6f
- 684 0143 00000000 		.4byte	.LFB66
- 685 0147 30000000 		.4byte	.LFE66-.LFB66
- 686 014b 01       		.uleb128 0x1
- 687 014c 9C       		.byte	0x9c
- 688 014d 85010000 		.4byte	0x185
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 17
+ 566 00d7 09       		.uleb128 0x9
+ 567 00d8 5C020000 		.4byte	.LASF18
+ 568 00dc 00       		.byte	0
+ 569 00dd 09       		.uleb128 0x9
+ 570 00de 52010000 		.4byte	.LASF19
+ 571 00e2 01       		.byte	0x1
+ 572 00e3 09       		.uleb128 0x9
+ 573 00e4 B2000000 		.4byte	.LASF20
+ 574 00e8 02       		.byte	0x2
+ 575 00e9 00       		.byte	0
+ 576 00ea 0A       		.uleb128 0xa
+ 577 00eb 3B000000 		.4byte	.LASF58
+ 578 00ef 01       		.byte	0x1
+ 579 00f0 3E       		.byte	0x3e
+ 580 00f1 00000000 		.4byte	.LFB64
+ 581 00f5 28000000 		.4byte	.LFE64-.LFB64
+ 582 00f9 01       		.uleb128 0x1
+ 583 00fa 9C       		.byte	0x9c
+ 584 00fb 0B       		.uleb128 0xb
+ 585 00fc F8000000 		.4byte	.LASF21
+ 586 0100 01       		.byte	0x1
+ 587 0101 4B       		.byte	0x4b
+ 588 0102 00000000 		.4byte	.LFB65
+ 589 0106 80000000 		.4byte	.LFE65-.LFB65
+ 590 010a 01       		.uleb128 0x1
+ 591 010b 9C       		.byte	0x9c
+ 592 010c 58010000 		.4byte	0x158
+ 593 0110 0C       		.uleb128 0xc
+ 594 0111 14000000 		.4byte	.LVL0
+ 595 0115 DC030000 		.4byte	0x3dc
+ 596 0119 23010000 		.4byte	0x123
+ 597 011d 0D       		.uleb128 0xd
+ 598 011e 01       		.uleb128 0x1
+ 599 011f 50       		.byte	0x50
+ 600 0120 01       		.uleb128 0x1
+ 601 0121 30       		.byte	0x30
+ 602 0122 00       		.byte	0
+ 603 0123 0E       		.uleb128 0xe
+ 604 0124 18000000 		.4byte	.LVL1
+ 605 0128 E7030000 		.4byte	0x3e7
+ 606 012c 0C       		.uleb128 0xc
+ 607 012d 2E000000 		.4byte	.LVL2
+ 608 0131 DC030000 		.4byte	0x3dc
+ 609 0135 3F010000 		.4byte	0x13f
+ 610 0139 0D       		.uleb128 0xd
+ 611 013a 01       		.uleb128 0x1
+ 612 013b 50       		.byte	0x50
+ 613 013c 01       		.uleb128 0x1
+ 614 013d 31       		.byte	0x31
+ 615 013e 00       		.byte	0
+ 616 013f 0E       		.uleb128 0xe
+ 617 0140 3C000000 		.4byte	.LVL3
+ 618 0144 DC030000 		.4byte	0x3dc
+ 619 0148 0F       		.uleb128 0xf
+ 620 0149 4A000000 		.4byte	.LVL4
+ 621 014d DC030000 		.4byte	0x3dc
+ 622 0151 0D       		.uleb128 0xd
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 17
 
 
- 689 0151 0B       		.uleb128 0xb
- 690 0152 10000000 		.4byte	.LVL3
- 691 0156 4C040000 		.4byte	0x44c
- 692 015a 66010000 		.4byte	0x166
- 693 015e 0C       		.uleb128 0xc
- 694 015f 01       		.uleb128 0x1
- 695 0160 50       		.byte	0x50
- 696 0161 03       		.uleb128 0x3
- 697 0162 0A       		.byte	0xa
- 698 0163 3E03     		.2byte	0x33e
- 699 0165 00       		.byte	0
- 700 0166 0B       		.uleb128 0xb
- 701 0167 18000000 		.4byte	.LVL4
- 702 016b 57040000 		.4byte	0x457
- 703 016f 7B010000 		.4byte	0x17b
- 704 0173 0C       		.uleb128 0xc
- 705 0174 01       		.uleb128 0x1
- 706 0175 50       		.byte	0x50
- 707 0176 03       		.uleb128 0x3
- 708 0177 0A       		.byte	0xa
- 709 0178 3D03     		.2byte	0x33d
- 710 017a 00       		.byte	0
- 711 017b 0D       		.uleb128 0xd
- 712 017c 1C000000 		.4byte	.LVL5
- 713 0180 62040000 		.4byte	0x462
- 714 0184 00       		.byte	0
- 715 0185 0A       		.uleb128 0xa
- 716 0186 03010000 		.4byte	.LASF23
- 717 018a 01       		.byte	0x1
- 718 018b 85       		.byte	0x85
- 719 018c 00000000 		.4byte	.LFB67
- 720 0190 DC000000 		.4byte	.LFE67-.LFB67
- 721 0194 01       		.uleb128 0x1
- 722 0195 9C       		.byte	0x9c
- 723 0196 0B020000 		.4byte	0x20b
- 724 019a 0B       		.uleb128 0xb
- 725 019b 26000000 		.4byte	.LVL6
- 726 019f 6D040000 		.4byte	0x46d
- 727 01a3 AD010000 		.4byte	0x1ad
- 728 01a7 0C       		.uleb128 0xc
- 729 01a8 01       		.uleb128 0x1
- 730 01a9 50       		.byte	0x50
- 731 01aa 01       		.uleb128 0x1
- 732 01ab 31       		.byte	0x31
- 733 01ac 00       		.byte	0
- 734 01ad 0B       		.uleb128 0xb
- 735 01ae 44000000 		.4byte	.LVL7
- 736 01b2 6D040000 		.4byte	0x46d
- 737 01b6 C0010000 		.4byte	0x1c0
- 738 01ba 0C       		.uleb128 0xc
- 739 01bb 01       		.uleb128 0x1
- 740 01bc 50       		.byte	0x50
- 741 01bd 01       		.uleb128 0x1
- 742 01be 30       		.byte	0x30
- 743 01bf 00       		.byte	0
- 744 01c0 0B       		.uleb128 0xb
- 745 01c1 6C000000 		.4byte	.LVL8
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 18
+ 623 0152 01       		.uleb128 0x1
+ 624 0153 50       		.byte	0x50
+ 625 0154 01       		.uleb128 0x1
+ 626 0155 30       		.byte	0x30
+ 627 0156 00       		.byte	0
+ 628 0157 00       		.byte	0
+ 629 0158 0B       		.uleb128 0xb
+ 630 0159 E6030000 		.4byte	.LASF22
+ 631 015d 01       		.byte	0x1
+ 632 015e 74       		.byte	0x74
+ 633 015f 00000000 		.4byte	.LFB66
+ 634 0163 30000000 		.4byte	.LFE66-.LFB66
+ 635 0167 01       		.uleb128 0x1
+ 636 0168 9C       		.byte	0x9c
+ 637 0169 9F010000 		.4byte	0x19f
+ 638 016d 0C       		.uleb128 0xc
+ 639 016e 0E000000 		.4byte	.LVL5
+ 640 0172 F2030000 		.4byte	0x3f2
+ 641 0176 81010000 		.4byte	0x181
+ 642 017a 0D       		.uleb128 0xd
+ 643 017b 01       		.uleb128 0x1
+ 644 017c 50       		.byte	0x50
+ 645 017d 02       		.uleb128 0x2
+ 646 017e 08       		.byte	0x8
+ 647 017f 34       		.byte	0x34
+ 648 0180 00       		.byte	0
+ 649 0181 0C       		.uleb128 0xc
+ 650 0182 14000000 		.4byte	.LVL6
+ 651 0186 FD030000 		.4byte	0x3fd
+ 652 018a 95010000 		.4byte	0x195
+ 653 018e 0D       		.uleb128 0xd
+ 654 018f 01       		.uleb128 0x1
+ 655 0190 50       		.byte	0x50
+ 656 0191 02       		.uleb128 0x2
+ 657 0192 08       		.byte	0x8
+ 658 0193 33       		.byte	0x33
+ 659 0194 00       		.byte	0
+ 660 0195 0E       		.uleb128 0xe
+ 661 0196 18000000 		.4byte	.LVL7
+ 662 019a 08040000 		.4byte	0x408
+ 663 019e 00       		.byte	0
+ 664 019f 0B       		.uleb128 0xb
+ 665 01a0 36010000 		.4byte	.LASF23
+ 666 01a4 01       		.byte	0x1
+ 667 01a5 8C       		.byte	0x8c
+ 668 01a6 00000000 		.4byte	.LFB67
+ 669 01aa 30000000 		.4byte	.LFE67-.LFB67
+ 670 01ae 01       		.uleb128 0x1
+ 671 01af 9C       		.byte	0x9c
+ 672 01b0 E8010000 		.4byte	0x1e8
+ 673 01b4 0C       		.uleb128 0xc
+ 674 01b5 10000000 		.4byte	.LVL8
+ 675 01b9 F2030000 		.4byte	0x3f2
+ 676 01bd C9010000 		.4byte	0x1c9
+ 677 01c1 0D       		.uleb128 0xd
+ 678 01c2 01       		.uleb128 0x1
+ 679 01c3 50       		.byte	0x50
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 18
 
 
- 746 01c5 6D040000 		.4byte	0x46d
- 747 01c9 D3010000 		.4byte	0x1d3
- 748 01cd 0C       		.uleb128 0xc
- 749 01ce 01       		.uleb128 0x1
- 750 01cf 50       		.byte	0x50
- 751 01d0 01       		.uleb128 0x1
- 752 01d1 31       		.byte	0x31
- 753 01d2 00       		.byte	0
- 754 01d3 0B       		.uleb128 0xb
- 755 01d4 84000000 		.4byte	.LVL9
- 756 01d8 6D040000 		.4byte	0x46d
- 757 01dc E6010000 		.4byte	0x1e6
- 758 01e0 0C       		.uleb128 0xc
- 759 01e1 01       		.uleb128 0x1
- 760 01e2 50       		.byte	0x50
- 761 01e3 01       		.uleb128 0x1
- 762 01e4 30       		.byte	0x30
- 763 01e5 00       		.byte	0
- 764 01e6 0B       		.uleb128 0xb
- 765 01e7 A4000000 		.4byte	.LVL10
- 766 01eb 78040000 		.4byte	0x478
- 767 01ef FB010000 		.4byte	0x1fb
- 768 01f3 0C       		.uleb128 0xc
- 769 01f4 01       		.uleb128 0x1
- 770 01f5 50       		.byte	0x50
- 771 01f6 03       		.uleb128 0x3
- 772 01f7 0A       		.byte	0xa
- 773 01f8 C201     		.2byte	0x1c2
- 774 01fa 00       		.byte	0
- 775 01fb 0E       		.uleb128 0xe
- 776 01fc C2000000 		.4byte	.LVL11
- 777 0200 6D040000 		.4byte	0x46d
- 778 0204 0C       		.uleb128 0xc
- 779 0205 01       		.uleb128 0x1
- 780 0206 50       		.byte	0x50
- 781 0207 01       		.uleb128 0x1
- 782 0208 30       		.byte	0x30
- 783 0209 00       		.byte	0
- 784 020a 00       		.byte	0
- 785 020b 0F       		.uleb128 0xf
- 786 020c A4000000 		.4byte	.LASF62
- 787 0210 01       		.byte	0x1
- 788 0211 AF       		.byte	0xaf
- 789 0212 68000000 		.4byte	0x68
- 790 0216 00000000 		.4byte	.LFB68
- 791 021a EC000000 		.4byte	.LFE68-.LFB68
- 792 021e 01       		.uleb128 0x1
- 793 021f 9C       		.byte	0x9c
- 794 0220 56030000 		.4byte	0x356
- 795 0224 10       		.uleb128 0x10
- 796 0225 00000000 		.4byte	.Ldebug_ranges0+0
- 797 0229 4D020000 		.4byte	0x24d
- 798 022d 11       		.uleb128 0x11
- 799 022e 7900     		.ascii	"y\000"
- 800 0230 01       		.byte	0x1
- 801 0231 D8       		.byte	0xd8
- 802 0232 68000000 		.4byte	0x68
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 19
+ 680 01c4 03       		.uleb128 0x3
+ 681 01c5 0A       		.byte	0xa
+ 682 01c6 3E03     		.2byte	0x33e
+ 683 01c8 00       		.byte	0
+ 684 01c9 0C       		.uleb128 0xc
+ 685 01ca 18000000 		.4byte	.LVL9
+ 686 01ce FD030000 		.4byte	0x3fd
+ 687 01d2 DE010000 		.4byte	0x1de
+ 688 01d6 0D       		.uleb128 0xd
+ 689 01d7 01       		.uleb128 0x1
+ 690 01d8 50       		.byte	0x50
+ 691 01d9 03       		.uleb128 0x3
+ 692 01da 0A       		.byte	0xa
+ 693 01db 3D03     		.2byte	0x33d
+ 694 01dd 00       		.byte	0
+ 695 01de 0E       		.uleb128 0xe
+ 696 01df 1C000000 		.4byte	.LVL10
+ 697 01e3 08040000 		.4byte	0x408
+ 698 01e7 00       		.byte	0
+ 699 01e8 10       		.uleb128 0x10
+ 700 01e9 82000000 		.4byte	.LASF59
+ 701 01ed 01       		.byte	0x1
+ 702 01ee A2       		.byte	0xa2
+ 703 01ef 68000000 		.4byte	0x68
+ 704 01f3 00000000 		.4byte	.LFB68
+ 705 01f7 CC000000 		.4byte	.LFE68-.LFB68
+ 706 01fb 01       		.uleb128 0x1
+ 707 01fc 9C       		.byte	0x9c
+ 708 01fd 33030000 		.4byte	0x333
+ 709 0201 11       		.uleb128 0x11
+ 710 0202 87000000 		.4byte	.LASF24
+ 711 0206 01       		.byte	0x1
+ 712 0207 AA       		.byte	0xaa
+ 713 0208 68000000 		.4byte	0x68
+ 714 020c F401     		.2byte	0x1f4
+ 715 020e 12       		.uleb128 0x12
+ 716 020f B7000000 		.4byte	.LASF25
+ 717 0213 01       		.byte	0x1
+ 718 0214 AB       		.byte	0xab
+ 719 0215 68000000 		.4byte	0x68
+ 720 0219 00000000 		.4byte	.LLST0
+ 721 021d 12       		.uleb128 0x12
+ 722 021e 75000000 		.4byte	.LASF26
+ 723 0222 01       		.byte	0x1
+ 724 0223 AC       		.byte	0xac
+ 725 0224 68000000 		.4byte	0x68
+ 726 0228 40000000 		.4byte	.LLST1
+ 727 022c 12       		.uleb128 0x12
+ 728 022d F4020000 		.4byte	.LASF27
+ 729 0231 01       		.byte	0x1
+ 730 0232 AD       		.byte	0xad
+ 731 0233 33030000 		.4byte	0x333
+ 732 0237 5F000000 		.4byte	.LLST2
+ 733 023b 13       		.uleb128 0x13
+ 734 023c C8020000 		.4byte	.LASF28
+ 735 0240 01       		.byte	0x1
+ 736 0241 AE       		.byte	0xae
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 19
 
 
- 803 0236 00000000 		.4byte	.LLST0
- 804 023a 0D       		.uleb128 0xd
- 805 023b 8E000000 		.4byte	.LVL29
- 806 023f 83040000 		.4byte	0x483
- 807 0243 0D       		.uleb128 0xd
- 808 0244 A2000000 		.4byte	.LVL30
- 809 0248 8E040000 		.4byte	0x48e
- 810 024c 00       		.byte	0
- 811 024d 0B       		.uleb128 0xb
- 812 024e 0A000000 		.4byte	.LVL12
- 813 0252 99040000 		.4byte	0x499
- 814 0256 64020000 		.4byte	0x264
- 815 025a 0C       		.uleb128 0xc
- 816 025b 01       		.uleb128 0x1
- 817 025c 50       		.byte	0x50
- 818 025d 05       		.uleb128 0x5
- 819 025e 03       		.byte	0x3
- 820 025f 00000000 		.4byte	RisingEdgeInterruptHandler
- 821 0263 00       		.byte	0
- 822 0264 0B       		.uleb128 0xb
- 823 0265 10000000 		.4byte	.LVL13
- 824 0269 A4040000 		.4byte	0x4a4
- 825 026d 7B020000 		.4byte	0x27b
- 826 0271 0C       		.uleb128 0xc
- 827 0272 01       		.uleb128 0x1
- 828 0273 50       		.byte	0x50
- 829 0274 05       		.uleb128 0x5
- 830 0275 03       		.byte	0x3
- 831 0276 00000000 		.4byte	FallingEdgeInterruptHandler
- 832 027a 00       		.byte	0
- 833 027b 0D       		.uleb128 0xd
- 834 027c 14000000 		.4byte	.LVL14
- 835 0280 AF040000 		.4byte	0x4af
- 836 0284 0B       		.uleb128 0xb
- 837 0285 1A000000 		.4byte	.LVL15
- 838 0289 BA040000 		.4byte	0x4ba
- 839 028d 98020000 		.4byte	0x298
- 840 0291 0C       		.uleb128 0xc
- 841 0292 01       		.uleb128 0x1
- 842 0293 50       		.byte	0x50
- 843 0294 02       		.uleb128 0x2
- 844 0295 08       		.byte	0x8
- 845 0296 2D       		.byte	0x2d
- 846 0297 00       		.byte	0
- 847 0298 0B       		.uleb128 0xb
- 848 0299 20000000 		.4byte	.LVL16
- 849 029d C5040000 		.4byte	0x4c5
- 850 02a1 AC020000 		.4byte	0x2ac
- 851 02a5 0C       		.uleb128 0xc
- 852 02a6 01       		.uleb128 0x1
- 853 02a7 50       		.byte	0x50
- 854 02a8 02       		.uleb128 0x2
- 855 02a9 08       		.byte	0x8
- 856 02aa 2C       		.byte	0x2c
- 857 02ab 00       		.byte	0
- 858 02ac 0B       		.uleb128 0xb
- 859 02ad 26000000 		.4byte	.LVL17
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 20
+ 737 0242 3A030000 		.4byte	0x33a
+ 738 0246 02       		.uleb128 0x2
+ 739 0247 91       		.byte	0x91
+ 740 0248 5C       		.sleb128 -36
+ 741 0249 13       		.uleb128 0x13
+ 742 024a AC020000 		.4byte	.LASF29
+ 743 024e 01       		.byte	0x1
+ 744 024f AF       		.byte	0xaf
+ 745 0250 4A030000 		.4byte	0x34a
+ 746 0254 03       		.uleb128 0x3
+ 747 0255 91       		.byte	0x91
+ 748 0256 AC7F     		.sleb128 -84
+ 749 0258 14       		.uleb128 0x14
+ 750 0259 5C010000 		.4byte	.LASF30
+ 751 025d 01       		.byte	0x1
+ 752 025e B0       		.byte	0xb0
+ 753 025f 33030000 		.4byte	0x333
+ 754 0263 00       		.byte	0
+ 755 0264 15       		.uleb128 0x15
+ 756 0265 29010000 		.4byte	.LASF60
+ 757 0269 01       		.byte	0x1
+ 758 026a B1       		.byte	0xb1
+ 759 026b 5A030000 		.4byte	0x35a
+ 760 026f 16       		.uleb128 0x16
+ 761 0270 00000000 		.4byte	.Ldebug_ranges0+0
+ 762 0274 8F020000 		.4byte	0x28f
+ 763 0278 17       		.uleb128 0x17
+ 764 0279 6900     		.ascii	"i\000"
+ 765 027b 01       		.byte	0x1
+ 766 027c C9       		.byte	0xc9
+ 767 027d 68000000 		.4byte	0x68
+ 768 0281 95000000 		.4byte	.LLST3
+ 769 0285 0E       		.uleb128 0xe
+ 770 0286 5E000000 		.4byte	.LVL24
+ 771 028a 13040000 		.4byte	0x413
+ 772 028e 00       		.byte	0
+ 773 028f 0C       		.uleb128 0xc
+ 774 0290 0C000000 		.4byte	.LVL11
+ 775 0294 1E040000 		.4byte	0x41e
+ 776 0298 A6020000 		.4byte	0x2a6
+ 777 029c 0D       		.uleb128 0xd
+ 778 029d 01       		.uleb128 0x1
+ 779 029e 50       		.byte	0x50
+ 780 029f 05       		.uleb128 0x5
+ 781 02a0 03       		.byte	0x3
+ 782 02a1 00000000 		.4byte	RisingEdgeInterruptHandler
+ 783 02a5 00       		.byte	0
+ 784 02a6 0C       		.uleb128 0xc
+ 785 02a7 12000000 		.4byte	.LVL12
+ 786 02ab 29040000 		.4byte	0x429
+ 787 02af BD020000 		.4byte	0x2bd
+ 788 02b3 0D       		.uleb128 0xd
+ 789 02b4 01       		.uleb128 0x1
+ 790 02b5 50       		.byte	0x50
+ 791 02b6 05       		.uleb128 0x5
+ 792 02b7 03       		.byte	0x3
+ 793 02b8 00000000 		.4byte	FallingEdgeInterruptHandler
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 20
 
 
- 860 02b1 D0040000 		.4byte	0x4d0
- 861 02b5 C3020000 		.4byte	0x2c3
- 862 02b9 0C       		.uleb128 0xc
- 863 02ba 01       		.uleb128 0x1
- 864 02bb 50       		.byte	0x50
- 865 02bc 05       		.uleb128 0x5
- 866 02bd 03       		.byte	0x3
- 867 02be 00000000 		.4byte	ReceiveInterruptHandler
- 868 02c2 00       		.byte	0
- 869 02c3 0B       		.uleb128 0xb
- 870 02c4 2C000000 		.4byte	.LVL18
- 871 02c8 DB040000 		.4byte	0x4db
- 872 02cc DA020000 		.4byte	0x2da
- 873 02d0 0C       		.uleb128 0xc
- 874 02d1 01       		.uleb128 0x1
- 875 02d2 50       		.byte	0x50
- 876 02d3 05       		.uleb128 0x5
- 877 02d4 03       		.byte	0x3
- 878 02d5 00000000 		.4byte	TransmitInterruptHandler
- 879 02d9 00       		.byte	0
- 880 02da 0B       		.uleb128 0xb
- 881 02db 36000000 		.4byte	.LVL19
- 882 02df E6040000 		.4byte	0x4e6
- 883 02e3 ED020000 		.4byte	0x2ed
- 884 02e7 0C       		.uleb128 0xc
- 885 02e8 01       		.uleb128 0x1
- 886 02e9 51       		.byte	0x51
- 887 02ea 01       		.uleb128 0x1
- 888 02eb 31       		.byte	0x31
- 889 02ec 00       		.byte	0
- 890 02ed 0D       		.uleb128 0xd
- 891 02ee 3A000000 		.4byte	.LVL20
- 892 02f2 F2040000 		.4byte	0x4f2
- 893 02f6 0D       		.uleb128 0xd
- 894 02f7 40000000 		.4byte	.LVL21
- 895 02fb FE040000 		.4byte	0x4fe
- 896 02ff 0D       		.uleb128 0xd
- 897 0300 46000000 		.4byte	.LVL22
- 898 0304 0A050000 		.4byte	0x50a
- 899 0308 0D       		.uleb128 0xd
- 900 0309 4A000000 		.4byte	.LVL23
- 901 030d 15050000 		.4byte	0x515
- 902 0311 0B       		.uleb128 0xb
- 903 0312 52000000 		.4byte	.LVL24
- 904 0316 20050000 		.4byte	0x520
- 905 031a 28030000 		.4byte	0x328
- 906 031e 0C       		.uleb128 0xc
- 907 031f 01       		.uleb128 0x1
- 908 0320 50       		.byte	0x50
- 909 0321 05       		.uleb128 0x5
- 910 0322 03       		.byte	0x3
- 911 0323 00000000 		.4byte	buffer
- 912 0327 00       		.byte	0
- 913 0328 0D       		.uleb128 0xd
- 914 0329 5A000000 		.4byte	.LVL25
- 915 032d 83040000 		.4byte	0x483
- 916 0331 0D       		.uleb128 0xd
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 21
+ 794 02bc 00       		.byte	0
+ 795 02bd 0C       		.uleb128 0xc
+ 796 02be 18000000 		.4byte	.LVL13
+ 797 02c2 34040000 		.4byte	0x434
+ 798 02c6 D4020000 		.4byte	0x2d4
+ 799 02ca 0D       		.uleb128 0xd
+ 800 02cb 01       		.uleb128 0x1
+ 801 02cc 50       		.byte	0x50
+ 802 02cd 05       		.uleb128 0x5
+ 803 02ce 03       		.byte	0x3
+ 804 02cf 00000000 		.4byte	ReceiveInterruptHandler
+ 805 02d3 00       		.byte	0
+ 806 02d4 0C       		.uleb128 0xc
+ 807 02d5 22000000 		.4byte	.LVL14
+ 808 02d9 3F040000 		.4byte	0x43f
+ 809 02dd E7020000 		.4byte	0x2e7
+ 810 02e1 0D       		.uleb128 0xd
+ 811 02e2 01       		.uleb128 0x1
+ 812 02e3 51       		.byte	0x51
+ 813 02e4 01       		.uleb128 0x1
+ 814 02e5 31       		.byte	0x31
+ 815 02e6 00       		.byte	0
+ 816 02e7 0E       		.uleb128 0xe
+ 817 02e8 2A000000 		.4byte	.LVL16
+ 818 02ec 4B040000 		.4byte	0x44b
+ 819 02f0 0E       		.uleb128 0xe
+ 820 02f1 30000000 		.4byte	.LVL17
+ 821 02f5 57040000 		.4byte	0x457
+ 822 02f9 0E       		.uleb128 0xe
+ 823 02fa 36000000 		.4byte	.LVL18
+ 824 02fe 63040000 		.4byte	0x463
+ 825 0302 0E       		.uleb128 0xe
+ 826 0303 3C000000 		.4byte	.LVL19
+ 827 0307 6E040000 		.4byte	0x46e
+ 828 030b 0C       		.uleb128 0xc
+ 829 030c 44000000 		.4byte	.LVL20
+ 830 0310 79040000 		.4byte	0x479
+ 831 0314 1F030000 		.4byte	0x31f
+ 832 0318 0D       		.uleb128 0xd
+ 833 0319 01       		.uleb128 0x1
+ 834 031a 50       		.byte	0x50
+ 835 031b 02       		.uleb128 0x2
+ 836 031c 91       		.byte	0x91
+ 837 031d 5C       		.sleb128 -36
+ 838 031e 00       		.byte	0
+ 839 031f 0F       		.uleb128 0xf
+ 840 0320 A4000000 		.4byte	.LVL31
+ 841 0324 84040000 		.4byte	0x484
+ 842 0328 0D       		.uleb128 0xd
+ 843 0329 01       		.uleb128 0x1
+ 844 032a 50       		.byte	0x50
+ 845 032b 05       		.uleb128 0x5
+ 846 032c 03       		.byte	0x3
+ 847 032d 00000000 		.4byte	TransmitInterruptHandler
+ 848 0331 00       		.byte	0
+ 849 0332 00       		.byte	0
+ 850 0333 02       		.uleb128 0x2
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 21
 
 
- 917 0332 62000000 		.4byte	.LVL26
- 918 0336 2B050000 		.4byte	0x52b
- 919 033a 0D       		.uleb128 0xd
- 920 033b 70000000 		.4byte	.LVL27
- 921 033f 83040000 		.4byte	0x483
- 922 0343 0D       		.uleb128 0xd
- 923 0344 B8000000 		.4byte	.LVL34
- 924 0348 83040000 		.4byte	0x483
- 925 034c 0D       		.uleb128 0xd
- 926 034d C0000000 		.4byte	.LVL35
- 927 0351 2B050000 		.4byte	0x52b
- 928 0355 00       		.byte	0
- 929 0356 12       		.uleb128 0x12
- 930 0357 25010000 		.4byte	.LASF24
- 931 035b 05       		.byte	0x5
- 932 035c D602     		.2byte	0x2d6
- 933 035e AE000000 		.4byte	0xae
- 934 0362 12       		.uleb128 0x12
- 935 0363 6D030000 		.4byte	.LASF25
- 936 0367 06       		.byte	0x6
- 937 0368 1207     		.2byte	0x712
- 938 036a 6E030000 		.4byte	0x36e
- 939 036e 06       		.uleb128 0x6
- 940 036f 76000000 		.4byte	0x76
- 941 0373 13       		.uleb128 0x13
- 942 0374 97010000 		.4byte	.LASF26
- 943 0378 01       		.byte	0x1
- 944 0379 23       		.byte	0x23
- 945 037a C1000000 		.4byte	0xc1
- 946 037e 05       		.uleb128 0x5
- 947 037f 03       		.byte	0x3
- 948 0380 00000000 		.4byte	systemState
- 949 0384 13       		.uleb128 0x13
- 950 0385 F8000000 		.4byte	.LASF27
- 951 0389 01       		.byte	0x1
- 952 038a 25       		.byte	0x25
- 953 038b 95030000 		.4byte	0x395
- 954 038f 05       		.uleb128 0x5
- 955 0390 03       		.byte	0x3
- 956 0391 00000000 		.4byte	logicLevel
- 957 0395 02       		.uleb128 0x2
- 958 0396 01       		.byte	0x1
- 959 0397 02       		.byte	0x2
- 960 0398 20020000 		.4byte	.LASF28
- 961 039c 13       		.uleb128 0x13
- 962 039d 85020000 		.4byte	.LASF29
- 963 03a1 01       		.byte	0x1
- 964 03a2 26       		.byte	0x26
- 965 03a3 9B000000 		.4byte	0x9b
- 966 03a7 05       		.uleb128 0x5
- 967 03a8 03       		.byte	0x3
- 968 03a9 00000000 		.4byte	currentDataCharacter
- 969 03ad 13       		.uleb128 0x13
- 970 03ae 32000000 		.4byte	.LASF30
- 971 03b2 01       		.byte	0x1
- 972 03b3 27       		.byte	0x27
- 973 03b4 68000000 		.4byte	0x68
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 22
+ 851 0334 01       		.byte	0x1
+ 852 0335 02       		.byte	0x2
+ 853 0336 A6020000 		.4byte	.LASF31
+ 854 033a 18       		.uleb128 0x18
+ 855 033b 2C000000 		.4byte	0x2c
+ 856 033f 4A030000 		.4byte	0x34a
+ 857 0343 19       		.uleb128 0x19
+ 858 0344 BA000000 		.4byte	0xba
+ 859 0348 09       		.byte	0x9
+ 860 0349 00       		.byte	0
+ 861 034a 18       		.uleb128 0x18
+ 862 034b 9B000000 		.4byte	0x9b
+ 863 034f 5A030000 		.4byte	0x35a
+ 864 0353 19       		.uleb128 0x19
+ 865 0354 BA000000 		.4byte	0xba
+ 866 0358 2C       		.byte	0x2c
+ 867 0359 00       		.byte	0
+ 868 035a 18       		.uleb128 0x18
+ 869 035b 9B000000 		.4byte	0x9b
+ 870 035f 6A030000 		.4byte	0x36a
+ 871 0363 19       		.uleb128 0x19
+ 872 0364 BA000000 		.4byte	0xba
+ 873 0368 08       		.byte	0x8
+ 874 0369 00       		.byte	0
+ 875 036a 1A       		.uleb128 0x1a
+ 876 036b 1A010000 		.4byte	.LASF32
+ 877 036f 05       		.byte	0x5
+ 878 0370 D602     		.2byte	0x2d6
+ 879 0372 AE000000 		.4byte	0xae
+ 880 0376 1A       		.uleb128 0x1a
+ 881 0377 4B030000 		.4byte	.LASF33
+ 882 037b 06       		.byte	0x6
+ 883 037c 1207     		.2byte	0x712
+ 884 037e 82030000 		.4byte	0x382
+ 885 0382 06       		.uleb128 0x6
+ 886 0383 76000000 		.4byte	0x76
+ 887 0387 1B       		.uleb128 0x1b
+ 888 0388 95010000 		.4byte	.LASF34
+ 889 038c 01       		.byte	0x1
+ 890 038d 25       		.byte	0x25
+ 891 038e C7000000 		.4byte	0xc7
+ 892 0392 05       		.uleb128 0x5
+ 893 0393 03       		.byte	0x3
+ 894 0394 00000000 		.4byte	systemState
+ 895 0398 1B       		.uleb128 0x1b
+ 896 0399 ED000000 		.4byte	.LASF35
+ 897 039d 01       		.byte	0x1
+ 898 039e 27       		.byte	0x27
+ 899 039f 33030000 		.4byte	0x333
+ 900 03a3 05       		.uleb128 0x5
+ 901 03a4 03       		.byte	0x3
+ 902 03a5 00000000 		.4byte	logicLevel
+ 903 03a9 1C       		.uleb128 0x1c
+ 904 03aa 69647800 		.ascii	"idx\000"
+ 905 03ae 01       		.byte	0x1
+ 906 03af 29       		.byte	0x29
+ 907 03b0 68000000 		.4byte	0x68
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 22
 
 
- 974 03b8 05       		.uleb128 0x5
- 975 03b9 03       		.byte	0x3
- 976 03ba 00000000 		.4byte	bufferPosition
- 977 03be 14       		.uleb128 0x14
- 978 03bf 2C000000 		.4byte	0x2c
- 979 03c3 CF030000 		.4byte	0x3cf
- 980 03c7 15       		.uleb128 0x15
- 981 03c8 BA000000 		.4byte	0xba
- 982 03cc F301     		.2byte	0x1f3
- 983 03ce 00       		.byte	0
- 984 03cf 13       		.uleb128 0x13
- 985 03d0 7E020000 		.4byte	.LASF31
- 986 03d4 01       		.byte	0x1
- 987 03d5 28       		.byte	0x28
- 988 03d6 BE030000 		.4byte	0x3be
- 989 03da 05       		.uleb128 0x5
- 990 03db 03       		.byte	0x3
- 991 03dc 00000000 		.4byte	buffer
- 992 03e0 14       		.uleb128 0x14
- 993 03e1 2C000000 		.4byte	0x2c
- 994 03e5 F7030000 		.4byte	0x3f7
- 995 03e9 15       		.uleb128 0x15
- 996 03ea BA000000 		.4byte	0xba
- 997 03ee F301     		.2byte	0x1f3
- 998 03f0 16       		.uleb128 0x16
- 999 03f1 BA000000 		.4byte	0xba
- 1000 03f5 0F       		.byte	0xf
- 1001 03f6 00       		.byte	0
- 1002 03f7 13       		.uleb128 0x13
- 1003 03f8 62020000 		.4byte	.LASF32
- 1004 03fc 01       		.byte	0x1
- 1005 03fd 29       		.byte	0x29
- 1006 03fe E0030000 		.4byte	0x3e0
- 1007 0402 05       		.uleb128 0x5
- 1008 0403 03       		.byte	0x3
- 1009 0404 00000000 		.4byte	data
- 1010 0408 13       		.uleb128 0x13
- 1011 0409 B7000000 		.4byte	.LASF33
- 1012 040d 01       		.byte	0x1
- 1013 040e 2A       		.byte	0x2a
- 1014 040f 68000000 		.4byte	0x68
- 1015 0413 05       		.uleb128 0x5
- 1016 0414 03       		.byte	0x3
- 1017 0415 00000000 		.4byte	dataSize
- 1018 0419 13       		.uleb128 0x13
- 1019 041a 97000000 		.4byte	.LASF34
- 1020 041e 01       		.byte	0x1
- 1021 041f 2B       		.byte	0x2b
- 1022 0420 68000000 		.4byte	0x68
- 1023 0424 05       		.uleb128 0x5
- 1024 0425 03       		.byte	0x3
- 1025 0426 00000000 		.4byte	dataPosition
- 1026 042a 13       		.uleb128 0x13
- 1027 042b C0000000 		.4byte	.LASF35
- 1028 042f 01       		.byte	0x1
- 1029 0430 2C       		.byte	0x2c
- 1030 0431 68000000 		.4byte	0x68
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 23
+ 908 03b4 05       		.uleb128 0x5
+ 909 03b5 03       		.byte	0x3
+ 910 03b6 00000000 		.4byte	idx
+ 911 03ba 1B       		.uleb128 0x1b
+ 912 03bb 7A010000 		.4byte	.LASF36
+ 913 03bf 01       		.byte	0x1
+ 914 03c0 2A       		.byte	0x2a
+ 915 03c1 33030000 		.4byte	0x333
+ 916 03c5 05       		.uleb128 0x5
+ 917 03c6 03       		.byte	0x3
+ 918 03c7 00000000 		.4byte	firstHalfBit
+ 919 03cb 1B       		.uleb128 0x1b
+ 920 03cc 2E020000 		.4byte	.LASF37
+ 921 03d0 01       		.byte	0x1
+ 922 03d1 2B       		.byte	0x2b
+ 923 03d2 C1000000 		.4byte	0xc1
+ 924 03d6 05       		.uleb128 0x5
+ 925 03d7 03       		.byte	0x3
+ 926 03d8 00000000 		.4byte	dataPtr
+ 927 03dc 1D       		.uleb128 0x1d
+ 928 03dd 08030000 		.4byte	.LASF38
+ 929 03e1 08030000 		.4byte	.LASF38
+ 930 03e5 07       		.byte	0x7
+ 931 03e6 26       		.byte	0x26
+ 932 03e7 1D       		.uleb128 0x1d
+ 933 03e8 9B000000 		.4byte	.LASF39
+ 934 03ec 9B000000 		.4byte	.LASF39
+ 935 03f0 08       		.byte	0x8
+ 936 03f1 19       		.byte	0x19
+ 937 03f2 1D       		.uleb128 0x1d
+ 938 03f3 92020000 		.4byte	.LASF40
+ 939 03f7 92020000 		.4byte	.LASF40
+ 940 03fb 09       		.byte	0x9
+ 941 03fc 68       		.byte	0x68
+ 942 03fd 1D       		.uleb128 0x1d
+ 943 03fe 36030000 		.4byte	.LASF41
+ 944 0402 36030000 		.4byte	.LASF41
+ 945 0406 09       		.byte	0x9
+ 946 0407 6A       		.byte	0x6a
+ 947 0408 1D       		.uleb128 0x1d
+ 948 0409 17030000 		.4byte	.LASF42
+ 949 040d 17030000 		.4byte	.LASF42
+ 950 0411 09       		.byte	0x9
+ 951 0412 5A       		.byte	0x5a
+ 952 0413 1D       		.uleb128 0x1d
+ 953 0414 82020000 		.4byte	.LASF43
+ 954 0418 82020000 		.4byte	.LASF43
+ 955 041c 0A       		.byte	0xa
+ 956 041d 26       		.byte	0x26
+ 957 041e 1D       		.uleb128 0x1d
+ 958 041f 1F000000 		.4byte	.LASF44
+ 959 0423 1F000000 		.4byte	.LASF44
+ 960 0427 0B       		.byte	0xb
+ 961 0428 18       		.byte	0x18
+ 962 0429 1D       		.uleb128 0x1d
+ 963 042a B1020000 		.4byte	.LASF45
+ 964 042e B1020000 		.4byte	.LASF45
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 23
 
 
- 1031 0435 05       		.uleb128 0x5
- 1032 0436 03       		.byte	0x3
- 1033 0437 00000000 		.4byte	count
- 1034 043b 17       		.uleb128 0x17
- 1035 043c 69647800 		.ascii	"idx\000"
- 1036 0440 01       		.byte	0x1
- 1037 0441 2D       		.byte	0x2d
- 1038 0442 68000000 		.4byte	0x68
- 1039 0446 05       		.uleb128 0x5
- 1040 0447 03       		.byte	0x3
- 1041 0448 00000000 		.4byte	idx
- 1042 044c 18       		.uleb128 0x18
- 1043 044d 3E020000 		.4byte	.LASF36
- 1044 0451 3E020000 		.4byte	.LASF36
- 1045 0455 07       		.byte	0x7
- 1046 0456 68       		.byte	0x68
- 1047 0457 18       		.uleb128 0x18
- 1048 0458 58030000 		.4byte	.LASF37
- 1049 045c 58030000 		.4byte	.LASF37
- 1050 0460 07       		.byte	0x7
- 1051 0461 6A       		.byte	0x6a
- 1052 0462 18       		.uleb128 0x18
- 1053 0463 33030000 		.4byte	.LASF38
- 1054 0467 33030000 		.4byte	.LASF38
- 1055 046b 07       		.byte	0x7
- 1056 046c 5A       		.byte	0x5a
- 1057 046d 18       		.uleb128 0x18
- 1058 046e 24030000 		.4byte	.LASF39
- 1059 0472 24030000 		.4byte	.LASF39
- 1060 0476 08       		.byte	0x8
- 1061 0477 26       		.byte	0x26
- 1062 0478 18       		.uleb128 0x18
- 1063 0479 7F010000 		.4byte	.LASF40
- 1064 047d 7F010000 		.4byte	.LASF40
- 1065 0481 09       		.byte	0x9
- 1066 0482 77       		.byte	0x77
- 1067 0483 18       		.uleb128 0x18
- 1068 0484 00000000 		.4byte	.LASF41
- 1069 0488 00000000 		.4byte	.LASF41
- 1070 048c 0A       		.byte	0xa
- 1071 048d 28       		.byte	0x28
- 1072 048e 18       		.uleb128 0x18
- 1073 048f 52020000 		.4byte	.LASF42
- 1074 0493 52020000 		.4byte	.LASF42
- 1075 0497 0A       		.byte	0xa
- 1076 0498 25       		.byte	0x25
- 1077 0499 18       		.uleb128 0x18
- 1078 049a 41000000 		.4byte	.LASF43
- 1079 049e 41000000 		.4byte	.LASF43
- 1080 04a2 0B       		.byte	0xb
- 1081 04a3 18       		.byte	0x18
- 1082 04a4 18       		.uleb128 0x18
- 1083 04a5 67020000 		.4byte	.LASF44
- 1084 04a9 67020000 		.4byte	.LASF44
- 1085 04ad 0C       		.byte	0xc
- 1086 04ae 18       		.byte	0x18
- 1087 04af 18       		.uleb128 0x18
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 24
+ 965 0432 0C       		.byte	0xc
+ 966 0433 18       		.byte	0x18
+ 967 0434 1D       		.uleb128 0x1d
+ 968 0435 36020000 		.4byte	.LASF46
+ 969 0439 36020000 		.4byte	.LASF46
+ 970 043d 0D       		.byte	0xd
+ 971 043e 18       		.byte	0x18
+ 972 043f 1E       		.uleb128 0x1e
+ 973 0440 8D000000 		.4byte	.LASF47
+ 974 0444 8D000000 		.4byte	.LASF47
+ 975 0448 05       		.byte	0x5
+ 976 0449 2E01     		.2byte	0x12e
+ 977 044b 1E       		.uleb128 0x1e
+ 978 044c 00000000 		.4byte	.LASF48
+ 979 0450 00000000 		.4byte	.LASF48
+ 980 0454 05       		.byte	0x5
+ 981 0455 3201     		.2byte	0x132
+ 982 0457 1E       		.uleb128 0x1e
+ 983 0458 C6000000 		.4byte	.LASF49
+ 984 045c C6000000 		.4byte	.LASF49
+ 985 0460 05       		.byte	0x5
+ 986 0461 3101     		.2byte	0x131
+ 987 0463 1D       		.uleb128 0x1d
+ 988 0464 25030000 		.4byte	.LASF50
+ 989 0468 25030000 		.4byte	.LASF50
+ 990 046c 0A       		.byte	0xa
+ 991 046d 22       		.byte	0x22
+ 992 046e 1D       		.uleb128 0x1d
+ 993 046f 01040000 		.4byte	.LASF51
+ 994 0473 01040000 		.4byte	.LASF51
+ 995 0477 0A       		.byte	0xa
+ 996 0478 29       		.byte	0x29
+ 997 0479 1D       		.uleb128 0x1d
+ 998 047a 66000000 		.4byte	.LASF52
+ 999 047e 66000000 		.4byte	.LASF52
+ 1000 0482 0A       		.byte	0xa
+ 1001 0483 2B       		.byte	0x2b
+ 1002 0484 1D       		.uleb128 0x1d
+ 1003 0485 61020000 		.4byte	.LASF53
+ 1004 0489 61020000 		.4byte	.LASF53
+ 1005 048d 08       		.byte	0x8
+ 1006 048e 18       		.byte	0x18
+ 1007 048f 00       		.byte	0
+ 1008              		.section	.debug_abbrev,"",%progbits
+ 1009              	.Ldebug_abbrev0:
+ 1010 0000 01       		.uleb128 0x1
+ 1011 0001 11       		.uleb128 0x11
+ 1012 0002 01       		.byte	0x1
+ 1013 0003 25       		.uleb128 0x25
+ 1014 0004 0E       		.uleb128 0xe
+ 1015 0005 13       		.uleb128 0x13
+ 1016 0006 0B       		.uleb128 0xb
+ 1017 0007 03       		.uleb128 0x3
+ 1018 0008 0E       		.uleb128 0xe
+ 1019 0009 1B       		.uleb128 0x1b
+ 1020 000a 0E       		.uleb128 0xe
+ 1021 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 24
 
 
- 1088 04b0 D3010000 		.4byte	.LASF45
- 1089 04b4 D3010000 		.4byte	.LASF45
- 1090 04b8 0D       		.byte	0xd
- 1091 04b9 5A       		.byte	0x5a
- 1092 04ba 18       		.uleb128 0x18
- 1093 04bb 34010000 		.4byte	.LASF46
- 1094 04bf 34010000 		.4byte	.LASF46
- 1095 04c3 0D       		.byte	0xd
- 1096 04c4 68       		.byte	0x68
- 1097 04c5 18       		.uleb128 0x18
- 1098 04c6 0F030000 		.4byte	.LASF47
- 1099 04ca 0F030000 		.4byte	.LASF47
- 1100 04ce 0D       		.byte	0xd
- 1101 04cf 6A       		.byte	0x6a
- 1102 04d0 18       		.uleb128 0x18
- 1103 04d1 E1010000 		.4byte	.LASF48
- 1104 04d5 E1010000 		.4byte	.LASF48
- 1105 04d9 0E       		.byte	0xe
- 1106 04da 18       		.byte	0x18
- 1107 04db 18       		.uleb128 0x18
- 1108 04dc 07020000 		.4byte	.LASF49
- 1109 04e0 07020000 		.4byte	.LASF49
- 1110 04e4 0F       		.byte	0xf
- 1111 04e5 18       		.byte	0x18
- 1112 04e6 19       		.uleb128 0x19
- 1113 04e7 A9000000 		.4byte	.LASF50
- 1114 04eb A9000000 		.4byte	.LASF50
- 1115 04ef 05       		.byte	0x5
- 1116 04f0 2E01     		.2byte	0x12e
- 1117 04f2 19       		.uleb128 0x19
- 1118 04f3 13000000 		.4byte	.LASF51
- 1119 04f7 13000000 		.4byte	.LASF51
- 1120 04fb 05       		.byte	0x5
- 1121 04fc 3201     		.2byte	0x132
- 1122 04fe 19       		.uleb128 0x19
- 1123 04ff D1000000 		.4byte	.LASF52
- 1124 0503 D1000000 		.4byte	.LASF52
- 1125 0507 05       		.byte	0x5
- 1126 0508 3101     		.2byte	0x131
- 1127 050a 18       		.uleb128 0x18
- 1128 050b 47030000 		.4byte	.LASF53
- 1129 050f 47030000 		.4byte	.LASF53
- 1130 0513 0A       		.byte	0xa
- 1131 0514 22       		.byte	0x22
- 1132 0515 18       		.uleb128 0x18
- 1133 0516 23040000 		.4byte	.LASF54
- 1134 051a 23040000 		.4byte	.LASF54
- 1135 051e 0A       		.byte	0xa
- 1136 051f 29       		.byte	0x29
- 1137 0520 18       		.uleb128 0x18
- 1138 0521 88000000 		.4byte	.LASF55
- 1139 0525 88000000 		.4byte	.LASF55
- 1140 0529 0A       		.byte	0xa
- 1141 052a 2B       		.byte	0x2b
- 1142 052b 18       		.uleb128 0x18
- 1143 052c 2E020000 		.4byte	.LASF56
- 1144 0530 2E020000 		.4byte	.LASF56
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 25
+ 1022 000c 17       		.uleb128 0x17
+ 1023 000d 11       		.uleb128 0x11
+ 1024 000e 01       		.uleb128 0x1
+ 1025 000f 10       		.uleb128 0x10
+ 1026 0010 17       		.uleb128 0x17
+ 1027 0011 00       		.byte	0
+ 1028 0012 00       		.byte	0
+ 1029 0013 02       		.uleb128 0x2
+ 1030 0014 24       		.uleb128 0x24
+ 1031 0015 00       		.byte	0
+ 1032 0016 0B       		.uleb128 0xb
+ 1033 0017 0B       		.uleb128 0xb
+ 1034 0018 3E       		.uleb128 0x3e
+ 1035 0019 0B       		.uleb128 0xb
+ 1036 001a 03       		.uleb128 0x3
+ 1037 001b 0E       		.uleb128 0xe
+ 1038 001c 00       		.byte	0
+ 1039 001d 00       		.byte	0
+ 1040 001e 03       		.uleb128 0x3
+ 1041 001f 16       		.uleb128 0x16
+ 1042 0020 00       		.byte	0
+ 1043 0021 03       		.uleb128 0x3
+ 1044 0022 0E       		.uleb128 0xe
+ 1045 0023 3A       		.uleb128 0x3a
+ 1046 0024 0B       		.uleb128 0xb
+ 1047 0025 3B       		.uleb128 0x3b
+ 1048 0026 0B       		.uleb128 0xb
+ 1049 0027 49       		.uleb128 0x49
+ 1050 0028 13       		.uleb128 0x13
+ 1051 0029 00       		.byte	0
+ 1052 002a 00       		.byte	0
+ 1053 002b 04       		.uleb128 0x4
+ 1054 002c 24       		.uleb128 0x24
+ 1055 002d 00       		.byte	0
+ 1056 002e 0B       		.uleb128 0xb
+ 1057 002f 0B       		.uleb128 0xb
+ 1058 0030 3E       		.uleb128 0x3e
+ 1059 0031 0B       		.uleb128 0xb
+ 1060 0032 03       		.uleb128 0x3
+ 1061 0033 08       		.uleb128 0x8
+ 1062 0034 00       		.byte	0
+ 1063 0035 00       		.byte	0
+ 1064 0036 05       		.uleb128 0x5
+ 1065 0037 16       		.uleb128 0x16
+ 1066 0038 00       		.byte	0
+ 1067 0039 03       		.uleb128 0x3
+ 1068 003a 0E       		.uleb128 0xe
+ 1069 003b 3A       		.uleb128 0x3a
+ 1070 003c 0B       		.uleb128 0xb
+ 1071 003d 3B       		.uleb128 0x3b
+ 1072 003e 05       		.uleb128 0x5
+ 1073 003f 49       		.uleb128 0x49
+ 1074 0040 13       		.uleb128 0x13
+ 1075 0041 00       		.byte	0
+ 1076 0042 00       		.byte	0
+ 1077 0043 06       		.uleb128 0x6
+ 1078 0044 35       		.uleb128 0x35
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 25
 
 
- 1145 0534 0A       		.byte	0xa
- 1146 0535 26       		.byte	0x26
- 1147 0536 00       		.byte	0
- 1148              		.section	.debug_abbrev,"",%progbits
- 1149              	.Ldebug_abbrev0:
- 1150 0000 01       		.uleb128 0x1
- 1151 0001 11       		.uleb128 0x11
- 1152 0002 01       		.byte	0x1
- 1153 0003 25       		.uleb128 0x25
- 1154 0004 0E       		.uleb128 0xe
- 1155 0005 13       		.uleb128 0x13
- 1156 0006 0B       		.uleb128 0xb
- 1157 0007 03       		.uleb128 0x3
- 1158 0008 0E       		.uleb128 0xe
- 1159 0009 1B       		.uleb128 0x1b
- 1160 000a 0E       		.uleb128 0xe
- 1161 000b 55       		.uleb128 0x55
- 1162 000c 17       		.uleb128 0x17
- 1163 000d 11       		.uleb128 0x11
- 1164 000e 01       		.uleb128 0x1
- 1165 000f 10       		.uleb128 0x10
- 1166 0010 17       		.uleb128 0x17
- 1167 0011 00       		.byte	0
- 1168 0012 00       		.byte	0
- 1169 0013 02       		.uleb128 0x2
- 1170 0014 24       		.uleb128 0x24
- 1171 0015 00       		.byte	0
- 1172 0016 0B       		.uleb128 0xb
- 1173 0017 0B       		.uleb128 0xb
- 1174 0018 3E       		.uleb128 0x3e
- 1175 0019 0B       		.uleb128 0xb
- 1176 001a 03       		.uleb128 0x3
- 1177 001b 0E       		.uleb128 0xe
- 1178 001c 00       		.byte	0
- 1179 001d 00       		.byte	0
- 1180 001e 03       		.uleb128 0x3
- 1181 001f 16       		.uleb128 0x16
- 1182 0020 00       		.byte	0
- 1183 0021 03       		.uleb128 0x3
- 1184 0022 0E       		.uleb128 0xe
- 1185 0023 3A       		.uleb128 0x3a
- 1186 0024 0B       		.uleb128 0xb
- 1187 0025 3B       		.uleb128 0x3b
- 1188 0026 0B       		.uleb128 0xb
- 1189 0027 49       		.uleb128 0x49
- 1190 0028 13       		.uleb128 0x13
- 1191 0029 00       		.byte	0
- 1192 002a 00       		.byte	0
- 1193 002b 04       		.uleb128 0x4
- 1194 002c 24       		.uleb128 0x24
- 1195 002d 00       		.byte	0
- 1196 002e 0B       		.uleb128 0xb
- 1197 002f 0B       		.uleb128 0xb
- 1198 0030 3E       		.uleb128 0x3e
- 1199 0031 0B       		.uleb128 0xb
- 1200 0032 03       		.uleb128 0x3
- 1201 0033 08       		.uleb128 0x8
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 26
+ 1079 0045 00       		.byte	0
+ 1080 0046 49       		.uleb128 0x49
+ 1081 0047 13       		.uleb128 0x13
+ 1082 0048 00       		.byte	0
+ 1083 0049 00       		.byte	0
+ 1084 004a 07       		.uleb128 0x7
+ 1085 004b 0F       		.uleb128 0xf
+ 1086 004c 00       		.byte	0
+ 1087 004d 0B       		.uleb128 0xb
+ 1088 004e 0B       		.uleb128 0xb
+ 1089 004f 49       		.uleb128 0x49
+ 1090 0050 13       		.uleb128 0x13
+ 1091 0051 00       		.byte	0
+ 1092 0052 00       		.byte	0
+ 1093 0053 08       		.uleb128 0x8
+ 1094 0054 04       		.uleb128 0x4
+ 1095 0055 01       		.byte	0x1
+ 1096 0056 03       		.uleb128 0x3
+ 1097 0057 0E       		.uleb128 0xe
+ 1098 0058 0B       		.uleb128 0xb
+ 1099 0059 0B       		.uleb128 0xb
+ 1100 005a 49       		.uleb128 0x49
+ 1101 005b 13       		.uleb128 0x13
+ 1102 005c 3A       		.uleb128 0x3a
+ 1103 005d 0B       		.uleb128 0xb
+ 1104 005e 3B       		.uleb128 0x3b
+ 1105 005f 0B       		.uleb128 0xb
+ 1106 0060 01       		.uleb128 0x1
+ 1107 0061 13       		.uleb128 0x13
+ 1108 0062 00       		.byte	0
+ 1109 0063 00       		.byte	0
+ 1110 0064 09       		.uleb128 0x9
+ 1111 0065 28       		.uleb128 0x28
+ 1112 0066 00       		.byte	0
+ 1113 0067 03       		.uleb128 0x3
+ 1114 0068 0E       		.uleb128 0xe
+ 1115 0069 1C       		.uleb128 0x1c
+ 1116 006a 0B       		.uleb128 0xb
+ 1117 006b 00       		.byte	0
+ 1118 006c 00       		.byte	0
+ 1119 006d 0A       		.uleb128 0xa
+ 1120 006e 2E       		.uleb128 0x2e
+ 1121 006f 00       		.byte	0
+ 1122 0070 3F       		.uleb128 0x3f
+ 1123 0071 19       		.uleb128 0x19
+ 1124 0072 03       		.uleb128 0x3
+ 1125 0073 0E       		.uleb128 0xe
+ 1126 0074 3A       		.uleb128 0x3a
+ 1127 0075 0B       		.uleb128 0xb
+ 1128 0076 3B       		.uleb128 0x3b
+ 1129 0077 0B       		.uleb128 0xb
+ 1130 0078 27       		.uleb128 0x27
+ 1131 0079 19       		.uleb128 0x19
+ 1132 007a 11       		.uleb128 0x11
+ 1133 007b 01       		.uleb128 0x1
+ 1134 007c 12       		.uleb128 0x12
+ 1135 007d 06       		.uleb128 0x6
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 26
 
 
- 1202 0034 00       		.byte	0
- 1203 0035 00       		.byte	0
- 1204 0036 05       		.uleb128 0x5
- 1205 0037 16       		.uleb128 0x16
- 1206 0038 00       		.byte	0
- 1207 0039 03       		.uleb128 0x3
- 1208 003a 0E       		.uleb128 0xe
- 1209 003b 3A       		.uleb128 0x3a
- 1210 003c 0B       		.uleb128 0xb
- 1211 003d 3B       		.uleb128 0x3b
- 1212 003e 05       		.uleb128 0x5
- 1213 003f 49       		.uleb128 0x49
- 1214 0040 13       		.uleb128 0x13
- 1215 0041 00       		.byte	0
- 1216 0042 00       		.byte	0
- 1217 0043 06       		.uleb128 0x6
- 1218 0044 35       		.uleb128 0x35
- 1219 0045 00       		.byte	0
- 1220 0046 49       		.uleb128 0x49
- 1221 0047 13       		.uleb128 0x13
- 1222 0048 00       		.byte	0
- 1223 0049 00       		.byte	0
- 1224 004a 07       		.uleb128 0x7
- 1225 004b 04       		.uleb128 0x4
- 1226 004c 01       		.byte	0x1
- 1227 004d 03       		.uleb128 0x3
- 1228 004e 0E       		.uleb128 0xe
- 1229 004f 0B       		.uleb128 0xb
- 1230 0050 0B       		.uleb128 0xb
- 1231 0051 49       		.uleb128 0x49
- 1232 0052 13       		.uleb128 0x13
- 1233 0053 3A       		.uleb128 0x3a
- 1234 0054 0B       		.uleb128 0xb
- 1235 0055 3B       		.uleb128 0x3b
- 1236 0056 0B       		.uleb128 0xb
- 1237 0057 01       		.uleb128 0x1
- 1238 0058 13       		.uleb128 0x13
- 1239 0059 00       		.byte	0
- 1240 005a 00       		.byte	0
- 1241 005b 08       		.uleb128 0x8
- 1242 005c 28       		.uleb128 0x28
- 1243 005d 00       		.byte	0
- 1244 005e 03       		.uleb128 0x3
- 1245 005f 0E       		.uleb128 0xe
- 1246 0060 1C       		.uleb128 0x1c
- 1247 0061 0B       		.uleb128 0xb
- 1248 0062 00       		.byte	0
- 1249 0063 00       		.byte	0
- 1250 0064 09       		.uleb128 0x9
- 1251 0065 2E       		.uleb128 0x2e
- 1252 0066 00       		.byte	0
- 1253 0067 3F       		.uleb128 0x3f
- 1254 0068 19       		.uleb128 0x19
- 1255 0069 03       		.uleb128 0x3
- 1256 006a 0E       		.uleb128 0xe
- 1257 006b 3A       		.uleb128 0x3a
- 1258 006c 0B       		.uleb128 0xb
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 27
+ 1136 007e 40       		.uleb128 0x40
+ 1137 007f 18       		.uleb128 0x18
+ 1138 0080 9742     		.uleb128 0x2117
+ 1139 0082 19       		.uleb128 0x19
+ 1140 0083 00       		.byte	0
+ 1141 0084 00       		.byte	0
+ 1142 0085 0B       		.uleb128 0xb
+ 1143 0086 2E       		.uleb128 0x2e
+ 1144 0087 01       		.byte	0x1
+ 1145 0088 3F       		.uleb128 0x3f
+ 1146 0089 19       		.uleb128 0x19
+ 1147 008a 03       		.uleb128 0x3
+ 1148 008b 0E       		.uleb128 0xe
+ 1149 008c 3A       		.uleb128 0x3a
+ 1150 008d 0B       		.uleb128 0xb
+ 1151 008e 3B       		.uleb128 0x3b
+ 1152 008f 0B       		.uleb128 0xb
+ 1153 0090 27       		.uleb128 0x27
+ 1154 0091 19       		.uleb128 0x19
+ 1155 0092 11       		.uleb128 0x11
+ 1156 0093 01       		.uleb128 0x1
+ 1157 0094 12       		.uleb128 0x12
+ 1158 0095 06       		.uleb128 0x6
+ 1159 0096 40       		.uleb128 0x40
+ 1160 0097 18       		.uleb128 0x18
+ 1161 0098 9742     		.uleb128 0x2117
+ 1162 009a 19       		.uleb128 0x19
+ 1163 009b 01       		.uleb128 0x1
+ 1164 009c 13       		.uleb128 0x13
+ 1165 009d 00       		.byte	0
+ 1166 009e 00       		.byte	0
+ 1167 009f 0C       		.uleb128 0xc
+ 1168 00a0 898201   		.uleb128 0x4109
+ 1169 00a3 01       		.byte	0x1
+ 1170 00a4 11       		.uleb128 0x11
+ 1171 00a5 01       		.uleb128 0x1
+ 1172 00a6 31       		.uleb128 0x31
+ 1173 00a7 13       		.uleb128 0x13
+ 1174 00a8 01       		.uleb128 0x1
+ 1175 00a9 13       		.uleb128 0x13
+ 1176 00aa 00       		.byte	0
+ 1177 00ab 00       		.byte	0
+ 1178 00ac 0D       		.uleb128 0xd
+ 1179 00ad 8A8201   		.uleb128 0x410a
+ 1180 00b0 00       		.byte	0
+ 1181 00b1 02       		.uleb128 0x2
+ 1182 00b2 18       		.uleb128 0x18
+ 1183 00b3 9142     		.uleb128 0x2111
+ 1184 00b5 18       		.uleb128 0x18
+ 1185 00b6 00       		.byte	0
+ 1186 00b7 00       		.byte	0
+ 1187 00b8 0E       		.uleb128 0xe
+ 1188 00b9 898201   		.uleb128 0x4109
+ 1189 00bc 00       		.byte	0
+ 1190 00bd 11       		.uleb128 0x11
+ 1191 00be 01       		.uleb128 0x1
+ 1192 00bf 31       		.uleb128 0x31
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 27
 
 
- 1259 006d 3B       		.uleb128 0x3b
- 1260 006e 0B       		.uleb128 0xb
- 1261 006f 27       		.uleb128 0x27
- 1262 0070 19       		.uleb128 0x19
- 1263 0071 11       		.uleb128 0x11
- 1264 0072 01       		.uleb128 0x1
- 1265 0073 12       		.uleb128 0x12
- 1266 0074 06       		.uleb128 0x6
- 1267 0075 40       		.uleb128 0x40
- 1268 0076 18       		.uleb128 0x18
- 1269 0077 9742     		.uleb128 0x2117
- 1270 0079 19       		.uleb128 0x19
- 1271 007a 00       		.byte	0
- 1272 007b 00       		.byte	0
- 1273 007c 0A       		.uleb128 0xa
- 1274 007d 2E       		.uleb128 0x2e
- 1275 007e 01       		.byte	0x1
- 1276 007f 3F       		.uleb128 0x3f
- 1277 0080 19       		.uleb128 0x19
- 1278 0081 03       		.uleb128 0x3
- 1279 0082 0E       		.uleb128 0xe
- 1280 0083 3A       		.uleb128 0x3a
- 1281 0084 0B       		.uleb128 0xb
- 1282 0085 3B       		.uleb128 0x3b
- 1283 0086 0B       		.uleb128 0xb
- 1284 0087 27       		.uleb128 0x27
- 1285 0088 19       		.uleb128 0x19
- 1286 0089 11       		.uleb128 0x11
- 1287 008a 01       		.uleb128 0x1
- 1288 008b 12       		.uleb128 0x12
- 1289 008c 06       		.uleb128 0x6
- 1290 008d 40       		.uleb128 0x40
- 1291 008e 18       		.uleb128 0x18
- 1292 008f 9742     		.uleb128 0x2117
- 1293 0091 19       		.uleb128 0x19
- 1294 0092 01       		.uleb128 0x1
- 1295 0093 13       		.uleb128 0x13
- 1296 0094 00       		.byte	0
- 1297 0095 00       		.byte	0
- 1298 0096 0B       		.uleb128 0xb
- 1299 0097 898201   		.uleb128 0x4109
- 1300 009a 01       		.byte	0x1
- 1301 009b 11       		.uleb128 0x11
- 1302 009c 01       		.uleb128 0x1
- 1303 009d 31       		.uleb128 0x31
- 1304 009e 13       		.uleb128 0x13
- 1305 009f 01       		.uleb128 0x1
- 1306 00a0 13       		.uleb128 0x13
- 1307 00a1 00       		.byte	0
- 1308 00a2 00       		.byte	0
- 1309 00a3 0C       		.uleb128 0xc
- 1310 00a4 8A8201   		.uleb128 0x410a
- 1311 00a7 00       		.byte	0
- 1312 00a8 02       		.uleb128 0x2
- 1313 00a9 18       		.uleb128 0x18
- 1314 00aa 9142     		.uleb128 0x2111
- 1315 00ac 18       		.uleb128 0x18
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 28
+ 1193 00c0 13       		.uleb128 0x13
+ 1194 00c1 00       		.byte	0
+ 1195 00c2 00       		.byte	0
+ 1196 00c3 0F       		.uleb128 0xf
+ 1197 00c4 898201   		.uleb128 0x4109
+ 1198 00c7 01       		.byte	0x1
+ 1199 00c8 11       		.uleb128 0x11
+ 1200 00c9 01       		.uleb128 0x1
+ 1201 00ca 31       		.uleb128 0x31
+ 1202 00cb 13       		.uleb128 0x13
+ 1203 00cc 00       		.byte	0
+ 1204 00cd 00       		.byte	0
+ 1205 00ce 10       		.uleb128 0x10
+ 1206 00cf 2E       		.uleb128 0x2e
+ 1207 00d0 01       		.byte	0x1
+ 1208 00d1 3F       		.uleb128 0x3f
+ 1209 00d2 19       		.uleb128 0x19
+ 1210 00d3 03       		.uleb128 0x3
+ 1211 00d4 0E       		.uleb128 0xe
+ 1212 00d5 3A       		.uleb128 0x3a
+ 1213 00d6 0B       		.uleb128 0xb
+ 1214 00d7 3B       		.uleb128 0x3b
+ 1215 00d8 0B       		.uleb128 0xb
+ 1216 00d9 27       		.uleb128 0x27
+ 1217 00da 19       		.uleb128 0x19
+ 1218 00db 49       		.uleb128 0x49
+ 1219 00dc 13       		.uleb128 0x13
+ 1220 00dd 8701     		.uleb128 0x87
+ 1221 00df 19       		.uleb128 0x19
+ 1222 00e0 11       		.uleb128 0x11
+ 1223 00e1 01       		.uleb128 0x1
+ 1224 00e2 12       		.uleb128 0x12
+ 1225 00e3 06       		.uleb128 0x6
+ 1226 00e4 40       		.uleb128 0x40
+ 1227 00e5 18       		.uleb128 0x18
+ 1228 00e6 9742     		.uleb128 0x2117
+ 1229 00e8 19       		.uleb128 0x19
+ 1230 00e9 01       		.uleb128 0x1
+ 1231 00ea 13       		.uleb128 0x13
+ 1232 00eb 00       		.byte	0
+ 1233 00ec 00       		.byte	0
+ 1234 00ed 11       		.uleb128 0x11
+ 1235 00ee 34       		.uleb128 0x34
+ 1236 00ef 00       		.byte	0
+ 1237 00f0 03       		.uleb128 0x3
+ 1238 00f1 0E       		.uleb128 0xe
+ 1239 00f2 3A       		.uleb128 0x3a
+ 1240 00f3 0B       		.uleb128 0xb
+ 1241 00f4 3B       		.uleb128 0x3b
+ 1242 00f5 0B       		.uleb128 0xb
+ 1243 00f6 49       		.uleb128 0x49
+ 1244 00f7 13       		.uleb128 0x13
+ 1245 00f8 1C       		.uleb128 0x1c
+ 1246 00f9 05       		.uleb128 0x5
+ 1247 00fa 00       		.byte	0
+ 1248 00fb 00       		.byte	0
+ 1249 00fc 12       		.uleb128 0x12
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 28
 
 
- 1316 00ad 00       		.byte	0
- 1317 00ae 00       		.byte	0
- 1318 00af 0D       		.uleb128 0xd
- 1319 00b0 898201   		.uleb128 0x4109
- 1320 00b3 00       		.byte	0
- 1321 00b4 11       		.uleb128 0x11
- 1322 00b5 01       		.uleb128 0x1
- 1323 00b6 31       		.uleb128 0x31
- 1324 00b7 13       		.uleb128 0x13
- 1325 00b8 00       		.byte	0
- 1326 00b9 00       		.byte	0
- 1327 00ba 0E       		.uleb128 0xe
- 1328 00bb 898201   		.uleb128 0x4109
- 1329 00be 01       		.byte	0x1
- 1330 00bf 11       		.uleb128 0x11
- 1331 00c0 01       		.uleb128 0x1
- 1332 00c1 31       		.uleb128 0x31
- 1333 00c2 13       		.uleb128 0x13
- 1334 00c3 00       		.byte	0
- 1335 00c4 00       		.byte	0
- 1336 00c5 0F       		.uleb128 0xf
- 1337 00c6 2E       		.uleb128 0x2e
- 1338 00c7 01       		.byte	0x1
- 1339 00c8 3F       		.uleb128 0x3f
- 1340 00c9 19       		.uleb128 0x19
- 1341 00ca 03       		.uleb128 0x3
- 1342 00cb 0E       		.uleb128 0xe
- 1343 00cc 3A       		.uleb128 0x3a
- 1344 00cd 0B       		.uleb128 0xb
- 1345 00ce 3B       		.uleb128 0x3b
- 1346 00cf 0B       		.uleb128 0xb
- 1347 00d0 27       		.uleb128 0x27
- 1348 00d1 19       		.uleb128 0x19
- 1349 00d2 49       		.uleb128 0x49
- 1350 00d3 13       		.uleb128 0x13
- 1351 00d4 8701     		.uleb128 0x87
- 1352 00d6 19       		.uleb128 0x19
- 1353 00d7 11       		.uleb128 0x11
- 1354 00d8 01       		.uleb128 0x1
- 1355 00d9 12       		.uleb128 0x12
- 1356 00da 06       		.uleb128 0x6
- 1357 00db 40       		.uleb128 0x40
- 1358 00dc 18       		.uleb128 0x18
- 1359 00dd 9742     		.uleb128 0x2117
- 1360 00df 19       		.uleb128 0x19
- 1361 00e0 01       		.uleb128 0x1
- 1362 00e1 13       		.uleb128 0x13
- 1363 00e2 00       		.byte	0
- 1364 00e3 00       		.byte	0
- 1365 00e4 10       		.uleb128 0x10
- 1366 00e5 0B       		.uleb128 0xb
- 1367 00e6 01       		.byte	0x1
- 1368 00e7 55       		.uleb128 0x55
- 1369 00e8 17       		.uleb128 0x17
- 1370 00e9 01       		.uleb128 0x1
- 1371 00ea 13       		.uleb128 0x13
- 1372 00eb 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 29
+ 1250 00fd 34       		.uleb128 0x34
+ 1251 00fe 00       		.byte	0
+ 1252 00ff 03       		.uleb128 0x3
+ 1253 0100 0E       		.uleb128 0xe
+ 1254 0101 3A       		.uleb128 0x3a
+ 1255 0102 0B       		.uleb128 0xb
+ 1256 0103 3B       		.uleb128 0x3b
+ 1257 0104 0B       		.uleb128 0xb
+ 1258 0105 49       		.uleb128 0x49
+ 1259 0106 13       		.uleb128 0x13
+ 1260 0107 02       		.uleb128 0x2
+ 1261 0108 17       		.uleb128 0x17
+ 1262 0109 00       		.byte	0
+ 1263 010a 00       		.byte	0
+ 1264 010b 13       		.uleb128 0x13
+ 1265 010c 34       		.uleb128 0x34
+ 1266 010d 00       		.byte	0
+ 1267 010e 03       		.uleb128 0x3
+ 1268 010f 0E       		.uleb128 0xe
+ 1269 0110 3A       		.uleb128 0x3a
+ 1270 0111 0B       		.uleb128 0xb
+ 1271 0112 3B       		.uleb128 0x3b
+ 1272 0113 0B       		.uleb128 0xb
+ 1273 0114 49       		.uleb128 0x49
+ 1274 0115 13       		.uleb128 0x13
+ 1275 0116 02       		.uleb128 0x2
+ 1276 0117 18       		.uleb128 0x18
+ 1277 0118 00       		.byte	0
+ 1278 0119 00       		.byte	0
+ 1279 011a 14       		.uleb128 0x14
+ 1280 011b 34       		.uleb128 0x34
+ 1281 011c 00       		.byte	0
+ 1282 011d 03       		.uleb128 0x3
+ 1283 011e 0E       		.uleb128 0xe
+ 1284 011f 3A       		.uleb128 0x3a
+ 1285 0120 0B       		.uleb128 0xb
+ 1286 0121 3B       		.uleb128 0x3b
+ 1287 0122 0B       		.uleb128 0xb
+ 1288 0123 49       		.uleb128 0x49
+ 1289 0124 13       		.uleb128 0x13
+ 1290 0125 1C       		.uleb128 0x1c
+ 1291 0126 0B       		.uleb128 0xb
+ 1292 0127 00       		.byte	0
+ 1293 0128 00       		.byte	0
+ 1294 0129 15       		.uleb128 0x15
+ 1295 012a 34       		.uleb128 0x34
+ 1296 012b 00       		.byte	0
+ 1297 012c 03       		.uleb128 0x3
+ 1298 012d 0E       		.uleb128 0xe
+ 1299 012e 3A       		.uleb128 0x3a
+ 1300 012f 0B       		.uleb128 0xb
+ 1301 0130 3B       		.uleb128 0x3b
+ 1302 0131 0B       		.uleb128 0xb
+ 1303 0132 49       		.uleb128 0x49
+ 1304 0133 13       		.uleb128 0x13
+ 1305 0134 00       		.byte	0
+ 1306 0135 00       		.byte	0
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 29
 
 
- 1373 00ec 00       		.byte	0
- 1374 00ed 11       		.uleb128 0x11
- 1375 00ee 34       		.uleb128 0x34
- 1376 00ef 00       		.byte	0
- 1377 00f0 03       		.uleb128 0x3
- 1378 00f1 08       		.uleb128 0x8
- 1379 00f2 3A       		.uleb128 0x3a
- 1380 00f3 0B       		.uleb128 0xb
- 1381 00f4 3B       		.uleb128 0x3b
- 1382 00f5 0B       		.uleb128 0xb
- 1383 00f6 49       		.uleb128 0x49
- 1384 00f7 13       		.uleb128 0x13
- 1385 00f8 02       		.uleb128 0x2
- 1386 00f9 17       		.uleb128 0x17
- 1387 00fa 00       		.byte	0
- 1388 00fb 00       		.byte	0
- 1389 00fc 12       		.uleb128 0x12
- 1390 00fd 34       		.uleb128 0x34
- 1391 00fe 00       		.byte	0
- 1392 00ff 03       		.uleb128 0x3
- 1393 0100 0E       		.uleb128 0xe
- 1394 0101 3A       		.uleb128 0x3a
- 1395 0102 0B       		.uleb128 0xb
- 1396 0103 3B       		.uleb128 0x3b
- 1397 0104 05       		.uleb128 0x5
- 1398 0105 49       		.uleb128 0x49
- 1399 0106 13       		.uleb128 0x13
- 1400 0107 3F       		.uleb128 0x3f
- 1401 0108 19       		.uleb128 0x19
- 1402 0109 3C       		.uleb128 0x3c
- 1403 010a 19       		.uleb128 0x19
- 1404 010b 00       		.byte	0
- 1405 010c 00       		.byte	0
- 1406 010d 13       		.uleb128 0x13
- 1407 010e 34       		.uleb128 0x34
- 1408 010f 00       		.byte	0
- 1409 0110 03       		.uleb128 0x3
- 1410 0111 0E       		.uleb128 0xe
- 1411 0112 3A       		.uleb128 0x3a
- 1412 0113 0B       		.uleb128 0xb
- 1413 0114 3B       		.uleb128 0x3b
- 1414 0115 0B       		.uleb128 0xb
- 1415 0116 49       		.uleb128 0x49
- 1416 0117 13       		.uleb128 0x13
- 1417 0118 3F       		.uleb128 0x3f
- 1418 0119 19       		.uleb128 0x19
- 1419 011a 02       		.uleb128 0x2
- 1420 011b 18       		.uleb128 0x18
- 1421 011c 00       		.byte	0
- 1422 011d 00       		.byte	0
- 1423 011e 14       		.uleb128 0x14
- 1424 011f 01       		.uleb128 0x1
- 1425 0120 01       		.byte	0x1
- 1426 0121 49       		.uleb128 0x49
- 1427 0122 13       		.uleb128 0x13
- 1428 0123 01       		.uleb128 0x1
- 1429 0124 13       		.uleb128 0x13
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 30
+ 1307 0136 16       		.uleb128 0x16
+ 1308 0137 0B       		.uleb128 0xb
+ 1309 0138 01       		.byte	0x1
+ 1310 0139 55       		.uleb128 0x55
+ 1311 013a 17       		.uleb128 0x17
+ 1312 013b 01       		.uleb128 0x1
+ 1313 013c 13       		.uleb128 0x13
+ 1314 013d 00       		.byte	0
+ 1315 013e 00       		.byte	0
+ 1316 013f 17       		.uleb128 0x17
+ 1317 0140 34       		.uleb128 0x34
+ 1318 0141 00       		.byte	0
+ 1319 0142 03       		.uleb128 0x3
+ 1320 0143 08       		.uleb128 0x8
+ 1321 0144 3A       		.uleb128 0x3a
+ 1322 0145 0B       		.uleb128 0xb
+ 1323 0146 3B       		.uleb128 0x3b
+ 1324 0147 0B       		.uleb128 0xb
+ 1325 0148 49       		.uleb128 0x49
+ 1326 0149 13       		.uleb128 0x13
+ 1327 014a 02       		.uleb128 0x2
+ 1328 014b 17       		.uleb128 0x17
+ 1329 014c 00       		.byte	0
+ 1330 014d 00       		.byte	0
+ 1331 014e 18       		.uleb128 0x18
+ 1332 014f 01       		.uleb128 0x1
+ 1333 0150 01       		.byte	0x1
+ 1334 0151 49       		.uleb128 0x49
+ 1335 0152 13       		.uleb128 0x13
+ 1336 0153 01       		.uleb128 0x1
+ 1337 0154 13       		.uleb128 0x13
+ 1338 0155 00       		.byte	0
+ 1339 0156 00       		.byte	0
+ 1340 0157 19       		.uleb128 0x19
+ 1341 0158 21       		.uleb128 0x21
+ 1342 0159 00       		.byte	0
+ 1343 015a 49       		.uleb128 0x49
+ 1344 015b 13       		.uleb128 0x13
+ 1345 015c 2F       		.uleb128 0x2f
+ 1346 015d 0B       		.uleb128 0xb
+ 1347 015e 00       		.byte	0
+ 1348 015f 00       		.byte	0
+ 1349 0160 1A       		.uleb128 0x1a
+ 1350 0161 34       		.uleb128 0x34
+ 1351 0162 00       		.byte	0
+ 1352 0163 03       		.uleb128 0x3
+ 1353 0164 0E       		.uleb128 0xe
+ 1354 0165 3A       		.uleb128 0x3a
+ 1355 0166 0B       		.uleb128 0xb
+ 1356 0167 3B       		.uleb128 0x3b
+ 1357 0168 05       		.uleb128 0x5
+ 1358 0169 49       		.uleb128 0x49
+ 1359 016a 13       		.uleb128 0x13
+ 1360 016b 3F       		.uleb128 0x3f
+ 1361 016c 19       		.uleb128 0x19
+ 1362 016d 3C       		.uleb128 0x3c
+ 1363 016e 19       		.uleb128 0x19
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 30
 
 
- 1430 0125 00       		.byte	0
- 1431 0126 00       		.byte	0
- 1432 0127 15       		.uleb128 0x15
- 1433 0128 21       		.uleb128 0x21
- 1434 0129 00       		.byte	0
- 1435 012a 49       		.uleb128 0x49
- 1436 012b 13       		.uleb128 0x13
- 1437 012c 2F       		.uleb128 0x2f
- 1438 012d 05       		.uleb128 0x5
- 1439 012e 00       		.byte	0
- 1440 012f 00       		.byte	0
- 1441 0130 16       		.uleb128 0x16
- 1442 0131 21       		.uleb128 0x21
- 1443 0132 00       		.byte	0
- 1444 0133 49       		.uleb128 0x49
- 1445 0134 13       		.uleb128 0x13
- 1446 0135 2F       		.uleb128 0x2f
- 1447 0136 0B       		.uleb128 0xb
- 1448 0137 00       		.byte	0
- 1449 0138 00       		.byte	0
- 1450 0139 17       		.uleb128 0x17
- 1451 013a 34       		.uleb128 0x34
- 1452 013b 00       		.byte	0
- 1453 013c 03       		.uleb128 0x3
- 1454 013d 08       		.uleb128 0x8
- 1455 013e 3A       		.uleb128 0x3a
- 1456 013f 0B       		.uleb128 0xb
- 1457 0140 3B       		.uleb128 0x3b
- 1458 0141 0B       		.uleb128 0xb
- 1459 0142 49       		.uleb128 0x49
- 1460 0143 13       		.uleb128 0x13
- 1461 0144 3F       		.uleb128 0x3f
- 1462 0145 19       		.uleb128 0x19
- 1463 0146 02       		.uleb128 0x2
- 1464 0147 18       		.uleb128 0x18
- 1465 0148 00       		.byte	0
- 1466 0149 00       		.byte	0
- 1467 014a 18       		.uleb128 0x18
- 1468 014b 2E       		.uleb128 0x2e
- 1469 014c 00       		.byte	0
- 1470 014d 3F       		.uleb128 0x3f
- 1471 014e 19       		.uleb128 0x19
- 1472 014f 3C       		.uleb128 0x3c
- 1473 0150 19       		.uleb128 0x19
- 1474 0151 6E       		.uleb128 0x6e
- 1475 0152 0E       		.uleb128 0xe
- 1476 0153 03       		.uleb128 0x3
- 1477 0154 0E       		.uleb128 0xe
- 1478 0155 3A       		.uleb128 0x3a
- 1479 0156 0B       		.uleb128 0xb
- 1480 0157 3B       		.uleb128 0x3b
- 1481 0158 0B       		.uleb128 0xb
- 1482 0159 00       		.byte	0
- 1483 015a 00       		.byte	0
- 1484 015b 19       		.uleb128 0x19
- 1485 015c 2E       		.uleb128 0x2e
- 1486 015d 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 31
+ 1364 016f 00       		.byte	0
+ 1365 0170 00       		.byte	0
+ 1366 0171 1B       		.uleb128 0x1b
+ 1367 0172 34       		.uleb128 0x34
+ 1368 0173 00       		.byte	0
+ 1369 0174 03       		.uleb128 0x3
+ 1370 0175 0E       		.uleb128 0xe
+ 1371 0176 3A       		.uleb128 0x3a
+ 1372 0177 0B       		.uleb128 0xb
+ 1373 0178 3B       		.uleb128 0x3b
+ 1374 0179 0B       		.uleb128 0xb
+ 1375 017a 49       		.uleb128 0x49
+ 1376 017b 13       		.uleb128 0x13
+ 1377 017c 3F       		.uleb128 0x3f
+ 1378 017d 19       		.uleb128 0x19
+ 1379 017e 02       		.uleb128 0x2
+ 1380 017f 18       		.uleb128 0x18
+ 1381 0180 00       		.byte	0
+ 1382 0181 00       		.byte	0
+ 1383 0182 1C       		.uleb128 0x1c
+ 1384 0183 34       		.uleb128 0x34
+ 1385 0184 00       		.byte	0
+ 1386 0185 03       		.uleb128 0x3
+ 1387 0186 08       		.uleb128 0x8
+ 1388 0187 3A       		.uleb128 0x3a
+ 1389 0188 0B       		.uleb128 0xb
+ 1390 0189 3B       		.uleb128 0x3b
+ 1391 018a 0B       		.uleb128 0xb
+ 1392 018b 49       		.uleb128 0x49
+ 1393 018c 13       		.uleb128 0x13
+ 1394 018d 3F       		.uleb128 0x3f
+ 1395 018e 19       		.uleb128 0x19
+ 1396 018f 02       		.uleb128 0x2
+ 1397 0190 18       		.uleb128 0x18
+ 1398 0191 00       		.byte	0
+ 1399 0192 00       		.byte	0
+ 1400 0193 1D       		.uleb128 0x1d
+ 1401 0194 2E       		.uleb128 0x2e
+ 1402 0195 00       		.byte	0
+ 1403 0196 3F       		.uleb128 0x3f
+ 1404 0197 19       		.uleb128 0x19
+ 1405 0198 3C       		.uleb128 0x3c
+ 1406 0199 19       		.uleb128 0x19
+ 1407 019a 6E       		.uleb128 0x6e
+ 1408 019b 0E       		.uleb128 0xe
+ 1409 019c 03       		.uleb128 0x3
+ 1410 019d 0E       		.uleb128 0xe
+ 1411 019e 3A       		.uleb128 0x3a
+ 1412 019f 0B       		.uleb128 0xb
+ 1413 01a0 3B       		.uleb128 0x3b
+ 1414 01a1 0B       		.uleb128 0xb
+ 1415 01a2 00       		.byte	0
+ 1416 01a3 00       		.byte	0
+ 1417 01a4 1E       		.uleb128 0x1e
+ 1418 01a5 2E       		.uleb128 0x2e
+ 1419 01a6 00       		.byte	0
+ 1420 01a7 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 31
 
 
- 1487 015e 3F       		.uleb128 0x3f
- 1488 015f 19       		.uleb128 0x19
- 1489 0160 3C       		.uleb128 0x3c
- 1490 0161 19       		.uleb128 0x19
- 1491 0162 6E       		.uleb128 0x6e
- 1492 0163 0E       		.uleb128 0xe
- 1493 0164 03       		.uleb128 0x3
- 1494 0165 0E       		.uleb128 0xe
- 1495 0166 3A       		.uleb128 0x3a
- 1496 0167 0B       		.uleb128 0xb
- 1497 0168 3B       		.uleb128 0x3b
- 1498 0169 05       		.uleb128 0x5
- 1499 016a 00       		.byte	0
- 1500 016b 00       		.byte	0
- 1501 016c 00       		.byte	0
- 1502              		.section	.debug_loc,"",%progbits
- 1503              	.Ldebug_loc0:
- 1504              	.LLST0:
- 1505 0000 8A000000 		.4byte	.LVL28
- 1506 0004 A6000000 		.4byte	.LVL32
- 1507 0008 0100     		.2byte	0x1
- 1508 000a 54       		.byte	0x54
- 1509 000b A8000000 		.4byte	.LVL33
- 1510 000f EC000000 		.4byte	.LFE68
- 1511 0013 0100     		.2byte	0x1
- 1512 0015 54       		.byte	0x54
- 1513 0016 00000000 		.4byte	0
- 1514 001a 00000000 		.4byte	0
- 1515              		.section	.debug_aranges,"",%progbits
- 1516 0000 3C000000 		.4byte	0x3c
- 1517 0004 0200     		.2byte	0x2
- 1518 0006 00000000 		.4byte	.Ldebug_info0
- 1519 000a 04       		.byte	0x4
- 1520 000b 00       		.byte	0
- 1521 000c 0000     		.2byte	0
- 1522 000e 0000     		.2byte	0
- 1523 0010 00000000 		.4byte	.LFB64
- 1524 0014 28000000 		.4byte	.LFE64-.LFB64
- 1525 0018 00000000 		.4byte	.LFB65
- 1526 001c 30000000 		.4byte	.LFE65-.LFB65
- 1527 0020 00000000 		.4byte	.LFB66
- 1528 0024 30000000 		.4byte	.LFE66-.LFB66
- 1529 0028 00000000 		.4byte	.LFB67
- 1530 002c DC000000 		.4byte	.LFE67-.LFB67
- 1531 0030 00000000 		.4byte	.LFB68
- 1532 0034 EC000000 		.4byte	.LFE68-.LFB68
- 1533 0038 00000000 		.4byte	0
- 1534 003c 00000000 		.4byte	0
- 1535              		.section	.debug_ranges,"",%progbits
- 1536              	.Ldebug_ranges0:
- 1537 0000 8A000000 		.4byte	.LBB2
- 1538 0004 A6000000 		.4byte	.LBE2
- 1539 0008 A8000000 		.4byte	.LBB3
- 1540 000c AC000000 		.4byte	.LBE3
- 1541 0010 00000000 		.4byte	0
- 1542 0014 00000000 		.4byte	0
- 1543 0018 00000000 		.4byte	.LFB64
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 32
+ 1421 01a8 19       		.uleb128 0x19
+ 1422 01a9 3C       		.uleb128 0x3c
+ 1423 01aa 19       		.uleb128 0x19
+ 1424 01ab 6E       		.uleb128 0x6e
+ 1425 01ac 0E       		.uleb128 0xe
+ 1426 01ad 03       		.uleb128 0x3
+ 1427 01ae 0E       		.uleb128 0xe
+ 1428 01af 3A       		.uleb128 0x3a
+ 1429 01b0 0B       		.uleb128 0xb
+ 1430 01b1 3B       		.uleb128 0x3b
+ 1431 01b2 05       		.uleb128 0x5
+ 1432 01b3 00       		.byte	0
+ 1433 01b4 00       		.byte	0
+ 1434 01b5 00       		.byte	0
+ 1435              		.section	.debug_loc,"",%progbits
+ 1436              	.Ldebug_loc0:
+ 1437              	.LLST0:
+ 1438 0000 22000000 		.4byte	.LVL14
+ 1439 0004 26000000 		.4byte	.LVL15
+ 1440 0008 0200     		.2byte	0x2
+ 1441 000a 30       		.byte	0x30
+ 1442 000b 9F       		.byte	0x9f
+ 1443 000c 46000000 		.4byte	.LVL21
+ 1444 0010 4A000000 		.4byte	.LVL22
+ 1445 0014 0100     		.2byte	0x1
+ 1446 0016 50       		.byte	0x50
+ 1447 0017 4A000000 		.4byte	.LVL22
+ 1448 001b 70000000 		.4byte	.LVL28
+ 1449 001f 0100     		.2byte	0x1
+ 1450 0021 57       		.byte	0x57
+ 1451 0022 70000000 		.4byte	.LVL28
+ 1452 0026 72000000 		.4byte	.LVL29
+ 1453 002a 0100     		.2byte	0x1
+ 1454 002c 50       		.byte	0x50
+ 1455 002d 72000000 		.4byte	.LVL29
+ 1456 0031 76000000 		.4byte	.LVL30
+ 1457 0035 0100     		.2byte	0x1
+ 1458 0037 57       		.byte	0x57
+ 1459 0038 00000000 		.4byte	0
+ 1460 003c 00000000 		.4byte	0
+ 1461              	.LLST1:
+ 1462 0040 22000000 		.4byte	.LVL14
+ 1463 0044 26000000 		.4byte	.LVL15
+ 1464 0048 0200     		.2byte	0x2
+ 1465 004a 30       		.byte	0x30
+ 1466 004b 9F       		.byte	0x9f
+ 1467 004c 26000000 		.4byte	.LVL15
+ 1468 0050 CC000000 		.4byte	.LFE68
+ 1469 0054 0100     		.2byte	0x1
+ 1470 0056 56       		.byte	0x56
+ 1471 0057 00000000 		.4byte	0
+ 1472 005b 00000000 		.4byte	0
+ 1473              	.LLST2:
+ 1474 005f 22000000 		.4byte	.LVL14
+ 1475 0063 26000000 		.4byte	.LVL15
+ 1476 0067 0200     		.2byte	0x2
+ 1477 0069 30       		.byte	0x30
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 32
 
 
- 1544 001c 28000000 		.4byte	.LFE64
- 1545 0020 00000000 		.4byte	.LFB65
- 1546 0024 30000000 		.4byte	.LFE65
- 1547 0028 00000000 		.4byte	.LFB66
- 1548 002c 30000000 		.4byte	.LFE66
- 1549 0030 00000000 		.4byte	.LFB67
- 1550 0034 DC000000 		.4byte	.LFE67
- 1551 0038 00000000 		.4byte	.LFB68
- 1552 003c EC000000 		.4byte	.LFE68
- 1553 0040 00000000 		.4byte	0
- 1554 0044 00000000 		.4byte	0
- 1555              		.section	.debug_line,"",%progbits
- 1556              	.Ldebug_line0:
- 1557 0000 9D020000 		.section	.debug_str,"MS",%progbits,1
- 1557      0200E501 
- 1557      00000201 
- 1557      FB0E0D00 
- 1557      01010101 
- 1558              	.LASF41:
- 1559 0000 55534255 		.ascii	"USBUART_CDCIsReady\000"
- 1559      4152545F 
- 1559      43444349 
- 1559      73526561 
- 1559      647900
- 1560              	.LASF51:
- 1561 0013 55534255 		.ascii	"USBUART_IsConfigurationChanged\000"
+ 1478 006a 9F       		.byte	0x9f
+ 1479 006b 26000000 		.4byte	.LVL15
+ 1480 006f 5A000000 		.4byte	.LVL23
+ 1481 0073 0100     		.2byte	0x1
+ 1482 0075 54       		.byte	0x54
+ 1483 0076 5A000000 		.4byte	.LVL23
+ 1484 007a 62000000 		.4byte	.LVL25
+ 1485 007e 0200     		.2byte	0x2
+ 1486 0080 31       		.byte	0x31
+ 1487 0081 9F       		.byte	0x9f
+ 1488 0082 62000000 		.4byte	.LVL25
+ 1489 0086 CC000000 		.4byte	.LFE68
+ 1490 008a 0100     		.2byte	0x1
+ 1491 008c 54       		.byte	0x54
+ 1492 008d 00000000 		.4byte	0
+ 1493 0091 00000000 		.4byte	0
+ 1494              	.LLST3:
+ 1495 0095 4A000000 		.4byte	.LVL22
+ 1496 0099 70000000 		.4byte	.LVL28
+ 1497 009d 0100     		.2byte	0x1
+ 1498 009f 55       		.byte	0x55
+ 1499 00a0 72000000 		.4byte	.LVL29
+ 1500 00a4 76000000 		.4byte	.LVL30
+ 1501 00a8 0100     		.2byte	0x1
+ 1502 00aa 55       		.byte	0x55
+ 1503 00ab 00000000 		.4byte	0
+ 1504 00af 00000000 		.4byte	0
+ 1505              		.section	.debug_aranges,"",%progbits
+ 1506 0000 3C000000 		.4byte	0x3c
+ 1507 0004 0200     		.2byte	0x2
+ 1508 0006 00000000 		.4byte	.Ldebug_info0
+ 1509 000a 04       		.byte	0x4
+ 1510 000b 00       		.byte	0
+ 1511 000c 0000     		.2byte	0
+ 1512 000e 0000     		.2byte	0
+ 1513 0010 00000000 		.4byte	.LFB64
+ 1514 0014 28000000 		.4byte	.LFE64-.LFB64
+ 1515 0018 00000000 		.4byte	.LFB65
+ 1516 001c 80000000 		.4byte	.LFE65-.LFB65
+ 1517 0020 00000000 		.4byte	.LFB66
+ 1518 0024 30000000 		.4byte	.LFE66-.LFB66
+ 1519 0028 00000000 		.4byte	.LFB67
+ 1520 002c 30000000 		.4byte	.LFE67-.LFB67
+ 1521 0030 00000000 		.4byte	.LFB68
+ 1522 0034 CC000000 		.4byte	.LFE68-.LFB68
+ 1523 0038 00000000 		.4byte	0
+ 1524 003c 00000000 		.4byte	0
+ 1525              		.section	.debug_ranges,"",%progbits
+ 1526              	.Ldebug_ranges0:
+ 1527 0000 4A000000 		.4byte	.LBB2
+ 1528 0004 70000000 		.4byte	.LBE2
+ 1529 0008 72000000 		.4byte	.LBB3
+ 1530 000c 76000000 		.4byte	.LBE3
+ 1531 0010 00000000 		.4byte	0
+ 1532 0014 00000000 		.4byte	0
+ 1533 0018 00000000 		.4byte	.LFB64
+ 1534 001c 28000000 		.4byte	.LFE64
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 33
+
+
+ 1535 0020 00000000 		.4byte	.LFB65
+ 1536 0024 80000000 		.4byte	.LFE65
+ 1537 0028 00000000 		.4byte	.LFB66
+ 1538 002c 30000000 		.4byte	.LFE66
+ 1539 0030 00000000 		.4byte	.LFB67
+ 1540 0034 30000000 		.4byte	.LFE67
+ 1541 0038 00000000 		.4byte	.LFB68
+ 1542 003c CC000000 		.4byte	.LFE68
+ 1543 0040 00000000 		.4byte	0
+ 1544 0044 00000000 		.4byte	0
+ 1545              		.section	.debug_line,"",%progbits
+ 1546              	.Ldebug_line0:
+ 1547 0000 7D020000 		.section	.debug_str,"MS",%progbits,1
+ 1547      0200CD01 
+ 1547      00000201 
+ 1547      FB0E0D00 
+ 1547      01010101 
+ 1548              	.LASF48:
+ 1549 0000 55534255 		.ascii	"USBUART_IsConfigurationChanged\000"
+ 1549      4152545F 
+ 1549      4973436F 
+ 1549      6E666967 
+ 1549      75726174 
+ 1550              	.LASF44:
+ 1551 001f 52697369 		.ascii	"RisingEdgeISR_StartEx\000"
+ 1551      6E674564 
+ 1551      67654953 
+ 1551      525F5374 
+ 1551      61727445 
+ 1552              	.LASF57:
+ 1553 0035 73746174 		.ascii	"state\000"
+ 1553      6500
+ 1554              	.LASF58:
+ 1555 003b 52656365 		.ascii	"ReceiveInterruptHandler\000"
+ 1555      69766549 
+ 1555      6E746572 
+ 1555      72757074 
+ 1555      48616E64 
+ 1556              	.LASF2:
+ 1557 0053 73686F72 		.ascii	"short int\000"
+ 1557      7420696E 
+ 1557      7400
+ 1558              	.LASF17:
+ 1559 005d 73697A65 		.ascii	"sizetype\000"
+ 1559      74797065 
+ 1559      00
+ 1560              	.LASF52:
+ 1561 0066 55534255 		.ascii	"USBUART_GetAll\000"
  1561      4152545F 
- 1561      4973436F 
- 1561      6E666967 
- 1561      75726174 
- 1562              	.LASF30:
- 1563 0032 62756666 		.ascii	"bufferPosition\000"
- 1563      6572506F 
- 1563      73697469 
- 1563      6F6E00
- 1564              	.LASF43:
- 1565 0041 52697369 		.ascii	"RisingEdgeISR_StartEx\000"
- 1565      6E674564 
- 1565      67654953 
- 1565      525F5374 
- 1565      61727445 
- 1566              	.LASF60:
- 1567 0057 73746174 		.ascii	"state\000"
- 1567      6500
- 1568              	.LASF61:
- 1569 005d 52656365 		.ascii	"ReceiveInterruptHandler\000"
- 1569      69766549 
- 1569      6E746572 
- 1569      72757074 
- 1569      48616E64 
- 1570              	.LASF2:
- 1571 0075 73686F72 		.ascii	"short int\000"
- 1571      7420696E 
- 1571      7400
- 1572              	.LASF17:
- 1573 007f 73697A65 		.ascii	"sizetype\000"
- 1573      74797065 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 33
+ 1561      47657441 
+ 1561      6C6C00
+ 1562              	.LASF26:
+ 1563 0075 64617461 		.ascii	"dataPosition\000"
+ 1563      506F7369 
+ 1563      74696F6E 
+ 1563      00
+ 1564              	.LASF59:
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 34
 
 
- 1573      00
- 1574              	.LASF55:
- 1575 0088 55534255 		.ascii	"USBUART_GetAll\000"
- 1575      4152545F 
- 1575      47657441 
- 1575      6C6C00
- 1576              	.LASF34:
- 1577 0097 64617461 		.ascii	"dataPosition\000"
- 1577      506F7369 
- 1577      74696F6E 
+ 1565 0082 6D61696E 		.ascii	"main\000"
+ 1565      00
+ 1566              	.LASF24:
+ 1567 0087 64656C61 		.ascii	"delay\000"
+ 1567      7900
+ 1568              	.LASF47:
+ 1569 008d 55534255 		.ascii	"USBUART_Start\000"
+ 1569      4152545F 
+ 1569      53746172 
+ 1569      7400
+ 1570              	.LASF39:
+ 1571 009b 5472616E 		.ascii	"TransmitISR_Stop\000"
+ 1571      736D6974 
+ 1571      4953525F 
+ 1571      53746F70 
+ 1571      00
+ 1572              	.LASF11:
+ 1573 00ac 75696E74 		.ascii	"uint8\000"
+ 1573      3800
+ 1574              	.LASF20:
+ 1575 00b2 49444C45 		.ascii	"IDLE\000"
+ 1575      00
+ 1576              	.LASF25:
+ 1577 00b7 64617461 		.ascii	"dataSize\000"
+ 1577      53697A65 
  1577      00
- 1578              	.LASF62:
- 1579 00a4 6D61696E 		.ascii	"main\000"
- 1579      00
- 1580              	.LASF50:
- 1581 00a9 55534255 		.ascii	"USBUART_Start\000"
+ 1578              	.LASF12:
+ 1579 00c0 666C6F61 		.ascii	"float\000"
+ 1579      7400
+ 1580              	.LASF49:
+ 1581 00c6 55534255 		.ascii	"USBUART_GetConfiguration\000"
  1581      4152545F 
- 1581      53746172 
- 1581      7400
- 1582              	.LASF33:
- 1583 00b7 64617461 		.ascii	"dataSize\000"
- 1583      53697A65 
- 1583      00
+ 1581      47657443 
+ 1581      6F6E6669 
+ 1581      67757261 
+ 1582              	.LASF6:
+ 1583 00df 6C6F6E67 		.ascii	"long long int\000"
+ 1583      206C6F6E 
+ 1583      6720696E 
+ 1583      7400
  1584              	.LASF35:
- 1585 00c0 636F756E 		.ascii	"count\000"
- 1585      7400
- 1586              	.LASF20:
- 1587 00c6 49444C45 		.ascii	"IDLE\000"
- 1587      00
- 1588              	.LASF12:
- 1589 00cb 666C6F61 		.ascii	"float\000"
- 1589      7400
- 1590              	.LASF52:
- 1591 00d1 55534255 		.ascii	"USBUART_GetConfiguration\000"
+ 1585 00ed 6C6F6769 		.ascii	"logicLevel\000"
+ 1585      634C6576 
+ 1585      656C00
+ 1586              	.LASF21:
+ 1587 00f8 5472616E 		.ascii	"TransmitInterruptHandler\000"
+ 1587      736D6974 
+ 1587      496E7465 
+ 1587      72727570 
+ 1587      7448616E 
+ 1588              	.LASF4:
+ 1589 0111 6C6F6E67 		.ascii	"long int\000"
+ 1589      20696E74 
+ 1589      00
+ 1590              	.LASF32:
+ 1591 011a 55534255 		.ascii	"USBUART_device\000"
  1591      4152545F 
- 1591      47657443 
- 1591      6F6E6669 
- 1591      67757261 
- 1592              	.LASF6:
- 1593 00ea 6C6F6E67 		.ascii	"long long int\000"
- 1593      206C6F6E 
- 1593      6720696E 
- 1593      7400
- 1594              	.LASF27:
- 1595 00f8 6C6F6769 		.ascii	"logicLevel\000"
- 1595      634C6576 
- 1595      656C00
- 1596              	.LASF23:
- 1597 0103 5472616E 		.ascii	"TransmitInterruptHandler\000"
- 1597      736D6974 
- 1597      496E7465 
- 1597      72727570 
- 1597      7448616E 
- 1598              	.LASF4:
- 1599 011c 6C6F6E67 		.ascii	"long int\000"
- 1599      20696E74 
- 1599      00
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 34
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 35
 
 
- 1600              	.LASF24:
- 1601 0125 55534255 		.ascii	"USBUART_device\000"
- 1601      4152545F 
- 1601      64657669 
- 1601      636500
- 1602              	.LASF46:
- 1603 0134 54696D65 		.ascii	"TimerTX_WritePeriod\000"
- 1603      7254585F 
- 1603      57726974 
- 1603      65506572 
- 1603      696F6400 
- 1604              	.LASF22:
- 1605 0148 46616C6C 		.ascii	"FallingEdgeInterruptHandler\000"
- 1605      696E6745 
- 1605      64676549 
- 1605      6E746572 
- 1605      72757074 
- 1606              	.LASF19:
- 1607 0164 434F4C4C 		.ascii	"COLLISION\000"
- 1607      4953494F 
- 1607      4E00
- 1608              	.LASF18:
- 1609 016e 42555359 		.ascii	"BUSY\000"
- 1609      00
- 1610              	.LASF16:
- 1611 0173 6C6F6E67 		.ascii	"long double\000"
- 1611      20646F75 
- 1611      626C6500 
- 1612              	.LASF40:
- 1613 017f 43794465 		.ascii	"CyDelayUs\000"
- 1613      6C617955 
- 1613      7300
- 1614              	.LASF1:
- 1615 0189 756E7369 		.ascii	"unsigned char\000"
- 1615      676E6564 
- 1615      20636861 
- 1615      7200
- 1616              	.LASF26:
- 1617 0197 73797374 		.ascii	"systemState\000"
- 1617      656D5374 
- 1617      61746500 
- 1618              	.LASF0:
- 1619 01a3 7369676E 		.ascii	"signed char\000"
- 1619      65642063 
- 1619      68617200 
- 1620              	.LASF7:
- 1621 01af 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1621      206C6F6E 
- 1621      6720756E 
- 1621      7369676E 
- 1621      65642069 
- 1622              	.LASF8:
- 1623 01c6 756E7369 		.ascii	"unsigned int\000"
- 1623      676E6564 
- 1623      20696E74 
- 1623      00
- 1624              	.LASF45:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 35
+ 1591      64657669 
+ 1591      636500
+ 1592              	.LASF60:
+ 1593 0129 62696E61 		.ascii	"binaryOfChar\000"
+ 1593      72794F66 
+ 1593      43686172 
+ 1593      00
+ 1594              	.LASF23:
+ 1595 0136 46616C6C 		.ascii	"FallingEdgeInterruptHandler\000"
+ 1595      696E6745 
+ 1595      64676549 
+ 1595      6E746572 
+ 1595      72757074 
+ 1596              	.LASF19:
+ 1597 0152 434F4C4C 		.ascii	"COLLISION\000"
+ 1597      4953494F 
+ 1597      4E00
+ 1598              	.LASF30:
+ 1599 015c 656E644F 		.ascii	"endOfTransmission\000"
+ 1599      66547261 
+ 1599      6E736D69 
+ 1599      7373696F 
+ 1599      6E00
+ 1600              	.LASF16:
+ 1601 016e 6C6F6E67 		.ascii	"long double\000"
+ 1601      20646F75 
+ 1601      626C6500 
+ 1602              	.LASF36:
+ 1603 017a 66697273 		.ascii	"firstHalfBit\000"
+ 1603      7448616C 
+ 1603      66426974 
+ 1603      00
+ 1604              	.LASF1:
+ 1605 0187 756E7369 		.ascii	"unsigned char\000"
+ 1605      676E6564 
+ 1605      20636861 
+ 1605      7200
+ 1606              	.LASF34:
+ 1607 0195 73797374 		.ascii	"systemState\000"
+ 1607      656D5374 
+ 1607      61746500 
+ 1608              	.LASF0:
+ 1609 01a1 7369676E 		.ascii	"signed char\000"
+ 1609      65642063 
+ 1609      68617200 
+ 1610              	.LASF7:
+ 1611 01ad 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1611      206C6F6E 
+ 1611      6720756E 
+ 1611      7369676E 
+ 1611      65642069 
+ 1612              	.LASF56:
+ 1613 01c4 433A5C55 		.ascii	"C:\\Users\\winstona\\Documents\\School Documents\\N"
+ 1613      73657273 
+ 1613      5C77696E 
+ 1613      73746F6E 
+ 1613      615C446F 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 36
 
 
- 1625 01d3 54696D65 		.ascii	"TimerTX_Start\000"
- 1625      7254585F 
- 1625      53746172 
- 1625      7400
- 1626              	.LASF48:
- 1627 01e1 52656365 		.ascii	"ReceiveISR_StartEx\000"
- 1627      69766549 
- 1627      53525F53 
- 1627      74617274 
- 1627      457800
- 1628              	.LASF3:
- 1629 01f4 73686F72 		.ascii	"short unsigned int\000"
- 1629      7420756E 
- 1629      7369676E 
- 1629      65642069 
- 1629      6E7400
- 1630              	.LASF49:
- 1631 0207 5472616E 		.ascii	"TransmitISR_StartEx\000"
- 1631      736D6974 
- 1631      4953525F 
- 1631      53746172 
- 1631      74457800 
- 1632              	.LASF14:
- 1633 021b 63686172 		.ascii	"char\000"
- 1633      00
- 1634              	.LASF28:
- 1635 0220 5F426F6F 		.ascii	"_Bool\000"
- 1635      6C00
- 1636              	.LASF10:
- 1637 0226 696E7433 		.ascii	"int32_t\000"
- 1637      325F7400 
- 1638              	.LASF56:
- 1639 022e 55534255 		.ascii	"USBUART_PutCRLF\000"
- 1639      4152545F 
- 1639      50757443 
- 1639      524C4600 
- 1640              	.LASF36:
- 1641 023e 54696D65 		.ascii	"TimerRX_WritePeriod\000"
- 1641      7252585F 
- 1641      57726974 
- 1641      65506572 
- 1641      696F6400 
- 1642              	.LASF42:
- 1643 0252 55534255 		.ascii	"USBUART_PutChar\000"
- 1643      4152545F 
- 1643      50757443 
- 1643      68617200 
- 1644              	.LASF32:
- 1645 0262 64617461 		.ascii	"data\000"
- 1645      00
- 1646              	.LASF44:
- 1647 0267 46616C6C 		.ascii	"FallingEdgeISR_StartEx\000"
- 1647      696E6745 
- 1647      64676549 
- 1647      53525F53 
- 1647      74617274 
- 1648              	.LASF31:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 36
+ 1614 01f2 6574776F 		.ascii	"etworking I\\ce4950lab1\\NetworkingProject.cydsn\000"
+ 1614      726B696E 
+ 1614      6720495C 
+ 1614      63653439 
+ 1614      35306C61 
+ 1615              	.LASF8:
+ 1616 0221 756E7369 		.ascii	"unsigned int\000"
+ 1616      676E6564 
+ 1616      20696E74 
+ 1616      00
+ 1617              	.LASF37:
+ 1618 022e 64617461 		.ascii	"dataPtr\000"
+ 1618      50747200 
+ 1619              	.LASF46:
+ 1620 0236 52656365 		.ascii	"ReceiveISR_StartEx\000"
+ 1620      69766549 
+ 1620      53525F53 
+ 1620      74617274 
+ 1620      457800
+ 1621              	.LASF3:
+ 1622 0249 73686F72 		.ascii	"short unsigned int\000"
+ 1622      7420756E 
+ 1622      7369676E 
+ 1622      65642069 
+ 1622      6E7400
+ 1623              	.LASF18:
+ 1624 025c 42555359 		.ascii	"BUSY\000"
+ 1624      00
+ 1625              	.LASF53:
+ 1626 0261 5472616E 		.ascii	"TransmitISR_StartEx\000"
+ 1626      736D6974 
+ 1626      4953525F 
+ 1626      53746172 
+ 1626      74457800 
+ 1627              	.LASF14:
+ 1628 0275 63686172 		.ascii	"char\000"
+ 1628      00
+ 1629              	.LASF10:
+ 1630 027a 696E7433 		.ascii	"int32_t\000"
+ 1630      325F7400 
+ 1631              	.LASF43:
+ 1632 0282 55534255 		.ascii	"USBUART_PutCRLF\000"
+ 1632      4152545F 
+ 1632      50757443 
+ 1632      524C4600 
+ 1633              	.LASF40:
+ 1634 0292 54696D65 		.ascii	"TimerRX_WritePeriod\000"
+ 1634      7252585F 
+ 1634      57726974 
+ 1634      65506572 
+ 1634      696F6400 
+ 1635              	.LASF31:
+ 1636 02a6 5F426F6F 		.ascii	"_Bool\000"
+ 1636      6C00
+ 1637              	.LASF29:
+ 1638 02ac 64617461 		.ascii	"data\000"
+ 1638      00
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 37
 
 
- 1649 027e 62756666 		.ascii	"buffer\000"
- 1649      657200
- 1650              	.LASF29:
- 1651 0285 63757272 		.ascii	"currentDataCharacter\000"
- 1651      656E7444 
- 1651      61746143 
- 1651      68617261 
- 1651      63746572 
- 1652              	.LASF58:
- 1653 029a 6D61696E 		.ascii	"main.c\000"
- 1653      2E6300
- 1654              	.LASF15:
- 1655 02a1 72656738 		.ascii	"reg8\000"
- 1655      00
- 1656              	.LASF5:
- 1657 02a6 6C6F6E67 		.ascii	"long unsigned int\000"
- 1657      20756E73 
- 1657      69676E65 
- 1657      6420696E 
- 1657      7400
- 1658              	.LASF13:
- 1659 02b8 646F7562 		.ascii	"double\000"
- 1659      6C6500
- 1660              	.LASF59:
- 1661 02bf 433A5C32 		.ascii	"C:\\2018 Winter\\CE4950\\GroupProject\\ce4950lab1\\"
- 1661      30313820 
- 1661      57696E74 
- 1661      65725C43 
- 1661      45343935 
- 1662 02ed 4E657477 		.ascii	"NetworkingProject.cydsn\000"
- 1662      6F726B69 
- 1662      6E675072 
- 1662      6F6A6563 
- 1662      742E6379 
- 1663              	.LASF9:
- 1664 0305 5F5F696E 		.ascii	"__int32_t\000"
- 1664      7433325F 
- 1664      7400
- 1665              	.LASF47:
- 1666 030f 54696D65 		.ascii	"TimerTX_WriteCounter\000"
- 1666      7254585F 
- 1666      57726974 
- 1666      65436F75 
- 1666      6E746572 
- 1667              	.LASF39:
- 1668 0324 5452414E 		.ascii	"TRANSMIT_Write\000"
- 1668      534D4954 
- 1668      5F577269 
- 1668      746500
- 1669              	.LASF38:
- 1670 0333 54696D65 		.ascii	"TimerRX_Start\000"
- 1670      7252585F 
- 1670      53746172 
- 1670      7400
- 1671              	.LASF11:
- 1672 0341 75696E74 		.ascii	"uint8\000"
- 1672      3800
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccLnNcWr.s 			page 37
+ 1639              	.LASF45:
+ 1640 02b1 46616C6C 		.ascii	"FallingEdgeISR_StartEx\000"
+ 1640      696E6745 
+ 1640      64676549 
+ 1640      53525F53 
+ 1640      74617274 
+ 1641              	.LASF28:
+ 1642 02c8 62756666 		.ascii	"buffer\000"
+ 1642      657200
+ 1643              	.LASF55:
+ 1644 02cf 6D61696E 		.ascii	"main.c\000"
+ 1644      2E6300
+ 1645              	.LASF15:
+ 1646 02d6 72656738 		.ascii	"reg8\000"
+ 1646      00
+ 1647              	.LASF5:
+ 1648 02db 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1648      20756E73 
+ 1648      69676E65 
+ 1648      6420696E 
+ 1648      7400
+ 1649              	.LASF13:
+ 1650 02ed 646F7562 		.ascii	"double\000"
+ 1650      6C6500
+ 1651              	.LASF27:
+ 1652 02f4 656E644F 		.ascii	"endOfData\000"
+ 1652      66446174 
+ 1652      6100
+ 1653              	.LASF9:
+ 1654 02fe 5F5F696E 		.ascii	"__int32_t\000"
+ 1654      7433325F 
+ 1654      7400
+ 1655              	.LASF38:
+ 1656 0308 5452414E 		.ascii	"TRANSMIT_Write\000"
+ 1656      534D4954 
+ 1656      5F577269 
+ 1656      746500
+ 1657              	.LASF42:
+ 1658 0317 54696D65 		.ascii	"TimerRX_Start\000"
+ 1658      7252585F 
+ 1658      53746172 
+ 1658      7400
+ 1659              	.LASF50:
+ 1660 0325 55534255 		.ascii	"USBUART_CDC_Init\000"
+ 1660      4152545F 
+ 1660      4344435F 
+ 1660      496E6974 
+ 1660      00
+ 1661              	.LASF41:
+ 1662 0336 54696D65 		.ascii	"TimerRX_WriteCounter\000"
+ 1662      7252585F 
+ 1662      57726974 
+ 1662      65436F75 
+ 1662      6E746572 
+ 1663              	.LASF33:
+ 1664 034b 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1664      52784275 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cc0pze8M.s 			page 38
 
 
- 1673              	.LASF53:
- 1674 0347 55534255 		.ascii	"USBUART_CDC_Init\000"
- 1674      4152545F 
- 1674      4344435F 
- 1674      496E6974 
- 1674      00
- 1675              	.LASF37:
- 1676 0358 54696D65 		.ascii	"TimerRX_WriteCounter\000"
- 1676      7252585F 
- 1676      57726974 
- 1676      65436F75 
- 1676      6E746572 
- 1677              	.LASF25:
- 1678 036d 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1678      52784275 
- 1678      66666572 
- 1678      00
- 1679              	.LASF57:
- 1680 037a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1680      43313120 
- 1680      352E342E 
- 1680      31203230 
- 1680      31363036 
- 1681 03ad 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1681      20726576 
- 1681      6973696F 
- 1681      6E203233 
- 1681      37373135 
- 1682 03e0 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1682      66756E63 
- 1682      74696F6E 
- 1682      2D736563 
- 1682      74696F6E 
- 1683              	.LASF21:
- 1684 0408 52697369 		.ascii	"RisingEdgeInterruptHandler\000"
- 1684      6E674564 
- 1684      6765496E 
- 1684      74657272 
- 1684      75707448 
- 1685              	.LASF54:
- 1686 0423 55534255 		.ascii	"USBUART_DataIsReady\000"
- 1686      4152545F 
- 1686      44617461 
- 1686      49735265 
- 1686      61647900 
- 1687              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1664      66666572 
+ 1664      00
+ 1665              	.LASF54:
+ 1666 0358 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1666      43313120 
+ 1666      352E342E 
+ 1666      31203230 
+ 1666      31363036 
+ 1667 038b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1667      20726576 
+ 1667      6973696F 
+ 1667      6E203233 
+ 1667      37373135 
+ 1668 03be 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1668      66756E63 
+ 1668      74696F6E 
+ 1668      2D736563 
+ 1668      74696F6E 
+ 1669              	.LASF22:
+ 1670 03e6 52697369 		.ascii	"RisingEdgeInterruptHandler\000"
+ 1670      6E674564 
+ 1670      6765496E 
+ 1670      74657272 
+ 1670      75707448 
+ 1671              	.LASF51:
+ 1672 0401 55534255 		.ascii	"USBUART_DataIsReady\000"
+ 1672      4152545F 
+ 1672      44617461 
+ 1672      49735265 
+ 1672      61647900 
+ 1673              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

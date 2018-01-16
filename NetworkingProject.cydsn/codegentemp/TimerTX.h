@@ -36,8 +36,8 @@ extern uint8 TimerTX_initVar;
 *           Parameter Defaults
 **************************************/
 
-#define TimerTX_Resolution                 16u
-#define TimerTX_UsingFixedFunction         0u
+#define TimerTX_Resolution                 8u
+#define TimerTX_UsingFixedFunction         1u
 #define TimerTX_UsingHWCaptureCounter      0u
 #define TimerTX_SoftwareCaptureMode        0u
 #define TimerTX_SoftwareTriggerMode        0u
@@ -69,7 +69,7 @@ typedef struct
     uint8 TimerEnableState;
     #if(!TimerTX_UsingFixedFunction)
 
-        uint16 TimerUdb;
+        uint8 TimerUdb;
         uint8 InterruptMaskValue;
         #if (TimerTX_UsingHWCaptureCounter)
             uint8 TimerCaptureCounter;
@@ -100,11 +100,11 @@ uint8   TimerTX_ReadStatusRegister(void) ;
     void    TimerTX_WriteControlRegister(uint8 control) ;
 #endif /* (!TimerTX_UDB_CONTROL_REG_REMOVED) */
 
-uint16  TimerTX_ReadPeriod(void) ;
-void    TimerTX_WritePeriod(uint16 period) ;
-uint16  TimerTX_ReadCounter(void) ;
-void    TimerTX_WriteCounter(uint16 counter) ;
-uint16  TimerTX_ReadCapture(void) ;
+uint8  TimerTX_ReadPeriod(void) ;
+void    TimerTX_WritePeriod(uint8 period) ;
+uint8  TimerTX_ReadCounter(void) ;
+void    TimerTX_WriteCounter(uint8 counter) ;
+uint8  TimerTX_ReadCapture(void) ;
 void    TimerTX_SoftwareCapture(void) ;
 
 #if(!TimerTX_UsingFixedFunction) /* UDB Prototypes */
@@ -168,14 +168,14 @@ void TimerTX_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define TimerTX_INIT_PERIOD             9u
+#define TimerTX_INIT_PERIOD             49u
 #define TimerTX_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << TimerTX_CTRL_CAP_MODE_SHIFT))
 #define TimerTX_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << TimerTX_CTRL_TRIG_MODE_SHIFT))
 #if (TimerTX_UsingFixedFunction)
-    #define TimerTX_INIT_INTERRUPT_MODE (((uint8)((uint8)1u << TimerTX_STATUS_TC_INT_MASK_SHIFT)) | \
+    #define TimerTX_INIT_INTERRUPT_MODE (((uint8)((uint8)0u << TimerTX_STATUS_TC_INT_MASK_SHIFT)) | \
                                                   ((uint8)((uint8)0 << TimerTX_STATUS_CAPTURE_INT_MASK_SHIFT)))
 #else
-    #define TimerTX_INIT_INTERRUPT_MODE (((uint8)((uint8)1u << TimerTX_STATUS_TC_INT_MASK_SHIFT)) | \
+    #define TimerTX_INIT_INTERRUPT_MODE (((uint8)((uint8)0u << TimerTX_STATUS_TC_INT_MASK_SHIFT)) | \
                                                  ((uint8)((uint8)0 << TimerTX_STATUS_CAPTURE_INT_MASK_SHIFT)) | \
                                                  ((uint8)((uint8)0 << TimerTX_STATUS_FIFOFULL_INT_MASK_SHIFT)))
 #endif /* (TimerTX_UsingFixedFunction) */
@@ -313,54 +313,54 @@ void TimerTX_Wakeup(void)        ;
     #define TimerTX_CONTROL             (* (reg8 *) TimerTX_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG )
     
     #if(TimerTX_Resolution <= 8u) /* 8-bit Timer */
-        #define TimerTX_CAPTURE_LSB         (* (reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define TimerTX_CAPTURE_LSB_PTR       ((reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define TimerTX_PERIOD_LSB          (* (reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define TimerTX_PERIOD_LSB_PTR        ((reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define TimerTX_COUNTER_LSB         (* (reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
-        #define TimerTX_COUNTER_LSB_PTR       ((reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define TimerTX_CAPTURE_LSB         (* (reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+        #define TimerTX_CAPTURE_LSB_PTR       ((reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+        #define TimerTX_PERIOD_LSB          (* (reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+        #define TimerTX_PERIOD_LSB_PTR        ((reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+        #define TimerTX_COUNTER_LSB         (* (reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
+        #define TimerTX_COUNTER_LSB_PTR       ((reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
     #elif(TimerTX_Resolution <= 16u) /* 8-bit Timer */
         #if(CY_PSOC3) /* 8-bit addres space */
-            #define TimerTX_CAPTURE_LSB         (* (reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define TimerTX_CAPTURE_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define TimerTX_PERIOD_LSB          (* (reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define TimerTX_PERIOD_LSB_PTR        ((reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define TimerTX_COUNTER_LSB         (* (reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
-            #define TimerTX_COUNTER_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define TimerTX_CAPTURE_LSB         (* (reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+            #define TimerTX_CAPTURE_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+            #define TimerTX_PERIOD_LSB          (* (reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+            #define TimerTX_PERIOD_LSB_PTR        ((reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+            #define TimerTX_COUNTER_LSB         (* (reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
+            #define TimerTX_COUNTER_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
         #else /* 16-bit address space */
-            #define TimerTX_CAPTURE_LSB         (* (reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
-            #define TimerTX_CAPTURE_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
-            #define TimerTX_PERIOD_LSB          (* (reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
-            #define TimerTX_PERIOD_LSB_PTR        ((reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
-            #define TimerTX_COUNTER_LSB         (* (reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
-            #define TimerTX_COUNTER_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
+            #define TimerTX_CAPTURE_LSB         (* (reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__16BIT_F0_REG )
+            #define TimerTX_CAPTURE_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__16BIT_F0_REG )
+            #define TimerTX_PERIOD_LSB          (* (reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__16BIT_D0_REG )
+            #define TimerTX_PERIOD_LSB_PTR        ((reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__16BIT_D0_REG )
+            #define TimerTX_COUNTER_LSB         (* (reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__16BIT_A0_REG )
+            #define TimerTX_COUNTER_LSB_PTR       ((reg16 *) TimerTX_TimerUDB_sT8_timerdp_u0__16BIT_A0_REG )
         #endif /* CY_PSOC3 */
     #elif(TimerTX_Resolution <= 24u)/* 24-bit Timer */
-        #define TimerTX_CAPTURE_LSB         (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define TimerTX_CAPTURE_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define TimerTX_PERIOD_LSB          (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define TimerTX_PERIOD_LSB_PTR        ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define TimerTX_COUNTER_LSB         (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
-        #define TimerTX_COUNTER_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define TimerTX_CAPTURE_LSB         (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+        #define TimerTX_CAPTURE_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+        #define TimerTX_PERIOD_LSB          (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+        #define TimerTX_PERIOD_LSB_PTR        ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+        #define TimerTX_COUNTER_LSB         (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
+        #define TimerTX_COUNTER_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
     #else /* 32-bit Timer */
         #if(CY_PSOC3 || CY_PSOC5) /* 8-bit address space */
-            #define TimerTX_CAPTURE_LSB         (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define TimerTX_CAPTURE_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define TimerTX_PERIOD_LSB          (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define TimerTX_PERIOD_LSB_PTR        ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define TimerTX_COUNTER_LSB         (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
-            #define TimerTX_COUNTER_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define TimerTX_CAPTURE_LSB         (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+            #define TimerTX_CAPTURE_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__F0_REG )
+            #define TimerTX_PERIOD_LSB          (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+            #define TimerTX_PERIOD_LSB_PTR        ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__D0_REG )
+            #define TimerTX_COUNTER_LSB         (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
+            #define TimerTX_COUNTER_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
         #else /* 32-bit address space */
-            #define TimerTX_CAPTURE_LSB         (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
-            #define TimerTX_CAPTURE_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
-            #define TimerTX_PERIOD_LSB          (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
-            #define TimerTX_PERIOD_LSB_PTR        ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
-            #define TimerTX_COUNTER_LSB         (* (reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
-            #define TimerTX_COUNTER_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
+            #define TimerTX_CAPTURE_LSB         (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__32BIT_F0_REG )
+            #define TimerTX_CAPTURE_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__32BIT_F0_REG )
+            #define TimerTX_PERIOD_LSB          (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__32BIT_D0_REG )
+            #define TimerTX_PERIOD_LSB_PTR        ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__32BIT_D0_REG )
+            #define TimerTX_COUNTER_LSB         (* (reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__32BIT_A0_REG )
+            #define TimerTX_COUNTER_LSB_PTR       ((reg32 *) TimerTX_TimerUDB_sT8_timerdp_u0__32BIT_A0_REG )
         #endif /* CY_PSOC3 || CY_PSOC5 */ 
     #endif
 
-    #define TimerTX_COUNTER_LSB_PTR_8BIT       ((reg8 *) TimerTX_TimerUDB_sT16_timerdp_u0__A0_REG )
+    #define TimerTX_COUNTER_LSB_PTR_8BIT       ((reg8 *) TimerTX_TimerUDB_sT8_timerdp_u0__A0_REG )
     
     #if (TimerTX_UsingHWCaptureCounter)
         #define TimerTX_CAP_COUNT              (*(reg8 *) TimerTX_TimerUDB_sCapCount_counter__PERIOD_REG )
