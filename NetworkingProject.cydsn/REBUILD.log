@@ -1,3 +1,10 @@
---------------- Rebuild Started: 01/15/2018 15:02:10 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Rebuild Started: 01/16/2018 11:34:25 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
---------------- Rebuild Succeeded: 01/15/2018 15:02:11 ---------------
+main.c: In function 'main':
+main.c:202:10: warning: unused variable 'binaryOfChar' [-Wunused-variable]
+     char binaryOfChar[8 + 1]; //represents the 8 bit representation of the character 
+          ^
+main.c:195:9: warning: unused variable 'delay' [-Wunused-variable]
+     int delay = 500; //delay of 500ms, configured later through random and uniformly distributed to be 0-1s
+         ^
+--------------- Rebuild Succeeded: 01/16/2018 11:34:26 ---------------

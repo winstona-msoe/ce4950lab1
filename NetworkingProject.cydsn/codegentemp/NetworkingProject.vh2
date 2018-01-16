@@ -2,7 +2,7 @@
 --	Conversion of NetworkingProject.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Jan 15 16:17:27 2018
+--	Tue Jan 16 11:23:19 2018
 --
 
 USE cypress.cypress.all;

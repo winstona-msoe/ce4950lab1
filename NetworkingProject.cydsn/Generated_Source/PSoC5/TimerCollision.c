@@ -402,12 +402,12 @@ void TimerCollision_WriteControlRegister(uint8 control)
 *  The present value of the counter.
 *
 *******************************************************************************/
-uint8 TimerCollision_ReadPeriod(void) 
+uint16 TimerCollision_ReadPeriod(void) 
 {
    #if(TimerCollision_UsingFixedFunction)
-       return ((uint8)CY_GET_REG16(TimerCollision_PERIOD_LSB_PTR));
+       return ((uint16)CY_GET_REG16(TimerCollision_PERIOD_LSB_PTR));
    #else
-       return (CY_GET_REG8(TimerCollision_PERIOD_LSB_PTR));
+       return (CY_GET_REG16(TimerCollision_PERIOD_LSB_PTR));
    #endif /* (TimerCollision_UsingFixedFunction) */
 }
 
@@ -428,13 +428,13 @@ uint8 TimerCollision_ReadPeriod(void)
 *  void
 *
 *******************************************************************************/
-void TimerCollision_WritePeriod(uint8 period) 
+void TimerCollision_WritePeriod(uint16 period) 
 {
     #if(TimerCollision_UsingFixedFunction)
         uint16 period_temp = (uint16)period;
         CY_SET_REG16(TimerCollision_PERIOD_LSB_PTR, period_temp);
     #else
-        CY_SET_REG8(TimerCollision_PERIOD_LSB_PTR, period);
+        CY_SET_REG16(TimerCollision_PERIOD_LSB_PTR, period);
     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed function implementation */
 }
 
@@ -453,12 +453,12 @@ void TimerCollision_WritePeriod(uint8 period)
 *  Present Capture value.
 *
 *******************************************************************************/
-uint8 TimerCollision_ReadCapture(void) 
+uint16 TimerCollision_ReadCapture(void) 
 {
    #if(TimerCollision_UsingFixedFunction)
-       return ((uint8)CY_GET_REG16(TimerCollision_CAPTURE_LSB_PTR));
+       return ((uint16)CY_GET_REG16(TimerCollision_CAPTURE_LSB_PTR));
    #else
-       return (CY_GET_REG8(TimerCollision_CAPTURE_LSB_PTR));
+       return (CY_GET_REG16(TimerCollision_CAPTURE_LSB_PTR));
    #endif /* (TimerCollision_UsingFixedFunction) */
 }
 
@@ -477,7 +477,7 @@ uint8 TimerCollision_ReadCapture(void)
 *  void
 *
 *******************************************************************************/
-void TimerCollision_WriteCounter(uint8 counter) 
+void TimerCollision_WriteCounter(uint16 counter) 
 {
    #if(TimerCollision_UsingFixedFunction)
         /* This functionality is removed until a FixedFunction HW update to
@@ -486,7 +486,7 @@ void TimerCollision_WriteCounter(uint8 counter)
         CY_SET_REG16(TimerCollision_COUNTER_LSB_PTR, (uint16)counter);
         
     #else
-        CY_SET_REG8(TimerCollision_COUNTER_LSB_PTR, counter);
+        CY_SET_REG16(TimerCollision_COUNTER_LSB_PTR, counter);
     #endif /* Set Write Counter only for the UDB implementation (Write Counter not available in fixed function Timer */
 }
 
@@ -505,7 +505,7 @@ void TimerCollision_WriteCounter(uint8 counter)
 *  Present compare value.
 *
 *******************************************************************************/
-uint8 TimerCollision_ReadCounter(void) 
+uint16 TimerCollision_ReadCounter(void) 
 {
     /* Force capture by reading Accumulator */
     /* Must first do a software capture to be able to read the counter */
@@ -518,9 +518,9 @@ uint8 TimerCollision_ReadCounter(void)
 
     /* Read the data from the FIFO (or capture register for Fixed Function)*/
     #if(TimerCollision_UsingFixedFunction)
-        return ((uint8)CY_GET_REG16(TimerCollision_CAPTURE_LSB_PTR));
+        return ((uint16)CY_GET_REG16(TimerCollision_CAPTURE_LSB_PTR));
     #else
-        return (CY_GET_REG8(TimerCollision_CAPTURE_LSB_PTR));
+        return (CY_GET_REG16(TimerCollision_CAPTURE_LSB_PTR));
     #endif /* (TimerCollision_UsingFixedFunction) */
 }
 

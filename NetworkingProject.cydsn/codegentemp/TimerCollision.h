@@ -36,7 +36,7 @@ extern uint8 TimerCollision_initVar;
 *           Parameter Defaults
 **************************************/
 
-#define TimerCollision_Resolution                 8u
+#define TimerCollision_Resolution                 16u
 #define TimerCollision_UsingFixedFunction         1u
 #define TimerCollision_UsingHWCaptureCounter      0u
 #define TimerCollision_SoftwareCaptureMode        0u
@@ -44,7 +44,7 @@ extern uint8 TimerCollision_initVar;
 #define TimerCollision_UsingHWEnable              0u
 #define TimerCollision_EnableTriggerMode          0u
 #define TimerCollision_InterruptOnCaptureCount    0u
-#define TimerCollision_RunModeUsed                0u
+#define TimerCollision_RunModeUsed                1u
 #define TimerCollision_ControlRegRemoved          0u
 
 #if defined(TimerCollision_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG)
@@ -69,7 +69,7 @@ typedef struct
     uint8 TimerEnableState;
     #if(!TimerCollision_UsingFixedFunction)
 
-        uint8 TimerUdb;
+        uint16 TimerUdb;
         uint8 InterruptMaskValue;
         #if (TimerCollision_UsingHWCaptureCounter)
             uint8 TimerCaptureCounter;
@@ -100,11 +100,11 @@ uint8   TimerCollision_ReadStatusRegister(void) ;
     void    TimerCollision_WriteControlRegister(uint8 control) ;
 #endif /* (!TimerCollision_UDB_CONTROL_REG_REMOVED) */
 
-uint8  TimerCollision_ReadPeriod(void) ;
-void    TimerCollision_WritePeriod(uint8 period) ;
-uint8  TimerCollision_ReadCounter(void) ;
-void    TimerCollision_WriteCounter(uint8 counter) ;
-uint8  TimerCollision_ReadCapture(void) ;
+uint16  TimerCollision_ReadPeriod(void) ;
+void    TimerCollision_WritePeriod(uint16 period) ;
+uint16  TimerCollision_ReadCounter(void) ;
+void    TimerCollision_WriteCounter(uint16 counter) ;
+uint16  TimerCollision_ReadCapture(void) ;
 void    TimerCollision_SoftwareCapture(void) ;
 
 #if(!TimerCollision_UsingFixedFunction) /* UDB Prototypes */
@@ -168,8 +168,8 @@ void TimerCollision_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define TimerCollision_INIT_PERIOD             255u
-#define TimerCollision_INIT_CAPTURE_MODE       ((uint8)((uint8)1u << TimerCollision_CTRL_CAP_MODE_SHIFT))
+#define TimerCollision_INIT_PERIOD             999u
+#define TimerCollision_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << TimerCollision_CTRL_CAP_MODE_SHIFT))
 #define TimerCollision_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << TimerCollision_CTRL_TRIG_MODE_SHIFT))
 #if (TimerCollision_UsingFixedFunction)
     #define TimerCollision_INIT_INTERRUPT_MODE (((uint8)((uint8)0u << TimerCollision_STATUS_TC_INT_MASK_SHIFT)) | \
@@ -313,54 +313,54 @@ void TimerCollision_Wakeup(void)        ;
     #define TimerCollision_CONTROL             (* (reg8 *) TimerCollision_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG )
     
     #if(TimerCollision_Resolution <= 8u) /* 8-bit Timer */
-        #define TimerCollision_CAPTURE_LSB         (* (reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TimerCollision_CAPTURE_LSB_PTR       ((reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TimerCollision_PERIOD_LSB          (* (reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TimerCollision_PERIOD_LSB_PTR        ((reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TimerCollision_COUNTER_LSB         (* (reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
-        #define TimerCollision_COUNTER_LSB_PTR       ((reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
+        #define TimerCollision_CAPTURE_LSB         (* (reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TimerCollision_CAPTURE_LSB_PTR       ((reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TimerCollision_PERIOD_LSB          (* (reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TimerCollision_PERIOD_LSB_PTR        ((reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TimerCollision_COUNTER_LSB         (* (reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define TimerCollision_COUNTER_LSB_PTR       ((reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
     #elif(TimerCollision_Resolution <= 16u) /* 8-bit Timer */
         #if(CY_PSOC3) /* 8-bit addres space */
-            #define TimerCollision_CAPTURE_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TimerCollision_CAPTURE_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TimerCollision_PERIOD_LSB          (* (reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TimerCollision_PERIOD_LSB_PTR        ((reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TimerCollision_COUNTER_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
-            #define TimerCollision_COUNTER_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
+            #define TimerCollision_CAPTURE_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TimerCollision_CAPTURE_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TimerCollision_PERIOD_LSB          (* (reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TimerCollision_PERIOD_LSB_PTR        ((reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TimerCollision_COUNTER_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define TimerCollision_COUNTER_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
         #else /* 16-bit address space */
-            #define TimerCollision_CAPTURE_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__16BIT_F0_REG )
-            #define TimerCollision_CAPTURE_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__16BIT_F0_REG )
-            #define TimerCollision_PERIOD_LSB          (* (reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__16BIT_D0_REG )
-            #define TimerCollision_PERIOD_LSB_PTR        ((reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__16BIT_D0_REG )
-            #define TimerCollision_COUNTER_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__16BIT_A0_REG )
-            #define TimerCollision_COUNTER_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT8_timerdp_u0__16BIT_A0_REG )
+            #define TimerCollision_CAPTURE_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
+            #define TimerCollision_CAPTURE_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
+            #define TimerCollision_PERIOD_LSB          (* (reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
+            #define TimerCollision_PERIOD_LSB_PTR        ((reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
+            #define TimerCollision_COUNTER_LSB         (* (reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
+            #define TimerCollision_COUNTER_LSB_PTR       ((reg16 *) TimerCollision_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
         #endif /* CY_PSOC3 */
     #elif(TimerCollision_Resolution <= 24u)/* 24-bit Timer */
-        #define TimerCollision_CAPTURE_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TimerCollision_CAPTURE_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-        #define TimerCollision_PERIOD_LSB          (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TimerCollision_PERIOD_LSB_PTR        ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-        #define TimerCollision_COUNTER_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
-        #define TimerCollision_COUNTER_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
+        #define TimerCollision_CAPTURE_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TimerCollision_CAPTURE_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+        #define TimerCollision_PERIOD_LSB          (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TimerCollision_PERIOD_LSB_PTR        ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+        #define TimerCollision_COUNTER_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define TimerCollision_COUNTER_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
     #else /* 32-bit Timer */
         #if(CY_PSOC3 || CY_PSOC5) /* 8-bit address space */
-            #define TimerCollision_CAPTURE_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TimerCollision_CAPTURE_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__F0_REG )
-            #define TimerCollision_PERIOD_LSB          (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TimerCollision_PERIOD_LSB_PTR        ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__D0_REG )
-            #define TimerCollision_COUNTER_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
-            #define TimerCollision_COUNTER_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
+            #define TimerCollision_CAPTURE_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TimerCollision_CAPTURE_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__F0_REG )
+            #define TimerCollision_PERIOD_LSB          (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TimerCollision_PERIOD_LSB_PTR        ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__D0_REG )
+            #define TimerCollision_COUNTER_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define TimerCollision_COUNTER_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
         #else /* 32-bit address space */
-            #define TimerCollision_CAPTURE_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__32BIT_F0_REG )
-            #define TimerCollision_CAPTURE_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__32BIT_F0_REG )
-            #define TimerCollision_PERIOD_LSB          (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__32BIT_D0_REG )
-            #define TimerCollision_PERIOD_LSB_PTR        ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__32BIT_D0_REG )
-            #define TimerCollision_COUNTER_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__32BIT_A0_REG )
-            #define TimerCollision_COUNTER_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT8_timerdp_u0__32BIT_A0_REG )
+            #define TimerCollision_CAPTURE_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
+            #define TimerCollision_CAPTURE_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
+            #define TimerCollision_PERIOD_LSB          (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
+            #define TimerCollision_PERIOD_LSB_PTR        ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
+            #define TimerCollision_COUNTER_LSB         (* (reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
+            #define TimerCollision_COUNTER_LSB_PTR       ((reg32 *) TimerCollision_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
         #endif /* CY_PSOC3 || CY_PSOC5 */ 
     #endif
 
-    #define TimerCollision_COUNTER_LSB_PTR_8BIT       ((reg8 *) TimerCollision_TimerUDB_sT8_timerdp_u0__A0_REG )
+    #define TimerCollision_COUNTER_LSB_PTR_8BIT       ((reg8 *) TimerCollision_TimerUDB_sT16_timerdp_u0__A0_REG )
     
     #if (TimerCollision_UsingHWCaptureCounter)
         #define TimerCollision_CAP_COUNT              (*(reg8 *) TimerCollision_TimerUDB_sCapCount_counter__PERIOD_REG )

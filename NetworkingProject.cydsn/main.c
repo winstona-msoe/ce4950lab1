@@ -65,8 +65,14 @@ CY_ISR(ReceiveInterruptHandler)
    	TimerRX_STATUS; 
     if (logicLevel) {
         systemState = COLLISION;
+        COLLISION_Write(1);
+        IDLE_Write(0);
+        BUSY_Write(0);
     } else {
         systemState = IDLE;
+        COLLISION_Write(0);
+        IDLE_Write(1);
+        BUSY_Write(0);
     }
 }
 
@@ -117,11 +123,16 @@ CY_ISR(TransmitInterruptHandler)
 CY_ISR(RisingEdgeInterruptHandler)
 {
     if ((!logicLevel)){
+        RisingEdgeISR_ClearPending();
+        TimerRX_Stop();
         TimerRX_WritePeriod(COLLISION_PERIOD);
         TimerRX_WriteCounter(COLLISION_COUNTER);
         TimerRX_Start();
         logicLevel = 1;
         systemState = BUSY;
+        BUSY_Write(1);
+        COLLISION_Write(0);
+        IDLE_Write(0);
     }
 }
  
@@ -140,15 +151,23 @@ CY_ISR(RisingEdgeInterruptHandler)
  *********************************************************/ 
 CY_ISR(FallingEdgeInterruptHandler)
 {
-    if (logicLevel){
+    if (logicLevel) {
+        FallingEdgeISR_ClearPending();
+        TimerRX_Stop();
         TimerRX_WritePeriod(IDLE_PERIOD);
         TimerRX_WriteCounter(IDLE_COUNTER);
         TimerRX_Start();
         logicLevel = 0;
         systemState = BUSY;
+        BUSY_Write(1);
+        COLLISION_Write(0);
+        IDLE_Write(0);
     }
 }
 
+/**
+This runs at the end of the interrupt.
+*/
 CY_ISR(CollisionInterruptHandler)
 {
     collisionDelay = false;
@@ -210,6 +229,7 @@ int main(void)
                         {
                             endOfData = true;
                             USBUART_PutCRLF();
+                            USBUART_PutString("Enter is pressed");
                         }
                         else
                         {
@@ -230,8 +250,8 @@ int main(void)
         TransmitISR_StartEx(TransmitInterruptHandler);
         while (systemState != IDLE); // Wait for lines to be idle
         while (!endOfTransmission);
-            if (systemState == COLLISION){
-        }
+        /*    if (systemState == COLLISION){
+        }*///TODO Add collision detection logic
         
         /*
         dataPosition = 0;
