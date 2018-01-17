@@ -37,7 +37,7 @@ extern uint8 TimerTX_initVar;
 **************************************/
 
 #define TimerTX_Resolution                 16u
-#define TimerTX_UsingFixedFunction         0u
+#define TimerTX_UsingFixedFunction         1u
 #define TimerTX_UsingHWCaptureCounter      0u
 #define TimerTX_SoftwareCaptureMode        0u
 #define TimerTX_SoftwareTriggerMode        0u
@@ -168,7 +168,7 @@ void TimerTX_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define TimerTX_INIT_PERIOD             9u
+#define TimerTX_INIT_PERIOD             49u
 #define TimerTX_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << TimerTX_CTRL_CAP_MODE_SHIFT))
 #define TimerTX_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << TimerTX_CTRL_TRIG_MODE_SHIFT))
 #if (TimerTX_UsingFixedFunction)
