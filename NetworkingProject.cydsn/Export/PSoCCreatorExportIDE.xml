@@ -58,6 +58,8 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cyfitteriar.inc</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cyfitter.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\cydisabledsheets.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerISR.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerISR.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\CLOCK1.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\IDLE_aliases.h</File>
@@ -158,6 +160,20 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TimerTX_PM.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TransmitISR.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\TransmitISR.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Timer.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Timer.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Timer_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PRS.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PRS.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PRS_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Backoff.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Backoff.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Backoff_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\BackoffISR.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\BackoffISR.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RiseEdge_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RiseEdge.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\RiseEdge.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\Export\ARM_GCC_Generic">
