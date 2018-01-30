@@ -44,7 +44,6 @@
 #include "LCD.h"
 #include "TRANSMIT_aliases.h"
 #include "TRANSMIT.h"
-#include "CLOCK2.h"
 #include "TimerTX.h"
 #include "TransmitISR.h"
 #include "USBUART_Dm_aliases.h"

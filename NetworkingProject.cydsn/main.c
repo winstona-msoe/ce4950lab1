@@ -19,6 +19,7 @@
 
 #include "project.h"
 #include <stdlib.h>
+#include <stdbool.h>
 #include "stdio.h"
 
 #define COLLISION_PERIOD                   52
@@ -26,13 +27,23 @@
 #define IDLE_PERIOD                        830
 #define IDLE_COUNTER                       829
 
+#define RX_BUFFER_SIZE                     32
+
+#define NULL_PAD                           1
+
+#define MAX_RX_HIGH_TIME_CLK               52
+#define EXPECTED_SYMBOL_TIME_CLK           50
+#define MIN_RX_HIGH_TIME_CLK               48
+
+
 //States include: 
 //Busy - signals that the channel monitor is busy
 //       and in either line high or line low 
 //Collision - collision detected, line high
 //Idle - initialized state looking for rising
 //       edge to occur
-enum state { BUSY, COLLISION, IDLE } systemState;
+typedef enum { BUSY, COLLISION, IDLE } State;
+State systemState;
 
 _Bool logicLevel = 0;
 char currentDataCharacter; //current char
@@ -51,6 +62,21 @@ int count; //dataConvertedReadOutCount
 
 // bit pos in transmitted character (0 is MSB, 6 is LSB, excludes start bit)
 int idx = 0;
+
+/******************************************************
+Receiving character logic
+******************************************************/
+//Which RX bit occurred during last HI period. 8 if no bit received yet.
+uint8_t rxBit = 8;
+// Buffer for receiving text.
+// TODO Adjust size of buffer. See if buffer is even necessary.
+char rxBuffer[RX_BUFFER_SIZE + NULL_PAD];
+
+char *rxBufferPos;
+// Type of previous event.
+enum {EVENT_RISING, EVENT_FALLING, EVENT_CLEARED, EVENT_ERROR} eventStatus;
+// Time before last recorded edge in clock cycles
+uint16_t timeBeforeEdgeClk;
     
     
 /*******************************************************************************
@@ -189,52 +215,83 @@ int main(void)
     CyGlobalIntEnable;
     RisingEdgeISR_StartEx(RisingEdgeInterruptHandler);
     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
-    TimerTX_Start();
-    TimerTX_WritePeriod(45);
-    TimerTX_WriteCounter(44);
+//    TimerTX_Start();
+//    TimerTX_WritePeriod(45);
+//    TimerTX_WriteCounter(44);
     ReceiveISR_StartEx(ReceiveInterruptHandler);
-    TransmitISR_StartEx(TransmitInterruptHandler);
+//    TransmitISR_StartEx(TransmitInterruptHandler);
 
     
     USBUART_Start(USBUART_device, USBUART_5V_OPERATION);
     
-
-    
-    while (1) {
+    while (true) {
+        State localState = systemState; // Save in case of preemption.
+        // TODO Make this code conditional so it doesn't check
+        // for a new bit unless something special happened.
+        // This code should only run when an edge was detected.
+        // TODO Make other code for when state changes to COLLISION
+        // or IDLE.
         
-        //Ensure device is connected and configured 
-        if (0u != USBUART_IsConfigurationChanged())
-        {           
-            // Initialize IN endpoints
-            if (0u != USBUART_GetConfiguration())
-            {
-                // Enable OUT endpoint to receive data from host
-                USBUART_CDC_Init();
-            }
-        }      
-        
-        
-        if(USBUART_DataIsReady() != 0){
-            dataSize = USBUART_GetAll(buffer);
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF();
-            count = 0;            
-            bufferPosition = 0;
-        }
-
-        if(USBUART_CDCIsReady() != 0){
-            if(count < dataSize && bufferPosition == dataSize){
-                for(int y = 0; y < 16; y++){
-                 while(!USBUART_CDCIsReady());
-                 USBUART_PutChar(data[count][y]); 
+        // Save this locally in case of preemption.
+        bool risingEdge = logicLevel;
+        unsigned inputCaptureTime = TimerRX_ReadCapture();
+        // Error detection. Caused by too many successive IRQs.
+        if (TimerRX_STATUS & TimerRX_STATUS_FIFONEMP) {
+            // TODO Wait for line to idle.
+        } else {
+            // This code should do bit shifting (or byte shifting if necessary)
+            // on the rising edge.
+            // On the falling edge, after proper high length was confirmed, the
+            // appropriate bit should be set.
+            if (risingEdge) { // Was last low
+                int timeClk = IDLE_COUNTER - inputCaptureTime;
+                // TODO Add time check, and do appropriate bit shifts.
+            } else { // Was last high.
+                int timeClk = COLLISION_COUNTER - inputCaptureTime;
+                if (timeClk >= MIN_RX_HIGH_TIME_CLK) {
+                    *rxBufferPos |= (1 << rxBit);
                 }
-                ++count;
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF();
             }
         }
     }
-}
+    return 0;
+
+// This was the original transmit code. Not for milestone 3.    
+//    while (1) {
+//        
+//        //Ensure device is connected and configured 
+//        if (0u != USBUART_IsConfigurationChanged())
+//        {           
+//            // Initialize IN endpoints
+//            if (0u != USBUART_GetConfiguration())
+//            {
+//                // Enable OUT endpoint to receive data from host
+//                USBUART_CDC_Init();
+//            }
+//        }      
+//        
+//        
+//        if(USBUART_DataIsReady() != 0){
+//            dataSize = USBUART_GetAll(buffer);
+//            while(!USBUART_CDCIsReady());
+//            USBUART_PutCRLF();
+//            count = 0;            
+//            bufferPosition = 0;
+//        }
+//
+//        if(USBUART_CDCIsReady() != 0){
+//            if(count < dataSize && bufferPosition == dataSize){
+//                for(int y = 0; y < 16; y++){
+//                 while(!USBUART_CDCIsReady());
+//                 USBUART_PutChar(data[count][y]); 
+//                }
+//                ++count;
+//                while(!USBUART_CDCIsReady());
+//                USBUART_PutCRLF();
+//            }
+//        }
+//    }
+//}
 
         
 //    while(1) {
@@ -259,6 +316,6 @@ int main(void)
 //        }
 //    }
    
-
+}
 
 /* [] END OF FILE */
