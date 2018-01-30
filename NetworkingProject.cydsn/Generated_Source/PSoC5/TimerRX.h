@@ -44,7 +44,7 @@ extern uint8 TimerRX_initVar;
 #define TimerRX_UsingHWEnable              0u
 #define TimerRX_EnableTriggerMode          0u
 #define TimerRX_InterruptOnCaptureCount    0u
-#define TimerRX_RunModeUsed                0u
+#define TimerRX_RunModeUsed                1u
 #define TimerRX_ControlRegRemoved          0u
 
 #if defined(TimerRX_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG)
