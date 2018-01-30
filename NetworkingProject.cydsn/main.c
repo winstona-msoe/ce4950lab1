@@ -35,6 +35,9 @@
 #define EXPECTED_SYMBOL_TIME_CLK           50
 #define MIN_RX_HIGH_TIME_CLK               48
 
+#define NO_BIT                             8
+#define START_BIT                          7
+
 
 //States include: 
 //Busy - signals that the channel monitor is busy
@@ -64,19 +67,14 @@ int count; //dataConvertedReadOutCount
 int idx = 0;
 
 /******************************************************
-Receiving character logic
+Receiving character logic variables
 ******************************************************/
 //Which RX bit occurred during last HI period. 8 if no bit received yet.
 uint8_t rxBit = 8;
 // Buffer for receiving text.
 // TODO Adjust size of buffer. See if buffer is even necessary.
 char rxBuffer[RX_BUFFER_SIZE + NULL_PAD];
-
-char *rxBufferPos;
-// Type of previous event.
-enum {EVENT_RISING, EVENT_FALLING, EVENT_CLEARED, EVENT_ERROR} eventStatus;
-// Time before last recorded edge in clock cycles
-uint16_t timeBeforeEdgeClk;
+char *rxBufferPos; // Current char position.
     
     
 /*******************************************************************************
@@ -221,6 +219,7 @@ int main(void)
     ReceiveISR_StartEx(ReceiveInterruptHandler);
 //    TransmitISR_StartEx(TransmitInterruptHandler);
 
+    rxBufferPos = rxBuffer;
     
     USBUART_Start(USBUART_device, USBUART_5V_OPERATION);
     
@@ -233,26 +232,72 @@ int main(void)
         // or IDLE.
         
         // Save this locally in case of preemption.
-        bool risingEdge = logicLevel;
-        unsigned inputCaptureTime = TimerRX_ReadCapture();
-        // Error detection. Caused by too many successive IRQs.
-        if (TimerRX_STATUS & TimerRX_STATUS_FIFONEMP) {
-            // TODO Wait for line to idle.
-        } else {
-            // This code should do bit shifting (or byte shifting if necessary)
-            // on the rising edge.
-            // On the falling edge, after proper high length was confirmed, the
-            // appropriate bit should be set.
-            if (risingEdge) { // Was last low
-                int timeClk = IDLE_COUNTER - inputCaptureTime;
-                // TODO Add time check, and do appropriate bit shifts.
-            } else { // Was last high.
-                int timeClk = COLLISION_COUNTER - inputCaptureTime;
-                if (timeClk >= MIN_RX_HIGH_TIME_CLK) {
-                    *rxBufferPos |= (1 << rxBit);
+        if (systemState == BUSY) {
+            bool risingEdge = logicLevel;
+            unsigned inputCaptureTime = TimerRX_ReadCapture();
+            // Error detection. Caused by too many successive IRQs.
+            if (TimerRX_STATUS & TimerRX_STATUS_FIFONEMP) {
+                // Error state. Stop interpreting received data until idle.
+                rxBit = NO_BIT;
+                while (systemState != IDLE);
+            } else {
+                // This code should do bit shifting (or byte shifting if necessary)
+                // on the rising edge.
+                // On the falling edge, after proper high length was confirmed, the
+                // appropriate bit should be set.
+                if (risingEdge) { // Was last low
+                    if (rxBit == 8) {
+                        rxBit--;
+                        continue;
+                    }
+                    int timeClk = IDLE_COUNTER - inputCaptureTime;
+                    int symbolClkCycles = timeClk % EXPECTED_SYMBOL_TIME_CLK;
+                    // Find out the nearest rounding of symbol time.
+                    int nearestNumSymbols = timeClk / EXPECTED_SYMBOL_TIME_CLK
+                    + ((symbolClkCycles >= EXPECTED_SYMBOL_TIME_CLK / 2) ? 1 : 0);
+                    int bitsToShift = nearestNumSymbols / 2;
+                    if (bitsToShift > rxBit) {
+                        rxBit = START_BIT;
+                        rxBufferPos++;
+                        *rxBufferPos = '\0'; // Nullify new buffer pos.
+                        continue;
+                    }
+                    // Improper number of symbols between highs.
+                    if ((nearestNumSymbols <= 0)
+                    || (nearestNumSymbols % 2 == 0) // Even num of symbols
+                    // Below appropraite min
+                    || (inputCaptureTime < 
+                    (unsigned) nearestNumSymbols * MIN_RX_HIGH_TIME_CLK) 
+                    // Below appropriate min
+                    || (inputCaptureTime > 
+                    (unsigned) nearestNumSymbols * MAX_RX_HIGH_TIME_CLK)) {
+                        // Error state.
+                        rxBit = NO_BIT;
+                        *rxBufferPos = '\0';
+                        while (systemState != IDLE);
+                    } else {
+                        // Will round down properly, since 0.5 is truncated.
+                        rxBit -= bitsToShift;
+                    }
+                } else { // Was last high.
+                    int timeClk = COLLISION_COUNTER - inputCaptureTime;
+                    if (timeClk >= MIN_RX_HIGH_TIME_CLK) {
+                        *rxBufferPos |= (1 << rxBit);
+                    }
                 }
             }
+        } else if (systemState == IDLE) {
+            // If idle, finish off current bit.
+            if (rxBit != NO_BIT) {
+                rxBufferPos++;
+                rxBit = NO_BIT;
+            }
+        } else {
+            // If collision, STOP trying to receive current bit.
+            rxBit = NO_BIT;
+            *rxBufferPos = '\0'; // Clear current char data. Is bad.
         }
+        
     }
     return 0;
 
