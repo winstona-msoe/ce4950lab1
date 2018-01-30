@@ -1,5 +1,5 @@
 -- Project:   NetworkingProject
--- Generated: 01/30/2018 11:50:42
+-- Generated: 01/30/2018 15:21:15
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -67,8 +67,6 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \\\LCD:LCDPort(5)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(6)\\__PA\ : bit;
     SIGNAL \RISING_EDGE:last\ : bit;
-    SIGNAL \TimerRX:TimerUDB:capture_last\ : bit;
-    SIGNAL \TimerRX:TimerUDB:cntr_load\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_0\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_1\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_2\ : bit;
@@ -77,23 +75,11 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \TimerRX:TimerUDB:control_5\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_6\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_7\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_0\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_1\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_2\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_3\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_4\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_5\ : bit;
-    SIGNAL \TimerRX:TimerUDB:count_6\ : bit;
-    SIGNAL \TimerRX:TimerUDB:fifo_load_polarized\ : bit;
     SIGNAL \TimerRX:TimerUDB:per_zero\ : bit;
-    SIGNAL \TimerRX:TimerUDB:run_mode\ : bit;
-    SIGNAL \TimerRX:TimerUDB:runmode_enable\ : bit;
     SIGNAL \TimerTX:TimerUDB:sT16:timerdp:u0.ce0__sig\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_2\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_3\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_tc\ : bit;
-    SIGNAL \TimerRX:TimerUDB:tmp_fifo_load\ : bit;
-    SIGNAL \TimerRX:TimerUDB:trig_disable\ : bit;
     SIGNAL \TimerTX:TimerUDB:control_0\ : bit;
     SIGNAL \TimerTX:TimerUDB:control_1\ : bit;
     SIGNAL \TimerTX:TimerUDB:control_2\ : bit;
@@ -175,11 +161,10 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE Location OF \USBUART:Dp(0)\ : LABEL IS "P15[6]";
     ATTRIBUTE lib_model OF TRANSMIT(0) : LABEL IS "iocell7";
     ATTRIBUTE Location OF TRANSMIT(0) : LABEL IS "P0[7]";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:fifo_load_polarized\ : LABEL IS "macrocell1";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "macrocell2";
-    ATTRIBUTE lib_model OF Net_92 : LABEL IS "macrocell3";
-    ATTRIBUTE lib_model OF Net_93 : LABEL IS "macrocell4";
-    ATTRIBUTE lib_model OF \TimerTX:TimerUDB:status_tc\ : LABEL IS "macrocell5";
+    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "macrocell1";
+    ATTRIBUTE lib_model OF Net_92 : LABEL IS "macrocell2";
+    ATTRIBUTE lib_model OF Net_93 : LABEL IS "macrocell3";
+    ATTRIBUTE lib_model OF \TimerTX:TimerUDB:status_tc\ : LABEL IS "macrocell4";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell1";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell1";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell1";
@@ -189,13 +174,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF \TimerTX:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell2";
     ATTRIBUTE lib_model OF \TimerTX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell3";
     ATTRIBUTE lib_model OF \TimerTX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell4";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:capture_last\ : LABEL IS "macrocell6";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:cntr_load\ : LABEL IS "macrocell7";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:tmp_fifo_load\ : LABEL IS "macrocell8";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:run_mode\ : LABEL IS "macrocell9";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:runmode_enable\ : LABEL IS "macrocell10";
-    ATTRIBUTE lib_model OF \TimerRX:TimerUDB:trig_disable\ : LABEL IS "macrocell11";
-    ATTRIBUTE lib_model OF \RISING_EDGE:last\ : LABEL IS "macrocell12";
+    ATTRIBUTE lib_model OF \RISING_EDGE:last\ : LABEL IS "macrocell5";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -294,28 +273,6 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE udb_clk OF controlcell : COMPONENT IS "clock";
     ATTRIBUTE udb_clken OF controlcell : COMPONENT IS "clk_en";
     ATTRIBUTE udb_reset OF controlcell : COMPONENT IS "reset";
-    COMPONENT count7cell
-        PORT (
-            clock : IN std_ulogic;
-            reset : IN std_ulogic;
-            load : IN std_ulogic;
-            enable : IN std_ulogic;
-            clk_en : IN std_ulogic;
-            count_0 : OUT std_ulogic;
-            count_1 : OUT std_ulogic;
-            count_2 : OUT std_ulogic;
-            count_3 : OUT std_ulogic;
-            count_4 : OUT std_ulogic;
-            count_5 : OUT std_ulogic;
-            count_6 : OUT std_ulogic;
-            tc : OUT std_ulogic;
-            clock_n : IN std_ulogic;
-            extclk : IN std_ulogic;
-            extclk_n : IN std_ulogic);
-    END COMPONENT;
-    ATTRIBUTE udb_clk OF count7cell : COMPONENT IS "clock,clock_n,extclk,extclk_n";
-    ATTRIBUTE udb_clken OF count7cell : COMPONENT IS "clk_en";
-    ATTRIBUTE udb_reset OF count7cell : COMPONENT IS "reset";
     COMPONENT datapathcell
         PORT (
             clock : IN std_ulogic;
@@ -1402,17 +1359,6 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
-    \TimerRX:TimerUDB:fifo_load_polarized\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2) + (!main_0 * main_1 * !main_2)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:fifo_load_polarized\,
-            main_0 => \TimerRX:TimerUDB:capture_last\,
-            main_1 => \RISING_EDGE:last\,
-            main_2 => Net_659);
-
     \TimerRX:TimerUDB:status_tc\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1)",
@@ -1420,7 +1366,7 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             q => \TimerRX:TimerUDB:status_tc\,
-            main_0 => \TimerRX:TimerUDB:run_mode\,
+            main_0 => \TimerRX:TimerUDB:control_7\,
             main_1 => \TimerRX:TimerUDB:per_zero\);
 
     Net_92:macrocell
@@ -1482,27 +1428,6 @@ BEGIN
             control_0 => \TimerRX:TimerUDB:control_0\,
             busclk => ClockBlock_BUS_CLK);
 
-    \TimerRX:TimerUDB:sCapCount:counter\:count7cell
-        GENERIC MAP(
-            cy_alt_mode => 0,
-            cy_init_value => "0000000",
-            cy_period => "0000001",
-            cy_route_en => 1,
-            cy_route_ld => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            clock => Net_255,
-            load => \TimerRX:TimerUDB:cntr_load\,
-            enable => \TimerRX:TimerUDB:fifo_load_polarized\,
-            count_6 => \TimerRX:TimerUDB:count_6\,
-            count_5 => \TimerRX:TimerUDB:count_5\,
-            count_4 => \TimerRX:TimerUDB:count_4\,
-            count_3 => \TimerRX:TimerUDB:count_3\,
-            count_2 => \TimerRX:TimerUDB:count_2\,
-            count_1 => \TimerRX:TimerUDB:count_1\,
-            count_0 => \TimerRX:TimerUDB:count_0\);
-
     \TimerRX:TimerUDB:rstSts:stsreg\:statusicell
         GENERIC MAP(
             cy_force_order => 1,
@@ -1517,7 +1442,7 @@ BEGIN
             status_4 => open,
             status_3 => \TimerRX:TimerUDB:status_3\,
             status_2 => \TimerRX:TimerUDB:status_2\,
-            status_1 => \TimerRX:TimerUDB:tmp_fifo_load\,
+            status_1 => open,
             status_0 => \TimerRX:TimerUDB:status_tc\,
             interrupt => Net_172);
 
@@ -1550,9 +1475,8 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             clock => Net_255,
-            cs_addr_1 => \TimerRX:TimerUDB:runmode_enable\,
+            cs_addr_1 => \TimerRX:TimerUDB:control_7\,
             cs_addr_0 => \TimerRX:TimerUDB:per_zero\,
-            f0_load => \TimerRX:TimerUDB:tmp_fifo_load\,
             busclk => ClockBlock_BUS_CLK,
             ce0 => \TimerRX:TimerUDB:sT16:timerdp:u0.ce0__sig\,
             cl0 => \TimerRX:TimerUDB:sT16:timerdp:u0.cl0__sig\,
@@ -1597,9 +1521,8 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             clock => Net_255,
-            cs_addr_1 => \TimerRX:TimerUDB:runmode_enable\,
+            cs_addr_1 => \TimerRX:TimerUDB:control_7\,
             cs_addr_0 => \TimerRX:TimerUDB:per_zero\,
-            f0_load => \TimerRX:TimerUDB:tmp_fifo_load\,
             z0_comb => \TimerRX:TimerUDB:per_zero\,
             f0_bus_stat_comb => \TimerRX:TimerUDB:status_3\,
             f0_blk_stat_comb => \TimerRX:TimerUDB:status_2\,
@@ -1874,93 +1797,6 @@ BEGIN
         PORT MAP(
             interrupt => Net_40,
             clock => ClockBlock_BUS_CLK);
-
-    \TimerRX:TimerUDB:capture_last\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * main_1) + (main_0 * !main_1)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:capture_last\,
-            clock_0 => Net_255,
-            main_0 => \RISING_EDGE:last\,
-            main_1 => Net_659);
-
-    \TimerRX:TimerUDB:cntr_load\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4 * !main_5 * main_6)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:cntr_load\,
-            clock_0 => Net_255,
-            main_0 => \TimerRX:TimerUDB:count_6\,
-            main_1 => \TimerRX:TimerUDB:count_5\,
-            main_2 => \TimerRX:TimerUDB:count_4\,
-            main_3 => \TimerRX:TimerUDB:count_3\,
-            main_4 => \TimerRX:TimerUDB:count_2\,
-            main_5 => \TimerRX:TimerUDB:count_1\,
-            main_6 => \TimerRX:TimerUDB:count_0\);
-
-    \TimerRX:TimerUDB:tmp_fifo_load\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4 * !main_5 * !main_6 * main_7)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:tmp_fifo_load\,
-            clock_0 => Net_255,
-            main_0 => \TimerRX:TimerUDB:cntr_load\,
-            main_1 => \TimerRX:TimerUDB:count_6\,
-            main_2 => \TimerRX:TimerUDB:count_5\,
-            main_3 => \TimerRX:TimerUDB:count_4\,
-            main_4 => \TimerRX:TimerUDB:count_3\,
-            main_5 => \TimerRX:TimerUDB:count_2\,
-            main_6 => \TimerRX:TimerUDB:count_1\,
-            main_7 => \TimerRX:TimerUDB:count_0\);
-
-    \TimerRX:TimerUDB:run_mode\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:run_mode\,
-            clock_0 => Net_255,
-            main_0 => \TimerRX:TimerUDB:control_7\);
-
-    \TimerRX:TimerUDB:runmode_enable\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * !main_1 * !main_4) + (main_0 * !main_2 * !main_4) + (main_0 * !main_3 * !main_4)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:runmode_enable\,
-            clock_0 => Net_255,
-            main_0 => \TimerRX:TimerUDB:control_7\,
-            main_1 => \TimerRX:TimerUDB:run_mode\,
-            main_2 => \TimerRX:TimerUDB:per_zero\,
-            main_3 => \TimerRX:TimerUDB:runmode_enable\,
-            main_4 => \TimerRX:TimerUDB:trig_disable\);
-
-    \TimerRX:TimerUDB:trig_disable\:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * main_1 * main_2 * !main_3)",
-            regmode => 2,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \TimerRX:TimerUDB:trig_disable\,
-            clock_0 => Net_255,
-            main_0 => \TimerRX:TimerUDB:run_mode\,
-            main_1 => \TimerRX:TimerUDB:per_zero\,
-            main_2 => \TimerRX:TimerUDB:runmode_enable\,
-            main_3 => \TimerRX:TimerUDB:trig_disable\);
 
     \RISING_EDGE:last\:macrocell
         GENERIC MAP(

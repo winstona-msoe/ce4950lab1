@@ -1,3 +1,10 @@
---------------- Rebuild Started: 01/15/2018 14:14:46 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Rebuild Started: 01/30/2018 15:11:20 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
---------------- Rebuild Succeeded: 01/15/2018 14:14:47 ---------------
+main.c: In function 'main':
+main.c:342:25: warning: statement with no effect [-Wunused-value]
+                         timeClk;
+                         ^
+main.c:341:29: warning: unused variable 'x' [-Wunused-variable]
+                         int x = nearestNumSymbols;
+                             ^
+--------------- Rebuild Succeeded: 01/30/2018 15:11:21 ---------------

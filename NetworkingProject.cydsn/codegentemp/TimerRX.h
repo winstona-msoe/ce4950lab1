@@ -38,13 +38,13 @@ extern uint8 TimerRX_initVar;
 
 #define TimerRX_Resolution                 16u
 #define TimerRX_UsingFixedFunction         0u
-#define TimerRX_UsingHWCaptureCounter      1u
+#define TimerRX_UsingHWCaptureCounter      0u
 #define TimerRX_SoftwareCaptureMode        0u
 #define TimerRX_SoftwareTriggerMode        0u
 #define TimerRX_UsingHWEnable              0u
 #define TimerRX_EnableTriggerMode          0u
 #define TimerRX_InterruptOnCaptureCount    0u
-#define TimerRX_RunModeUsed                1u
+#define TimerRX_RunModeUsed                0u
 #define TimerRX_ControlRegRemoved          0u
 
 #if defined(TimerRX_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG)
@@ -169,7 +169,7 @@ void TimerRX_Wakeup(void)        ;
 ***************************************/
 
 #define TimerRX_INIT_PERIOD             9u
-#define TimerRX_INIT_CAPTURE_MODE       ((uint8)((uint8)1u << TimerRX_CTRL_CAP_MODE_SHIFT))
+#define TimerRX_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << TimerRX_CTRL_CAP_MODE_SHIFT))
 #define TimerRX_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << TimerRX_CTRL_TRIG_MODE_SHIFT))
 #if (TimerRX_UsingFixedFunction)
     #define TimerRX_INIT_INTERRUPT_MODE (((uint8)((uint8)1u << TimerRX_STATUS_TC_INT_MASK_SHIFT)) | \

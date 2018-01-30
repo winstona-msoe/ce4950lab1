@@ -2,7 +2,7 @@
 --	Conversion of NetworkingProject.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Jan 30 11:50:41 2018
+--	Tue Jan 30 15:21:15 2018
 --
 
 USE cypress.cypress.all;
@@ -40,32 +40,21 @@ SIGNAL \TimerRX:TimerUDB:ctrl_tmode_0\ : bit;
 SIGNAL \TimerRX:TimerUDB:ctrl_ic_1\ : bit;
 SIGNAL \TimerRX:TimerUDB:ctrl_ic_0\ : bit;
 SIGNAL \TimerRX:TimerUDB:fifo_load_polarized\ : bit;
-SIGNAL Net_58 : bit;
 SIGNAL \TimerRX:TimerUDB:capture_last\ : bit;
-SIGNAL \TimerRX:TimerUDB:cntr_load\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_6\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_5\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_4\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_3\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_2\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_1\ : bit;
-SIGNAL \TimerRX:TimerUDB:count_0\ : bit;
-SIGNAL \TimerRX:TimerUDB:tmp_fifo_load\ : bit;
 SIGNAL \TimerRX:TimerUDB:capt_fifo_load\ : bit;
+SIGNAL \TimerRX:TimerUDB:timer_enable\ : bit;
 SIGNAL \TimerRX:TimerUDB:run_mode\ : bit;
-SIGNAL \TimerRX:TimerUDB:hwEnable_reg\ : bit;
+SIGNAL \TimerRX:TimerUDB:hwEnable\ : bit;
 SIGNAL \TimerRX:TimerUDB:status_tc\ : bit;
 SIGNAL \TimerRX:TimerUDB:trigger_enable\ : bit;
 SIGNAL \TimerRX:TimerUDB:per_zero\ : bit;
 SIGNAL \TimerRX:TimerUDB:tc_i\ : bit;
 SIGNAL \TimerRX:TimerUDB:tc_reg_i\ : bit;
-SIGNAL \TimerRX:TimerUDB:hwEnable\ : bit;
+SIGNAL \TimerRX:TimerUDB:hwEnable_reg\ : bit;
 SIGNAL \TimerRX:TimerUDB:capture_out_reg_i\ : bit;
-SIGNAL Net_31 : bit;
+SIGNAL Net_107 : bit;
 SIGNAL \TimerRX:TimerUDB:capt_fifo_load_int\ : bit;
 SIGNAL \TimerRX:TimerUDB:runmode_enable\ : bit;
-SIGNAL \TimerRX:TimerUDB:trig_disable\ : bit;
-SIGNAL \TimerRX:TimerUDB:timer_enable\ : bit;
 SIGNAL \TimerRX:TimerUDB:trig_reg\ : bit;
 SIGNAL \TimerRX:TimerUDB:status_6\ : bit;
 SIGNAL \TimerRX:TimerUDB:status_5\ : bit;
@@ -512,13 +501,9 @@ ATTRIBUTE port_state_att of \TimerTX:TimerUDB:sT16:timerdp:f1_blk_stat_reg_1\:SI
 SIGNAL \TimerTX:Net_102\ : bit;
 SIGNAL \TimerTX:Net_266\ : bit;
 SIGNAL \TimerRX:TimerUDB:capture_last\\D\ : bit;
-SIGNAL \TimerRX:TimerUDB:cntr_load\\D\ : bit;
-SIGNAL \TimerRX:TimerUDB:tmp_fifo_load\\D\ : bit;
-SIGNAL \TimerRX:TimerUDB:hwEnable_reg\\D\ : bit;
 SIGNAL \TimerRX:TimerUDB:tc_reg_i\\D\ : bit;
+SIGNAL \TimerRX:TimerUDB:hwEnable_reg\\D\ : bit;
 SIGNAL \TimerRX:TimerUDB:capture_out_reg_i\\D\ : bit;
-SIGNAL \TimerRX:TimerUDB:runmode_enable\\D\ : bit;
-SIGNAL \TimerRX:TimerUDB:trig_disable\\D\ : bit;
 SIGNAL \RISING_EDGE:last\\D\ : bit;
 SIGNAL \FALLING_EDGE:last\\D\ : bit;
 SIGNAL \TimerTX:TimerUDB:capture_last\\D\ : bit;
@@ -531,28 +516,11 @@ Net_20 <=  ('0') ;
 
 one <=  ('1') ;
 
-\TimerRX:TimerUDB:fifo_load_polarized\ <= ((not \TimerRX:TimerUDB:capture_last\ and not Net_659 and \FALLING_EDGE:last\)
-	OR (not \TimerRX:TimerUDB:capture_last\ and not \RISING_EDGE:last\ and Net_659));
-
-\TimerRX:TimerUDB:tmp_fifo_load\\D\ <= ((not \TimerRX:TimerUDB:cntr_load\ and not \TimerRX:TimerUDB:count_6\ and not \TimerRX:TimerUDB:count_5\ and not \TimerRX:TimerUDB:count_4\ and not \TimerRX:TimerUDB:count_3\ and not \TimerRX:TimerUDB:count_2\ and not \TimerRX:TimerUDB:count_1\ and \TimerRX:TimerUDB:count_0\));
-
-\TimerRX:TimerUDB:cntr_load\\D\ <= ((not \TimerRX:TimerUDB:count_6\ and not \TimerRX:TimerUDB:count_5\ and not \TimerRX:TimerUDB:count_4\ and not \TimerRX:TimerUDB:count_3\ and not \TimerRX:TimerUDB:count_2\ and not \TimerRX:TimerUDB:count_1\ and \TimerRX:TimerUDB:count_0\));
-
-\TimerRX:TimerUDB:status_tc\ <= ((\TimerRX:TimerUDB:run_mode\ and \TimerRX:TimerUDB:per_zero\));
-
-\TimerRX:TimerUDB:runmode_enable\\D\ <= ((not \TimerRX:TimerUDB:runmode_enable\ and not \TimerRX:TimerUDB:trig_disable\ and \TimerRX:TimerUDB:control_7\)
-	OR (not \TimerRX:TimerUDB:per_zero\ and not \TimerRX:TimerUDB:trig_disable\ and \TimerRX:TimerUDB:control_7\)
-	OR (not \TimerRX:TimerUDB:run_mode\ and not \TimerRX:TimerUDB:trig_disable\ and \TimerRX:TimerUDB:control_7\));
-
-\TimerRX:TimerUDB:trig_disable\\D\ <= ((\TimerRX:TimerUDB:run_mode\ and \TimerRX:TimerUDB:per_zero\ and \TimerRX:TimerUDB:runmode_enable\)
-	OR \TimerRX:TimerUDB:trig_disable\);
+\TimerRX:TimerUDB:status_tc\ <= ((\TimerRX:TimerUDB:control_7\ and \TimerRX:TimerUDB:per_zero\));
 
 Net_92 <= ((not \RISING_EDGE:last\ and Net_659));
 
 Net_93 <= ((not Net_659 and \FALLING_EDGE:last\));
-
-Net_58 <= ((not Net_659 and \FALLING_EDGE:last\)
-	OR (not \RISING_EDGE:last\ and Net_659));
 
 \TimerTX:TimerUDB:status_tc\ <= ((\TimerTX:TimerUDB:control_7\ and \TimerTX:TimerUDB:per_zero\));
 
@@ -590,19 +558,6 @@ CLOCK1:cy_clock_v1_0
 		clock=>\TimerRX:TimerUDB:Clk_Ctl_i\,
 		control=>(\TimerRX:TimerUDB:control_7\, \TimerRX:TimerUDB:control_6\, \TimerRX:TimerUDB:control_5\, \TimerRX:TimerUDB:control_4\,
 			\TimerRX:TimerUDB:control_3\, \TimerRX:TimerUDB:control_2\, \TimerRX:TimerUDB:control_1\, \TimerRX:TimerUDB:control_0\));
-\TimerRX:TimerUDB:sCapCount:counter\:cy_psoc3_count7
-	GENERIC MAP(cy_period=>"0000001",
-		cy_init_value=>"0000000",
-		cy_route_ld=>'1',
-		cy_route_en=>'1',
-		cy_alt_mode=>'0')
-	PORT MAP(clock=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		reset=>Net_20,
-		load=>\TimerRX:TimerUDB:cntr_load\,
-		enable=>\TimerRX:TimerUDB:fifo_load_polarized\,
-		count=>(\TimerRX:TimerUDB:count_6\, \TimerRX:TimerUDB:count_5\, \TimerRX:TimerUDB:count_4\, \TimerRX:TimerUDB:count_3\,
-			\TimerRX:TimerUDB:count_2\, \TimerRX:TimerUDB:count_1\, \TimerRX:TimerUDB:count_0\),
-		tc=>open);
 \TimerRX:TimerUDB:rstSts:stsreg\:cy_psoc3_statusi
 	GENERIC MAP(cy_force_order=>'1',
 		cy_md_select=>"0000011",
@@ -610,7 +565,7 @@ CLOCK1:cy_clock_v1_0
 	PORT MAP(reset=>Net_20,
 		clock=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
 		status=>(Net_20, Net_20, Net_20, \TimerRX:TimerUDB:status_3\,
-			\TimerRX:TimerUDB:status_2\, \TimerRX:TimerUDB:tmp_fifo_load\, \TimerRX:TimerUDB:status_tc\),
+			\TimerRX:TimerUDB:status_2\, Net_20, \TimerRX:TimerUDB:status_tc\),
 		interrupt=>Net_172);
 \TimerRX:TimerUDB:sT16:timerdp:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000001000000000000000100000001000000010000000000000010000000000000001000000000000000100000000000000010000000000000001000000011111111000000001111111111111111000000000000000000000001000000000000000000011000",
@@ -636,10 +591,10 @@ CLOCK1:cy_clock_v1_0
 		f1_blk_sync=>'1')
 	PORT MAP(reset=>Net_20,
 		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		cs_addr=>(Net_20, \TimerRX:TimerUDB:runmode_enable\, \TimerRX:TimerUDB:per_zero\),
+		cs_addr=>(Net_20, \TimerRX:TimerUDB:control_7\, \TimerRX:TimerUDB:per_zero\),
 		route_si=>Net_20,
 		route_ci=>Net_20,
-		f0_load=>\TimerRX:TimerUDB:tmp_fifo_load\,
+		f0_load=>Net_20,
 		f1_load=>Net_20,
 		d0_load=>Net_20,
 		d1_load=>Net_20,
@@ -722,10 +677,10 @@ CLOCK1:cy_clock_v1_0
 		f1_blk_sync=>'1')
 	PORT MAP(reset=>Net_20,
 		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		cs_addr=>(Net_20, \TimerRX:TimerUDB:runmode_enable\, \TimerRX:TimerUDB:per_zero\),
+		cs_addr=>(Net_20, \TimerRX:TimerUDB:control_7\, \TimerRX:TimerUDB:per_zero\),
 		route_si=>Net_20,
 		route_ci=>Net_20,
-		f0_load=>\TimerRX:TimerUDB:tmp_fifo_load\,
+		f0_load=>Net_20,
 		f1_load=>Net_20,
 		d0_load=>Net_20,
 		d1_load=>Net_20,
@@ -1624,37 +1579,21 @@ TransmitISR:cy_isr_v1_0
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_40);
 \TimerRX:TimerUDB:capture_last\:cy_dff
-	PORT MAP(d=>Net_58,
+	PORT MAP(d=>Net_20,
 		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
 		q=>\TimerRX:TimerUDB:capture_last\);
-\TimerRX:TimerUDB:cntr_load\:cy_dff
-	PORT MAP(d=>\TimerRX:TimerUDB:cntr_load\\D\,
-		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		q=>\TimerRX:TimerUDB:cntr_load\);
-\TimerRX:TimerUDB:tmp_fifo_load\:cy_dff
-	PORT MAP(d=>\TimerRX:TimerUDB:tmp_fifo_load\\D\,
-		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		q=>\TimerRX:TimerUDB:tmp_fifo_load\);
-\TimerRX:TimerUDB:hwEnable_reg\:cy_dff
-	PORT MAP(d=>\TimerRX:TimerUDB:control_7\,
-		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		q=>\TimerRX:TimerUDB:run_mode\);
 \TimerRX:TimerUDB:tc_reg_i\:cy_dff
 	PORT MAP(d=>\TimerRX:TimerUDB:status_tc\,
 		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
 		q=>\TimerRX:TimerUDB:tc_reg_i\);
+\TimerRX:TimerUDB:hwEnable_reg\:cy_dff
+	PORT MAP(d=>\TimerRX:TimerUDB:control_7\,
+		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
+		q=>\TimerRX:TimerUDB:hwEnable_reg\);
 \TimerRX:TimerUDB:capture_out_reg_i\:cy_dff
-	PORT MAP(d=>\TimerRX:TimerUDB:tmp_fifo_load\,
+	PORT MAP(d=>Net_20,
 		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
 		q=>\TimerRX:TimerUDB:capture_out_reg_i\);
-\TimerRX:TimerUDB:runmode_enable\:cy_dff
-	PORT MAP(d=>\TimerRX:TimerUDB:runmode_enable\\D\,
-		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		q=>\TimerRX:TimerUDB:runmode_enable\);
-\TimerRX:TimerUDB:trig_disable\:cy_dff
-	PORT MAP(d=>\TimerRX:TimerUDB:trig_disable\\D\,
-		clk=>\TimerRX:TimerUDB:ClockOutFromEnBlock\,
-		q=>\TimerRX:TimerUDB:trig_disable\);
 \RISING_EDGE:last\:cy_dff
 	PORT MAP(d=>Net_659,
 		clk=>Net_3,

@@ -308,6 +308,7 @@
       <Data key="c39ef993-d787-4c0c-8ad6-c0c81f866442/8b77a6c4-10a0-4390-971c-672353e2a49c" value="USBUART_Dm" />
       <Data key="c39ef993-d787-4c0c-8ad6-c0c81f866442/618a72fc-5ddd-4df5-958f-a3d55102db42" value="USBUART_Dp" />
       <Data key="c936bb4f-653d-4801-81c0-eb475c8e77dc" value="TRANSMIT" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="EdgeDetect" />
       <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="IDLE" />
     </Group>
   </Group>
@@ -3415,12 +3416,27 @@
         <Data key="Port Format" value="0,7" />
       </Group>
     </Group>
+    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+      <Group key="0">
+        <Data key="Port Format" value="0,0" />
+      </Group>
+    </Group>
     <Group key="ed092b9b-d398-4703-be89-cebf998501f6">
       <Group key="0">
         <Data key="Port Format" value="3,1" />
       </Group>
     </Group>
-    <Group key="UnAssigned Pins" />
+    <Group key="UnAssigned Pins">
+      <Group key="50137ab5-3bdc-4f10-bb11-a8bb7aa7c876/ed092b9b-d398-4703-be89-cebf998501f6">
+        <Data key="0" value="131618152505503460" />
+        <Data key="1" value="131618152505503460" />
+        <Data key="2" value="131618152505503460" />
+        <Data key="3" value="131618152505503460" />
+        <Data key="4" value="131618152505503460" />
+        <Data key="5" value="131618152505503460" />
+        <Data key="6" value="131618152505503460" />
+      </Group>
+    </Group>
   </Group>
   <Group key="PlaceDir">
     <Data key="count" value="0" />

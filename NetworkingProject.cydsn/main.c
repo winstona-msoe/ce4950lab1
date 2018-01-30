@@ -71,11 +71,16 @@ Receiving character logic variables
 ******************************************************/
 //Which RX bit occurred during last HI period. 8 if no bit received yet.
 uint8_t rxBit = 8;
+// Contains status of most recent capture
+typedef enum {DATA_RISING, DATA_FALLING, DATA_NONE, DATA_ERROR} EdgeStatus;
+EdgeStatus edgeDataStatus = DATA_NONE;
+uint16_t lastCapture; // Contains most recent capture
 // Buffer for receiving text.
 // TODO Adjust size of buffer. See if buffer is even necessary.
 //char rxBuffer[RX_BUFFER_SIZE + NULL_PAD];
 //char *rxBufferPos; // Current char position.
 char currRxChar;
+bool timerWrapped;
     
     
 /*******************************************************************************
@@ -108,6 +113,7 @@ CY_ISR(ReceiveInterruptHandler)
         IDLE_Write(1);
         BUSY_Write(0);
     }
+    timerWrapped = true;
 }
 
 
@@ -127,7 +133,8 @@ CY_ISR(RisingEdgeInterruptHandler)
 {
     if ((!logicLevel)){
         RisingEdgeISR_ClearPending();
-        TimerRX_Stop();
+        TimerRX_Sleep();
+        lastCapture = TimerRX_ReadCounter();
         TimerRX_WritePeriod(COLLISION_PERIOD);
         TimerRX_WriteCounter(COLLISION_COUNTER);
         TimerRX_Start();
@@ -136,6 +143,12 @@ CY_ISR(RisingEdgeInterruptHandler)
         BUSY_Write(1);
         COLLISION_Write(0);
         IDLE_Write(0);
+        timerWrapped = false;
+        if (edgeDataStatus == DATA_NONE) {
+            edgeDataStatus = DATA_RISING;
+        } else {
+            edgeDataStatus = DATA_ERROR;
+        }
     }
 }
  
@@ -156,7 +169,8 @@ CY_ISR(FallingEdgeInterruptHandler)
 {
     if (logicLevel) {
         FallingEdgeISR_ClearPending();
-        TimerRX_Stop();
+        TimerRX_Sleep();
+        lastCapture = TimerRX_ReadCounter();
         TimerRX_WritePeriod(IDLE_PERIOD);
         TimerRX_WriteCounter(IDLE_COUNTER);
         TimerRX_Start();
@@ -165,6 +179,12 @@ CY_ISR(FallingEdgeInterruptHandler)
         BUSY_Write(1);
         COLLISION_Write(0);
         IDLE_Write(0);
+        timerWrapped = false;
+        if (edgeDataStatus == DATA_NONE) {
+            edgeDataStatus = DATA_FALLING;
+        } else {
+            edgeDataStatus = DATA_ERROR;
+        }
     }
 }
 
@@ -237,10 +257,40 @@ int main(void)
 //    TransmitISR_StartEx(TransmitInterruptHandler);
 
     // rxBufferPos = rxBuffer;
-    
     USBUART_Start(USBUART_device, USBUART_5V_OPERATION);
+    while (!USBUART_GetConfiguration()) {
+    }
+    USBUART_CDC_Init();
+    
+    while(!(USBUART_GetDTERate() == 57600));
+	
+	//Host can send double SET_INTERFACE request, which sounds sub-optimal for us if we don't handle that
+	while (!USBUART_IsConfigurationChanged());
+	//re-initialize device
+	while (!USBUART_GetConfiguration());
+	//Enumeration is done, allow receieving data from host
+	USBUART_CDC_Init();
+    while(!USBUART_CDCIsReady());
+    USBUART_PutChar('!');
     
     while (true) {
+        int uartConnected = 0;
+        if(USBUART_GetDTERate() == 57600){
+			uartConnected = 1;
+		}
+	
+		//Host can send double SET_INTERFACE request, which sounds sub-optimal for us if we don't handle that
+		if (0 != USBUART_IsConfigurationChanged())
+		{
+			//re-initialize device
+			if (0 != USBUART_GetConfiguration())
+			{
+				//Enumeration is done, allow receieving data from host
+				USBUART_CDC_Init();
+			}
+		}
+        while(!USBUART_CDCIsReady());
+        USBUART_PutString("Source Address: ");
         State localState = systemState; // Save in case of preemption.
         // TODO Make this code conditional so it doesn't check
         // for a new bit unless something special happened.
@@ -250,65 +300,74 @@ int main(void)
         
         // Save this locally in case of preemption.
         if (localState == BUSY) {
-            if (TimerRX_STATUS & TimerRX_STATUS_FIFONEMP) {
-                bool risingEdge = logicLevel;
-                uint16_t inputCaptureTime = TimerRX_ReadCapture();
+            if (edgeDataStatus != DATA_NONE) {
+                bool localTimerWrapped = timerWrapped;
+                EdgeStatus localEdgeStatus = edgeDataStatus;
+                uint16_t inputCaptureTime = lastCapture;
+                edgeDataStatus = DATA_NONE;
                 // Error detection. Caused by too many successive IRQs.
-                if (TimerRX_STATUS & TimerRX_STATUS_FIFONEMP) {
+                if (localEdgeStatus == DATA_ERROR) {
                     // Error state. Stop interpreting received data until idle.
                     rxBit = NO_BIT;
                     currRxChar = '\0';
-                    while (systemState != IDLE);
+                    while (systemState != IDLE) {}
+                    edgeDataStatus = DATA_NONE; // Sanity check
                     TimerRX_ClearFIFO();
-                } else {
-                    // This code should do bit shifting (or byte shifting if necessary)
-                    // on the rising edge.
-                    // On the falling edge, after proper high length was confirmed, the
-                    // appropriate bit should be set.
-                    if (risingEdge) { // Was last low
-                        if (rxBit == 8) {
-                            rxBit--;
-                            continue;
-                        }
-                        int timeClk = IDLE_COUNTER - inputCaptureTime;
-                        int symbolClkCycles = timeClk % EXPECTED_SYMBOL_TIME_CLK;
-                        // Find out the nearest rounding of symbol time.
-                        int nearestNumSymbols = timeClk / EXPECTED_SYMBOL_TIME_CLK
-                        + ((symbolClkCycles >= EXPECTED_SYMBOL_TIME_CLK / 2) ? 1 : 0);
-                        int bitsToShift = nearestNumSymbols / 2;
-                        if (bitsToShift > rxBit) {
-                            rxBit = START_BIT;
-                            USBUART_PutChar(currRxChar);
-                            currRxChar = '\0';
-    //                        rxBufferPos++;
-    //                        *rxBufferPos = '\0'; // Nullify new buffer pos.
-                            continue;
-                        }
-                        // Improper number of symbols between highs.
-                        if ((nearestNumSymbols <= 0)
-                        || (nearestNumSymbols % 2 == 0) // Even num of symbols
-                        // Below appropraite min
-                        || (inputCaptureTime < 
-                        (unsigned) nearestNumSymbols * MIN_RX_HIGH_TIME_CLK) 
-                        // Below appropriate min
-                        || (inputCaptureTime > 
-                        (unsigned) nearestNumSymbols * MAX_RX_HIGH_TIME_CLK)) {
-                            // Error state.
-                            rxBit = NO_BIT;
-                            currRxChar = '\0';
-                            // *rxBufferPos = '\0';
-                            while (systemState != IDLE);
-                        } else {
-                            // Will round down properly, since 0.5 is truncated.
-                            rxBit -= bitsToShift;
-                        }
-                    } else { // Was last high.
-                        int timeClk = COLLISION_COUNTER - inputCaptureTime;
-                        if (timeClk >= MIN_RX_HIGH_TIME_CLK) {
-                            currRxChar |= (1 << rxBit);
-                            USBUART_PutChar(rxBit+0x30);
-                            // *rxBufferPos |= (1 << rxBit);
-                        }
+                // This code should do bit shifting (or byte shifting if necessary)
+                // on the rising edge.
+                // On the falling edge, after proper high length was confirmed, the
+                // appropriate bit should be set.
+                } else if (localEdgeStatus == DATA_RISING) { // Was last low
+                    if (rxBit == 8) {
+                        rxBit--;
+                        continue;
+                    }
+                    if (localTimerWrapped) {
+                        rxBit = NO_BIT;
+                        USBUART_PutChar(currRxChar);
+                        currRxChar = '\0';
+                        continue;
+                    }
+                    int timeClk = IDLE_COUNTER - inputCaptureTime;
+                    int symbolClkCycles = timeClk % EXPECTED_SYMBOL_TIME_CLK;
+                    // Find out the nearest rounding of symbol time.
+                    int nearestNumSymbols = timeClk / EXPECTED_SYMBOL_TIME_CLK
+                    + ((symbolClkCycles >= EXPECTED_SYMBOL_TIME_CLK / 2) ? 1 : 0);
+                    int bitsToShift = nearestNumSymbols / 2;
+                    if (bitsToShift > rxBit) {
+                        rxBit = START_BIT;
+                        USBUART_PutChar(currRxChar);
+                        currRxChar = '\0';
+//                        rxBufferPos++;
+//                        *rxBufferPos = '\0'; // Nullify new buffer pos.
+                        continue;
+                    }
+                    // Improper number of symbols between highs.
+                    if ((nearestNumSymbols <= 0)
+                    || (nearestNumSymbols % 2 == 0) // Even num of symbols
+                    // Below appropraite min
+                    || (timeClk < 
+                     nearestNumSymbols * MIN_RX_HIGH_TIME_CLK) 
+                    // Below appropriate min
+                    || (timeClk > 
+                     nearestNumSymbols * MAX_RX_HIGH_TIME_CLK)) {
+                        // Error state.
+                        int x = nearestNumSymbols;
+                        timeClk;
+                        rxBit = NO_BIT;
+                        currRxChar = '\0';
+                        // *rxBufferPos = '\0';
+                        while (systemState != IDLE) {}
+                    } else {
+                        // Will round down properly, since 0.5 is truncated.
+                        rxBit -= bitsToShift;
+                    }
+                } else { // Was last high.
+                    int timeClk = COLLISION_COUNTER - inputCaptureTime;
+                    if ((timeClk >= MIN_RX_HIGH_TIME_CLK) && !localTimerWrapped) {
+                        currRxChar |= (1 << rxBit);
+                        USBUART_PutChar(rxBit+0x30);
+                        // *rxBufferPos |= (1 << rxBit);
                     }
                 }
             }
