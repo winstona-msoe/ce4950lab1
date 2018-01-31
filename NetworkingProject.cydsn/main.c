@@ -34,6 +34,11 @@
 #define ADDR_length 2
 #define BROADCAST 0
 #define PROTOCOL_VERSION 0x01
+#define SERIAL_BUFFER_SIZE 500
+#define RX_PERIOD   52
+#define RX_COUNTER  51
+#define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
+#define TX_COUNTER    46 
 
 //States include: 
 //Busy - signals that the channel monitor is busy
@@ -52,9 +57,9 @@ bool firstHalfBit; // Flag for which part of bit we're in.
 char binaryOfChar[8]; //represents the 8 bit representation of the character 
 bool endOfTransmission;
 bool collisionDuringTransmit = false;
-#define SERIAL_BUFFER_SIZE 500
 unsigned char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
 unsigned char SERIAL_RX_BUFFER[SERIAL_BUFFER_SIZE];
+unsigned char CONVERTED_DATA[SERIAL_BUFFER_SIZE][16];
 int SERIAL_POS = 0;
 int SERIAL_RX_POS = 0;
 int UART_RX_DATA_READ_OUT = 0;
@@ -69,6 +74,11 @@ unsigned char RX_DATA[16];
 int RX_Bit_Counter = 0;
 char RX_Char;
 int RX_Lock = 0;
+char currentChar;
+int dataSize;
+unsigned char RX_DATA[16]; //receieved data buffer
+char RX_Char;
+
     
 /*******************************************************************************
 * Define Interrupt service routine and allocate an vector to the Interrupt
@@ -88,18 +98,40 @@ int RX_Lock = 0;
  *********************************************************/ 
 CY_ISR(ReceiveInterruptHandler)
 {
-   	TimerRX_STATUS; 
-    if (logicLevel) {
-        systemState = COLLISION;
-        collisionDuringTransmit = true;
-        COLLISION_Write(1);
-        BUSY_Write(0);
-        IDLE_Write(0);
-    } else {
-        systemState = IDLE;
-        COLLISION_Write(0);
-        BUSY_Write(0);
-        IDLE_Write(1);
+    int bitConCatCount = 0;
+    char characterRX = 0;
+    
+    TimerRX_STATUS; //clear stat
+
+    if(systemState != COLLISION){
+        TimerRX_Start();
+        RX_DATA[RX_Bit_Counter] = RECEIVE_Read(); //read bit
+        ++RX_Bit_Counter;
+        
+    }else{
+        //reset buffers when in collision 
+        RX_Bit_Counter = 0;   
+        SERIAL_RX_POS = 0;
+        UART_RX_DATA_READ_OUT = 0;
+        TimerRX_Stop();
+        RX_Lock = 0;
+    }
+    if(RX_Bit_Counter >= 15 ){
+        RX_Bit_Counter = 0;
+        TimerRX_Stop();
+        RX_Lock = 0;
+        
+        for(int x = 15; x >= 0; x--){
+            if(x == 15){
+             characterRX = 0x00;   
+            }
+            if(x % 2 != 0){
+                characterRX = (characterRX | (RX_DATA[x] << (bitConCatCount-1)));
+                ++bitConCatCount;
+            }
+        }
+        SERIAL_RX_BUFFER[SERIAL_RX_POS] = characterRX;
+        ++SERIAL_RX_POS;     
     }
 }
 
@@ -146,39 +178,43 @@ CY_ISR(TimerInterruptHandler)
 
 CY_ISR(TransmitInterruptHandler)
 {
-    TimerTX_STATUS;
-    if (*dataPtr == '\0') {
-        TRANSMIT_Write(0);
-        TransmitISR_Stop();
-        endOfTransmission = true;
-    } else {
-        if (systemState == COLLISION) {
-            /*TransmitISR_Stop();
-            TimerTX_Stop();
-            collisionDuringTransmit = true;
-            idx = 7;
-            firstHalfBit = true;
-            TRANSMIT_Write(0);*/
-            return;
-        }
-        if (firstHalfBit) {
-            if (idx == 7) {
-                TRANSMIT_Write(1);
-            } else {
-                // Sets the level to the current bit.
-                TRANSMIT_Write((*dataPtr & (1 << idx)) ? 1 : 0);
-            }
-            firstHalfBit = false;
-        } else {
+	TimerTX_STATUS; //clear TX timer
+	//get data
+	currentChar = SERIAL_BUFFER[SERIAL_POS];
+
+	if((SERIAL_POS < dataSize) && systemState == IDLE){ 
+	//encode into Unipolar-RZ
+	
+	//Data to be transmitted. This represents one byte of data and will
+	//be encoded in unipolar RZ. For every bit there will be 2 bits, and there are 8 bits
+	
+		if(TX_Bit_Counter == 0){
+			TRANSMIT_Write(1);
+			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+		}else if(TX_Bit_Counter%2 != 0){
+			TRANSMIT_Write(0);
+			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;
+		}else{
+			//see if a 1 exists at the bit of the char, otherwise write a 0 out
+			//this should transmit MSB first
+			if(currentChar & (1<<(6-count))){
+				TRANSMIT_Write(1);
+				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+			}else{
+				TRANSMIT_Write(0);
+				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;   
+			}
+				++count;
+		}
+        CyDelayUs(495);
+        ++TX_Bit_Counter;
+        if(TX_Bit_Counter >= 16){
+		    ++SERIAL_POS;
+		    count = 0;
+		    TX_Bit_Counter = 0;
             TRANSMIT_Write(0);
-            if (idx == 0) {
-                idx = 7;
-                dataPtr++;
-            } else {
-                idx--;
-            }
-            firstHalfBit = true;
         }
+    }else if(systemState == COLLISION){  
     }
 }
 
@@ -206,11 +242,13 @@ CY_ISR(RisingEdgeInterruptHandler)
         COLLISION_Write(0);
         BUSY_Write(1);
         IDLE_Write(0);
-    } else {
-        
+    }
+    if(RX_Lock == 0){
+        TimerRX_Start();
+        RX_Lock = 1;
     }
 }
- 
+     
 
  /**********************************************************
  * function name: FallingEdgeInterruptHandler
@@ -264,18 +302,27 @@ int main(void)
     RisingEdgeISR_StartEx(RisingEdgeInterruptHandler);
     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
     ReceiveISR_StartEx(ReceiveInterruptHandler);  
-    USBUART_Start(USBUART_device, USBUART_5V_OPERATION); //configuring USBUART to start
-    TRANSMIT_Write(0);
+
+    TimerTX_Start();
+    TimerTX_WritePeriod(TX_PERIOD);
+    TimerTX_WriteCounter(TX_COUNTER);
+    TransmitISR_StartEx(TransmitInterruptHandler);
+    
+    TimerRX_WriteCounter(RX_COUNTER);
+    TimerRX_WritePeriod(RX_PERIOD);
+    ReceiveISR_StartEx(ReceiveInterruptHandler);
+    
     BackoffISR_StartEx(BackoffInterruptHandler);
     PRS_Start();
+    USBUART_Start(USBUART_device,USBUART_5V_OPERATION);
+    
+    
+    
+    TRANSMIT_Write(0);
     systemState = IDLE;
 
     while(1){
-         //check if UART is connected, then set flag
-		if(USBUART_GetDTERate() == 57600){
-			uartConnected = 1;
-		}
-	
+         //check if UART is connected, then set flag	
 		//Host can send double SET_INTERFACE request, which sounds sub-optimal for us if we don't handle that
 		if (0 != USBUART_IsConfigurationChanged())
 		{
