@@ -80,6 +80,15 @@ void checkNewBytes(); //gets new messages
 void checkState(); //gets current system state
 void getHeader(); //gets the header
 
+// TODO Code needs to be added to accept signals at
+// various speeds. The documentation states that the signal
+// MUST be tolerated at speeds of ±1.32%, and MUST NOT be
+// tolerated at speeds of ±8% or so. See standard specification
+// for more details.
+
+// TODO Move characterRX logic into RX_Bit_Counter
+// incrementation section of code. This will make
+// this ISR more efficient.
 CY_ISR(ReceiveInterruptHandler){
     int bitConCatCount = 0;
     char characterRX = 0;
@@ -198,6 +207,9 @@ CY_ISR(TimerInterruptHandler)
     }
 }
 
+// TODO Fix "race against time" between ReceiveInterruptHandler ant his.
+// If this wins the race, then RX_Bit_Counter doesn't increment properly.
+// This is the reason why code didn't work well at higher speeds.
 CY_ISR(RisingEdgeInterruptHandler)
 {
     if ((!lowFlag)){
@@ -213,7 +225,8 @@ CY_ISR(RisingEdgeInterruptHandler)
         
     }
 }
- 
+
+// TODO This could also contribute to the "race against time" issue.
 CY_ISR(FallingEdgeInterruptHandler)
 {
     if (lowFlag){
