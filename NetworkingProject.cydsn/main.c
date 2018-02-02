@@ -227,8 +227,11 @@ CY_ISR(RisingEdgeInterruptHandler)
     }
     if(RX_Lock == 0){
         TimerRX_Start();
-        RX_Lock = 1;
-        
+        RX_Lock = 1;       
+    } else {
+        RX_Bit_Counter++;
+        // TODO Code doesn't quite take into account corner case
+        // when RX_Bit_Counter reached 15. Now we gotta set the byte.
     }
 }
 
