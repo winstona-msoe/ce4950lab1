@@ -77,6 +77,7 @@
 <v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\ReceiveISR</v>
 <v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\RiseEdge</v>
 <v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\RisingEdgeISR</v>
+<v>NetworkingProject-000\NetworkingProject\Generated_Source\PSoC5\Timer</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -166,40 +167,6 @@
 <VisibleNodeIds>
 <v>NetworkingProject-000</v>
 <v>NetworkingProject-000\NetworkingProject</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Backoff.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Backoff_PM.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\BackoffISR.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\BUSY.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK1.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK2.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CLOCK3.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\COLLISION.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\FallingEdgeISR.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\IDLE.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_LCDPort.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_PM.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\PRS.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\PRS_PM.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\RECEIVE.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\ReceiveISR.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\RiseEdge.lst</v>
-<v>NetworkingProject-000\NetworkingProject\CortexM3\ARM_GCC_541\Debug\Listing Files\RisingEdgeISR.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -273,7 +240,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="743, 338" SelectedTabbedMdiWindow="53755e77-c91a-4298-b391-ad514f4b6fe0"><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\main.c" Guid="53755e77-c91a-4298-b391-ad514f4b6fe0" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="332fc44b-057a-464b-bf3d-036bd8ce3e8f" /><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\TopDesign\TopDesign.cysch" Guid="a93d6d62-99e4-40a9-8619-e06d1de3d66f" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1513, 659" SelectedTabbedMdiWindow="53755e77-c91a-4298-b391-ad514f4b6fe0"><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\main.c" Guid="53755e77-c91a-4298-b391-ad514f4b6fe0" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="332fc44b-057a-464b-bf3d-036bd8ce3e8f" /><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\TopDesign\TopDesign.cysch" Guid="a93d6d62-99e4-40a9-8619-e06d1de3d66f" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
