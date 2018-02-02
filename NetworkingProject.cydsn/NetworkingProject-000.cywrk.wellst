@@ -265,6 +265,7 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\main.c" />
+<name v=".\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -272,7 +273,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="1264, 622" SelectedTabbedMdiWindow="53755e77-c91a-4298-b391-ad514f4b6fe0"><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\main.c" Guid="53755e77-c91a-4298-b391-ad514f4b6fe0" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Vertical"><TabbedMdiContainer Size="743, 338" SelectedTabbedMdiWindow="53755e77-c91a-4298-b391-ad514f4b6fe0"><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\main.c" Guid="53755e77-c91a-4298-b391-ad514f4b6fe0" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="332fc44b-057a-464b-bf3d-036bd8ce3e8f" /><DocumentWindow Key="C:\2018 Winter\CE4950\GroupProject\ce4950lab1\NetworkingProject.cydsn\TopDesign\TopDesign.cysch" Guid="a93d6d62-99e4-40a9-8619-e06d1de3d66f" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
