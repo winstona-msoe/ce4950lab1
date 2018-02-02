@@ -28,28 +28,34 @@ _Bool lowFlag = 0;
 #define CRC_USE 128 //crcs not used
 #define HEADER_CRC 0b1110111 
 
-//period and counter for timer
+//period and counter for timer. Used for collision/idle detection.
 #define COLL_PERIOD     52
 #define COLL_COUNTER    51
 #define IDLE_PERIOD     830
 #define IDLE_COUNTER    829
-//Receive timer stuff
+
+//Receive timer stuff. Ensures proper receiving speed.
 #define RX_PERIOD   52
 #define RX_COUNTER  51
+
 //transmit timer stuff
 #define TX_PERIOD     47 //gives 0.50ms or 500us for unipolar-rz at 1000bps
 #define TX_COUNTER    46 //empirically tuned...
 #define RANDON_BACKOFF_MAX_RETRY 10
+
 //serial buffer size
 #define SERIAL_BUFFER_SIZE 500
+
 //serial buffer
-unsigned char SERIAL_BUFFER[SERIAL_BUFFER_SIZE];
-unsigned char SERIAL_RX_BUFFER[SERIAL_BUFFER_SIZE];
-int SERIAL_POS = 0;
-int SERIAL_RX_POS = 0;
-int USBUART_RX_DATA_READ_OUT = 0;
+unsigned char serialBuffer[SERIAL_BUFFER_SIZE];
+unsigned char serialRxBuffer[SERIAL_BUFFER_SIZE];
+int serialPos = 0;
+int serialRxPos = 0;
+int USBUART_rxDataReadOut = 0;
+
 //flag to determine if the UART is connected
 int uartConnected = 0;
+
 //data cache for later use
 unsigned char CONVERTED_DATA[SERIAL_BUFFER_SIZE][16];
 int dataConvertedReadOutCount = 0;
@@ -57,7 +63,7 @@ char currentChar;
 int dataSize;
 int TX_Bit_Counter = 0; //keeps track of what would be a for loop in the ISR
 int count = 0; //keeps track of which bit we're on
-unsigned char RX_DATA[16]; //receieved data buffer
+unsigned char rxData[16]; //receieved data buffer
 int RX_Bit_Counter = 0;
 char RX_Char;
 int RX_Lock = 0;
@@ -97,14 +103,14 @@ CY_ISR(ReceiveInterruptHandler){
     //only receive data in not collision
     if(systemState != collisionState){
         TimerRX_Start();
-        RX_DATA[RX_Bit_Counter] = RECEIVE_Read(); //read bit
+        rxData[RX_Bit_Counter] = RECEIVE_Read(); //read bit
         ++RX_Bit_Counter;
         
     }else{
         //reset buffers when in collision 
         RX_Bit_Counter = 0;   
-        SERIAL_RX_POS = 0;
-        USBUART_RX_DATA_READ_OUT = 0;
+        serialRxPos = 0;
+        USBUART_rxDataReadOut = 0;
         TimerRX_Stop();
         RX_Lock = 0;
     }
@@ -120,13 +126,13 @@ CY_ISR(ReceiveInterruptHandler){
              characterRX = 0x00; //account for start bit   
             }
             if(x % 2 != 0){
-                characterRX = (characterRX | (RX_DATA[x] << (bitConCatCount-1)));
-                //UART_PutChar((RX_DATA[x])+0x30);
+                characterRX = (characterRX | (rxData[x] << (bitConCatCount-1)));
+                //UART_PutChar((rxData[x])+0x30);
                 ++bitConCatCount;
             }
         }
-        SERIAL_RX_BUFFER[SERIAL_RX_POS] = characterRX;
-        ++SERIAL_RX_POS;
+        serialRxBuffer[serialRxPos] = characterRX;
+        ++serialRxPos;
        
     }
 }
@@ -135,9 +141,9 @@ CY_ISR(TransmitInterruptHandler)
 {
 	TimerTX_STATUS; //clear TX timer
 	//get data
-	currentChar = SERIAL_BUFFER[SERIAL_POS];
+	currentChar = serialBuffer[serialPos];
 
-	if(((SERIAL_POS < dataSize) && (systemState == idleState)) || ((TX_Lock) && (systemState == busyState))){ 
+	if(((serialPos < dataSize) && (systemState == idleState)) || ((TX_Lock) && (systemState == busyState))){ 
 	//encode into Unipolar-RZ
 	
 	//Data to be transmitted. This represents one byte of data and will
@@ -145,26 +151,26 @@ CY_ISR(TransmitInterruptHandler)
 	
 		if(TX_Bit_Counter == 0){
 			TRANSMIT_Write(1);
-			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+			CONVERTED_DATA[serialPos][TX_Bit_Counter] = 0x31;
 		}else if(TX_Bit_Counter%2 != 0){
 			TRANSMIT_Write(0);
-			CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;
+			CONVERTED_DATA[serialPos][TX_Bit_Counter] = 0x30;
 		}else{
 			//see if a 1 exists at the bit of the char, otherwise write a 0 out
 			//this should transmit MSB first
 			if(currentChar & (1<<(6-count))){
 				TRANSMIT_Write(1);
-				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x31;
+				CONVERTED_DATA[serialPos][TX_Bit_Counter] = 0x31;
 			}else{
 				TRANSMIT_Write(0);
-				CONVERTED_DATA[SERIAL_POS][TX_Bit_Counter] = 0x30;   
+				CONVERTED_DATA[serialPos][TX_Bit_Counter] = 0x30;   
 			}
 				++count;
 		}
         CyDelayUs(495);
         ++TX_Bit_Counter;
         if(TX_Bit_Counter >= 16){
-		    ++SERIAL_POS;
+		    ++serialPos;
 		    count = 0;
 		    TX_Bit_Counter = 0;
             TX_Lock = 0;
@@ -315,29 +321,29 @@ int main(void)
             input = 0; //reset input
             //encode header
             
-            SERIAL_BUFFER[0] = 0x00; //does not take into account starting bit
-            SERIAL_BUFFER[1] = PROTOCOL_VERSION;
-            SERIAL_BUFFER[2] = ADDR1_Start;
-            SERIAL_BUFFER[3] = TX_Addr;
-            SERIAL_BUFFER[4] = 0x00; //padding for now, will be replaced with actual length after user input
-            SERIAL_BUFFER[5] = CRC_USE;
-            SERIAL_BUFFER[6] = HEADER_CRC;
+            serialBuffer[0] = 0x00; //does not take into account starting bit
+            serialBuffer[1] = PROTOCOL_VERSION;
+            serialBuffer[2] = ADDR1_Start;
+            serialBuffer[3] = TX_Addr;
+            serialBuffer[4] = 0x00; //padding for now, will be replaced with actual length after user input
+            serialBuffer[5] = CRC_USE;
+            serialBuffer[6] = HEADER_CRC;
             
             //OD is the 'enter' key
             while(input != 0x0D){
                 while(USBUART_DataIsReady() == 0); //wait for message data
                 input = USBUART_GetChar();
                 if(input != 0x0D){
-                    SERIAL_BUFFER[inCount] = input;
+                    serialBuffer[inCount] = input;
                     while(!USBUART_CDCIsReady());
-                    USBUART_PutChar(SERIAL_BUFFER[inCount]);
+                    USBUART_PutChar(serialBuffer[inCount]);
                     ++inCount;
                 }
             }
-            SERIAL_BUFFER[4] = inCount; //replace padding with actual message length
+            serialBuffer[4] = inCount; //replace padding with actual message length
         //send data by setting variable
-        dataSize = SERIAL_BUFFER[4];
-        SERIAL_POS = 0;
+        dataSize = serialBuffer[4];
+        serialPos = 0;
         printPrompt = 0;
         while(!USBUART_CDCIsReady());
         USBUART_PutCRLF();       
@@ -356,8 +362,8 @@ void checkState(){
             BUSY_Write(!IDLE_Read());
             COLLISION_Write(!IDLE_Read());
             //since nothing happens in IDLE this is a safe bet...
-            USBUART_RX_DATA_READ_OUT = 0;
-            SERIAL_RX_POS = 0;
+            USBUART_rxDataReadOut = 0;
+            serialRxPos = 0;
             addrDataPrinted = 0;
         break;
         //busy state
@@ -377,8 +383,8 @@ void checkState(){
 
 void checkNewBytes(){
  if(USBUART_CDCIsReady() != 0){
-    while(USBUART_RX_DATA_READ_OUT != SERIAL_RX_POS){
-        if(USBUART_RX_DATA_READ_OUT == 0){
+    while(USBUART_rxDataReadOut != serialRxPos){
+        if(USBUART_rxDataReadOut == 0){
             getHeader();
         }
         if(destAddr == BROADCAST || 
@@ -444,12 +450,12 @@ void checkNewBytes(){
             while(!USBUART_CDCIsReady());
             addrDataPrinted = 1;
             }
-            if(USBUART_RX_DATA_READ_OUT > 6){
-            USBUART_PutChar(SERIAL_RX_BUFFER[USBUART_RX_DATA_READ_OUT]);
+            if(USBUART_rxDataReadOut > 6){
+            USBUART_PutChar(serialRxBuffer[USBUART_rxDataReadOut]);
             }
             
         }
-        ++USBUART_RX_DATA_READ_OUT;
+        ++USBUART_rxDataReadOut;
     }
      
    }
@@ -457,26 +463,26 @@ void checkNewBytes(){
 
 void getHeader(){
     //if there is at least enough data in the buffer to hold the header, fetch it
-    if(SERIAL_RX_BUFFER[0] == 0x00){
+    if(serialRxBuffer[0] == 0x00){
         startHeaderReceieved = 1;
     
     }
     //check for version number
-    if(SERIAL_RX_BUFFER[1] == 0x01){
+    if(serialRxBuffer[1] == 0x01){
             verNumMatch = 1;
    }
    //get source address
-    sourceAddr = SERIAL_RX_BUFFER[2];
+    sourceAddr = serialRxBuffer[2];
     //get destination address
-    destAddr = SERIAL_RX_BUFFER[3];
+    destAddr = serialRxBuffer[3];
   
     //get datalegnth     
-    dataLength = SERIAL_RX_BUFFER[4];
+    dataLength = serialRxBuffer[4];
 
     //get CRC related data
-    CRCused = SERIAL_RX_BUFFER[5];
+    CRCused = serialRxBuffer[5];
 
-    HeaderCRC = SERIAL_RX_BUFFER[6];
+    HeaderCRC = serialRxBuffer[6];
  
 }
 /* [] END OF FILE */
