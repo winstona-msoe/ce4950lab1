@@ -11,12 +11,32 @@
 */
 #include "project.h"
 
+#define MAX_DATA_SIZE 44
+
+typedef struct {
+    uint8_t start; // Header start (must be 0x80)
+    uint8_t version; // Version number (0x81 for 1st version)
+    uint8_t source; // Source address
+    uint8_t destination; // Destination address
+    uint8_t length; // Length of message (must be between 0 and 44. Bit 7 is 1)
+    
+    // Indicates which CRC(s) are used.
+    // See Interface Standard for more details.
+    uint8_t crcUsage;
+    
+    uint8_t headerCrc; // Header CRC. Should be 0xF7 when unused
+} Header;
+
+
 typedef enum state {idleState, collisionState, busyState} State;
 
 State systemState = idleState;
 
 _Bool lowFlag = 0;
+
 //Address constants
+// TODO From Andy: Why are these addresses from Anthony,
+// Shah, and Divin?
 #define ADDR1_Start 16
 #define ADDR2_Start 25
 #define ADDR3_Start 28
