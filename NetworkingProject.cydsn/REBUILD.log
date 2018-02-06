@@ -1,3 +1,8 @@
---------------- Rebuild Started: 01/16/2018 14:22:06 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Rebuild Started: 02/05/2018 20:39:58 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
---------------- Rebuild Succeeded: 01/16/2018 14:22:08 ---------------
+main.c: In function 'checkForNewData':
+main.c:524:1: error: expected declaration or statement at end of input
+ }
+ ^
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+--------------- Rebuild Failed: 02/05/2018 20:39:59 ---------------

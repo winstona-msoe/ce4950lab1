@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: BackoffISR.c  
+* File Name: CollisionDelayInterrupt.c  
 * Version 1.70
 *
 *  Description:
@@ -18,15 +18,15 @@
 
 #include <cydevice_trm.h>
 #include <CyLib.h>
-#include <BackoffISR.h>
+#include <CollisionDelayInterrupt.h>
 #include "cyapicallbacks.h"
 
-#if !defined(BackoffISR__REMOVED) /* Check for removal by optimization */
+#if !defined(CollisionDelayInterrupt__REMOVED) /* Check for removal by optimization */
 
 /*******************************************************************************
 *  Place your includes, defines and code here 
 ********************************************************************************/
-/* `#START BackoffISR_intc` */
+/* `#START CollisionDelayInterrupt_intc` */
 
 /* `#END` */
 
@@ -42,7 +42,7 @@ CY_ISR_PROTO(IntDefaultHandler);
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_Start
+* Function Name: CollisionDelayInterrupt_Start
 ********************************************************************************
 *
 * Summary:
@@ -58,24 +58,24 @@ CY_ISR_PROTO(IntDefaultHandler);
 *   None
 *
 *******************************************************************************/
-void BackoffISR_Start(void)
+void CollisionDelayInterrupt_Start(void)
 {
     /* For all we know the interrupt is active. */
-    BackoffISR_Disable();
+    CollisionDelayInterrupt_Disable();
 
-    /* Set the ISR to point to the BackoffISR Interrupt. */
-    BackoffISR_SetVector(&BackoffISR_Interrupt);
+    /* Set the ISR to point to the CollisionDelayInterrupt Interrupt. */
+    CollisionDelayInterrupt_SetVector(&CollisionDelayInterrupt_Interrupt);
 
     /* Set the priority. */
-    BackoffISR_SetPriority((uint8)BackoffISR_INTC_PRIOR_NUMBER);
+    CollisionDelayInterrupt_SetPriority((uint8)CollisionDelayInterrupt_INTC_PRIOR_NUMBER);
 
     /* Enable it. */
-    BackoffISR_Enable();
+    CollisionDelayInterrupt_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_StartEx
+* Function Name: CollisionDelayInterrupt_StartEx
 ********************************************************************************
 *
 * Summary:
@@ -101,24 +101,24 @@ void BackoffISR_Start(void)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_StartEx(cyisraddress address)
+void CollisionDelayInterrupt_StartEx(cyisraddress address)
 {
     /* For all we know the interrupt is active. */
-    BackoffISR_Disable();
+    CollisionDelayInterrupt_Disable();
 
-    /* Set the ISR to point to the BackoffISR Interrupt. */
-    BackoffISR_SetVector(address);
+    /* Set the ISR to point to the CollisionDelayInterrupt Interrupt. */
+    CollisionDelayInterrupt_SetVector(address);
 
     /* Set the priority. */
-    BackoffISR_SetPriority((uint8)BackoffISR_INTC_PRIOR_NUMBER);
+    CollisionDelayInterrupt_SetPriority((uint8)CollisionDelayInterrupt_INTC_PRIOR_NUMBER);
 
     /* Enable it. */
-    BackoffISR_Enable();
+    CollisionDelayInterrupt_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_Stop
+* Function Name: CollisionDelayInterrupt_Stop
 ********************************************************************************
 *
 * Summary:
@@ -131,22 +131,22 @@ void BackoffISR_StartEx(cyisraddress address)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_Stop(void)
+void CollisionDelayInterrupt_Stop(void)
 {
     /* Disable this interrupt. */
-    BackoffISR_Disable();
+    CollisionDelayInterrupt_Disable();
 
     /* Set the ISR to point to the passive one. */
-    BackoffISR_SetVector(&IntDefaultHandler);
+    CollisionDelayInterrupt_SetVector(&IntDefaultHandler);
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_Interrupt
+* Function Name: CollisionDelayInterrupt_Interrupt
 ********************************************************************************
 *
 * Summary:
-*   The default Interrupt Service Routine for BackoffISR.
+*   The default Interrupt Service Routine for CollisionDelayInterrupt.
 *
 *   Add custom code between the coments to keep the next version of this file
 *   from over writting your code.
@@ -157,27 +157,27 @@ void BackoffISR_Stop(void)
 *   None
 *
 *******************************************************************************/
-CY_ISR(BackoffISR_Interrupt)
+CY_ISR(CollisionDelayInterrupt_Interrupt)
 {
-    #ifdef BackoffISR_INTERRUPT_INTERRUPT_CALLBACK
-        BackoffISR_Interrupt_InterruptCallback();
-    #endif /* BackoffISR_INTERRUPT_INTERRUPT_CALLBACK */ 
+    #ifdef CollisionDelayInterrupt_INTERRUPT_INTERRUPT_CALLBACK
+        CollisionDelayInterrupt_Interrupt_InterruptCallback();
+    #endif /* CollisionDelayInterrupt_INTERRUPT_INTERRUPT_CALLBACK */ 
 
     /*  Place your Interrupt code here. */
-    /* `#START BackoffISR_Interrupt` */
+    /* `#START CollisionDelayInterrupt_Interrupt` */
 
     /* `#END` */
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_SetVector
+* Function Name: CollisionDelayInterrupt_SetVector
 ********************************************************************************
 *
 * Summary:
-*   Change the ISR vector for the Interrupt. Note calling BackoffISR_Start
+*   Change the ISR vector for the Interrupt. Note calling CollisionDelayInterrupt_Start
 *   will override any effect this method would have had. To set the vector 
-*   before the component has been started use BackoffISR_StartEx instead.
+*   before the component has been started use CollisionDelayInterrupt_StartEx instead.
 * 
 *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
 *   used to provide consistent definition across compilers:
@@ -197,18 +197,18 @@ CY_ISR(BackoffISR_Interrupt)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_SetVector(cyisraddress address)
+void CollisionDelayInterrupt_SetVector(cyisraddress address)
 {
     cyisraddress * ramVectorTable;
 
     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
 
-    ramVectorTable[CYINT_IRQ_BASE + (uint32)BackoffISR__INTC_NUMBER] = address;
+    ramVectorTable[CYINT_IRQ_BASE + (uint32)CollisionDelayInterrupt__INTC_NUMBER] = address;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_GetVector
+* Function Name: CollisionDelayInterrupt_GetVector
 ********************************************************************************
 *
 * Summary:
@@ -221,26 +221,26 @@ void BackoffISR_SetVector(cyisraddress address)
 *   Address of the ISR in the interrupt vector table.
 *
 *******************************************************************************/
-cyisraddress BackoffISR_GetVector(void)
+cyisraddress CollisionDelayInterrupt_GetVector(void)
 {
     cyisraddress * ramVectorTable;
 
     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
 
-    return ramVectorTable[CYINT_IRQ_BASE + (uint32)BackoffISR__INTC_NUMBER];
+    return ramVectorTable[CYINT_IRQ_BASE + (uint32)CollisionDelayInterrupt__INTC_NUMBER];
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_SetPriority
+* Function Name: CollisionDelayInterrupt_SetPriority
 ********************************************************************************
 *
 * Summary:
 *   Sets the Priority of the Interrupt. 
 *
-*   Note calling BackoffISR_Start or BackoffISR_StartEx will 
+*   Note calling CollisionDelayInterrupt_Start or CollisionDelayInterrupt_StartEx will 
 *   override any effect this API would have had. This API should only be called
-*   after BackoffISR_Start or BackoffISR_StartEx has been called. 
+*   after CollisionDelayInterrupt_Start or CollisionDelayInterrupt_StartEx has been called. 
 *   To set the initial priority for the component, use the Design-Wide Resources
 *   Interrupt Editor.
 *
@@ -255,14 +255,14 @@ cyisraddress BackoffISR_GetVector(void)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_SetPriority(uint8 priority)
+void CollisionDelayInterrupt_SetPriority(uint8 priority)
 {
-    *BackoffISR_INTC_PRIOR = priority << 5;
+    *CollisionDelayInterrupt_INTC_PRIOR = priority << 5;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_GetPriority
+* Function Name: CollisionDelayInterrupt_GetPriority
 ********************************************************************************
 *
 * Summary:
@@ -277,19 +277,19 @@ void BackoffISR_SetPriority(uint8 priority)
 *    PSoC 4: Priority is from 0 to 3.
 *
 *******************************************************************************/
-uint8 BackoffISR_GetPriority(void)
+uint8 CollisionDelayInterrupt_GetPriority(void)
 {
     uint8 priority;
 
 
-    priority = *BackoffISR_INTC_PRIOR >> 5;
+    priority = *CollisionDelayInterrupt_INTC_PRIOR >> 5;
 
     return priority;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_Enable
+* Function Name: CollisionDelayInterrupt_Enable
 ********************************************************************************
 *
 * Summary:
@@ -304,15 +304,15 @@ uint8 BackoffISR_GetPriority(void)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_Enable(void)
+void CollisionDelayInterrupt_Enable(void)
 {
     /* Enable the general interrupt. */
-    *BackoffISR_INTC_SET_EN = BackoffISR__INTC_MASK;
+    *CollisionDelayInterrupt_INTC_SET_EN = CollisionDelayInterrupt__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_GetState
+* Function Name: CollisionDelayInterrupt_GetState
 ********************************************************************************
 *
 * Summary:
@@ -325,15 +325,15 @@ void BackoffISR_Enable(void)
 *   1 if enabled, 0 if disabled.
 *
 *******************************************************************************/
-uint8 BackoffISR_GetState(void)
+uint8 CollisionDelayInterrupt_GetState(void)
 {
     /* Get the state of the general interrupt. */
-    return ((*BackoffISR_INTC_SET_EN & (uint32)BackoffISR__INTC_MASK) != 0u) ? 1u:0u;
+    return ((*CollisionDelayInterrupt_INTC_SET_EN & (uint32)CollisionDelayInterrupt__INTC_MASK) != 0u) ? 1u:0u;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_Disable
+* Function Name: CollisionDelayInterrupt_Disable
 ********************************************************************************
 *
 * Summary:
@@ -346,15 +346,15 @@ uint8 BackoffISR_GetState(void)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_Disable(void)
+void CollisionDelayInterrupt_Disable(void)
 {
     /* Disable the general interrupt. */
-    *BackoffISR_INTC_CLR_EN = BackoffISR__INTC_MASK;
+    *CollisionDelayInterrupt_INTC_CLR_EN = CollisionDelayInterrupt__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_SetPending
+* Function Name: CollisionDelayInterrupt_SetPending
 ********************************************************************************
 *
 * Summary:
@@ -373,14 +373,14 @@ void BackoffISR_Disable(void)
 *   interrupts).
 *
 *******************************************************************************/
-void BackoffISR_SetPending(void)
+void CollisionDelayInterrupt_SetPending(void)
 {
-    *BackoffISR_INTC_SET_PD = BackoffISR__INTC_MASK;
+    *CollisionDelayInterrupt_INTC_SET_PD = CollisionDelayInterrupt__INTC_MASK;
 }
 
 
 /*******************************************************************************
-* Function Name: BackoffISR_ClearPending
+* Function Name: CollisionDelayInterrupt_ClearPending
 ********************************************************************************
 *
 * Summary:
@@ -398,9 +398,9 @@ void BackoffISR_SetPending(void)
 *   None
 *
 *******************************************************************************/
-void BackoffISR_ClearPending(void)
+void CollisionDelayInterrupt_ClearPending(void)
 {
-    *BackoffISR_INTC_CLR_PD = BackoffISR__INTC_MASK;
+    *CollisionDelayInterrupt_INTC_CLR_PD = CollisionDelayInterrupt__INTC_MASK;
 }
 
 #endif /* End check for removal by optimization */

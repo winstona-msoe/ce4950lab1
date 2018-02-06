@@ -1,5 +1,5 @@
 -- Project:   NetworkingProject
--- Generated: 02/02/2018 13:50:28
+-- Generated: 02/05/2018 21:41:26
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -43,7 +43,10 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL ClockBlock_XTAL : bit;
     SIGNAL ClockBlock_XTAL_32KHZ : bit;
     SIGNAL IDLE(0)__PA : bit;
-    SIGNAL Net_105 : bit;
+    SIGNAL Net_115 : bit;
+    SIGNAL Net_124 : bit;
+    ATTRIBUTE global_signal OF Net_124 : SIGNAL IS true;
+    SIGNAL Net_124_local : bit;
     SIGNAL Net_172 : bit;
     SIGNAL Net_20 : bit;
     ATTRIBUTE GROUND OF Net_20 : SIGNAL IS true;
@@ -58,9 +61,9 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL Net_64_local : bit;
     SIGNAL Net_659 : bit;
     SIGNAL Net_66 : bit;
-    ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(2,0,B)2";
+    ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(3,1,A)2";
     SIGNAL Net_71 : bit;
-    ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(2,0,B)0";
+    ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(3,1,A)0";
     SIGNAL Net_95 : bit;
     ATTRIBUTE placement_force OF Net_95 : SIGNAL IS "U(3,0,A)0";
     SIGNAL Net_99 : bit;
@@ -70,19 +73,25 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL RECEIVE(0)__PA : bit;
     SIGNAL RiseEdge(0)__PA : bit;
     SIGNAL TRANSMIT(0)__PA : bit;
-    SIGNAL \Backoff:TimerUDB:control_0\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_1\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_2\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_3\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_4\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_5\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_6\ : bit;
-    SIGNAL \Backoff:TimerUDB:control_7\ : bit;
-    SIGNAL \Backoff:TimerUDB:per_zero\ : bit;
-    SIGNAL \Backoff:TimerUDB:status_2\ : bit;
-    SIGNAL \Backoff:TimerUDB:status_3\ : bit;
-    SIGNAL \Backoff:TimerUDB:status_tc\ : bit;
-    ATTRIBUTE placement_force OF \Backoff:TimerUDB:status_tc\ : SIGNAL IS "U(2,1,A)0";
+    SIGNAL \CollisionDelay:TimerUDB:control_0\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_1\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_2\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_3\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_4\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_5\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_6\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:control_7\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:per_zero\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:run_mode\ : bit;
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:run_mode\ : SIGNAL IS "U(2,2,A)2";
+    SIGNAL \CollisionDelay:TimerUDB:status_2\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:status_3\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:status_tc\ : bit;
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:status_tc\ : SIGNAL IS "U(2,2,A)3";
+    SIGNAL \CollisionDelay:TimerUDB:timer_enable\ : bit;
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:timer_enable\ : SIGNAL IS "U(2,2,A)0";
+    SIGNAL \CollisionDelay:TimerUDB:trig_disable\ : bit;
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:trig_disable\ : SIGNAL IS "U(2,2,A)1";
     SIGNAL \\\LCD:LCDPort(0)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(1)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(2)\\__PA\ : bit;
@@ -90,16 +99,8 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \\\LCD:LCDPort(4)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(5)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(6)\\__PA\ : bit;
-    SIGNAL \PRS:control_1\ : bit;
-    SIGNAL \PRS:control_2\ : bit;
-    SIGNAL \PRS:control_3\ : bit;
-    SIGNAL \PRS:control_4\ : bit;
-    SIGNAL \PRS:control_5\ : bit;
-    SIGNAL \PRS:control_6\ : bit;
-    SIGNAL \PRS:control_7\ : bit;
-    SIGNAL \PRS:enable_final\ : bit;
     SIGNAL \RISING_EDGE:last\ : bit;
-    ATTRIBUTE placement_force OF \RISING_EDGE:last\ : SIGNAL IS "U(2,0,B)1";
+    ATTRIBUTE placement_force OF \RISING_EDGE:last\ : SIGNAL IS "U(3,1,A)1";
     SIGNAL \Timer:TimerUDB:control_0\ : bit;
     SIGNAL \Timer:TimerUDB:control_1\ : bit;
     SIGNAL \Timer:TimerUDB:control_2\ : bit;
@@ -109,7 +110,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \Timer:TimerUDB:control_6\ : bit;
     SIGNAL \Timer:TimerUDB:control_7\ : bit;
     SIGNAL \Timer:TimerUDB:per_zero\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.ce0__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.ce0__sig\ : bit;
     SIGNAL \Timer:TimerUDB:status_2\ : bit;
     SIGNAL \Timer:TimerUDB:status_3\ : bit;
     SIGNAL \Timer:TimerUDB:status_tc\ : bit;
@@ -127,7 +128,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \TimerRX:TimerUDB:status_2\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_3\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_tc\ : bit;
-    ATTRIBUTE placement_force OF \TimerRX:TimerUDB:status_tc\ : SIGNAL IS "U(2,2,A)0";
+    ATTRIBUTE placement_force OF \TimerRX:TimerUDB:status_tc\ : SIGNAL IS "U(2,1,A)0";
     SIGNAL \TimerTX:Net_261\ : bit;
     SIGNAL \TimerTX:Net_51\ : bit;
     SIGNAL \\\USBUART:Dm(0)\\__PA\ : bit;
@@ -155,7 +156,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \USBUART:ep_int_7\ : bit;
     SIGNAL \USBUART:ep_int_8\ : bit;
     SIGNAL __ONE__ : bit;
-    ATTRIBUTE placement_force OF __ONE__ : SIGNAL IS "U(2,0,B)3";
+    ATTRIBUTE placement_force OF __ONE__ : SIGNAL IS "U(3,1,A)3";
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
     ATTRIBUTE GROUND OF __ZERO__ : SIGNAL IS true;
@@ -187,18 +188,18 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \Timer:TimerUDB:sT16:timerdp:u0.cfbo__sig\ : bit;
     SIGNAL \Timer:TimerUDB:sT16:timerdp:u1.sor__sig\ : bit;
     SIGNAL \Timer:TimerUDB:sT16:timerdp:u1.cmsbo__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.cl0__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.z0__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.ff0__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.ce1__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.cl1__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.z1__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.ff1__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.co_msb__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.sol_msb__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u0.cfbo__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u1.sor__sig\ : bit;
-    SIGNAL \Backoff:TimerUDB:sT16:timerdp:u1.cmsbo__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.cl0__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.z0__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.ff0__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.ce1__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.cl1__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.z1__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.ff1__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.co_msb__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.sol_msb__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u0.cfbo__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u1.sor__sig\ : bit;
+    SIGNAL \CollisionDelay:TimerUDB:sT16:timerdp:u1.cmsbo__sig\ : bit;
     ATTRIBUTE Location OF ClockBlock : LABEL IS "F(Clock,0)";
     ATTRIBUTE lib_model OF IDLE(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF IDLE(0) : LABEL IS "P3[1]";
@@ -230,28 +231,28 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF TRANSMIT(0) : LABEL IS "iocell14";
     ATTRIBUTE Location OF TRANSMIT(0) : LABEL IS "P0[7]";
     ATTRIBUTE lib_model OF RiseEdge(0) : LABEL IS "iocell15";
-    ATTRIBUTE Location OF RiseEdge(0) : LABEL IS "P3[3]";
+    ATTRIBUTE Location OF RiseEdge(0) : LABEL IS "P15[1]";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "macrocell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF Net_66 : LABEL IS "macrocell2";
-    ATTRIBUTE Location OF Net_66 : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF Net_66 : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF Net_71 : LABEL IS "macrocell3";
-    ATTRIBUTE Location OF Net_71 : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF Net_71 : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:status_tc\ : LABEL IS "macrocell4";
     ATTRIBUTE Location OF \Timer:TimerUDB:status_tc\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \Backoff:TimerUDB:status_tc\ : LABEL IS "macrocell5";
-    ATTRIBUTE Location OF \Backoff:TimerUDB:status_tc\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "macrocell5";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "U(2,2)";
     ATTRIBUTE Location OF ReceiveISR : LABEL IS "[IntrContainer=(0)][IntrId=(2)]";
     ATTRIBUTE lib_model OF __ONE__ : LABEL IS "macrocell6";
-    ATTRIBUTE Location OF __ONE__ : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF __ONE__ : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,1)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,2)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell2";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,1)";
     ATTRIBUTE Location OF RisingEdgeISR : LABEL IS "[IntrContainer=(0)][IntrId=(3)]";
     ATTRIBUTE Location OF FallingEdgeISR : LABEL IS "[IntrContainer=(0)][IntrId=(1)]";
     ATTRIBUTE Location OF \USBUART:dp_int\ : LABEL IS "[IntrContainer=(0)][IntrId=(12)]";
@@ -267,7 +268,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE Location OF \TimerTX:TimerHW\ : LABEL IS "F(Timer,0)";
     ATTRIBUTE Location OF TransmitISR : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell2";
-    ATTRIBUTE Location OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,0)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell2";
     ATTRIBUTE Location OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell3";
@@ -275,23 +276,25 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell4";
     ATTRIBUTE Location OF \Timer:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(3,0)";
     ATTRIBUTE Location OF TimerISR : LABEL IS "[IntrContainer=(0)][IntrId=(4)]";
-    ATTRIBUTE lib_model OF \PRS:ClkSp:CtrlReg\ : LABEL IS "controlcell3";
-    ATTRIBUTE Location OF \PRS:ClkSp:CtrlReg\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \PRS:sC8:PRSdp:u0\ : LABEL IS "datapathcell5";
-    ATTRIBUTE Location OF \PRS:sC8:PRSdp:u0\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \Backoff:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell4";
-    ATTRIBUTE Location OF \Backoff:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \Backoff:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell3";
-    ATTRIBUTE Location OF \Backoff:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,1)";
-    ATTRIBUTE lib_model OF \Backoff:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell6";
-    ATTRIBUTE Location OF \Backoff:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \Backoff:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell7";
-    ATTRIBUTE Location OF \Backoff:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,1)";
-    ATTRIBUTE Location OF BackoffISR : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
+    ATTRIBUTE Location OF CollisionDelayISR : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell3";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell3";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell5";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell6";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \RISING_EDGE:last\ : LABEL IS "macrocell7";
-    ATTRIBUTE Location OF \RISING_EDGE:last\ : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF \RISING_EDGE:last\ : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF Net_95 : LABEL IS "macrocell8";
     ATTRIBUTE Location OF Net_95 : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "macrocell9";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "macrocell10";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "macrocell11";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "U(2,2)";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -628,12 +631,14 @@ BEGIN
             clk_bus => ClockBlock_BUS_CLK_local,
             dsi_clkin_div => open,
             dsi_glb_div => open,
-            dclk_glb_0 => Net_64,
-            dclk_0 => Net_64_local,
+            dclk_glb_0 => Net_124,
+            dclk_0 => Net_124_local,
             dclk_glb_1 => Net_99,
             dclk_1 => Net_99_local,
             dclk_glb_2 => Net_3,
             dclk_2 => Net_3_local,
+            dclk_glb_3 => Net_64,
+            dclk_3 => Net_64_local,
             dclk_glb_ff_0 => \ClockBlock.dclk_glb_ff_0__sig\);
 
     IDLE:logicalport
@@ -1603,15 +1608,15 @@ BEGIN
             main_0 => \Timer:TimerUDB:control_7\,
             main_1 => \Timer:TimerUDB:per_zero\);
 
-    \Backoff:TimerUDB:status_tc\:macrocell
+    \CollisionDelay:TimerUDB:status_tc\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1)",
             regmode => 0,
             clken_mode => 1)
         PORT MAP(
-            q => \Backoff:TimerUDB:status_tc\,
-            main_0 => \Backoff:TimerUDB:control_7\,
-            main_1 => \Backoff:TimerUDB:per_zero\);
+            q => \CollisionDelay:TimerUDB:status_tc\,
+            main_0 => \CollisionDelay:TimerUDB:run_mode\,
+            main_1 => \CollisionDelay:TimerUDB:per_zero\);
 
     ReceiveISR:interrupt
         GENERIC MAP(
@@ -2040,62 +2045,15 @@ BEGIN
             interrupt => Net_95,
             clock => ClockBlock_BUS_CLK);
 
-    \PRS:ClkSp:CtrlReg\:controlcell
+    CollisionDelayISR:interrupt
         GENERIC MAP(
-            cy_ctrl_mode_0 => "11111111",
-            cy_ctrl_mode_1 => "00000110",
-            cy_ext_reset => 0,
-            cy_force_order => 1,
-            cy_init_value => "00000000",
-            clk_inv => '0',
-            clken_mode => 1)
+            int_type => "10",
+            is_nmi => 0)
         PORT MAP(
-            clock => Net_99,
-            control_7 => \PRS:control_7\,
-            control_6 => \PRS:control_6\,
-            control_5 => \PRS:control_5\,
-            control_4 => \PRS:control_4\,
-            control_3 => \PRS:control_3\,
-            control_2 => \PRS:control_2\,
-            control_1 => \PRS:control_1\,
-            control_0 => \PRS:enable_final\,
-            busclk => ClockBlock_BUS_CLK);
+            interrupt => Net_115,
+            clock => ClockBlock_BUS_CLK);
 
-    \PRS:sC8:PRSdp:u0\:datapathcell
-        GENERIC MAP(
-            a0_init => "00000000",
-            a1_init => "00000000",
-            ce0_sync => 1,
-            ce1_sync => 1,
-            cl0_sync => 1,
-            cl1_sync => 1,
-            cmsb_sync => 1,
-            co_msb_sync => 1,
-            cy_dpconfig => "0000000000000000101000010100100000000000000000000000000000000000000000001111000000000000111100000000000011110000000000001111000011111111000000001111111111111111000000000000001000000000111000000000000000000000",
-            d0_init => "00000000",
-            d1_init => "00000000",
-            f0_blk_sync => 1,
-            f0_bus_sync => 1,
-            f1_blk_sync => 1,
-            f1_bus_sync => 1,
-            ff0_sync => 1,
-            ff1_sync => 1,
-            ov_msb_sync => 1,
-            so_sync => 1,
-            z0_sync => 1,
-            z1_sync => 1,
-            uses_p_in => '0',
-            uses_p_out => '0',
-            clk_inv => '0',
-            clken_inv => '0',
-            clken_mode => 3)
-        PORT MAP(
-            clock => Net_99,
-            cs_addr_0 => \PRS:enable_final\,
-            clk_en => \PRS:enable_final\,
-            busclk => ClockBlock_BUS_CLK);
-
-    \Backoff:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\:controlcell
+    \CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\:controlcell
         GENERIC MAP(
             cy_ctrl_mode_0 => "11111111",
             cy_ctrl_mode_1 => "00000000",
@@ -2106,17 +2064,17 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             clock => Net_64,
-            control_7 => \Backoff:TimerUDB:control_7\,
-            control_6 => \Backoff:TimerUDB:control_6\,
-            control_5 => \Backoff:TimerUDB:control_5\,
-            control_4 => \Backoff:TimerUDB:control_4\,
-            control_3 => \Backoff:TimerUDB:control_3\,
-            control_2 => \Backoff:TimerUDB:control_2\,
-            control_1 => \Backoff:TimerUDB:control_1\,
-            control_0 => \Backoff:TimerUDB:control_0\,
+            control_7 => \CollisionDelay:TimerUDB:control_7\,
+            control_6 => \CollisionDelay:TimerUDB:control_6\,
+            control_5 => \CollisionDelay:TimerUDB:control_5\,
+            control_4 => \CollisionDelay:TimerUDB:control_4\,
+            control_3 => \CollisionDelay:TimerUDB:control_3\,
+            control_2 => \CollisionDelay:TimerUDB:control_2\,
+            control_1 => \CollisionDelay:TimerUDB:control_1\,
+            control_0 => \CollisionDelay:TimerUDB:control_0\,
             busclk => ClockBlock_BUS_CLK);
 
-    \Backoff:TimerUDB:rstSts:stsreg\:statusicell
+    \CollisionDelay:TimerUDB:rstSts:stsreg\:statusicell
         GENERIC MAP(
             cy_force_order => 1,
             cy_int_mask => "1111111",
@@ -2128,13 +2086,13 @@ BEGIN
             status_6 => open,
             status_5 => open,
             status_4 => open,
-            status_3 => \Backoff:TimerUDB:status_3\,
-            status_2 => \Backoff:TimerUDB:status_2\,
+            status_3 => \CollisionDelay:TimerUDB:status_3\,
+            status_2 => \CollisionDelay:TimerUDB:status_2\,
             status_1 => open,
-            status_0 => \Backoff:TimerUDB:status_tc\,
-            interrupt => Net_105);
+            status_0 => \CollisionDelay:TimerUDB:status_tc\,
+            interrupt => Net_115);
 
-    \Backoff:TimerUDB:sT16:timerdp:u0\:datapathcell
+    \CollisionDelay:TimerUDB:sT16:timerdp:u0\:datapathcell
         GENERIC MAP(
             a0_init => "00000000",
             a1_init => "00000000",
@@ -2163,24 +2121,24 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             clock => Net_64,
-            cs_addr_1 => \Backoff:TimerUDB:control_7\,
-            cs_addr_0 => \Backoff:TimerUDB:per_zero\,
+            cs_addr_1 => \CollisionDelay:TimerUDB:timer_enable\,
+            cs_addr_0 => \CollisionDelay:TimerUDB:per_zero\,
             busclk => ClockBlock_BUS_CLK,
-            ce0 => \Backoff:TimerUDB:sT16:timerdp:u0.ce0__sig\,
-            cl0 => \Backoff:TimerUDB:sT16:timerdp:u0.cl0__sig\,
-            z0 => \Backoff:TimerUDB:sT16:timerdp:u0.z0__sig\,
-            ff0 => \Backoff:TimerUDB:sT16:timerdp:u0.ff0__sig\,
-            ce1 => \Backoff:TimerUDB:sT16:timerdp:u0.ce1__sig\,
-            cl1 => \Backoff:TimerUDB:sT16:timerdp:u0.cl1__sig\,
-            z1 => \Backoff:TimerUDB:sT16:timerdp:u0.z1__sig\,
-            ff1 => \Backoff:TimerUDB:sT16:timerdp:u0.ff1__sig\,
-            co_msb => \Backoff:TimerUDB:sT16:timerdp:u0.co_msb__sig\,
-            sol_msb => \Backoff:TimerUDB:sT16:timerdp:u0.sol_msb__sig\,
-            cfbo => \Backoff:TimerUDB:sT16:timerdp:u0.cfbo__sig\,
-            sil => \Backoff:TimerUDB:sT16:timerdp:u1.sor__sig\,
-            cmsbi => \Backoff:TimerUDB:sT16:timerdp:u1.cmsbo__sig\);
+            ce0 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ce0__sig\,
+            cl0 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.cl0__sig\,
+            z0 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.z0__sig\,
+            ff0 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ff0__sig\,
+            ce1 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ce1__sig\,
+            cl1 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.cl1__sig\,
+            z1 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.z1__sig\,
+            ff1 => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ff1__sig\,
+            co_msb => \CollisionDelay:TimerUDB:sT16:timerdp:u0.co_msb__sig\,
+            sol_msb => \CollisionDelay:TimerUDB:sT16:timerdp:u0.sol_msb__sig\,
+            cfbo => \CollisionDelay:TimerUDB:sT16:timerdp:u0.cfbo__sig\,
+            sil => \CollisionDelay:TimerUDB:sT16:timerdp:u1.sor__sig\,
+            cmsbi => \CollisionDelay:TimerUDB:sT16:timerdp:u1.cmsbo__sig\);
 
-    \Backoff:TimerUDB:sT16:timerdp:u1\:datapathcell
+    \CollisionDelay:TimerUDB:sT16:timerdp:u1\:datapathcell
         GENERIC MAP(
             a0_init => "00000000",
             a1_init => "00000000",
@@ -2209,33 +2167,25 @@ BEGIN
             clken_mode => 1)
         PORT MAP(
             clock => Net_64,
-            cs_addr_1 => \Backoff:TimerUDB:control_7\,
-            cs_addr_0 => \Backoff:TimerUDB:per_zero\,
-            z0_comb => \Backoff:TimerUDB:per_zero\,
-            f0_bus_stat_comb => \Backoff:TimerUDB:status_3\,
-            f0_blk_stat_comb => \Backoff:TimerUDB:status_2\,
+            cs_addr_1 => \CollisionDelay:TimerUDB:timer_enable\,
+            cs_addr_0 => \CollisionDelay:TimerUDB:per_zero\,
+            z0_comb => \CollisionDelay:TimerUDB:per_zero\,
+            f0_bus_stat_comb => \CollisionDelay:TimerUDB:status_3\,
+            f0_blk_stat_comb => \CollisionDelay:TimerUDB:status_2\,
             busclk => ClockBlock_BUS_CLK,
-            ce0i => \Backoff:TimerUDB:sT16:timerdp:u0.ce0__sig\,
-            cl0i => \Backoff:TimerUDB:sT16:timerdp:u0.cl0__sig\,
-            z0i => \Backoff:TimerUDB:sT16:timerdp:u0.z0__sig\,
-            ff0i => \Backoff:TimerUDB:sT16:timerdp:u0.ff0__sig\,
-            ce1i => \Backoff:TimerUDB:sT16:timerdp:u0.ce1__sig\,
-            cl1i => \Backoff:TimerUDB:sT16:timerdp:u0.cl1__sig\,
-            z1i => \Backoff:TimerUDB:sT16:timerdp:u0.z1__sig\,
-            ff1i => \Backoff:TimerUDB:sT16:timerdp:u0.ff1__sig\,
-            ci => \Backoff:TimerUDB:sT16:timerdp:u0.co_msb__sig\,
-            sir => \Backoff:TimerUDB:sT16:timerdp:u0.sol_msb__sig\,
-            cfbi => \Backoff:TimerUDB:sT16:timerdp:u0.cfbo__sig\,
-            sor => \Backoff:TimerUDB:sT16:timerdp:u1.sor__sig\,
-            cmsbo => \Backoff:TimerUDB:sT16:timerdp:u1.cmsbo__sig\);
-
-    BackoffISR:interrupt
-        GENERIC MAP(
-            int_type => "00",
-            is_nmi => 0)
-        PORT MAP(
-            interrupt => Net_105,
-            clock => ClockBlock_BUS_CLK);
+            ce0i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ce0__sig\,
+            cl0i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.cl0__sig\,
+            z0i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.z0__sig\,
+            ff0i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ff0__sig\,
+            ce1i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ce1__sig\,
+            cl1i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.cl1__sig\,
+            z1i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.z1__sig\,
+            ff1i => \CollisionDelay:TimerUDB:sT16:timerdp:u0.ff1__sig\,
+            ci => \CollisionDelay:TimerUDB:sT16:timerdp:u0.co_msb__sig\,
+            sir => \CollisionDelay:TimerUDB:sT16:timerdp:u0.sol_msb__sig\,
+            cfbi => \CollisionDelay:TimerUDB:sT16:timerdp:u0.cfbo__sig\,
+            sor => \CollisionDelay:TimerUDB:sT16:timerdp:u1.sor__sig\,
+            cmsbo => \CollisionDelay:TimerUDB:sT16:timerdp:u1.cmsbo__sig\);
 
     \RISING_EDGE:last\:macrocell
         GENERIC MAP(
@@ -2259,5 +2209,45 @@ BEGIN
             clock_0 => Net_99,
             main_0 => \Timer:TimerUDB:control_7\,
             main_1 => \Timer:TimerUDB:per_zero\);
+
+    \CollisionDelay:TimerUDB:run_mode\:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => \CollisionDelay:TimerUDB:run_mode\,
+            clock_0 => Net_64,
+            main_0 => \CollisionDelay:TimerUDB:control_7\);
+
+    \CollisionDelay:TimerUDB:timer_enable\:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * !main_1 * !main_4) + (main_0 * !main_2 * !main_4) + (main_0 * !main_3 * !main_4)",
+            regmode => 1,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => \CollisionDelay:TimerUDB:timer_enable\,
+            clock_0 => Net_64,
+            main_0 => \CollisionDelay:TimerUDB:control_7\,
+            main_1 => \CollisionDelay:TimerUDB:timer_enable\,
+            main_2 => \CollisionDelay:TimerUDB:run_mode\,
+            main_3 => \CollisionDelay:TimerUDB:per_zero\,
+            main_4 => \CollisionDelay:TimerUDB:trig_disable\);
+
+    \CollisionDelay:TimerUDB:trig_disable\:macrocell
+        GENERIC MAP(
+            eqn_main => "(main_0 * main_1 * main_2 * !main_3)",
+            regmode => 2,
+            clk_inv => '0',
+            clken_mode => 1)
+        PORT MAP(
+            q => \CollisionDelay:TimerUDB:trig_disable\,
+            clock_0 => Net_64,
+            main_0 => \CollisionDelay:TimerUDB:timer_enable\,
+            main_1 => \CollisionDelay:TimerUDB:run_mode\,
+            main_2 => \CollisionDelay:TimerUDB:per_zero\,
+            main_3 => \CollisionDelay:TimerUDB:trig_disable\);
 
 END __DEFAULT__;

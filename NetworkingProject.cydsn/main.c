@@ -22,6 +22,7 @@
 #include "project.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 //States include: 
 //Busy - signals that the channel monitor is busy
@@ -85,7 +86,7 @@ int receiveBitCount = 0;
 int concatCount = 0;
 unsigned char transmitAddress = 0; 
 
-
+bool transmitMode = true; // Whether currently transmitting or receiving
 
 void checkForNewData(); 
 void stateDiagram(); 
@@ -225,15 +226,12 @@ CY_ISR(TimerInterruptHandler)
          transmitLock = 1;
     } else {
         systemState = COLLISION;
-        TRANSMIT_Write(0);
-        transmitBitCount = 0;    
-        transmitLock = 0;
-        idx = 0;
-        int delay = 0; 
-        //wait a time betwee 0 and 1 second
-         delay = (rand() % 1000) + 1;
-         CyDelay(delay);
-
+        TRANSMIT_Write(0); 
+        transmitLock = 1; // Don't transmit anymore.
+        uint16_t randNum = (uint16_t)((float)rand() / RAND_MAX * 1000);
+        CollisionDelay_WritePeriod(randNum);
+        CollisionDelay_WriteCounter(randNum - 1);
+        CollisionDelay_Start();
     }
 }
 
@@ -294,6 +292,16 @@ CY_ISR(FallingEdgeInterruptHandler)
     }
 }
 
+/**
+This interrupt should fire after the random delay period of the timer after
+a collision has expired. All this does is tells the transmitter that it has
+the green light to transmit.
+*/
+CY_ISR(CollisionDelayInterruptHandler)
+{
+    transmitLock = 0;
+}
+
 /**********************************************************
  * function name: main
  * operation: Handles the main state machine diagram for the
@@ -323,28 +331,31 @@ int main(void)
     TimerRX_WriteCounter(RECEIVE_COUNTER);
     TimerRX_WritePeriod(RECEIVE_PERIOD);
     ReceiveISR_StartEx(ReceiveInterruptHandler);
+    
+    CollisionDelayISR_StartEx(CollisionDelayInterruptHandler);
         
     //configure usb to start
     USBUART_Start(USBUART_device,USBUART_5V_OPERATION);
     
+    while (!USBUART_GetConfiguration());
+    USBUART_CDC_Init();
+    
     //starting system in idle state
     systemState = IDLE;
 
-    while(1){
-        int printPrompt = 0;
-	
-		
-		if (0 != USBUART_IsConfigurationChanged())
+    while(1) {
+                
+		/** if (0 != USBUART_IsConfigurationChanged())
 		{
 			
 			if (0 != USBUART_GetConfiguration())
 			{				
 				USBUART_CDC_Init();
 			}
-		}
+		} */
         
         
-        if(printPrompt == 0){
+        if(transmitMode){
             int inCount = 0;
             transmitAddress = 0;
             char input = 0;
@@ -352,7 +363,6 @@ int main(void)
             USBUART_PutString("Enter Address (3 digits): ");
             while(inCount < 3){
                 while(USBUART_DataIsReady() == 0) { 
-                    checkForNewData();
                     stateDiagram();
                 }
                 
@@ -360,8 +370,15 @@ int main(void)
                 
                 //get the transmitAddress entered in
                 if(inCount == 0){
-                    transmitAddress  += 100*(input - (0x30));
-                    USBUART_PutChar(input);
+                    if (toupper(input) == 'R') {
+                        transmitMode = false;
+                        USBUART_PutChar(input);
+                        USBUART_PutCRLF();
+                        USBUART_PutString("Press 'T' to switch to transmit mode.");
+                    } else {
+                        transmitAddress  += 100*(input - (0x30));
+                        USBUART_PutChar(input);
+                    }
                 }else if(inCount == 1){
                     transmitAddress  += 10*(input - (0x30));
                     USBUART_PutChar(input);
@@ -401,15 +418,22 @@ int main(void)
             }
             buffer[4] = inCount;
 
-        dataSize = buffer[4];
-        position = 0;
-        printPrompt = 0;
-        while(!USBUART_CDCIsReady());
-        USBUART_PutCRLF();       
+            dataSize = buffer[4];
+            position = 0;
+            while(!USBUART_CDCIsReady());
+            USBUART_PutCRLF(); 
+            
+        } else { // Receive mode
+            checkForNewData();
+            stateDiagram();
+            if (USBUART_DataIsReady()) { 
+                char input;
+                input = USBUART_GetChar();
+                if (toupper(input) == 'T') {
+                    transmitMode = true;
+                }
+            }
         }
-        
-
-        
     }
 }
 
@@ -439,88 +463,90 @@ void stateDiagram(){
     }   
 }
 
+/**
+*/
 void checkForNewData(){
- if(USBUART_CDCIsReady() != 0){
-    while(dataBitsRead != receivePosition){
-        if(dataBitsRead == 0){
-//            if(receiveBuffer[0] == 0x00){
-//                startHeaderReceieved = 1;
-//            }
-//            if(receiveBuffer[1] == 0x01){
-//                    verNumMatch = 1;
-//           }
-            sourceAddress = receiveBuffer[2];
-            destinationAddress = receiveBuffer[3];
-            messageLength = receiveBuffer[4];
-            crcUsage = receiveBuffer[5];
-            headerCRC = receiveBuffer[6];            
-        }
-        if(destinationAddress == BROADCAST_ADDRESS || 
-        ((destinationAddress >= ADDR1Start) && (destinationAddress <= ADDR1Start+ADDRLength)) ||
-        ((destinationAddress >= ADDR2Start) && (destinationAddress <= ADDR2Start+ADDRLength)) ||
-        ((destinationAddress >= ADDR3Start) && (destinationAddress <= ADDR3Start+ADDRLength))){
-            if(addressZeroReceive == 0){
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF();
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF();
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF(); 
-            while(!USBUART_CDCIsReady());
-            USBUART_PutString("Message From: ");
-            while(!USBUART_CDCIsReady());
-
-            USBUART_PutChar(((sourceAddress)/100)+0x30);
-
-            while(!USBUART_CDCIsReady());
-            USBUART_PutChar(((sourceAddress/10)%10)+0x30);
-            while(!USBUART_CDCIsReady());
- 
-            USBUART_PutChar(((sourceAddress%10)%10)+0x30);
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF();
-            while(!USBUART_CDCIsReady());
-            USBUART_PutString("Sent To: ");
-            if(destinationAddress == BROADCAST_ADDRESS){
-                while(!USBUART_CDCIsReady());
-                USBUART_PutString("BCST ");
+    if(USBUART_CDCIsReady() != 0){
+        while(dataBitsRead != receivePosition){
+            if(dataBitsRead == 0){
+    //            if(receiveBuffer[0] == 0x00){
+    //                startHeaderReceieved = 1;
+    //            }
+    //            if(receiveBuffer[1] == 0x01){
+    //                    verNumMatch = 1;
+    //           }
+                sourceAddress = receiveBuffer[2];
+                destinationAddress = receiveBuffer[3];
+                messageLength = receiveBuffer[4];
+                crcUsage = receiveBuffer[5];
+                headerCRC = receiveBuffer[6];            
+            }
+            if(destinationAddress == BROADCAST_ADDRESS || 
+            ((destinationAddress >= ADDR1Start) && (destinationAddress <= ADDR1Start+ADDRLength)) ||
+            ((destinationAddress >= ADDR2Start) && (destinationAddress <= ADDR2Start+ADDRLength)) ||
+            ((destinationAddress >= ADDR3Start) && (destinationAddress <= ADDR3Start+ADDRLength))){
+                if(addressZeroReceive == 0){
                 while(!USBUART_CDCIsReady());
                 USBUART_PutCRLF();
-            }else{
                 while(!USBUART_CDCIsReady());
- 
-                USBUART_PutChar(((destinationAddress)/100)+0x30);
-
-                while(!USBUART_CDCIsReady());
-                USBUART_PutChar(((destinationAddress/10)%10)+0x30);
-                while(!USBUART_CDCIsReady());
-   
-                USBUART_PutChar(((destinationAddress%10)%10)+0x30);
                 USBUART_PutCRLF();
                 while(!USBUART_CDCIsReady());
+                USBUART_PutCRLF(); 
+                while(!USBUART_CDCIsReady());
+                USBUART_PutString("Message From: ");
+                while(!USBUART_CDCIsReady());
+
+                USBUART_PutChar(((sourceAddress)/100)+0x30);
+
+                while(!USBUART_CDCIsReady());
+                USBUART_PutChar(((sourceAddress/10)%10)+0x30);
+                while(!USBUART_CDCIsReady());
+     
+                USBUART_PutChar(((sourceAddress%10)%10)+0x30);
+                while(!USBUART_CDCIsReady());
+                USBUART_PutCRLF();
+                while(!USBUART_CDCIsReady());
+                USBUART_PutString("Sent To: ");
+                if(destinationAddress == BROADCAST_ADDRESS){
+                    while(!USBUART_CDCIsReady());
+                    USBUART_PutString("BCST ");
+                    while(!USBUART_CDCIsReady());
+                    USBUART_PutCRLF();
+                }else{
+                    while(!USBUART_CDCIsReady());
+     
+                    USBUART_PutChar(((destinationAddress)/100)+0x30);
+
+                    while(!USBUART_CDCIsReady());
+                    USBUART_PutChar(((destinationAddress/10)%10)+0x30);
+                    while(!USBUART_CDCIsReady());
+       
+                    USBUART_PutChar(((destinationAddress%10)%10)+0x30);
+                    USBUART_PutCRLF();
+                    while(!USBUART_CDCIsReady());
+                }
+                while(!USBUART_CDCIsReady());
+                USBUART_PutString("Size: ");
+                while(!USBUART_CDCIsReady());
+                USBUART_PutChar(((messageLength)/100)+0x30);
+                while(!USBUART_CDCIsReady());
+                USBUART_PutChar(((messageLength/10)%10)+0x30);
+                while(!USBUART_CDCIsReady());
+                USBUART_PutChar(((messageLength%10)%10)+0x30);
+                while(!USBUART_CDCIsReady());
+                USBUART_PutCRLF();
+                while(!USBUART_CDCIsReady());
+                USBUART_PutString("Message: ");
+                while(!USBUART_CDCIsReady());
+                addressZeroReceive = 1;
+                }
+                if(dataBitsRead > 6){
+                USBUART_PutChar(receiveBuffer[dataBitsRead]);
+                }
+                
             }
-            while(!USBUART_CDCIsReady());
-            USBUART_PutString("Size: ");
-            while(!USBUART_CDCIsReady());
-            USBUART_PutChar(((messageLength)/100)+0x30);
-            while(!USBUART_CDCIsReady());
-            USBUART_PutChar(((messageLength/10)%10)+0x30);
-            while(!USBUART_CDCIsReady());
-            USBUART_PutChar(((messageLength%10)%10)+0x30);
-            while(!USBUART_CDCIsReady());
-            USBUART_PutCRLF();
-            while(!USBUART_CDCIsReady());
-            USBUART_PutString("Message: ");
-            while(!USBUART_CDCIsReady());
-            addressZeroReceive = 1;
-            }
-            if(dataBitsRead > 6){
-            USBUART_PutChar(receiveBuffer[dataBitsRead]);
-            }
-            
+            ++dataBitsRead;
         }
-        ++dataBitsRead;
     }
 }
-
 /* [] END OF FILE */

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Backoff_PM.c
+* File Name: CollisionDelay_PM.c
 * Version 2.70
 *
 *  Description:
@@ -16,13 +16,13 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "Backoff.h"
+#include "CollisionDelay.h"
 
-static Backoff_backupStruct Backoff_backup;
+static CollisionDelay_backupStruct CollisionDelay_backup;
 
 
 /*******************************************************************************
-* Function Name: Backoff_SaveConfig
+* Function Name: CollisionDelay_SaveConfig
 ********************************************************************************
 *
 * Summary:
@@ -35,29 +35,29 @@ static Backoff_backupStruct Backoff_backup;
 *  void
 *
 * Global variables:
-*  Backoff_backup:  Variables of this global structure are modified to
+*  CollisionDelay_backup:  Variables of this global structure are modified to
 *  store the values of non retention configuration registers when Sleep() API is
 *  called.
 *
 *******************************************************************************/
-void Backoff_SaveConfig(void) 
+void CollisionDelay_SaveConfig(void) 
 {
-    #if (!Backoff_UsingFixedFunction)
-        Backoff_backup.TimerUdb = Backoff_ReadCounter();
-        Backoff_backup.InterruptMaskValue = Backoff_STATUS_MASK;
-        #if (Backoff_UsingHWCaptureCounter)
-            Backoff_backup.TimerCaptureCounter = Backoff_ReadCaptureCount();
+    #if (!CollisionDelay_UsingFixedFunction)
+        CollisionDelay_backup.TimerUdb = CollisionDelay_ReadCounter();
+        CollisionDelay_backup.InterruptMaskValue = CollisionDelay_STATUS_MASK;
+        #if (CollisionDelay_UsingHWCaptureCounter)
+            CollisionDelay_backup.TimerCaptureCounter = CollisionDelay_ReadCaptureCount();
         #endif /* Back Up capture counter register  */
 
-        #if(!Backoff_UDB_CONTROL_REG_REMOVED)
-            Backoff_backup.TimerControlRegister = Backoff_ReadControlRegister();
+        #if(!CollisionDelay_UDB_CONTROL_REG_REMOVED)
+            CollisionDelay_backup.TimerControlRegister = CollisionDelay_ReadControlRegister();
         #endif /* Backup the enable state of the Timer component */
     #endif /* Backup non retention registers in UDB implementation. All fixed function registers are retention */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_RestoreConfig
+* Function Name: CollisionDelay_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -70,29 +70,29 @@ void Backoff_SaveConfig(void)
 *  void
 *
 * Global variables:
-*  Backoff_backup:  Variables of this global structure are used to
+*  CollisionDelay_backup:  Variables of this global structure are used to
 *  restore the values of non retention registers on wakeup from sleep mode.
 *
 *******************************************************************************/
-void Backoff_RestoreConfig(void) 
+void CollisionDelay_RestoreConfig(void) 
 {   
-    #if (!Backoff_UsingFixedFunction)
+    #if (!CollisionDelay_UsingFixedFunction)
 
-        Backoff_WriteCounter(Backoff_backup.TimerUdb);
-        Backoff_STATUS_MASK =Backoff_backup.InterruptMaskValue;
-        #if (Backoff_UsingHWCaptureCounter)
-            Backoff_SetCaptureCount(Backoff_backup.TimerCaptureCounter);
+        CollisionDelay_WriteCounter(CollisionDelay_backup.TimerUdb);
+        CollisionDelay_STATUS_MASK =CollisionDelay_backup.InterruptMaskValue;
+        #if (CollisionDelay_UsingHWCaptureCounter)
+            CollisionDelay_SetCaptureCount(CollisionDelay_backup.TimerCaptureCounter);
         #endif /* Restore Capture counter register*/
 
-        #if(!Backoff_UDB_CONTROL_REG_REMOVED)
-            Backoff_WriteControlRegister(Backoff_backup.TimerControlRegister);
+        #if(!CollisionDelay_UDB_CONTROL_REG_REMOVED)
+            CollisionDelay_WriteControlRegister(CollisionDelay_backup.TimerControlRegister);
         #endif /* Restore the enable state of the Timer component */
     #endif /* Restore non retention registers in the UDB implementation only */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_Sleep
+* Function Name: CollisionDelay_Sleep
 ********************************************************************************
 *
 * Summary:
@@ -105,32 +105,32 @@ void Backoff_RestoreConfig(void)
 *  void
 *
 * Global variables:
-*  Backoff_backup.TimerEnableState:  Is modified depending on the
+*  CollisionDelay_backup.TimerEnableState:  Is modified depending on the
 *  enable state of the block before entering sleep mode.
 *
 *******************************************************************************/
-void Backoff_Sleep(void) 
+void CollisionDelay_Sleep(void) 
 {
-    #if(!Backoff_UDB_CONTROL_REG_REMOVED)
+    #if(!CollisionDelay_UDB_CONTROL_REG_REMOVED)
         /* Save Counter's enable state */
-        if(Backoff_CTRL_ENABLE == (Backoff_CONTROL & Backoff_CTRL_ENABLE))
+        if(CollisionDelay_CTRL_ENABLE == (CollisionDelay_CONTROL & CollisionDelay_CTRL_ENABLE))
         {
             /* Timer is enabled */
-            Backoff_backup.TimerEnableState = 1u;
+            CollisionDelay_backup.TimerEnableState = 1u;
         }
         else
         {
             /* Timer is disabled */
-            Backoff_backup.TimerEnableState = 0u;
+            CollisionDelay_backup.TimerEnableState = 0u;
         }
     #endif /* Back up enable state from the Timer control register */
-    Backoff_Stop();
-    Backoff_SaveConfig();
+    CollisionDelay_Stop();
+    CollisionDelay_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_Wakeup
+* Function Name: CollisionDelay_Wakeup
 ********************************************************************************
 *
 * Summary:
@@ -143,17 +143,17 @@ void Backoff_Sleep(void)
 *  void
 *
 * Global variables:
-*  Backoff_backup.enableState:  Is used to restore the enable state of
+*  CollisionDelay_backup.enableState:  Is used to restore the enable state of
 *  block on wakeup from sleep mode.
 *
 *******************************************************************************/
-void Backoff_Wakeup(void) 
+void CollisionDelay_Wakeup(void) 
 {
-    Backoff_RestoreConfig();
-    #if(!Backoff_UDB_CONTROL_REG_REMOVED)
-        if(Backoff_backup.TimerEnableState == 1u)
+    CollisionDelay_RestoreConfig();
+    #if(!CollisionDelay_UDB_CONTROL_REG_REMOVED)
+        if(CollisionDelay_backup.TimerEnableState == 1u)
         {     /* Enable Timer's operation */
-                Backoff_Enable();
+                CollisionDelay_Enable();
         } /* Do nothing if Timer was disabled before */
     #endif /* Remove this code section if Control register is removed */
 }

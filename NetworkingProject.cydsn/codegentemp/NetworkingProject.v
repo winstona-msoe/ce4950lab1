@@ -1,6 +1,6 @@
 // ======================================================================
 // NetworkingProject.v generated from TopDesign.cysch
-// 02/02/2018 at 13:50
+// 02/05/2018 at 21:41
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -823,33 +823,7 @@ module Timer_v2_70_4 (
 
 endmodule
 
-// Component: PRS_v2_40
-`ifdef CY_BLK_DIR
-`undef CY_BLK_DIR
-`endif
-
-`ifdef WARP
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40\PRS_v2_40.v"
-`else
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\PRS_v2_40\PRS_v2_40.v"
-`endif
-
-// Component: cy_constant_v1_0
-`ifdef CY_BLK_DIR
-`undef CY_BLK_DIR
-`endif
-
-`ifdef WARP
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
-`else
-`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0"
-`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
-`endif
-
-// Timer_v2_70(CaptureAlternatingFall=false, CaptureAlternatingRise=false, CaptureCount=2, CaptureCounterEnabled=false, CaptureInputEnabled=false, CaptureMode=0, CONTROL3=0, ControlRegRemoved=0, CtlModeReplacementString=SyncCtl, CyGetRegReplacementString=CY_GET_REG16, CySetRegReplacementString=CY_SET_REG16, DeviceFamily=PSoC5, EnableMode=0, FF16=false, FF8=false, FixedFunction=false, FixedFunctionUsed=0, HWCaptureCounterEnabled=false, InterruptOnCapture=false, InterruptOnFIFOFull=false, InterruptOnTC=true, IntOnCapture=0, IntOnFIFOFull=0, IntOnTC=1, NumberOfCaptures=1, param45=1, Period=9, RegDefReplacementString=reg16, RegSizeReplacementString=uint16, Resolution=16, RstStatusReplacementString=rstSts, RunMode=0, SiliconRevision=0, SoftwareCaptureModeEnabled=false, SoftwareTriggerModeEnabled=false, TriggerInputEnabled=false, TriggerMode=0, UDB16=true, UDB24=false, UDB32=false, UDB8=false, UDBControlReg=true, UsesHWEnable=0, VerilogSectionReplacementString=sT16, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=Timer_v2_70, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=Backoff, CY_INSTANCE_SHORT_NAME=Backoff, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=70, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.1 Update 1, INSTANCE_NAME=Backoff, )
+// Timer_v2_70(CaptureAlternatingFall=false, CaptureAlternatingRise=false, CaptureCount=2, CaptureCounterEnabled=false, CaptureInputEnabled=false, CaptureMode=0, CONTROL3=0, ControlRegRemoved=0, CtlModeReplacementString=SyncCtl, CyGetRegReplacementString=CY_GET_REG16, CySetRegReplacementString=CY_SET_REG16, DeviceFamily=PSoC5, EnableMode=0, FF16=false, FF8=false, FixedFunction=false, FixedFunctionUsed=0, HWCaptureCounterEnabled=false, InterruptOnCapture=false, InterruptOnFIFOFull=false, InterruptOnTC=false, IntOnCapture=0, IntOnFIFOFull=0, IntOnTC=0, NumberOfCaptures=1, param45=1, Period=999, RegDefReplacementString=reg16, RegSizeReplacementString=uint16, Resolution=16, RstStatusReplacementString=rstSts, RunMode=1, SiliconRevision=0, SoftwareCaptureModeEnabled=false, SoftwareTriggerModeEnabled=false, TriggerInputEnabled=false, TriggerMode=0, UDB16=true, UDB24=false, UDB32=false, UDB8=false, UDBControlReg=true, UsesHWEnable=0, VerilogSectionReplacementString=sT16, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=Timer_v2_70, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=CollisionDelay, CY_INSTANCE_SHORT_NAME=CollisionDelay, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=70, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.1 Update 1, INSTANCE_NAME=CollisionDelay, )
 module Timer_v2_70_5 (
     reset,
     interrupt,
@@ -872,7 +846,7 @@ module Timer_v2_70_5 (
     parameter CaptureCounterEnabled = 0;
     parameter DeviceFamily = "PSoC5";
     parameter InterruptOnCapture = 0;
-    parameter InterruptOnTC = 1;
+    parameter InterruptOnTC = 0;
     parameter Resolution = 16;
     parameter SiliconRevision = "0";
 
@@ -909,7 +883,7 @@ module Timer_v2_70_5 (
     defparam TimerUDB.EnableMode = 0;
     defparam TimerUDB.InterruptOnCapture = 0;
     defparam TimerUDB.Resolution = 16;
-    defparam TimerUDB.RunMode = 0;
+    defparam TimerUDB.RunMode = 1;
     defparam TimerUDB.TriggerMode = 0;
 
     OneTerminal OneTerminal_1 (
@@ -925,14 +899,12 @@ endmodule
 // top
 module top ;
 
-          wire  Net_110;
-          wire  Net_109;
-          wire  Net_108;
-          wire  Net_107;
-          wire  Net_106;
-          wire  Net_105;
-          wire  Net_104;
-          wire  Net_102;
+          wire  Net_128;
+          wire  Net_120;
+          wire  Net_119;
+          wire  Net_118;
+          wire  Net_117;
+          wire  Net_116;
           wire  Net_95;
           wire  Net_94;
           wire  Net_93;
@@ -955,10 +927,11 @@ module top ;
           wire  Net_29;
           wire  Net_28;
           wire  Net_19;
-          wire  Net_66;
+          wire  Net_124;
+          wire  Net_115;
+          wire  Net_12;
           wire  Net_64;
-          wire  Net_103;
-          wire  Net_100;
+          wire  Net_66;
           wire  Net_99;
           wire  Net_89;
           wire  Net_20;
@@ -1434,7 +1407,7 @@ module top ;
         .capture(1'b0),
         .capture_out(Net_62),
         .tc(Net_63),
-        .clock(Net_64));
+        .clock(Net_124));
     defparam TimerTX.CaptureCount = 2;
     defparam TimerTX.CaptureCounterEnabled = 0;
     defparam TimerTX.DeviceFamily = "PSoC5";
@@ -1462,7 +1435,7 @@ module top ;
 		  .is_direct(0),
 		  .is_digital(1))
 		CLOCK2
-		 (.clock_out(Net_64));
+		 (.clock_out(Net_124));
 
 
     Timer_v2_70_4 Timer (
@@ -1491,45 +1464,6 @@ module top ;
 
     ZeroTerminal ZeroTerminal_3 (
         .z(Net_89));
-
-    PRS_v2_40 PRS (
-        .enable(Net_100),
-        .clock(Net_99),
-        .bitstream(Net_102),
-        .reset(Net_103));
-    defparam PRS.Resolution = 7;
-    defparam PRS.RunMode = 0;
-    defparam PRS.TimeMultiplexing = 0;
-    defparam PRS.WakeupBehaviour = 1;
-
-    ZeroTerminal ZeroTerminal_4 (
-        .z(Net_103));
-
-    assign Net_100 = 1'h1;
-
-    Timer_v2_70_5 Backoff (
-        .reset(Net_104),
-        .interrupt(Net_105),
-        .enable(1'b1),
-        .trigger(1'b1),
-        .capture(1'b0),
-        .capture_out(Net_109),
-        .tc(Net_110),
-        .clock(Net_64));
-    defparam Backoff.CaptureCount = 2;
-    defparam Backoff.CaptureCounterEnabled = 0;
-    defparam Backoff.DeviceFamily = "PSoC5";
-    defparam Backoff.InterruptOnCapture = 0;
-    defparam Backoff.InterruptOnTC = 1;
-    defparam Backoff.Resolution = 16;
-    defparam Backoff.SiliconRevision = "0";
-
-
-	cy_isr_v1_0
-		#(.int_type(2'b00))
-		BackoffISR
-		 (.int_signal(Net_105));
-
 
 	wire [0:0] tmpOE__RiseEdge_net;
 	wire [0:0] tmpFB_0__RiseEdge_net;
@@ -1606,8 +1540,44 @@ module top ;
 
 	assign tmpOE__RiseEdge_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
-    ZeroTerminal ZeroTerminal_5 (
-        .z(Net_104));
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		CollisionDelayISR
+		 (.int_signal(Net_115));
+
+
+    ZeroTerminal ZeroTerminal_4 (
+        .z(Net_12));
+
+    Timer_v2_70_5 CollisionDelay (
+        .reset(Net_12),
+        .interrupt(Net_115),
+        .enable(1'b1),
+        .trigger(1'b1),
+        .capture(1'b0),
+        .capture_out(Net_119),
+        .tc(Net_120),
+        .clock(Net_64));
+    defparam CollisionDelay.CaptureCount = 2;
+    defparam CollisionDelay.CaptureCounterEnabled = 0;
+    defparam CollisionDelay.DeviceFamily = "PSoC5";
+    defparam CollisionDelay.InterruptOnCapture = 0;
+    defparam CollisionDelay.InterruptOnTC = 0;
+    defparam CollisionDelay.Resolution = 16;
+    defparam CollisionDelay.SiliconRevision = "0";
+
+
+	cy_clock_v1_0
+		#(.id("3cddae3e-3052-4701-ac6c-1de846850579"),
+		  .source_clock_id(""),
+		  .divisor(0),
+		  .period("1000000000000"),
+		  .is_direct(0),
+		  .is_digital(1))
+		CollisionDelayClk
+		 (.clock_out(Net_64));
+
 
 
 

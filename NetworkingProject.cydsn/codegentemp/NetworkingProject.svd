@@ -37,7 +37,7 @@
         <register>
           <name>Timer_Control_Reg</name>
           <description>UDB Control Register - Assigned Control Register Value</description>
-          <addressOffset>0x40006575</addressOffset>
+          <addressOffset>0x40006574</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -539,46 +539,7 @@
       </registers>
     </peripheral>
     <peripheral>
-      <name>PRS</name>
-      <description>No description available</description>
-      <baseAddress>0x40006405</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x0</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>SINGLE_CYCLE_SEED</name>
-          <description>Current seed value</description>
-          <addressOffset>0x0</addressOffset>
-          <size>7</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>SINGLE_CYCLE_POLYNOMIAL</name>
-          <description>Current polynomial value</description>
-          <addressOffset>0x20</addressOffset>
-          <size>7</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>SINGLE_CYCLE_COPY</name>
-          <description>Copy seed value</description>
-          <addressOffset>0x40</addressOffset>
-          <size>7</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>Backoff</name>
+      <name>CollisionDelay</name>
       <description>No description available</description>
       <baseAddress>0x0</baseAddress>
       <addressBlock>
@@ -588,27 +549,27 @@
       </addressBlock>
       <registers>
         <register>
-          <name>Backoff_COUNTER</name>
+          <name>CollisionDelay_COUNTER</name>
           <description>UDB.A0 - Current Down Counter Value</description>
-          <addressOffset>0x40006506</addressOffset>
+          <addressOffset>0x40006406</addressOffset>
           <size>16</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
           <resetMask>0</resetMask>
         </register>
         <register>
-          <name>Backoff_PERIOD</name>
+          <name>CollisionDelay_PERIOD</name>
           <description>UDB.D0 - Assigned Period</description>
-          <addressOffset>0x40006526</addressOffset>
+          <addressOffset>0x40006426</addressOffset>
           <size>16</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
           <resetMask>0</resetMask>
         </register>
         <register>
-          <name>Backoff_Control_Reg</name>
+          <name>CollisionDelay_Control_Reg</name>
           <description>UDB Control Register - Assigned Control Register Value</description>
-          <addressOffset>0x40006576</addressOffset>
+          <addressOffset>0x40006477</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -652,9 +613,9 @@
           </fields>
         </register>
         <register>
-          <name>Backoff_STATUS_MASK</name>
+          <name>CollisionDelay_STATUS_MASK</name>
           <description>UDB Status bits Interrupt Mask Enable Register</description>
-          <addressOffset>0x40006587</addressOffset>
+          <addressOffset>0x40006487</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -691,9 +652,9 @@
           </fields>
         </register>
         <register>
-          <name>Backoff_STATUS_AUX_CTRL</name>
+          <name>CollisionDelay_STATUS_AUX_CTRL</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006597</addressOffset>
+          <addressOffset>0x40006497</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -830,7 +791,7 @@
         <register>
           <name>TimerRX_COUNTER</name>
           <description>UDB.A0 - Current Down Counter Value</description>
-          <addressOffset>0x40006406</addressOffset>
+          <addressOffset>0x40006506</addressOffset>
           <size>16</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -839,7 +800,7 @@
         <register>
           <name>TimerRX_PERIOD</name>
           <description>UDB.D0 - Assigned Period</description>
-          <addressOffset>0x40006426</addressOffset>
+          <addressOffset>0x40006526</addressOffset>
           <size>16</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -848,7 +809,7 @@
         <register>
           <name>TimerRX_Control_Reg</name>
           <description>UDB Control Register - Assigned Control Register Value</description>
-          <addressOffset>0x40006477</addressOffset>
+          <addressOffset>0x40006577</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -894,7 +855,7 @@
         <register>
           <name>TimerRX_STATUS_MASK</name>
           <description>UDB Status bits Interrupt Mask Enable Register</description>
-          <addressOffset>0x40006487</addressOffset>
+          <addressOffset>0x40006587</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -933,7 +894,7 @@
         <register>
           <name>TimerRX_STATUS_AUX_CTRL</name>
           <description>UDB Auxilliary Control Register</description>
-          <addressOffset>0x40006497</addressOffset>
+          <addressOffset>0x40006597</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Backoff.c
+* File Name: CollisionDelay.c
 * Version 2.70
 *
 * Description:
@@ -21,13 +21,13 @@
 * the software package with which this file was provided.
 ********************************************************************************/
 
-#include "Backoff.h"
+#include "CollisionDelay.h"
 
-uint8 Backoff_initVar = 0u;
+uint8 CollisionDelay_initVar = 0u;
 
 
 /*******************************************************************************
-* Function Name: Backoff_Init
+* Function Name: CollisionDelay_Init
 ********************************************************************************
 *
 * Summary:
@@ -40,131 +40,131 @@ uint8 Backoff_initVar = 0u;
 *  void
 *
 *******************************************************************************/
-void Backoff_Init(void) 
+void CollisionDelay_Init(void) 
 {
-    #if(!Backoff_UsingFixedFunction)
+    #if(!CollisionDelay_UsingFixedFunction)
             /* Interrupt State Backup for Critical Region*/
-            uint8 Backoff_interruptState;
+            uint8 CollisionDelay_interruptState;
     #endif /* Interrupt state back up for Fixed Function only */
 
-    #if (Backoff_UsingFixedFunction)
+    #if (CollisionDelay_UsingFixedFunction)
         /* Clear all bits but the enable bit (if it's already set) for Timer operation */
-        Backoff_CONTROL &= Backoff_CTRL_ENABLE;
+        CollisionDelay_CONTROL &= CollisionDelay_CTRL_ENABLE;
 
         /* Clear the mode bits for continuous run mode */
         #if (CY_PSOC5A)
-            Backoff_CONTROL2 &= ((uint8)(~Backoff_CTRL_MODE_MASK));
+            CollisionDelay_CONTROL2 &= ((uint8)(~CollisionDelay_CTRL_MODE_MASK));
         #endif /* Clear bits in CONTROL2 only in PSOC5A */
 
         #if (CY_PSOC3 || CY_PSOC5LP)
-            Backoff_CONTROL3 &= ((uint8)(~Backoff_CTRL_MODE_MASK));
+            CollisionDelay_CONTROL3 &= ((uint8)(~CollisionDelay_CTRL_MODE_MASK));
         #endif /* CONTROL3 register exists only in PSoC3 OR PSoC5LP */
 
         /* Check if One Shot mode is enabled i.e. RunMode !=0*/
-        #if (Backoff_RunModeUsed != 0x0u)
+        #if (CollisionDelay_RunModeUsed != 0x0u)
             /* Set 3rd bit of Control register to enable one shot mode */
-            Backoff_CONTROL |= 0x04u;
+            CollisionDelay_CONTROL |= 0x04u;
         #endif /* One Shot enabled only when RunModeUsed is not Continuous*/
 
-        #if (Backoff_RunModeUsed == 2)
+        #if (CollisionDelay_RunModeUsed == 2)
             #if (CY_PSOC5A)
                 /* Set last 2 bits of control2 register if one shot(halt on
                 interrupt) is enabled*/
-                Backoff_CONTROL2 |= 0x03u;
+                CollisionDelay_CONTROL2 |= 0x03u;
             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL2 for PSoC5A */
 
             #if (CY_PSOC3 || CY_PSOC5LP)
                 /* Set last 2 bits of control3 register if one shot(halt on
                 interrupt) is enabled*/
-                Backoff_CONTROL3 |= 0x03u;
+                CollisionDelay_CONTROL3 |= 0x03u;
             #endif /* Set One-Shot Halt on Interrupt bit in CONTROL3 for PSoC3 or PSoC5LP */
 
         #endif /* Remove section if One Shot Halt on Interrupt is not enabled */
 
-        #if (Backoff_UsingHWEnable != 0)
+        #if (CollisionDelay_UsingHWEnable != 0)
             #if (CY_PSOC5A)
                 /* Set the default Run Mode of the Timer to Continuous */
-                Backoff_CONTROL2 |= Backoff_CTRL_MODE_PULSEWIDTH;
+                CollisionDelay_CONTROL2 |= CollisionDelay_CTRL_MODE_PULSEWIDTH;
             #endif /* Set Continuous Run Mode in CONTROL2 for PSoC5A */
 
             #if (CY_PSOC3 || CY_PSOC5LP)
                 /* Clear and Set ROD and COD bits of CFG2 register */
-                Backoff_CONTROL3 &= ((uint8)(~Backoff_CTRL_RCOD_MASK));
-                Backoff_CONTROL3 |= Backoff_CTRL_RCOD;
+                CollisionDelay_CONTROL3 &= ((uint8)(~CollisionDelay_CTRL_RCOD_MASK));
+                CollisionDelay_CONTROL3 |= CollisionDelay_CTRL_RCOD;
 
                 /* Clear and Enable the HW enable bit in CFG2 register */
-                Backoff_CONTROL3 &= ((uint8)(~Backoff_CTRL_ENBL_MASK));
-                Backoff_CONTROL3 |= Backoff_CTRL_ENBL;
+                CollisionDelay_CONTROL3 &= ((uint8)(~CollisionDelay_CTRL_ENBL_MASK));
+                CollisionDelay_CONTROL3 |= CollisionDelay_CTRL_ENBL;
 
                 /* Set the default Run Mode of the Timer to Continuous */
-                Backoff_CONTROL3 |= Backoff_CTRL_MODE_CONTINUOUS;
+                CollisionDelay_CONTROL3 |= CollisionDelay_CTRL_MODE_CONTINUOUS;
             #endif /* Set Continuous Run Mode in CONTROL3 for PSoC3ES3 or PSoC5A */
 
         #endif /* Configure Run Mode with hardware enable */
 
         /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
-        Backoff_RT1 &= ((uint8)(~Backoff_RT1_MASK));
-        Backoff_RT1 |= Backoff_SYNC;
+        CollisionDelay_RT1 &= ((uint8)(~CollisionDelay_RT1_MASK));
+        CollisionDelay_RT1 |= CollisionDelay_SYNC;
 
         /*Enable DSI Sync all all inputs of the Timer*/
-        Backoff_RT1 &= ((uint8)(~Backoff_SYNCDSI_MASK));
-        Backoff_RT1 |= Backoff_SYNCDSI_EN;
+        CollisionDelay_RT1 &= ((uint8)(~CollisionDelay_SYNCDSI_MASK));
+        CollisionDelay_RT1 |= CollisionDelay_SYNCDSI_EN;
 
         /* Set the IRQ to use the status register interrupts */
-        Backoff_CONTROL2 |= Backoff_CTRL2_IRQ_SEL;
+        CollisionDelay_CONTROL2 |= CollisionDelay_CTRL2_IRQ_SEL;
     #endif /* Configuring registers of fixed function implementation */
 
     /* Set Initial values from Configuration */
-    Backoff_WritePeriod(Backoff_INIT_PERIOD);
-    Backoff_WriteCounter(Backoff_INIT_PERIOD);
+    CollisionDelay_WritePeriod(CollisionDelay_INIT_PERIOD);
+    CollisionDelay_WriteCounter(CollisionDelay_INIT_PERIOD);
 
-    #if (Backoff_UsingHWCaptureCounter)/* Capture counter is enabled */
-        Backoff_CAPTURE_COUNT_CTRL |= Backoff_CNTR_ENABLE;
-        Backoff_SetCaptureCount(Backoff_INIT_CAPTURE_COUNT);
+    #if (CollisionDelay_UsingHWCaptureCounter)/* Capture counter is enabled */
+        CollisionDelay_CAPTURE_COUNT_CTRL |= CollisionDelay_CNTR_ENABLE;
+        CollisionDelay_SetCaptureCount(CollisionDelay_INIT_CAPTURE_COUNT);
     #endif /* Configure capture counter value */
 
-    #if (!Backoff_UsingFixedFunction)
-        #if (Backoff_SoftwareCaptureMode)
-            Backoff_SetCaptureMode(Backoff_INIT_CAPTURE_MODE);
+    #if (!CollisionDelay_UsingFixedFunction)
+        #if (CollisionDelay_SoftwareCaptureMode)
+            CollisionDelay_SetCaptureMode(CollisionDelay_INIT_CAPTURE_MODE);
         #endif /* Set Capture Mode for UDB implementation if capture mode is software controlled */
 
-        #if (Backoff_SoftwareTriggerMode)
-            #if (!Backoff_UDB_CONTROL_REG_REMOVED)
-                if (0u == (Backoff_CONTROL & Backoff__B_TIMER__TM_SOFTWARE))
+        #if (CollisionDelay_SoftwareTriggerMode)
+            #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED)
+                if (0u == (CollisionDelay_CONTROL & CollisionDelay__B_TIMER__TM_SOFTWARE))
                 {
-                    Backoff_SetTriggerMode(Backoff_INIT_TRIGGER_MODE);
+                    CollisionDelay_SetTriggerMode(CollisionDelay_INIT_TRIGGER_MODE);
                 }
-            #endif /* (!Backoff_UDB_CONTROL_REG_REMOVED) */
+            #endif /* (!CollisionDelay_UDB_CONTROL_REG_REMOVED) */
         #endif /* Set trigger mode for UDB Implementation if trigger mode is software controlled */
 
         /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region critical*/
         /* Enter Critical Region*/
-        Backoff_interruptState = CyEnterCriticalSection();
+        CollisionDelay_interruptState = CyEnterCriticalSection();
 
         /* Use the interrupt output of the status register for IRQ output */
-        Backoff_STATUS_AUX_CTRL |= Backoff_STATUS_ACTL_INT_EN_MASK;
+        CollisionDelay_STATUS_AUX_CTRL |= CollisionDelay_STATUS_ACTL_INT_EN_MASK;
 
         /* Exit Critical Region*/
-        CyExitCriticalSection(Backoff_interruptState);
+        CyExitCriticalSection(CollisionDelay_interruptState);
 
-        #if (Backoff_EnableTriggerMode)
-            Backoff_EnableTrigger();
+        #if (CollisionDelay_EnableTriggerMode)
+            CollisionDelay_EnableTrigger();
         #endif /* Set Trigger enable bit for UDB implementation in the control register*/
 		
 		
-        #if (Backoff_InterruptOnCaptureCount && !Backoff_UDB_CONTROL_REG_REMOVED)
-            Backoff_SetInterruptCount(Backoff_INIT_INT_CAPTURE_COUNT);
+        #if (CollisionDelay_InterruptOnCaptureCount && !CollisionDelay_UDB_CONTROL_REG_REMOVED)
+            CollisionDelay_SetInterruptCount(CollisionDelay_INIT_INT_CAPTURE_COUNT);
         #endif /* Set interrupt count in UDB implementation if interrupt count feature is checked.*/
 
-        Backoff_ClearFIFO();
+        CollisionDelay_ClearFIFO();
     #endif /* Configure additional features of UDB implementation */
 
-    Backoff_SetInterruptMode(Backoff_INIT_INTERRUPT_MODE);
+    CollisionDelay_SetInterruptMode(CollisionDelay_INIT_INTERRUPT_MODE);
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_Enable
+* Function Name: CollisionDelay_Enable
 ********************************************************************************
 *
 * Summary:
@@ -177,23 +177,23 @@ void Backoff_Init(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_Enable(void) 
+void CollisionDelay_Enable(void) 
 {
     /* Globally Enable the Fixed Function Block chosen */
-    #if (Backoff_UsingFixedFunction)
-        Backoff_GLOBAL_ENABLE |= Backoff_BLOCK_EN_MASK;
-        Backoff_GLOBAL_STBY_ENABLE |= Backoff_BLOCK_STBY_EN_MASK;
+    #if (CollisionDelay_UsingFixedFunction)
+        CollisionDelay_GLOBAL_ENABLE |= CollisionDelay_BLOCK_EN_MASK;
+        CollisionDelay_GLOBAL_STBY_ENABLE |= CollisionDelay_BLOCK_STBY_EN_MASK;
     #endif /* Set Enable bit for enabling Fixed function timer*/
 
     /* Remove assignment if control register is removed */
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED || Backoff_UsingFixedFunction)
-        Backoff_CONTROL |= Backoff_CTRL_ENABLE;
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED || CollisionDelay_UsingFixedFunction)
+        CollisionDelay_CONTROL |= CollisionDelay_CTRL_ENABLE;
     #endif /* Remove assignment if control register is removed */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_Start
+* Function Name: CollisionDelay_Start
 ********************************************************************************
 *
 * Summary:
@@ -208,26 +208,26 @@ void Backoff_Enable(void)
 *  void
 *
 * Global variables:
-*  Backoff_initVar: Is modified when this function is called for the
+*  CollisionDelay_initVar: Is modified when this function is called for the
 *   first time. Is used to ensure that initialization happens only once.
 *
 *******************************************************************************/
-void Backoff_Start(void) 
+void CollisionDelay_Start(void) 
 {
-    if(Backoff_initVar == 0u)
+    if(CollisionDelay_initVar == 0u)
     {
-        Backoff_Init();
+        CollisionDelay_Init();
 
-        Backoff_initVar = 1u;   /* Clear this bit for Initialization */
+        CollisionDelay_initVar = 1u;   /* Clear this bit for Initialization */
     }
 
     /* Enable the Timer */
-    Backoff_Enable();
+    CollisionDelay_Enable();
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_Stop
+* Function Name: CollisionDelay_Stop
 ********************************************************************************
 *
 * Summary:
@@ -244,23 +244,23 @@ void Backoff_Start(void)
 *               has no effect on the operation of the timer.
 *
 *******************************************************************************/
-void Backoff_Stop(void) 
+void CollisionDelay_Stop(void) 
 {
     /* Disable Timer */
-    #if(!Backoff_UDB_CONTROL_REG_REMOVED || Backoff_UsingFixedFunction)
-        Backoff_CONTROL &= ((uint8)(~Backoff_CTRL_ENABLE));
+    #if(!CollisionDelay_UDB_CONTROL_REG_REMOVED || CollisionDelay_UsingFixedFunction)
+        CollisionDelay_CONTROL &= ((uint8)(~CollisionDelay_CTRL_ENABLE));
     #endif /* Remove assignment if control register is removed */
 
     /* Globally disable the Fixed Function Block chosen */
-    #if (Backoff_UsingFixedFunction)
-        Backoff_GLOBAL_ENABLE &= ((uint8)(~Backoff_BLOCK_EN_MASK));
-        Backoff_GLOBAL_STBY_ENABLE &= ((uint8)(~Backoff_BLOCK_STBY_EN_MASK));
+    #if (CollisionDelay_UsingFixedFunction)
+        CollisionDelay_GLOBAL_ENABLE &= ((uint8)(~CollisionDelay_BLOCK_EN_MASK));
+        CollisionDelay_GLOBAL_STBY_ENABLE &= ((uint8)(~CollisionDelay_BLOCK_STBY_EN_MASK));
     #endif /* Disable global enable for the Timer Fixed function block to stop the Timer*/
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_SetInterruptMode
+* Function Name: CollisionDelay_SetInterruptMode
 ********************************************************************************
 *
 * Summary:
@@ -276,14 +276,14 @@ void Backoff_Stop(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_SetInterruptMode(uint8 interruptMode) 
+void CollisionDelay_SetInterruptMode(uint8 interruptMode) 
 {
-    Backoff_STATUS_MASK = interruptMode;
+    CollisionDelay_STATUS_MASK = interruptMode;
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_SoftwareCapture
+* Function Name: CollisionDelay_SoftwareCapture
 ********************************************************************************
 *
 * Summary:
@@ -299,20 +299,20 @@ void Backoff_SetInterruptMode(uint8 interruptMode)
 *  An existing hardware capture could be overwritten.
 *
 *******************************************************************************/
-void Backoff_SoftwareCapture(void) 
+void CollisionDelay_SoftwareCapture(void) 
 {
     /* Generate a software capture by reading the counter register */
-    #if(Backoff_UsingFixedFunction)
-        (void)CY_GET_REG16(Backoff_COUNTER_LSB_PTR);
+    #if(CollisionDelay_UsingFixedFunction)
+        (void)CY_GET_REG16(CollisionDelay_COUNTER_LSB_PTR);
     #else
-        (void)CY_GET_REG8(Backoff_COUNTER_LSB_PTR_8BIT);
-    #endif/* (Backoff_UsingFixedFunction) */
+        (void)CY_GET_REG8(CollisionDelay_COUNTER_LSB_PTR_8BIT);
+    #endif/* (CollisionDelay_UsingFixedFunction) */
     /* Capture Data is now in the FIFO */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_ReadStatusRegister
+* Function Name: CollisionDelay_ReadStatusRegister
 ********************************************************************************
 *
 * Summary:
@@ -330,17 +330,17 @@ void Backoff_SoftwareCapture(void)
 *  Status register bits may be clear on read.
 *
 *******************************************************************************/
-uint8   Backoff_ReadStatusRegister(void) 
+uint8   CollisionDelay_ReadStatusRegister(void) 
 {
-    return (Backoff_STATUS);
+    return (CollisionDelay_STATUS);
 }
 
 
-#if (!Backoff_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
+#if (!CollisionDelay_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
 
 
 /*******************************************************************************
-* Function Name: Backoff_ReadControlRegister
+* Function Name: CollisionDelay_ReadControlRegister
 ********************************************************************************
 *
 * Summary:
@@ -353,18 +353,18 @@ uint8   Backoff_ReadStatusRegister(void)
 *  The contents of the control register
 *
 *******************************************************************************/
-uint8 Backoff_ReadControlRegister(void) 
+uint8 CollisionDelay_ReadControlRegister(void) 
 {
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED) 
-        return ((uint8)Backoff_CONTROL);
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED) 
+        return ((uint8)CollisionDelay_CONTROL);
     #else
         return (0);
-    #endif /* (!Backoff_UDB_CONTROL_REG_REMOVED) */
+    #endif /* (!CollisionDelay_UDB_CONTROL_REG_REMOVED) */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_WriteControlRegister
+* Function Name: CollisionDelay_WriteControlRegister
 ********************************************************************************
 *
 * Summary:
@@ -376,20 +376,20 @@ uint8 Backoff_ReadControlRegister(void)
 * Return:
 *
 *******************************************************************************/
-void Backoff_WriteControlRegister(uint8 control) 
+void CollisionDelay_WriteControlRegister(uint8 control) 
 {
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED) 
-        Backoff_CONTROL = control;
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED) 
+        CollisionDelay_CONTROL = control;
     #else
         control = 0u;
-    #endif /* (!Backoff_UDB_CONTROL_REG_REMOVED) */
+    #endif /* (!CollisionDelay_UDB_CONTROL_REG_REMOVED) */
 }
 
 #endif /* Remove API if control register is unused */
 
 
 /*******************************************************************************
-* Function Name: Backoff_ReadPeriod
+* Function Name: CollisionDelay_ReadPeriod
 ********************************************************************************
 *
 * Summary:
@@ -402,18 +402,18 @@ void Backoff_WriteControlRegister(uint8 control)
 *  The present value of the counter.
 *
 *******************************************************************************/
-uint16 Backoff_ReadPeriod(void) 
+uint16 CollisionDelay_ReadPeriod(void) 
 {
-   #if(Backoff_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(Backoff_PERIOD_LSB_PTR));
+   #if(CollisionDelay_UsingFixedFunction)
+       return ((uint16)CY_GET_REG16(CollisionDelay_PERIOD_LSB_PTR));
    #else
-       return (CY_GET_REG16(Backoff_PERIOD_LSB_PTR));
-   #endif /* (Backoff_UsingFixedFunction) */
+       return (CY_GET_REG16(CollisionDelay_PERIOD_LSB_PTR));
+   #endif /* (CollisionDelay_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_WritePeriod
+* Function Name: CollisionDelay_WritePeriod
 ********************************************************************************
 *
 * Summary:
@@ -428,19 +428,19 @@ uint16 Backoff_ReadPeriod(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_WritePeriod(uint16 period) 
+void CollisionDelay_WritePeriod(uint16 period) 
 {
-    #if(Backoff_UsingFixedFunction)
+    #if(CollisionDelay_UsingFixedFunction)
         uint16 period_temp = (uint16)period;
-        CY_SET_REG16(Backoff_PERIOD_LSB_PTR, period_temp);
+        CY_SET_REG16(CollisionDelay_PERIOD_LSB_PTR, period_temp);
     #else
-        CY_SET_REG16(Backoff_PERIOD_LSB_PTR, period);
+        CY_SET_REG16(CollisionDelay_PERIOD_LSB_PTR, period);
     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed function implementation */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_ReadCapture
+* Function Name: CollisionDelay_ReadCapture
 ********************************************************************************
 *
 * Summary:
@@ -453,18 +453,18 @@ void Backoff_WritePeriod(uint16 period)
 *  Present Capture value.
 *
 *******************************************************************************/
-uint16 Backoff_ReadCapture(void) 
+uint16 CollisionDelay_ReadCapture(void) 
 {
-   #if(Backoff_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(Backoff_CAPTURE_LSB_PTR));
+   #if(CollisionDelay_UsingFixedFunction)
+       return ((uint16)CY_GET_REG16(CollisionDelay_CAPTURE_LSB_PTR));
    #else
-       return (CY_GET_REG16(Backoff_CAPTURE_LSB_PTR));
-   #endif /* (Backoff_UsingFixedFunction) */
+       return (CY_GET_REG16(CollisionDelay_CAPTURE_LSB_PTR));
+   #endif /* (CollisionDelay_UsingFixedFunction) */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_WriteCounter
+* Function Name: CollisionDelay_WriteCounter
 ********************************************************************************
 *
 * Summary:
@@ -477,22 +477,22 @@ uint16 Backoff_ReadCapture(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_WriteCounter(uint16 counter) 
+void CollisionDelay_WriteCounter(uint16 counter) 
 {
-   #if(Backoff_UsingFixedFunction)
+   #if(CollisionDelay_UsingFixedFunction)
         /* This functionality is removed until a FixedFunction HW update to
          * allow this register to be written
          */
-        CY_SET_REG16(Backoff_COUNTER_LSB_PTR, (uint16)counter);
+        CY_SET_REG16(CollisionDelay_COUNTER_LSB_PTR, (uint16)counter);
         
     #else
-        CY_SET_REG16(Backoff_COUNTER_LSB_PTR, counter);
+        CY_SET_REG16(CollisionDelay_COUNTER_LSB_PTR, counter);
     #endif /* Set Write Counter only for the UDB implementation (Write Counter not available in fixed function Timer */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_ReadCounter
+* Function Name: CollisionDelay_ReadCounter
 ********************************************************************************
 *
 * Summary:
@@ -505,27 +505,27 @@ void Backoff_WriteCounter(uint16 counter)
 *  Present compare value.
 *
 *******************************************************************************/
-uint16 Backoff_ReadCounter(void) 
+uint16 CollisionDelay_ReadCounter(void) 
 {
     /* Force capture by reading Accumulator */
     /* Must first do a software capture to be able to read the counter */
     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
-    #if(Backoff_UsingFixedFunction)
-        (void)CY_GET_REG16(Backoff_COUNTER_LSB_PTR);
+    #if(CollisionDelay_UsingFixedFunction)
+        (void)CY_GET_REG16(CollisionDelay_COUNTER_LSB_PTR);
     #else
-        (void)CY_GET_REG8(Backoff_COUNTER_LSB_PTR_8BIT);
-    #endif/* (Backoff_UsingFixedFunction) */
+        (void)CY_GET_REG8(CollisionDelay_COUNTER_LSB_PTR_8BIT);
+    #endif/* (CollisionDelay_UsingFixedFunction) */
 
     /* Read the data from the FIFO (or capture register for Fixed Function)*/
-    #if(Backoff_UsingFixedFunction)
-        return ((uint16)CY_GET_REG16(Backoff_CAPTURE_LSB_PTR));
+    #if(CollisionDelay_UsingFixedFunction)
+        return ((uint16)CY_GET_REG16(CollisionDelay_CAPTURE_LSB_PTR));
     #else
-        return (CY_GET_REG16(Backoff_CAPTURE_LSB_PTR));
-    #endif /* (Backoff_UsingFixedFunction) */
+        return (CY_GET_REG16(CollisionDelay_CAPTURE_LSB_PTR));
+    #endif /* (CollisionDelay_UsingFixedFunction) */
 }
 
 
-#if(!Backoff_UsingFixedFunction) /* UDB Specific Functions */
+#if(!CollisionDelay_UsingFixedFunction) /* UDB Specific Functions */
 
     
 /*******************************************************************************
@@ -534,11 +534,11 @@ uint16 Backoff_ReadCounter(void)
  ******************************************************************************/
 
 
-#if (Backoff_SoftwareCaptureMode)
+#if (CollisionDelay_SoftwareCaptureMode)
 
 
 /*******************************************************************************
-* Function Name: Backoff_SetCaptureMode
+* Function Name: CollisionDelay_SetCaptureMode
 ********************************************************************************
 *
 * Summary:
@@ -547,44 +547,44 @@ uint16 Backoff_ReadCounter(void)
 * Parameters:
 *  captureMode: This parameter sets the capture mode of the UDB capture feature
 *  The parameter values are defined using the
-*  #define Backoff__B_TIMER__CM_NONE 0
-#define Backoff__B_TIMER__CM_RISINGEDGE 1
-#define Backoff__B_TIMER__CM_FALLINGEDGE 2
-#define Backoff__B_TIMER__CM_EITHEREDGE 3
-#define Backoff__B_TIMER__CM_SOFTWARE 4
+*  #define CollisionDelay__B_TIMER__CM_NONE 0
+#define CollisionDelay__B_TIMER__CM_RISINGEDGE 1
+#define CollisionDelay__B_TIMER__CM_FALLINGEDGE 2
+#define CollisionDelay__B_TIMER__CM_EITHEREDGE 3
+#define CollisionDelay__B_TIMER__CM_SOFTWARE 4
  identifiers
 *  The following are the possible values of the parameter
-*  Backoff__B_TIMER__CM_NONE        - Set Capture mode to None
-*  Backoff__B_TIMER__CM_RISINGEDGE  - Rising edge of Capture input
-*  Backoff__B_TIMER__CM_FALLINGEDGE - Falling edge of Capture input
-*  Backoff__B_TIMER__CM_EITHEREDGE  - Either edge of Capture input
+*  CollisionDelay__B_TIMER__CM_NONE        - Set Capture mode to None
+*  CollisionDelay__B_TIMER__CM_RISINGEDGE  - Rising edge of Capture input
+*  CollisionDelay__B_TIMER__CM_FALLINGEDGE - Falling edge of Capture input
+*  CollisionDelay__B_TIMER__CM_EITHEREDGE  - Either edge of Capture input
 *
 * Return:
 *  void
 *
 *******************************************************************************/
-void Backoff_SetCaptureMode(uint8 captureMode) 
+void CollisionDelay_SetCaptureMode(uint8 captureMode) 
 {
     /* This must only set to two bits of the control register associated */
-    captureMode = ((uint8)((uint8)captureMode << Backoff_CTRL_CAP_MODE_SHIFT));
-    captureMode &= (Backoff_CTRL_CAP_MODE_MASK);
+    captureMode = ((uint8)((uint8)captureMode << CollisionDelay_CTRL_CAP_MODE_SHIFT));
+    captureMode &= (CollisionDelay_CTRL_CAP_MODE_MASK);
 
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED)
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED)
         /* Clear the Current Setting */
-        Backoff_CONTROL &= ((uint8)(~Backoff_CTRL_CAP_MODE_MASK));
+        CollisionDelay_CONTROL &= ((uint8)(~CollisionDelay_CTRL_CAP_MODE_MASK));
 
         /* Write The New Setting */
-        Backoff_CONTROL |= captureMode;
-    #endif /* (!Backoff_UDB_CONTROL_REG_REMOVED) */
+        CollisionDelay_CONTROL |= captureMode;
+    #endif /* (!CollisionDelay_UDB_CONTROL_REG_REMOVED) */
 }
 #endif /* Remove API if Capture Mode is not Software Controlled */
 
 
-#if (Backoff_SoftwareTriggerMode)
+#if (CollisionDelay_SoftwareTriggerMode)
 
 
 /*******************************************************************************
-* Function Name: Backoff_SetTriggerMode
+* Function Name: CollisionDelay_SetTriggerMode
 ********************************************************************************
 *
 * Summary:
@@ -592,37 +592,37 @@ void Backoff_SetCaptureMode(uint8 captureMode)
 *
 * Parameters:
 *  triggerMode: Pass one of the pre-defined Trigger Modes (except Software)
-    #define Backoff__B_TIMER__TM_NONE 0x00u
-    #define Backoff__B_TIMER__TM_RISINGEDGE 0x04u
-    #define Backoff__B_TIMER__TM_FALLINGEDGE 0x08u
-    #define Backoff__B_TIMER__TM_EITHEREDGE 0x0Cu
-    #define Backoff__B_TIMER__TM_SOFTWARE 0x10u
+    #define CollisionDelay__B_TIMER__TM_NONE 0x00u
+    #define CollisionDelay__B_TIMER__TM_RISINGEDGE 0x04u
+    #define CollisionDelay__B_TIMER__TM_FALLINGEDGE 0x08u
+    #define CollisionDelay__B_TIMER__TM_EITHEREDGE 0x0Cu
+    #define CollisionDelay__B_TIMER__TM_SOFTWARE 0x10u
 *
 * Return:
 *  void
 *
 *******************************************************************************/
-void Backoff_SetTriggerMode(uint8 triggerMode) 
+void CollisionDelay_SetTriggerMode(uint8 triggerMode) 
 {
     /* This must only set to two bits of the control register associated */
-    triggerMode &= Backoff_CTRL_TRIG_MODE_MASK;
+    triggerMode &= CollisionDelay_CTRL_TRIG_MODE_MASK;
 
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
     
         /* Clear the Current Setting */
-        Backoff_CONTROL &= ((uint8)(~Backoff_CTRL_TRIG_MODE_MASK));
+        CollisionDelay_CONTROL &= ((uint8)(~CollisionDelay_CTRL_TRIG_MODE_MASK));
 
         /* Write The New Setting */
-        Backoff_CONTROL |= (triggerMode | Backoff__B_TIMER__TM_SOFTWARE);
+        CollisionDelay_CONTROL |= (triggerMode | CollisionDelay__B_TIMER__TM_SOFTWARE);
     #endif /* Remove code section if control register is not used */
 }
 #endif /* Remove API if Trigger Mode is not Software Controlled */
 
-#if (Backoff_EnableTriggerMode)
+#if (CollisionDelay_EnableTriggerMode)
 
 
 /*******************************************************************************
-* Function Name: Backoff_EnableTrigger
+* Function Name: CollisionDelay_EnableTrigger
 ********************************************************************************
 *
 * Summary:
@@ -635,16 +635,16 @@ void Backoff_SetTriggerMode(uint8 triggerMode)
 *  void
 *
 *******************************************************************************/
-void Backoff_EnableTrigger(void) 
+void CollisionDelay_EnableTrigger(void) 
 {
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
-        Backoff_CONTROL |= Backoff_CTRL_TRIG_EN;
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED)   /* Remove assignment if control register is removed */
+        CollisionDelay_CONTROL |= CollisionDelay_CTRL_TRIG_EN;
     #endif /* Remove code section if control register is not used */
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_DisableTrigger
+* Function Name: CollisionDelay_DisableTrigger
 ********************************************************************************
 *
 * Summary:
@@ -657,19 +657,19 @@ void Backoff_EnableTrigger(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_DisableTrigger(void) 
+void CollisionDelay_DisableTrigger(void) 
 {
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED )   /* Remove assignment if control register is removed */
-        Backoff_CONTROL &= ((uint8)(~Backoff_CTRL_TRIG_EN));
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED )   /* Remove assignment if control register is removed */
+        CollisionDelay_CONTROL &= ((uint8)(~CollisionDelay_CTRL_TRIG_EN));
     #endif /* Remove code section if control register is not used */
 }
 #endif /* Remove API is Trigger Mode is set to None */
 
-#if(Backoff_InterruptOnCaptureCount)
+#if(CollisionDelay_InterruptOnCaptureCount)
 
 
 /*******************************************************************************
-* Function Name: Backoff_SetInterruptCount
+* Function Name: CollisionDelay_SetInterruptCount
 ********************************************************************************
 *
 * Summary:
@@ -685,26 +685,26 @@ void Backoff_DisableTrigger(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_SetInterruptCount(uint8 interruptCount) 
+void CollisionDelay_SetInterruptCount(uint8 interruptCount) 
 {
     /* This must only set to two bits of the control register associated */
-    interruptCount &= Backoff_CTRL_INTCNT_MASK;
+    interruptCount &= CollisionDelay_CTRL_INTCNT_MASK;
 
-    #if (!Backoff_UDB_CONTROL_REG_REMOVED)
+    #if (!CollisionDelay_UDB_CONTROL_REG_REMOVED)
         /* Clear the Current Setting */
-        Backoff_CONTROL &= ((uint8)(~Backoff_CTRL_INTCNT_MASK));
+        CollisionDelay_CONTROL &= ((uint8)(~CollisionDelay_CTRL_INTCNT_MASK));
         /* Write The New Setting */
-        Backoff_CONTROL |= interruptCount;
-    #endif /* (!Backoff_UDB_CONTROL_REG_REMOVED) */
+        CollisionDelay_CONTROL |= interruptCount;
+    #endif /* (!CollisionDelay_UDB_CONTROL_REG_REMOVED) */
 }
-#endif /* Backoff_InterruptOnCaptureCount */
+#endif /* CollisionDelay_InterruptOnCaptureCount */
 
 
-#if (Backoff_UsingHWCaptureCounter)
+#if (CollisionDelay_UsingHWCaptureCounter)
 
 
 /*******************************************************************************
-* Function Name: Backoff_SetCaptureCount
+* Function Name: CollisionDelay_SetCaptureCount
 ********************************************************************************
 *
 * Summary:
@@ -719,14 +719,14 @@ void Backoff_SetInterruptCount(uint8 interruptCount)
 *  void
 *
 *******************************************************************************/
-void Backoff_SetCaptureCount(uint8 captureCount) 
+void CollisionDelay_SetCaptureCount(uint8 captureCount) 
 {
-    Backoff_CAP_COUNT = captureCount;
+    CollisionDelay_CAP_COUNT = captureCount;
 }
 
 
 /*******************************************************************************
-* Function Name: Backoff_ReadCaptureCount
+* Function Name: CollisionDelay_ReadCaptureCount
 ********************************************************************************
 *
 * Summary:
@@ -739,15 +739,15 @@ void Backoff_SetCaptureCount(uint8 captureCount)
 *  Returns the Capture Count Setting
 *
 *******************************************************************************/
-uint8 Backoff_ReadCaptureCount(void) 
+uint8 CollisionDelay_ReadCaptureCount(void) 
 {
-    return ((uint8)Backoff_CAP_COUNT);
+    return ((uint8)CollisionDelay_CAP_COUNT);
 }
-#endif /* Backoff_UsingHWCaptureCounter */
+#endif /* CollisionDelay_UsingHWCaptureCounter */
 
 
 /*******************************************************************************
-* Function Name: Backoff_ClearFIFO
+* Function Name: CollisionDelay_ClearFIFO
 ********************************************************************************
 *
 * Summary:
@@ -760,11 +760,11 @@ uint8 Backoff_ReadCaptureCount(void)
 *  void
 *
 *******************************************************************************/
-void Backoff_ClearFIFO(void) 
+void CollisionDelay_ClearFIFO(void) 
 {
-    while(0u != (Backoff_ReadStatusRegister() & Backoff_STATUS_FIFONEMP))
+    while(0u != (CollisionDelay_ReadStatusRegister() & CollisionDelay_STATUS_FIFONEMP))
     {
-        (void)Backoff_ReadCapture();
+        (void)CollisionDelay_ReadCapture();
     }
 }
 
