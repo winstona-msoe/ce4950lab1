@@ -44,6 +44,7 @@ _Bool lowFlag = 0;
 #define VERSION_NUMBER 0x01
 #define CRC 128 //CRCs are not being used
 #define HEADER 0b1110111 //header CRC not being used 
+#define BLANK_MESSAGE_CRC 0x77
 #define COLLISION_PERIOD     52
 #define COLLISION_COUNTER    51
 #define IDLE_PERIOD     830
@@ -54,23 +55,27 @@ _Bool lowFlag = 0;
 #define TRANSMIT_COUNTER    46 
 #define BUFFER_SIZE 500
 //student assigned addressses
-#define ADDR1Start 46
+#define ADDR1Start 0x60 //46
 #define ADDR2Start 55
 #define ADDR3Start 124 //Kamith didn't have one listed so gave him 124
 #define ADDRLength 2
+
+#define MESSAGE_POS 7
+#define HEADER_SIZE
 
 
 unsigned char transmitData[BUFFER_SIZE][16];
 unsigned char buffer[BUFFER_SIZE];
 unsigned char receiveBuffer[BUFFER_SIZE];
 unsigned char receiveData[16]; 
-int position = 0;
+volatile int position = 0;
 int receivePosition = 0;
 int dataBitsRead = 0;
 int idx = 0;
 char* dataPtr;
-int transmitLock = 0;
+int transmitLock = 0; // High when transmitting
 int receiveLock = 0;
+bool collisionLock = false; // High when collision should not.
 //int startHeaderReceieved = 0;
 //int verNumMatch = 0;
 char sourceAddress = 0x00;
@@ -160,7 +165,8 @@ CY_ISR(ReceiveInterruptHandler){
 
  /**********************************************************
  * function name: ReceiveInterruptHandler
- * operation: Handles the receive interrupt
+ * operation: Handles the transmit interrupt.
+Fires each time we need to transmit.
  * inputs: none
  * returns: none
  * implemented: 14 Dec 2017
@@ -169,27 +175,31 @@ CY_ISR(ReceiveInterruptHandler){
 CY_ISR(TransmitInterruptHandler)
 {
 	TimerTX_STATUS; 
-
+    if (position >= dataSize) {
+        return;
+    }
 	currentChar = buffer[position];
 
-	if(((position < dataSize) && (systemState == IDLE)) || ((transmitLock) && (systemState == BUSY))){ 
-		if(transmitBitCount == 0){
-			TRANSMIT_Write(1);
-			transmitData[position][transmitBitCount] = 0x31;
-		}else if(transmitBitCount%2 != 0){
-			TRANSMIT_Write(0);
-			transmitData[position][transmitBitCount] = 0x30;
-		}else{
-			if(currentChar & (1<<(6-idx))){
-				TRANSMIT_Write(1);
-				transmitData[position][transmitBitCount] = 0x31;
-			}else{
-				TRANSMIT_Write(0);
-				transmitData[position][transmitBitCount] = 0x30;   
-			}
-				++idx;
-		}
-        CyDelayUs(495);
+    if (!collisionLock) {
+    	if(((position < dataSize) && (systemState == IDLE)) || ((transmitLock) && (systemState == BUSY))){ 
+    		if(transmitBitCount == 0){
+    			TRANSMIT_Write(1);
+    			transmitData[position][transmitBitCount] = 0x31;
+    		}else if(transmitBitCount%2 != 0){
+    			TRANSMIT_Write(0);
+    			transmitData[position][transmitBitCount] = 0x30;
+    		}else{
+    			if(currentChar & (1<<(6-idx))){
+    				TRANSMIT_Write(1);
+    				transmitData[position][transmitBitCount] = 0x31;
+    			}else{
+    				TRANSMIT_Write(0);
+    				transmitData[position][transmitBitCount] = 0x30;   
+    			}
+    				++idx;
+    		}
+        }
+        // CyDelayUs(495);
         ++transmitBitCount;
         if(transmitBitCount >= 16){
 		    ++position;
@@ -199,6 +209,9 @@ CY_ISR(TransmitInterruptHandler)
             TRANSMIT_Write(0);
 
         }
+    } else {
+        position = 0;
+        transmitBitCount = 0;
     }
 }
 
@@ -227,7 +240,11 @@ CY_ISR(TimerInterruptHandler)
     } else {
         systemState = COLLISION;
         TRANSMIT_Write(0); 
-        transmitLock = 1; // Don't transmit anymore.
+        transmitLock = 0; // Don't transmit anymore.
+        collisionLock = 1; // Collision
+        position = 0; // Start over entire packet.
+        receivePosition = 0;
+        
         uint16_t randNum = (uint16_t)((float)rand() / RAND_MAX * 1000);
         CollisionDelay_WritePeriod(randNum);
         CollisionDelay_WriteCounter(randNum - 1);
@@ -299,7 +316,7 @@ the green light to transmit.
 */
 CY_ISR(CollisionDelayInterruptHandler)
 {
-    transmitLock = 0;
+    collisionLock = false;
 }
 
 /**********************************************************
@@ -323,7 +340,7 @@ int main(void)
     FallingEdgeISR_StartEx(FallingEdgeInterruptHandler);
     ReceiveISR_StartEx(ReceiveInterruptHandler);  
 
-    TimerTX_Start();
+    // TimerTX_Start();
     TimerTX_WritePeriod(TRANSMIT_PERIOD);
     TimerTX_WriteCounter(TRANSMIT_COUNTER);
     TransmitISR_StartEx(TransmitInterruptHandler);
@@ -360,7 +377,7 @@ int main(void)
             transmitAddress = 0;
             char input = 0;
             while(!USBUART_CDCIsReady());
-            USBUART_PutString("Enter Address (3 digits): ");
+            USBUART_PutString("Enter Address or press 'R' to switch to receive mode: ");
             while(inCount < 3){
                 while(USBUART_DataIsReady() == 0) { 
                     stateDiagram();
@@ -372,40 +389,50 @@ int main(void)
                 if(inCount == 0){
                     if (toupper(input) == 'R') {
                         transmitMode = false;
+                        TimerRX_Start();
                         USBUART_PutChar(input);
+                        
                         USBUART_PutCRLF();
-                        USBUART_PutString("Press 'T' to switch to transmit mode.");
+                        USBUART_PutString("Press 'T' to switch to transmit mode.\r\n");
+                        inCount = 0;
+                        break;
                     } else {
                         transmitAddress  += 100*(input - (0x30));
                         USBUART_PutChar(input);
+                        ++inCount;
                     }
                 }else if(inCount == 1){
                     transmitAddress  += 10*(input - (0x30));
                     USBUART_PutChar(input);
+                    ++inCount;
                 }else if (inCount == 2){
                     transmitAddress  += input - (0x30);   
                     USBUART_PutChar(input);
+                    ++inCount;
                 }
-                ++inCount;
-            } 
+                
+            }
+            if (!transmitMode) {
+                continue;
+            }
 
             while(!USBUART_CDCIsReady());
             USBUART_PutCRLF();
             while(!USBUART_CDCIsReady());
             USBUART_PutString("Enter message: ");
-            inCount = 6; 
+            inCount = 7; 
             input = 0; 
 
             
-            buffer[0] = 0x00; 
-            buffer[1] = VERSION_NUMBER;
-            buffer[2] = ADDR1Start;
-            buffer[3] = transmitAddress;
-            buffer[4] = 0x00; 
-            buffer[5] = CRC;
-            buffer[6] = HEADER;
+            buffer[0] = 0x00; // Start of header
+            buffer[1] = VERSION_NUMBER; // Verison number
+            buffer[2] = ADDR1Start; // Source address
+            buffer[3] = transmitAddress; // Destination address
+            buffer[4] = 0x00; // CRC disabled
+            buffer[5] = CRC; // CRC (is 0x77 when disabled)
+            buffer[6] = HEADER; // Header CRC (0x77 when disabled)
             
-            //Enter = 0x0D
+            //Enter = 0x0D (carriage return or \r)
             while(input != 0x0D){
                 while(USBUART_DataIsReady() == 0); 
                 input = USBUART_GetChar();
@@ -416,10 +443,20 @@ int main(void)
                     ++inCount;
                 }
             }
-            buffer[4] = inCount;
+            buffer[4] = inCount - 7; // Removes CR character.
+            if (buffer[4] > 44) {
+                while(!USBUART_CDCIsReady());
+                USBUART_PutString("\r\nMessage must be no more than 44 bytes.\r\n");
+                continue;
+            }
 
-            dataSize = buffer[4];
-            position = 0;
+            dataSize = inCount;
+            position = 0; // Reset position in transmit interrupt
+            buffer[inCount] = BLANK_MESSAGE_CRC;
+            dataSize++;
+            TimerTX_Start();
+            while (position < dataSize);
+            TimerTX_Stop();
             while(!USBUART_CDCIsReady());
             USBUART_PutCRLF(); 
             
@@ -468,7 +505,7 @@ void stateDiagram(){
 void checkForNewData(){
     if(USBUART_CDCIsReady() != 0){
         while(dataBitsRead != receivePosition){
-            if(dataBitsRead == 0){
+            if(dataBitsRead <= 6){
     //            if(receiveBuffer[0] == 0x00){
     //                startHeaderReceieved = 1;
     //            }
@@ -480,70 +517,71 @@ void checkForNewData(){
                 messageLength = receiveBuffer[4];
                 crcUsage = receiveBuffer[5];
                 headerCRC = receiveBuffer[6];            
-            }
-            if(destinationAddress == BROADCAST_ADDRESS || 
-            ((destinationAddress >= ADDR1Start) && (destinationAddress <= ADDR1Start+ADDRLength)) ||
-            ((destinationAddress >= ADDR2Start) && (destinationAddress <= ADDR2Start+ADDRLength)) ||
-            ((destinationAddress >= ADDR3Start) && (destinationAddress <= ADDR3Start+ADDRLength))){
-                if(addressZeroReceive == 0){
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF();
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF();
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF(); 
-                while(!USBUART_CDCIsReady());
-                USBUART_PutString("Message From: ");
-                while(!USBUART_CDCIsReady());
+            } else {
+                if(destinationAddress == BROADCAST_ADDRESS || 
+                ((destinationAddress >= ADDR1Start) && (destinationAddress <= ADDR1Start+ADDRLength)) ||
+                ((destinationAddress >= ADDR2Start) && (destinationAddress <= ADDR2Start+ADDRLength)) ||
+                ((destinationAddress >= ADDR3Start) && (destinationAddress <= ADDR3Start+ADDRLength))){
+                    if(addressZeroReceive == 0){
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutCRLF();
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutCRLF();
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutCRLF(); 
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutString("Message From: ");
+                        while(!USBUART_CDCIsReady());
 
-                USBUART_PutChar(((sourceAddress)/100)+0x30);
+                        USBUART_PutChar(((sourceAddress)/100)+0x30);
 
-                while(!USBUART_CDCIsReady());
-                USBUART_PutChar(((sourceAddress/10)%10)+0x30);
-                while(!USBUART_CDCIsReady());
-     
-                USBUART_PutChar(((sourceAddress%10)%10)+0x30);
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF();
-                while(!USBUART_CDCIsReady());
-                USBUART_PutString("Sent To: ");
-                if(destinationAddress == BROADCAST_ADDRESS){
-                    while(!USBUART_CDCIsReady());
-                    USBUART_PutString("BCST ");
-                    while(!USBUART_CDCIsReady());
-                    USBUART_PutCRLF();
-                }else{
-                    while(!USBUART_CDCIsReady());
-     
-                    USBUART_PutChar(((destinationAddress)/100)+0x30);
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutChar(((sourceAddress/10)%10)+0x30);
+                        while(!USBUART_CDCIsReady());
+             
+                        USBUART_PutChar(((sourceAddress%10)%10)+0x30);
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutCRLF();
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutString("Sent To: ");
+                        if(destinationAddress == BROADCAST_ADDRESS){
+                            while(!USBUART_CDCIsReady());
+                            USBUART_PutString("BCST ");
+                            while(!USBUART_CDCIsReady());
+                            USBUART_PutCRLF();
+                        }else{
+                            while(!USBUART_CDCIsReady());
+             
+                            USBUART_PutChar(((destinationAddress)/100)+0x30);
 
-                    while(!USBUART_CDCIsReady());
-                    USBUART_PutChar(((destinationAddress/10)%10)+0x30);
-                    while(!USBUART_CDCIsReady());
-       
-                    USBUART_PutChar(((destinationAddress%10)%10)+0x30);
-                    USBUART_PutCRLF();
-                    while(!USBUART_CDCIsReady());
+                            while(!USBUART_CDCIsReady());
+                            USBUART_PutChar(((destinationAddress/10)%10)+0x30);
+                            while(!USBUART_CDCIsReady());
+               
+                            USBUART_PutChar(((destinationAddress%10)%10)+0x30);
+                            USBUART_PutCRLF();
+                            while(!USBUART_CDCIsReady());
+                        }
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutString("Size: ");
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutChar(((messageLength)/100)+0x30);
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutChar(((messageLength/10)%10)+0x30);
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutChar(((messageLength%10)%10)+0x30);
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutCRLF();
+                        while(!USBUART_CDCIsReady());
+                        USBUART_PutString("Message: ");
+                        while(!USBUART_CDCIsReady());
+                        addressZeroReceive = 1;
+                    }
+                    if(dataBitsRead > 6 && dataBitsRead < receiveBuffer[4] + 7){
+                        USBUART_PutChar(receiveBuffer[dataBitsRead]);
+                    }
+                    
                 }
-                while(!USBUART_CDCIsReady());
-                USBUART_PutString("Size: ");
-                while(!USBUART_CDCIsReady());
-                USBUART_PutChar(((messageLength)/100)+0x30);
-                while(!USBUART_CDCIsReady());
-                USBUART_PutChar(((messageLength/10)%10)+0x30);
-                while(!USBUART_CDCIsReady());
-                USBUART_PutChar(((messageLength%10)%10)+0x30);
-                while(!USBUART_CDCIsReady());
-                USBUART_PutCRLF();
-                while(!USBUART_CDCIsReady());
-                USBUART_PutString("Message: ");
-                while(!USBUART_CDCIsReady());
-                addressZeroReceive = 1;
-                }
-                if(dataBitsRead > 6){
-                USBUART_PutChar(receiveBuffer[dataBitsRead]);
-                }
-                
             }
             ++dataBitsRead;
         }
