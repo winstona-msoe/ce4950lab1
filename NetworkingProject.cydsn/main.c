@@ -87,10 +87,8 @@ unsigned char transmitAddress = 0;
 
 
 
-void checkNewBytes(); 
+void checkForNewData(); 
 void stateDiagram(); 
-void getHead(); 
-
 
 /*******************************************************************************
 * Define Interrupt service routine and allocate an vector to the Interrupt
@@ -354,11 +352,13 @@ int main(void)
             USBUART_PutString("Enter Address (3 digits): ");
             while(inCount < 3){
                 while(USBUART_DataIsReady() == 0) { 
-                    checkNewBytes();
+                    checkForNewData();
                     stateDiagram();
                 }
                 
                 input = USBUART_GetChar();
+                
+                //get the transmitAddress entered in
                 if(inCount == 0){
                     transmitAddress  += 100*(input - (0x30));
                     USBUART_PutChar(input);
@@ -439,11 +439,21 @@ void stateDiagram(){
     }   
 }
 
-void checkNewBytes(){
+void checkForNewData(){
  if(USBUART_CDCIsReady() != 0){
     while(dataBitsRead != receivePosition){
         if(dataBitsRead == 0){
-            getHead();
+//            if(receiveBuffer[0] == 0x00){
+//                startHeaderReceieved = 1;
+//            }
+//            if(receiveBuffer[1] == 0x01){
+//                    verNumMatch = 1;
+//           }
+            sourceAddress = receiveBuffer[2];
+            destinationAddress = receiveBuffer[3];
+            messageLength = receiveBuffer[4];
+            crcUsage = receiveBuffer[5];
+            headerCRC = receiveBuffer[6];            
         }
         if(destinationAddress == BROADCAST_ADDRESS || 
         ((destinationAddress >= ADDR1Start) && (destinationAddress <= ADDR1Start+ADDRLength)) ||
@@ -511,23 +521,6 @@ void checkNewBytes(){
         }
         ++dataBitsRead;
     }
-     
-   }
 }
 
-
-
-void getHead(){
-//    if(receiveBuffer[0] == 0x00){
-//        startHeaderReceieved = 1;
-//    }
-//    if(receiveBuffer[1] == 0x01){
-//            verNumMatch = 1;
-//   }
-    sourceAddress = receiveBuffer[2];
-    destinationAddress = receiveBuffer[3];
-    messageLength = receiveBuffer[4];
-    crcUsage = receiveBuffer[5];
-    headerCRC = receiveBuffer[6];
-}
 /* [] END OF FILE */
