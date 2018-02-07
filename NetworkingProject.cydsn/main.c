@@ -394,6 +394,7 @@ int main(void)
                         
                         USBUART_PutCRLF();
                         USBUART_PutString("Press 'T' to switch to transmit mode.\r\n");
+                        USBUART_PutCRLF();
                         inCount = 0;
                         break;
                     } else {
