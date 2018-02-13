@@ -1,5 +1,5 @@
 # NetworkingProject
-# 2018-02-13 19:23:55Z
+# 2018-02-13 21:09:59Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -29,8 +29,8 @@ set_io "ReceiveLight(0)" iocell 0 1
 set_location "\TimerRX:TimerUDB:status_tc\" 2 4 0 0
 set_location "Net_66" 3 4 0 2
 set_location "Net_71" 3 4 0 0
-set_location "\Timer:TimerUDB:status_tc\" 3 0 0 1
-set_location "\CollisionDelay:TimerUDB:status_tc\" 2 2 0 3
+set_location "\Timer:TimerUDB:status_tc\" 2 2 0 0
+set_location "\CollisionDelay:TimerUDB:status_tc\" 3 0 0 3
 set_location "ReceiveISR" interrupt -1 -1 2
 set_location "__ONE__" 3 4 0 3
 set_location "\TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 2 4 6
@@ -51,18 +51,17 @@ set_location "\USBUART:arb_int\" interrupt -1 -1 22
 set_location "\USBUART:sof_int\" interrupt -1 -1 21
 set_location "\TimerTX:TimerHW\" timercell -1 -1 0
 set_location "TransmitISR" interrupt -1 -1 17
-set_location "\Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 3 0 6
-set_location "\Timer:TimerUDB:rstSts:stsreg\" 3 0 4
-set_location "\Timer:TimerUDB:sT16:timerdp:u0\" 2 0 2
-set_location "\Timer:TimerUDB:sT16:timerdp:u1\" 3 0 2
+set_location "\Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 2 2 6
+set_location "\Timer:TimerUDB:rstSts:stsreg\" 2 2 4
+set_location "\Timer:TimerUDB:sT16:timerdp:u0\" 3 2 2
+set_location "\Timer:TimerUDB:sT16:timerdp:u1\" 2 2 2
 set_location "TimerISR" interrupt -1 -1 4
 set_location "CollisionDelayISR" interrupt -1 -1 0
-set_location "\CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 2 2 6
-set_location "\CollisionDelay:TimerUDB:rstSts:stsreg\" 2 2 4
-set_location "\CollisionDelay:TimerUDB:sT16:timerdp:u0\" 3 2 2
-set_location "\CollisionDelay:TimerUDB:sT16:timerdp:u1\" 2 2 2
+set_location "\CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\" 3 0 6
+set_location "\CollisionDelay:TimerUDB:rstSts:stsreg\" 3 0 4
+set_location "\CollisionDelay:TimerUDB:sT16:timerdp:u0\" 2 0 2
+set_location "\CollisionDelay:TimerUDB:sT16:timerdp:u1\" 3 0 2
 set_location "\RISING_EDGE:last\" 3 4 0 1
-set_location "Net_95" 3 0 0 0
-set_location "\CollisionDelay:TimerUDB:run_mode\" 2 2 0 2
-set_location "\CollisionDelay:TimerUDB:timer_enable\" 2 2 0 0
-set_location "\CollisionDelay:TimerUDB:trig_disable\" 2 2 0 1
+set_location "\CollisionDelay:TimerUDB:run_mode\" 3 0 0 2
+set_location "\CollisionDelay:TimerUDB:timer_enable\" 3 0 0 0
+set_location "\CollisionDelay:TimerUDB:trig_disable\" 3 0 0 1

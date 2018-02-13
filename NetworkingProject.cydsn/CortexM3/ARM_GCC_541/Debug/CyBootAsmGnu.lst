@@ -11426,79 +11426,79 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  123              	/* CollisionDelay */
  124              	.set CollisionDelay_TimerUDB_rstSts_stsreg__0__MASK, 0x01
  125              	.set CollisionDelay_TimerUDB_rstSts_stsreg__0__POS, 0
- 126              	.set CollisionDelay_TimerUDB_rstSts_stsreg__16BIT_STATUS_AUX_CTL_REG, CYREG_B0_UDB07_08_ACTL
- 127              	.set CollisionDelay_TimerUDB_rstSts_stsreg__16BIT_STATUS_REG, CYREG_B0_UDB07_08_ST
+ 126              	.set CollisionDelay_TimerUDB_rstSts_stsreg__16BIT_STATUS_AUX_CTL_REG, CYREG_B1_UDB05_06_ACTL
+ 127              	.set CollisionDelay_TimerUDB_rstSts_stsreg__16BIT_STATUS_REG, CYREG_B1_UDB05_06_ST
  128              	.set CollisionDelay_TimerUDB_rstSts_stsreg__2__MASK, 0x04
  129              	.set CollisionDelay_TimerUDB_rstSts_stsreg__2__POS, 2
  130              	.set CollisionDelay_TimerUDB_rstSts_stsreg__3__MASK, 0x08
  131              	.set CollisionDelay_TimerUDB_rstSts_stsreg__3__POS, 3
  132              	.set CollisionDelay_TimerUDB_rstSts_stsreg__MASK, 0x0D
- 133              	.set CollisionDelay_TimerUDB_rstSts_stsreg__MASK_REG, CYREG_B0_UDB07_MSK
- 134              	.set CollisionDelay_TimerUDB_rstSts_stsreg__MASK_ST_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
- 135              	.set CollisionDelay_TimerUDB_rstSts_stsreg__PER_ST_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
- 136              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_AUX_CTL_REG, CYREG_B0_UDB07_ACTL
- 137              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_CNT_REG, CYREG_B0_UDB07_ST_CTL
- 138              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_CONTROL_REG, CYREG_B0_UDB07_ST_CTL
- 139              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_REG, CYREG_B0_UDB07_ST
- 140              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_AUX_CTL_REG, CYREG_B0_UDB07_08
- 141              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_CONTROL_REG, CYREG_B0_UDB07_08
- 142              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_COUNT_REG, CYREG_B0_UDB07_08_C
- 143              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_CONTROL_REG, CYREG_B0_UDB07_08_C
- 144              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_COUNT_REG, CYREG_B0_UDB07_08_CTL
- 145              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_MASK_REG, CYREG_B0_UDB07_08_MSK
- 146              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_PERIOD_REG, CYREG_B0_UDB07_08_MSK
- 147              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_MASK_REG, CYREG_B0_UDB07_08_MSK
- 148              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_PERIOD_REG, CYREG_B0_UDB07_08_M
+ 133              	.set CollisionDelay_TimerUDB_rstSts_stsreg__MASK_REG, CYREG_B1_UDB05_MSK
+ 134              	.set CollisionDelay_TimerUDB_rstSts_stsreg__MASK_ST_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
+ 135              	.set CollisionDelay_TimerUDB_rstSts_stsreg__PER_ST_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
+ 136              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_AUX_CTL_REG, CYREG_B1_UDB05_ACTL
+ 137              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_CNT_REG, CYREG_B1_UDB05_ST_CTL
+ 138              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_CONTROL_REG, CYREG_B1_UDB05_ST_CTL
+ 139              	.set CollisionDelay_TimerUDB_rstSts_stsreg__STATUS_REG, CYREG_B1_UDB05_ST
+ 140              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_AUX_CTL_REG, CYREG_B1_UDB05_06
+ 141              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_CONTROL_REG, CYREG_B1_UDB05_06
+ 142              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_COUNT_REG, CYREG_B1_UDB05_06_C
+ 143              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_CONTROL_REG, CYREG_B1_UDB05_06_C
+ 144              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_COUNT_REG, CYREG_B1_UDB05_06_CTL
+ 145              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_MASK_REG, CYREG_B1_UDB05_06_MSK
+ 146              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_PERIOD_REG, CYREG_B1_UDB05_06_MSK
+ 147              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_MASK_REG, CYREG_B1_UDB05_06_MSK
+ 148              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_PERIOD_REG, CYREG_B1_UDB05_06_M
  149              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__7__MASK, 0x80
  150              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__7__POS, 7
- 151              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_AUX_CTL_REG, CYREG_B0_UDB07_ACTL
- 152              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG, CYREG_B0_UDB07_CTL
- 153              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_ST_REG, CYREG_B0_UDB07_ST_CTL
- 154              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_REG, CYREG_B0_UDB07_CTL
- 155              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_ST_REG, CYREG_B0_UDB07_ST_CTL
+ 151              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_AUX_CTL_REG, CYREG_B1_UDB05_ACTL
+ 152              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG, CYREG_B1_UDB05_CTL
+ 153              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_ST_REG, CYREG_B1_UDB05_ST_CTL
+ 154              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_REG, CYREG_B1_UDB05_CTL
+ 155              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_ST_REG, CYREG_B1_UDB05_ST_CTL
  156              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__MASK, 0x80
- 157              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__MASK_CTL_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACT
+ 157              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__MASK_CTL_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACT
 ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 192
 
 
- 158              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PER_CTL_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
- 159              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PERIOD_REG, CYREG_B0_UDB07_MSK
- 160              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG, CYREG_B0_UDB06_07_A0
- 161              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_A1_REG, CYREG_B0_UDB06_07_A1
- 162              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG, CYREG_B0_UDB06_07_D0
- 163              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_D1_REG, CYREG_B0_UDB06_07_D1
- 164              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_DP_AUX_CTL_REG, CYREG_B0_UDB06_07_ACTL
- 165              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG, CYREG_B0_UDB06_07_F0
- 166              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_F1_REG, CYREG_B0_UDB06_07_F1
- 167              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__A0_A1_REG, CYREG_B0_UDB06_A0_A1
- 168              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__A0_REG, CYREG_B0_UDB06_A0
- 169              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__A1_REG, CYREG_B0_UDB06_A1
- 170              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__D0_D1_REG, CYREG_B0_UDB06_D0_D1
- 171              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__D0_REG, CYREG_B0_UDB06_D0
- 172              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__D1_REG, CYREG_B0_UDB06_D1
- 173              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__DP_AUX_CTL_REG, CYREG_B0_UDB06_ACTL
- 174              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__F0_F1_REG, CYREG_B0_UDB06_F0_F1
- 175              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__F0_REG, CYREG_B0_UDB06_F0
- 176              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__F1_REG, CYREG_B0_UDB06_F1
- 177              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_A0_REG, CYREG_B0_UDB07_08_A0
- 178              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_A1_REG, CYREG_B0_UDB07_08_A1
- 179              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_D0_REG, CYREG_B0_UDB07_08_D0
- 180              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_D1_REG, CYREG_B0_UDB07_08_D1
- 181              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_DP_AUX_CTL_REG, CYREG_B0_UDB07_08_ACTL
- 182              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_F0_REG, CYREG_B0_UDB07_08_F0
- 183              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_F1_REG, CYREG_B0_UDB07_08_F1
- 184              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__A0_A1_REG, CYREG_B0_UDB07_A0_A1
- 185              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__A0_REG, CYREG_B0_UDB07_A0
- 186              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__A1_REG, CYREG_B0_UDB07_A1
- 187              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__D0_D1_REG, CYREG_B0_UDB07_D0_D1
- 188              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__D0_REG, CYREG_B0_UDB07_D0
- 189              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__D1_REG, CYREG_B0_UDB07_D1
- 190              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__DP_AUX_CTL_REG, CYREG_B0_UDB07_ACTL
- 191              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__F0_F1_REG, CYREG_B0_UDB07_F0_F1
- 192              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__F0_REG, CYREG_B0_UDB07_F0
- 193              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__F1_REG, CYREG_B0_UDB07_F1
- 194              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__MSK_DP_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
- 195              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__PER_DP_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
+ 158              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PER_CTL_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
+ 159              	.set CollisionDelay_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PERIOD_REG, CYREG_B1_UDB05_MSK
+ 160              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG, CYREG_B1_UDB04_05_A0
+ 161              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_A1_REG, CYREG_B1_UDB04_05_A1
+ 162              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG, CYREG_B1_UDB04_05_D0
+ 163              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_D1_REG, CYREG_B1_UDB04_05_D1
+ 164              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_DP_AUX_CTL_REG, CYREG_B1_UDB04_05_ACTL
+ 165              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG, CYREG_B1_UDB04_05_F0
+ 166              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__16BIT_F1_REG, CYREG_B1_UDB04_05_F1
+ 167              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__A0_A1_REG, CYREG_B1_UDB04_A0_A1
+ 168              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__A0_REG, CYREG_B1_UDB04_A0
+ 169              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__A1_REG, CYREG_B1_UDB04_A1
+ 170              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__D0_D1_REG, CYREG_B1_UDB04_D0_D1
+ 171              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__D0_REG, CYREG_B1_UDB04_D0
+ 172              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__D1_REG, CYREG_B1_UDB04_D1
+ 173              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__DP_AUX_CTL_REG, CYREG_B1_UDB04_ACTL
+ 174              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__F0_F1_REG, CYREG_B1_UDB04_F0_F1
+ 175              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__F0_REG, CYREG_B1_UDB04_F0
+ 176              	.set CollisionDelay_TimerUDB_sT16_timerdp_u0__F1_REG, CYREG_B1_UDB04_F1
+ 177              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_A0_REG, CYREG_B1_UDB05_06_A0
+ 178              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_A1_REG, CYREG_B1_UDB05_06_A1
+ 179              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_D0_REG, CYREG_B1_UDB05_06_D0
+ 180              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_D1_REG, CYREG_B1_UDB05_06_D1
+ 181              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_DP_AUX_CTL_REG, CYREG_B1_UDB05_06_ACTL
+ 182              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_F0_REG, CYREG_B1_UDB05_06_F0
+ 183              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__16BIT_F1_REG, CYREG_B1_UDB05_06_F1
+ 184              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__A0_A1_REG, CYREG_B1_UDB05_A0_A1
+ 185              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__A0_REG, CYREG_B1_UDB05_A0
+ 186              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__A1_REG, CYREG_B1_UDB05_A1
+ 187              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__D0_D1_REG, CYREG_B1_UDB05_D0_D1
+ 188              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__D0_REG, CYREG_B1_UDB05_D0
+ 189              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__D1_REG, CYREG_B1_UDB05_D1
+ 190              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__DP_AUX_CTL_REG, CYREG_B1_UDB05_ACTL
+ 191              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__F0_F1_REG, CYREG_B1_UDB05_F0_F1
+ 192              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__F0_REG, CYREG_B1_UDB05_F0
+ 193              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__F1_REG, CYREG_B1_UDB05_F1
+ 194              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__MSK_DP_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
+ 195              	.set CollisionDelay_TimerUDB_sT16_timerdp_u1__PER_DP_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
  196              	.set CollisionDelayClk__CFG0, CYREG_CLKDIST_DCFG3_CFG0
  197              	.set CollisionDelayClk__CFG1, CYREG_CLKDIST_DCFG3_CFG1
  198              	.set CollisionDelayClk__CFG2, CYREG_CLKDIST_DCFG3_CFG2
@@ -11836,79 +11836,79 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
  512              	/* Timer */
  513              	.set Timer_TimerUDB_rstSts_stsreg__0__MASK, 0x01
  514              	.set Timer_TimerUDB_rstSts_stsreg__0__POS, 0
- 515              	.set Timer_TimerUDB_rstSts_stsreg__16BIT_STATUS_AUX_CTL_REG, CYREG_B1_UDB05_06_ACTL
- 516              	.set Timer_TimerUDB_rstSts_stsreg__16BIT_STATUS_REG, CYREG_B1_UDB05_06_ST
+ 515              	.set Timer_TimerUDB_rstSts_stsreg__16BIT_STATUS_AUX_CTL_REG, CYREG_B0_UDB07_08_ACTL
+ 516              	.set Timer_TimerUDB_rstSts_stsreg__16BIT_STATUS_REG, CYREG_B0_UDB07_08_ST
  517              	.set Timer_TimerUDB_rstSts_stsreg__2__MASK, 0x04
  518              	.set Timer_TimerUDB_rstSts_stsreg__2__POS, 2
  519              	.set Timer_TimerUDB_rstSts_stsreg__3__MASK, 0x08
  520              	.set Timer_TimerUDB_rstSts_stsreg__3__POS, 3
  521              	.set Timer_TimerUDB_rstSts_stsreg__MASK, 0x0D
- 522              	.set Timer_TimerUDB_rstSts_stsreg__MASK_REG, CYREG_B1_UDB05_MSK
- 523              	.set Timer_TimerUDB_rstSts_stsreg__MASK_ST_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
- 524              	.set Timer_TimerUDB_rstSts_stsreg__PER_ST_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
- 525              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_AUX_CTL_REG, CYREG_B1_UDB05_ACTL
- 526              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_CNT_REG, CYREG_B1_UDB05_ST_CTL
- 527              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_CONTROL_REG, CYREG_B1_UDB05_ST_CTL
- 528              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_REG, CYREG_B1_UDB05_ST
- 529              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_AUX_CTL_REG, CYREG_B1_UDB05_06_ACTL
- 530              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_CONTROL_REG, CYREG_B1_UDB05_06_CTL
- 531              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_COUNT_REG, CYREG_B1_UDB05_06_CTL
- 532              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_CONTROL_REG, CYREG_B1_UDB05_06_CTL
- 533              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_COUNT_REG, CYREG_B1_UDB05_06_CTL
- 534              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_MASK_REG, CYREG_B1_UDB05_06_MSK
- 535              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_PERIOD_REG, CYREG_B1_UDB05_06_MSK
- 536              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_MASK_REG, CYREG_B1_UDB05_06_MSK
- 537              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_PERIOD_REG, CYREG_B1_UDB05_06_MSK
+ 522              	.set Timer_TimerUDB_rstSts_stsreg__MASK_REG, CYREG_B0_UDB07_MSK
+ 523              	.set Timer_TimerUDB_rstSts_stsreg__MASK_ST_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
+ 524              	.set Timer_TimerUDB_rstSts_stsreg__PER_ST_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
+ 525              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_AUX_CTL_REG, CYREG_B0_UDB07_ACTL
+ 526              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_CNT_REG, CYREG_B0_UDB07_ST_CTL
+ 527              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_CONTROL_REG, CYREG_B0_UDB07_ST_CTL
+ 528              	.set Timer_TimerUDB_rstSts_stsreg__STATUS_REG, CYREG_B0_UDB07_ST
+ 529              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_AUX_CTL_REG, CYREG_B0_UDB07_08_ACTL
+ 530              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_CONTROL_REG, CYREG_B0_UDB07_08_CTL
+ 531              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_CONTROL_COUNT_REG, CYREG_B0_UDB07_08_CTL
+ 532              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_CONTROL_REG, CYREG_B0_UDB07_08_CTL
+ 533              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_COUNT_COUNT_REG, CYREG_B0_UDB07_08_CTL
+ 534              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_MASK_REG, CYREG_B0_UDB07_08_MSK
+ 535              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_MASK_PERIOD_REG, CYREG_B0_UDB07_08_MSK
+ 536              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_MASK_REG, CYREG_B0_UDB07_08_MSK
+ 537              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__16BIT_PERIOD_PERIOD_REG, CYREG_B0_UDB07_08_MSK
  538              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__7__MASK, 0x80
  539              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__7__POS, 7
- 540              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_AUX_CTL_REG, CYREG_B1_UDB05_ACTL
- 541              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG, CYREG_B1_UDB05_CTL
- 542              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_ST_REG, CYREG_B1_UDB05_ST_CTL
- 543              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_REG, CYREG_B1_UDB05_CTL
- 544              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_ST_REG, CYREG_B1_UDB05_ST_CTL
+ 540              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_AUX_CTL_REG, CYREG_B0_UDB07_ACTL
+ 541              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG, CYREG_B0_UDB07_CTL
+ 542              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_ST_REG, CYREG_B0_UDB07_ST_CTL
+ 543              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_REG, CYREG_B0_UDB07_CTL
+ 544              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__COUNT_ST_REG, CYREG_B0_UDB07_ST_CTL
  545              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__MASK, 0x80
- 546              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__MASK_CTL_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
- 547              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PER_CTL_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
- 548              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PERIOD_REG, CYREG_B1_UDB05_MSK
- 549              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG, CYREG_B1_UDB04_05_A0
- 550              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_A1_REG, CYREG_B1_UDB04_05_A1
- 551              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG, CYREG_B1_UDB04_05_D0
- 552              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_D1_REG, CYREG_B1_UDB04_05_D1
- 553              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_DP_AUX_CTL_REG, CYREG_B1_UDB04_05_ACTL
- 554              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG, CYREG_B1_UDB04_05_F0
- 555              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_F1_REG, CYREG_B1_UDB04_05_F1
- 556              	.set Timer_TimerUDB_sT16_timerdp_u0__A0_A1_REG, CYREG_B1_UDB04_A0_A1
+ 546              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__MASK_CTL_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
+ 547              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PER_CTL_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
+ 548              	.set Timer_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__PERIOD_REG, CYREG_B0_UDB07_MSK
+ 549              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG, CYREG_B0_UDB06_07_A0
+ 550              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_A1_REG, CYREG_B0_UDB06_07_A1
+ 551              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG, CYREG_B0_UDB06_07_D0
+ 552              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_D1_REG, CYREG_B0_UDB06_07_D1
+ 553              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_DP_AUX_CTL_REG, CYREG_B0_UDB06_07_ACTL
+ 554              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG, CYREG_B0_UDB06_07_F0
+ 555              	.set Timer_TimerUDB_sT16_timerdp_u0__16BIT_F1_REG, CYREG_B0_UDB06_07_F1
+ 556              	.set Timer_TimerUDB_sT16_timerdp_u0__A0_A1_REG, CYREG_B0_UDB06_A0_A1
 ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 199
 
 
- 557              	.set Timer_TimerUDB_sT16_timerdp_u0__A0_REG, CYREG_B1_UDB04_A0
- 558              	.set Timer_TimerUDB_sT16_timerdp_u0__A1_REG, CYREG_B1_UDB04_A1
- 559              	.set Timer_TimerUDB_sT16_timerdp_u0__D0_D1_REG, CYREG_B1_UDB04_D0_D1
- 560              	.set Timer_TimerUDB_sT16_timerdp_u0__D0_REG, CYREG_B1_UDB04_D0
- 561              	.set Timer_TimerUDB_sT16_timerdp_u0__D1_REG, CYREG_B1_UDB04_D1
- 562              	.set Timer_TimerUDB_sT16_timerdp_u0__DP_AUX_CTL_REG, CYREG_B1_UDB04_ACTL
- 563              	.set Timer_TimerUDB_sT16_timerdp_u0__F0_F1_REG, CYREG_B1_UDB04_F0_F1
- 564              	.set Timer_TimerUDB_sT16_timerdp_u0__F0_REG, CYREG_B1_UDB04_F0
- 565              	.set Timer_TimerUDB_sT16_timerdp_u0__F1_REG, CYREG_B1_UDB04_F1
- 566              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_A0_REG, CYREG_B1_UDB05_06_A0
- 567              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_A1_REG, CYREG_B1_UDB05_06_A1
- 568              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_D0_REG, CYREG_B1_UDB05_06_D0
- 569              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_D1_REG, CYREG_B1_UDB05_06_D1
- 570              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_DP_AUX_CTL_REG, CYREG_B1_UDB05_06_ACTL
- 571              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_F0_REG, CYREG_B1_UDB05_06_F0
- 572              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_F1_REG, CYREG_B1_UDB05_06_F1
- 573              	.set Timer_TimerUDB_sT16_timerdp_u1__A0_A1_REG, CYREG_B1_UDB05_A0_A1
- 574              	.set Timer_TimerUDB_sT16_timerdp_u1__A0_REG, CYREG_B1_UDB05_A0
- 575              	.set Timer_TimerUDB_sT16_timerdp_u1__A1_REG, CYREG_B1_UDB05_A1
- 576              	.set Timer_TimerUDB_sT16_timerdp_u1__D0_D1_REG, CYREG_B1_UDB05_D0_D1
- 577              	.set Timer_TimerUDB_sT16_timerdp_u1__D0_REG, CYREG_B1_UDB05_D0
- 578              	.set Timer_TimerUDB_sT16_timerdp_u1__D1_REG, CYREG_B1_UDB05_D1
- 579              	.set Timer_TimerUDB_sT16_timerdp_u1__DP_AUX_CTL_REG, CYREG_B1_UDB05_ACTL
- 580              	.set Timer_TimerUDB_sT16_timerdp_u1__F0_F1_REG, CYREG_B1_UDB05_F0_F1
- 581              	.set Timer_TimerUDB_sT16_timerdp_u1__F0_REG, CYREG_B1_UDB05_F0
- 582              	.set Timer_TimerUDB_sT16_timerdp_u1__F1_REG, CYREG_B1_UDB05_F1
- 583              	.set Timer_TimerUDB_sT16_timerdp_u1__MSK_DP_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
- 584              	.set Timer_TimerUDB_sT16_timerdp_u1__PER_DP_AUX_CTL_REG, CYREG_B1_UDB05_MSK_ACTL
+ 557              	.set Timer_TimerUDB_sT16_timerdp_u0__A0_REG, CYREG_B0_UDB06_A0
+ 558              	.set Timer_TimerUDB_sT16_timerdp_u0__A1_REG, CYREG_B0_UDB06_A1
+ 559              	.set Timer_TimerUDB_sT16_timerdp_u0__D0_D1_REG, CYREG_B0_UDB06_D0_D1
+ 560              	.set Timer_TimerUDB_sT16_timerdp_u0__D0_REG, CYREG_B0_UDB06_D0
+ 561              	.set Timer_TimerUDB_sT16_timerdp_u0__D1_REG, CYREG_B0_UDB06_D1
+ 562              	.set Timer_TimerUDB_sT16_timerdp_u0__DP_AUX_CTL_REG, CYREG_B0_UDB06_ACTL
+ 563              	.set Timer_TimerUDB_sT16_timerdp_u0__F0_F1_REG, CYREG_B0_UDB06_F0_F1
+ 564              	.set Timer_TimerUDB_sT16_timerdp_u0__F0_REG, CYREG_B0_UDB06_F0
+ 565              	.set Timer_TimerUDB_sT16_timerdp_u0__F1_REG, CYREG_B0_UDB06_F1
+ 566              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_A0_REG, CYREG_B0_UDB07_08_A0
+ 567              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_A1_REG, CYREG_B0_UDB07_08_A1
+ 568              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_D0_REG, CYREG_B0_UDB07_08_D0
+ 569              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_D1_REG, CYREG_B0_UDB07_08_D1
+ 570              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_DP_AUX_CTL_REG, CYREG_B0_UDB07_08_ACTL
+ 571              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_F0_REG, CYREG_B0_UDB07_08_F0
+ 572              	.set Timer_TimerUDB_sT16_timerdp_u1__16BIT_F1_REG, CYREG_B0_UDB07_08_F1
+ 573              	.set Timer_TimerUDB_sT16_timerdp_u1__A0_A1_REG, CYREG_B0_UDB07_A0_A1
+ 574              	.set Timer_TimerUDB_sT16_timerdp_u1__A0_REG, CYREG_B0_UDB07_A0
+ 575              	.set Timer_TimerUDB_sT16_timerdp_u1__A1_REG, CYREG_B0_UDB07_A1
+ 576              	.set Timer_TimerUDB_sT16_timerdp_u1__D0_D1_REG, CYREG_B0_UDB07_D0_D1
+ 577              	.set Timer_TimerUDB_sT16_timerdp_u1__D0_REG, CYREG_B0_UDB07_D0
+ 578              	.set Timer_TimerUDB_sT16_timerdp_u1__D1_REG, CYREG_B0_UDB07_D1
+ 579              	.set Timer_TimerUDB_sT16_timerdp_u1__DP_AUX_CTL_REG, CYREG_B0_UDB07_ACTL
+ 580              	.set Timer_TimerUDB_sT16_timerdp_u1__F0_F1_REG, CYREG_B0_UDB07_F0_F1
+ 581              	.set Timer_TimerUDB_sT16_timerdp_u1__F0_REG, CYREG_B0_UDB07_F0
+ 582              	.set Timer_TimerUDB_sT16_timerdp_u1__F1_REG, CYREG_B0_UDB07_F1
+ 583              	.set Timer_TimerUDB_sT16_timerdp_u1__MSK_DP_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
+ 584              	.set Timer_TimerUDB_sT16_timerdp_u1__PER_DP_AUX_CTL_REG, CYREG_B0_UDB07_MSK_ACTL
  585              	.set TimerISR__INTC_CLR_EN_REG, CYREG_NVIC_CLRENA0
  586              	.set TimerISR__INTC_CLR_PD_REG, CYREG_NVIC_CLRPEND0
  587              	.set TimerISR__INTC_MASK, 0x10

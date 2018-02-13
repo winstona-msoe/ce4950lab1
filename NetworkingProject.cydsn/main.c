@@ -242,10 +242,11 @@ CY_ISR(TimerInterruptHandler)
         systemState = IDLE;
          transmitLock = 1;
     } else {
+        int period = Timer_ReadPeriod();
         systemState = COLLISION;
         TRANSMIT_Write(0); 
         transmitLock = 0; // Don't transmit anymore.
-        collisionLock = 1; // Collision
+        // collisionLock = 1; // Collision
         position = 0; // Start over entire packet.
         receivePosition = 0;
         
@@ -276,6 +277,7 @@ CY_ISR(TimerInterruptHandler)
 CY_ISR(RisingEdgeInterruptHandler)
 {
     if (RECEIVE_Read()){
+        Timer_Stop();
         Timer_WritePeriod(COLLISION_PERIOD);
         Timer_WriteCounter(COLLISION_COUNTER);
         Timer_Start();
@@ -306,7 +308,9 @@ CY_ISR(RisingEdgeInterruptHandler)
 // TODO This could also contribute to the "race against time" issue.
 CY_ISR(FallingEdgeInterruptHandler)
 {
+    int value = Timer_ReadPeriod();
     if (!RECEIVE_Read()){
+        Timer_Stop();
         Timer_WritePeriod(IDLE_PERIOD);
         Timer_WriteCounter(IDLE_COUNTER);
         Timer_Start();

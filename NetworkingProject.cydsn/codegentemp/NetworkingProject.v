@@ -1,6 +1,6 @@
 // ======================================================================
 // NetworkingProject.v generated from TopDesign.cysch
-// 02/13/2018 at 13:23
+// 02/13/2018 at 15:09
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -910,7 +910,6 @@ module top ;
           wire  Net_93;
           wire  Net_92;
           wire  Net_91;
-          wire  Net_90;
           wire  Net_69;
           wire  Net_63;
           wire  Net_62;
@@ -927,6 +926,7 @@ module top ;
           wire  Net_29;
           wire  Net_28;
           wire  Net_19;
+          wire  Net_90;
           wire  Net_71;
           wire  Net_124;
           wire  Net_115;
@@ -1459,7 +1459,7 @@ module top ;
 	cy_isr_v1_0
 		#(.int_type(2'b00))
 		TimerISR
-		 (.int_signal(Net_95));
+		 (.int_signal(Net_90));
 
 
     ZeroTerminal ZeroTerminal_3 (

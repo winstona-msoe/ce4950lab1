@@ -1,5 +1,5 @@
 -- Project:   NetworkingProject
--- Generated: 02/13/2018 13:23:54
+-- Generated: 02/13/2018 15:09:58
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -65,7 +65,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL Net_659 : bit;
     SIGNAL Net_66 : bit;
     SIGNAL Net_71 : bit;
-    SIGNAL Net_95 : bit;
+    SIGNAL Net_90 : bit;
     SIGNAL Net_99 : bit;
     ATTRIBUTE udbclken_assigned OF Net_99 : SIGNAL IS "True";
     ATTRIBUTE global_signal OF Net_99 : SIGNAL IS true;
@@ -233,10 +233,9 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell5";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell6";
     ATTRIBUTE lib_model OF \RISING_EDGE:last\ : LABEL IS "macrocell7";
-    ATTRIBUTE lib_model OF Net_95 : LABEL IS "macrocell8";
-    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "macrocell9";
-    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "macrocell10";
-    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "macrocell11";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "macrocell8";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "macrocell9";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "macrocell10";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -2085,7 +2084,8 @@ BEGIN
             status_3 => \Timer:TimerUDB:status_3\,
             status_2 => \Timer:TimerUDB:status_2\,
             status_1 => open,
-            status_0 => \Timer:TimerUDB:status_tc\);
+            status_0 => \Timer:TimerUDB:status_tc\,
+            interrupt => Net_90);
 
     \Timer:TimerUDB:sT16:timerdp:u0\:datapathcell
         GENERIC MAP(
@@ -2187,7 +2187,7 @@ BEGIN
             int_type => "00",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_95,
+            interrupt => Net_90,
             clock => ClockBlock_BUS_CLK);
 
     CollisionDelayISR:interrupt
@@ -2342,18 +2342,6 @@ BEGIN
             q => \RISING_EDGE:last\,
             clock_0 => Net_3,
             main_0 => Net_659);
-
-    Net_95:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => Net_95,
-            clock_0 => Net_99,
-            main_0 => \Timer:TimerUDB:control_7\,
-            main_1 => \Timer:TimerUDB:per_zero\);
 
     \CollisionDelay:TimerUDB:run_mode\:macrocell
         GENERIC MAP(

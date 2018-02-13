@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
   29:Generated_Source\PSoC5/cyfitter_cfg.c **** 
   30:Generated_Source\PSoC5/cyfitter_cfg.c **** #if defined(__GNUC__) || defined(__ARMCC_VERSION)
   31:Generated_Source\PSoC5/cyfitter_cfg.c ****     #define CYPACKED 
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 2
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 2
 
 
   32:Generated_Source\PSoC5/cyfitter_cfg.c ****     #define CYPACKED_ATTR __attribute__ ((packed))
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
   34              		.cfi_offset 14, -4
   35 0002 82B0     		sub	sp, sp, #8
   36              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 3
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 3
 
 
   37 0004 00AF     		add	r7, sp, #0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
   83 0012 FFF7FEFF 		bl	memcpy
   87:Generated_Source\PSoC5/cyfitter_cfg.c **** }
   84              		.loc 1 87 0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 4
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 4
 
 
   85 0016 00BF     		nop
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  132              		.size	CYCONFIGCPYCODE, .-CYCONFIGCPYCODE
  133 001e 00BF     		.section	.text.CyClockStartupError,"ax",%progbits
  134              		.align	2
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 5
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 5
 
 
  135              		.thumb
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  129:Generated_Source\PSoC5/cyfitter_cfg.c **** #if defined(CY_PSOC3) && (CY_PSOC3)
  130:Generated_Source\PSoC5/cyfitter_cfg.c ****     errorCode = errorCode;
  131:Generated_Source\PSoC5/cyfitter_cfg.c **** #else
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 6
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 6
 
 
  132:Generated_Source\PSoC5/cyfitter_cfg.c ****     (void)errorCode;
@@ -335,7 +335,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  151:Generated_Source\PSoC5/cyfitter_cfg.c **** }
  152:Generated_Source\PSoC5/cyfitter_cfg.c **** #endif
  153:Generated_Source\PSoC5/cyfitter_cfg.c **** 
- 154:Generated_Source\PSoC5/cyfitter_cfg.c **** #define CY_CFG_BASE_ADDR_COUNT 27u
+ 154:Generated_Source\PSoC5/cyfitter_cfg.c **** #define CY_CFG_BASE_ADDR_COUNT 26u
  155:Generated_Source\PSoC5/cyfitter_cfg.c **** CYPACKED typedef struct
  156:Generated_Source\PSoC5/cyfitter_cfg.c **** {
  157:Generated_Source\PSoC5/cyfitter_cfg.c **** 	uint8 offset;
@@ -343,25 +343,25 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  159:Generated_Source\PSoC5/cyfitter_cfg.c **** } CYPACKED_ATTR cy_cfg_addrvalue_t;
  160:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  161:Generated_Source\PSoC5/cyfitter_cfg.c **** #define cy_cfg_addr_table ((const uint32 CYFAR *)0x48000000u)
- 162:Generated_Source\PSoC5/cyfitter_cfg.c **** #define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x4800006Cu)
+ 162:Generated_Source\PSoC5/cyfitter_cfg.c **** #define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x48000068u)
  163:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  164:Generated_Source\PSoC5/cyfitter_cfg.c **** /* IOPINS0_0 Address: CYREG_PRT0_DM0 Size (bytes): 8 */
- 165:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_0_VAL ((const uint8 CYFAR *)0x48000318u)
+ 165:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_0_VAL ((const uint8 CYFAR *)0x48000320u)
  166:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  167:Generated_Source\PSoC5/cyfitter_cfg.c **** /* IOPINS0_8 Address: CYREG_PRT15_DR Size (bytes): 10 */
- 168:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_8_VAL ((const uint8 CYFAR *)0x48000320u)
+ 168:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_8_VAL ((const uint8 CYFAR *)0x48000328u)
  169:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  170:Generated_Source\PSoC5/cyfitter_cfg.c **** /* IOPINS0_1 Address: CYREG_PRT1_DM0 Size (bytes): 8 */
- 171:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x4800032Cu)
+ 171:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x48000334u)
  172:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  173:Generated_Source\PSoC5/cyfitter_cfg.c **** /* IOPINS0_2 Address: CYREG_PRT2_DM0 Size (bytes): 8 */
- 174:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_2_VAL ((const uint8 CYFAR *)0x48000334u)
+ 174:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_2_VAL ((const uint8 CYFAR *)0x4800033Cu)
  175:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  176:Generated_Source\PSoC5/cyfitter_cfg.c **** /* IOPINS0_3 Address: CYREG_PRT3_DM0 Size (bytes): 8 */
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 7
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 7
 
 
- 177:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x4800033Cu)
+ 177:Generated_Source\PSoC5/cyfitter_cfg.c **** #define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x48000344u)
  178:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  179:Generated_Source\PSoC5/cyfitter_cfg.c **** 
  180:Generated_Source\PSoC5/cyfitter_cfg.c **** /*******************************************************************************
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  196 001e BB60     		str	r3, [r7, #8]
  202:Generated_Source\PSoC5/cyfitter_cfg.c **** 		uint8 count = (uint8)baseAddr;
  197              		.loc 1 202 0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 8
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 8
 
 
  198 0020 BB68     		ldr	r3, [r7, #8]
@@ -476,9 +476,9 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  199:Generated_Source\PSoC5/cyfitter_cfg.c **** 	{
  242              		.loc 1 199 0 is_stmt 0 discriminator 1
  243 0064 7B69     		ldr	r3, [r7, #20]
- 244 0066 1A2B     		cmp	r3, #26
+ 244 0066 192B     		cmp	r3, #25
  245 0068 D4D9     		bls	.L10
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 9
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 9
 
 
  209:Generated_Source\PSoC5/cyfitter_cfg.c **** 		}
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  277 0004 00AF     		add	r7, sp, #0
  278              		.cfi_def_cfa_register 7
  232:Generated_Source\PSoC5/cyfitter_cfg.c **** 	uint32 timeout;
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 10
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 10
 
 
  233:Generated_Source\PSoC5/cyfitter_cfg.c **** 	uint8 pllLock;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  315              		.loc 1 250 0
  316 0040 344B     		ldr	r3, .L16+36
  317 0042 5222     		movs	r2, #82
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 11
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 11
 
 
  318 0044 1A70     		strb	r2, [r3]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  360 0092 7B60     		str	r3, [r7, #4]
  361              	.L12:
  258:Generated_Source\PSoC5/cyfitter_cfg.c **** 	for (timeout = 250u / 10u; (timeout > 0u) && (pllLock != 0x03u); timeout--)
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 12
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 12
 
 
  362              		.loc 1 258 0 is_stmt 0 discriminator 1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  399              		.loc 1 277 0
  400 00cc 1A4B     		ldr	r3, .L16+72
  401 00ce 0022     		movs	r2, #0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 13
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 13
 
 
  402 00d0 1A70     		strb	r2, [r3]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  452              		.thumb
  453              		.thumb_func
  454              		.type	AnalogSetDefault, %function
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 14
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 14
 
 
  455              	AnalogSetDefault:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  483 001e DBB2     		uxtb	r3, r3
  484 0020 1370     		strb	r3, [r2]
  308:Generated_Source\PSoC5/cyfitter_cfg.c **** 	CY_SET_XTND_REG8((void CYFAR *)CYREG_PUMP_CR0, 0x44u);
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 15
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 15
 
 
  485              		.loc 1 308 0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  330:Generated_Source\PSoC5/cyfitter_cfg.c **** {
  518              		.loc 1 330 0
  519              		.cfi_startproc
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 16
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 16
 
 
  520              		@ args = 0, pretend = 0, frame = 16
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  563              		.global	cyfitter_cfg
  564              		.thumb
  565              		.thumb_func
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 17
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 17
 
 
  566              		.type	cyfitter_cfg, %function
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  590 000a 3D4B     		ldr	r3, .L29
  591 000c 1B78     		ldrb	r3, [r3]
  592 000e DBB2     		uxtb	r3, r3
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 18
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 18
 
 
  593 0010 43F00403 		orr	r3, r3, #4
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  620 003c FFF7FEFF 		bl	CYMEMZERO
  621              	.LBE4:
  395:Generated_Source\PSoC5/cyfitter_cfg.c **** 		{
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 19
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 19
 
 
  622              		.loc 1 395 0 discriminator 3
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  664 008e 43F01003 		orr	r3, r3, #16
  665 0092 DBB2     		uxtb	r3, r3
  666 0094 1370     		strb	r3, [r2]
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 20
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 20
 
 
  667              	.LBE3:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  705              		.loc 1 425 0
  706 00de FFF7FEFF 		bl	ClockSetup
  426:Generated_Source\PSoC5/cyfitter_cfg.c **** 	/* Set Flash Cycles based on newly configured 24.00MHz Bus Clock. */
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 21
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 21
 
 
  427:Generated_Source\PSoC5/cyfitter_cfg.c **** 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CACHE_CC_CTL), (((CYDEV_INSTRUCT_CACHE_ENABLED) != 0) ? 0x81
@@ -1233,20 +1233,20 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  728              	.L29:
  729 0100 E8460040 		.word	1073759976
  730 0104 00000000 		.word	cfg_memset_list.5003
- 731 0108 6C000048 		.word	1207959660
+ 731 0108 68000048 		.word	1207959656
  732 010c 03500140 		.word	1073827843
  733 0110 13500140 		.word	1073827859
  734 0114 A0430040 		.word	1073759136
  735 0118 C2430040 		.word	1073759170
- 736 011c 18030048 		.word	1207960344
+ 736 011c 20030048 		.word	1207960352
  737 0120 02510040 		.word	1073762562
- 738 0124 20030048 		.word	1207960352
+ 738 0124 28030048 		.word	1207960360
  739 0128 F0510040 		.word	1073762800
- 740 012c 2C030048 		.word	1207960364
+ 740 012c 34030048 		.word	1207960372
  741 0130 12510040 		.word	1073762578
- 742 0134 34030048 		.word	1207960372
+ 742 0134 3C030048 		.word	1207960380
  743 0138 22510040 		.word	1073762594
- 744 013c 3C030048 		.word	1207960380
+ 744 013c 44030048 		.word	1207960388
  745 0140 32510040 		.word	1073762610
  746 0144 22430040 		.word	1073759010
  747 0148 00480040 		.word	1073760256
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  753              		.align	2
  754              		.type	cfg_memset_list.5003, %object
  755              		.size	cfg_memset_list.5003, 48
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 22
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 22
 
 
  756              	cfg_memset_list.5003:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  810 0047 04       		.byte	0x4
  811 0048 DF020000 		.4byte	.LASF2
  812 004c 04       		.uleb128 0x4
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 23
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 23
 
 
  813 004d 01       		.byte	0x1
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  867 00b3 04       		.byte	0x4
  868 00b4 14010000 		.4byte	.LASF16
  869 00b8 04       		.uleb128 0x4
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 24
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 24
 
 
  870 00b9 08       		.byte	0x8
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  924 012b 02       		.uleb128 0x2
  925 012c 91       		.byte	0x91
  926 012d 74       		.sleb128 -12
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 25
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 25
 
 
  927 012e 0B       		.uleb128 0xb
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  981 0190 9C       		.byte	0x9c
  982 0191 BE010000 		.4byte	0x1be
  983 0195 0C       		.uleb128 0xc
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 26
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 26
 
 
  984 0196 2E010000 		.4byte	.LASF25
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1038 01fd C3       		.byte	0xc3
  1039 01fe 52020000 		.4byte	0x252
  1040 0202 02       		.uleb128 0x2
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 27
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 27
 
 
  1041 0203 91       		.byte	0x91
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1095 025f 63020000 		.4byte	0x263
  1096 0263 13       		.uleb128 0x13
  1097 0264 02010000 		.4byte	0x102
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 28
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 28
 
 
  1098 0268 0A       		.uleb128 0xa
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1152 02d7 C9020000 		.4byte	.LASF39
  1153 02db 01       		.byte	0x1
  1154 02dc 4901     		.2byte	0x149
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 29
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 29
 
 
  1155 02de 8D000000 		.4byte	0x8d
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1209 0350 13       		.uleb128 0x13
  1210 0351 34030000 		.4byte	0x334
  1211 0355 15       		.uleb128 0x15
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 30
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 30
 
 
  1212 0356 33010000 		.4byte	.LASF44
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1266 0011 00       		.byte	0
  1267 0012 00       		.byte	0
  1268 0013 02       		.uleb128 0x2
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 31
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 31
 
 
  1269 0014 24       		.uleb128 0x24
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1323 004a 07       		.uleb128 0x7
  1324 004b 35       		.uleb128 0x35
  1325 004c 00       		.byte	0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 32
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 32
 
 
  1326 004d 49       		.uleb128 0x49
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1380 0084 00       		.byte	0
  1381 0085 0B       		.uleb128 0xb
  1382 0086 05       		.uleb128 0x5
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 33
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 33
 
 
  1383 0087 00       		.byte	0
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1437 00bd 01       		.uleb128 0x1
  1438 00be 12       		.uleb128 0x12
  1439 00bf 06       		.uleb128 0x6
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 34
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 34
 
 
  1440 00c0 40       		.uleb128 0x40
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1494 00f7 14       		.uleb128 0x14
  1495 00f8 2E       		.uleb128 0x2e
  1496 00f9 01       		.byte	0x1
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 35
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 35
 
 
  1497 00fa 03       		.uleb128 0x3
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1551 0131 9742     		.uleb128 0x2117
  1552 0133 19       		.uleb128 0x19
  1553 0134 01       		.uleb128 0x1
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 36
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 36
 
 
  1554 0135 13       		.uleb128 0x13
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1608 016c 1A       		.uleb128 0x1a
  1609 016d 0D       		.uleb128 0xd
  1610 016e 00       		.byte	0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 37
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 37
 
 
  1611 016f 03       		.uleb128 0x3
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1665 0010 00000000 		.4byte	.LFB0
  1666 0014 1C000000 		.4byte	.LFE0-.LFB0
  1667 0018 00000000 		.4byte	.LFB1
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 38
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 38
 
 
  1668 001c 1E000000 		.4byte	.LFE1-.LFB1
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1715      43313120 
  1715      352E342E 
  1715      31203230 
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 39
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 39
 
 
  1715      31363036 
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1737      75704572 
  1737      726F7200 
  1738              	.LASF25:
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 40
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 40
 
 
  1739 012e 64657374 		.ascii	"dest\000"
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1763      6C6500
  1764              	.LASF14:
  1765 01c4 75696E74 		.ascii	"uint16\000"
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 41
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 41
 
 
  1765      313600
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 1
  1788      7400
  1789              	.LASF35:
  1790 029d 74696D65 		.ascii	"timeout\000"
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccclU0iI.s 			page 42
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\cchfmgga.s 			page 42
 
 
  1790      6F757400 

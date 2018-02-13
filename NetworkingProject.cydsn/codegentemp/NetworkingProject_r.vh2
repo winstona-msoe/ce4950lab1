@@ -1,5 +1,5 @@
 -- Project:   NetworkingProject
--- Generated: 02/13/2018 13:23:55
+-- Generated: 02/13/2018 15:09:59
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -67,8 +67,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(3,4,A)2";
     SIGNAL Net_71 : bit;
     ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(3,4,A)0";
-    SIGNAL Net_95 : bit;
-    ATTRIBUTE placement_force OF Net_95 : SIGNAL IS "U(3,0,A)0";
+    SIGNAL Net_90 : bit;
     SIGNAL Net_99 : bit;
     ATTRIBUTE udbclken_assigned OF Net_99 : SIGNAL IS "True";
     ATTRIBUTE global_signal OF Net_99 : SIGNAL IS true;
@@ -87,15 +86,15 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \CollisionDelay:TimerUDB:control_7\ : bit;
     SIGNAL \CollisionDelay:TimerUDB:per_zero\ : bit;
     SIGNAL \CollisionDelay:TimerUDB:run_mode\ : bit;
-    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:run_mode\ : SIGNAL IS "U(2,2,A)2";
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:run_mode\ : SIGNAL IS "U(3,0,A)2";
     SIGNAL \CollisionDelay:TimerUDB:status_2\ : bit;
     SIGNAL \CollisionDelay:TimerUDB:status_3\ : bit;
     SIGNAL \CollisionDelay:TimerUDB:status_tc\ : bit;
-    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:status_tc\ : SIGNAL IS "U(2,2,A)3";
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:status_tc\ : SIGNAL IS "U(3,0,A)3";
     SIGNAL \CollisionDelay:TimerUDB:timer_enable\ : bit;
-    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:timer_enable\ : SIGNAL IS "U(2,2,A)0";
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:timer_enable\ : SIGNAL IS "U(3,0,A)0";
     SIGNAL \CollisionDelay:TimerUDB:trig_disable\ : bit;
-    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:trig_disable\ : SIGNAL IS "U(2,2,A)1";
+    ATTRIBUTE placement_force OF \CollisionDelay:TimerUDB:trig_disable\ : SIGNAL IS "U(3,0,A)1";
     SIGNAL \\\LCD:LCDPort(0)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(1)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(2)\\__PA\ : bit;
@@ -118,7 +117,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \Timer:TimerUDB:status_2\ : bit;
     SIGNAL \Timer:TimerUDB:status_3\ : bit;
     SIGNAL \Timer:TimerUDB:status_tc\ : bit;
-    ATTRIBUTE placement_force OF \Timer:TimerUDB:status_tc\ : SIGNAL IS "U(3,0,A)1";
+    ATTRIBUTE placement_force OF \Timer:TimerUDB:status_tc\ : SIGNAL IS "U(2,2,A)0";
     SIGNAL \TimerRX:TimerUDB:control_0\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_1\ : bit;
     SIGNAL \TimerRX:TimerUDB:control_2\ : bit;
@@ -247,9 +246,9 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF Net_71 : LABEL IS "macrocell3";
     ATTRIBUTE Location OF Net_71 : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:status_tc\ : LABEL IS "macrocell4";
-    ATTRIBUTE Location OF \Timer:TimerUDB:status_tc\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:status_tc\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "macrocell5";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "U(3,0)";
     ATTRIBUTE Location OF ReceiveISR : LABEL IS "[IntrContainer=(0)][IntrId=(2)]";
     ATTRIBUTE lib_model OF __ONE__ : LABEL IS "macrocell6";
     ATTRIBUTE Location OF __ONE__ : LABEL IS "U(3,4)";
@@ -276,33 +275,31 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE Location OF \TimerTX:TimerHW\ : LABEL IS "F(Timer,0)";
     ATTRIBUTE Location OF TransmitISR : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell2";
-    ATTRIBUTE Location OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell2";
-    ATTRIBUTE Location OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell3";
-    ATTRIBUTE Location OF \Timer:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,2)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell4";
-    ATTRIBUTE Location OF \Timer:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,2)";
     ATTRIBUTE Location OF TimerISR : LABEL IS "[IntrContainer=(0)][IntrId=(4)]";
     ATTRIBUTE Location OF CollisionDelayISR : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell3";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell3";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:rstSts:stsreg\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell5";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,2)";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(2,0)";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell6";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \RISING_EDGE:last\ : LABEL IS "macrocell7";
     ATTRIBUTE Location OF \RISING_EDGE:last\ : LABEL IS "U(3,4)";
-    ATTRIBUTE lib_model OF Net_95 : LABEL IS "macrocell8";
-    ATTRIBUTE Location OF Net_95 : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "macrocell9";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "macrocell10";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "macrocell11";
-    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "macrocell8";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "macrocell9";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:timer_enable\ : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "macrocell10";
+    ATTRIBUTE Location OF \CollisionDelay:TimerUDB:trig_disable\ : LABEL IS "U(3,0)";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -2132,7 +2129,8 @@ BEGIN
             status_3 => \Timer:TimerUDB:status_3\,
             status_2 => \Timer:TimerUDB:status_2\,
             status_1 => open,
-            status_0 => \Timer:TimerUDB:status_tc\);
+            status_0 => \Timer:TimerUDB:status_tc\,
+            interrupt => Net_90);
 
     \Timer:TimerUDB:sT16:timerdp:u0\:datapathcell
         GENERIC MAP(
@@ -2234,7 +2232,7 @@ BEGIN
             int_type => "00",
             is_nmi => 0)
         PORT MAP(
-            interrupt => Net_95,
+            interrupt => Net_90,
             clock => ClockBlock_BUS_CLK);
 
     CollisionDelayISR:interrupt
@@ -2389,18 +2387,6 @@ BEGIN
             q => \RISING_EDGE:last\,
             clock_0 => Net_3,
             main_0 => Net_659);
-
-    Net_95:macrocell
-        GENERIC MAP(
-            eqn_main => "(main_0 * main_1)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => Net_95,
-            clock_0 => Net_99,
-            main_0 => \Timer:TimerUDB:control_7\,
-            main_1 => \Timer:TimerUDB:per_zero\);
 
     \CollisionDelay:TimerUDB:run_mode\:macrocell
         GENERIC MAP(

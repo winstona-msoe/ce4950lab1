@@ -2,7 +2,7 @@
 --	Conversion of NetworkingProject.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Feb 13 13:23:53 2018
+--	Tue Feb 13 15:09:57 2018
 --
 
 USE cypress.cypress.all;
@@ -1658,7 +1658,7 @@ CLOCK2:cy_clock_v1_0
 		clock=>\Timer:TimerUDB:ClockOutFromEnBlock\,
 		status=>(Net_20, Net_20, Net_20, \Timer:TimerUDB:status_3\,
 			\Timer:TimerUDB:status_2\, Net_20, \Timer:TimerUDB:status_tc\),
-		interrupt=>\Timer:Net_55\);
+		interrupt=>Net_90);
 \Timer:TimerUDB:sT16:timerdp:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000001000000000000000100000001000000010000000000000010000000000000001000000000000000100000000000000010000000000000001000000011111111000000001111111111111111000000000000000000000001000000000000000000011000",
 		d0_init=>"00000000",
@@ -1834,7 +1834,7 @@ CLOCK2:cy_clock_v1_0
 TimerISR:cy_isr_v1_0
 	GENERIC MAP(int_type=>"00",
 		is_nmi=>'0')
-	PORT MAP(int_signal=>Net_95);
+	PORT MAP(int_signal=>Net_90);
 RiseEdge:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"c7205184-884b-414a-a267-34694b1e0a1d",
 		drive_mode=>"110",
@@ -2291,7 +2291,7 @@ ReceiveLight:cy_psoc3_pins_v1_10
 \Timer:TimerUDB:tc_reg_i\:cy_dff
 	PORT MAP(d=>\Timer:TimerUDB:status_tc\,
 		clk=>\Timer:TimerUDB:ClockOutFromEnBlock\,
-		q=>Net_95);
+		q=>\Timer:TimerUDB:tc_reg_i\);
 \Timer:TimerUDB:hwEnable_reg\:cy_dff
 	PORT MAP(d=>\Timer:TimerUDB:control_7\,
 		clk=>\Timer:TimerUDB:ClockOutFromEnBlock\,
