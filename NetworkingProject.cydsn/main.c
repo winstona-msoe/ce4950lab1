@@ -384,10 +384,13 @@ int main(void)
                     if (toupper(input) == 'R') {
                         transmitMode = false;
                         TimerRX_Start();
+                        while(!USBUART_CDCIsReady());
                         USBUART_PutChar(input);
-                        
+                        while(!USBUART_CDCIsReady());
                         USBUART_PutCRLF();
+                        while(!USBUART_CDCIsReady());
                         USBUART_PutString("Press 'T' to switch to transmit mode.\r\n");
+                        while(!USBUART_CDCIsReady());
                         USBUART_PutCRLF();
                         inCount = 0;
                         break;
