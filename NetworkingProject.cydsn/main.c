@@ -24,23 +24,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-//States include: 
-//Busy - signals that the channel monitor is busy
-//       and in either line high or line low 
-//Collision - collision detected, line high
-//Idle - initialized state looking for rising
-//       edge to occur
-enum state {IDLE, COLLISION, BUSY} systemState;
-
-//flag to help determine if signal level is low or high
-_Bool lowFlag = 0;
-
-
-
-
 #define BROADCAST_ADDRESS 0
-
-
 #define VERSION_NUMBER 0x01
 #define CRC 128 //CRCs are not being used
 #define HEADER 0b1110111 //header CRC not being used 
@@ -64,32 +48,42 @@ _Bool lowFlag = 0;
 #define HEADER_SIZE
 
 
-unsigned char transmitData[BUFFER_SIZE][16];
-unsigned char buffer[BUFFER_SIZE];
-unsigned char receiveBuffer[BUFFER_SIZE];
-unsigned char receiveData[16]; 
+//States include: 
+//Busy - signals that the channel monitor is busy
+//       and in either line high or line low 
+//Collision - collision detected, line high
+//Idle - initialized state looking for rising
+//       edge to occur
+volatile enum state {IDLE, COLLISION, BUSY} systemState;
+
+//flag to help determine if signal level is low or high
+volatile _Bool lowFlag = 0;
+
+volatile unsigned char transmitData[BUFFER_SIZE][16];
+volatile unsigned char buffer[BUFFER_SIZE];
+volatile unsigned char receiveBuffer[BUFFER_SIZE];
+volatile unsigned char receiveData[16]; 
 volatile int position = 0;
-int receivePosition = 0;
-int dataBitsRead = 0;
-int idx = 0;
-char* dataPtr;
-int transmitLock = 0; // High when transmitting
-int receiveLock = 0;
-bool collisionLock = false; // High when collision should not.
-//int startHeaderReceieved = 0;
-//int verNumMatch = 0;
-char sourceAddress = 0x00;
-char destinationAddress = 0x00;
-int  messageLength = 0;
-char crcUsage = 0x00;
-char headerCRC = 0x00;
-int addressZeroReceive = 0;
-char currentChar;
-int dataSize;
-int transmitBitCount = 0;
-int receiveBitCount = 0;
-int concatCount = 0;
-unsigned char transmitAddress = 0; 
+volatile int receivePosition = 0;
+volatile int dataBitsRead = 0;
+volatile int idx = 0;
+volatile char* dataPtr;
+volatile int transmitLock = 0; // High when transmitting
+volatile int receiveLock = 0;
+volatile bool collisionLock = false; // High when collision should not.
+
+volatile char sourceAddress = 0x00;
+volatile char destinationAddress = 0x00;
+volatile int  messageLength = 0;
+volatile char crcUsage = 0x00;
+volatile char headerCRC = 0x00;
+volatile int addressZeroReceive = 0;
+volatile char currentChar;
+volatile int dataSize;
+volatile int transmitBitCount = 0;
+volatile int receiveBitCount = 0;
+volatile int concatCount = 0;
+volatile unsigned char transmitAddress = 0; 
 
 bool transmitMode = true; // Whether currently transmitting or receiving
 

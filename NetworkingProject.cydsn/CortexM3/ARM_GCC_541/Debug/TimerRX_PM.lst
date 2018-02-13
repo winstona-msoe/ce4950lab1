@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
   28:Generated_Source\PSoC5/TimerRX_PM.c **** * Summary:
   29:Generated_Source\PSoC5/TimerRX_PM.c **** *     Save the current user configuration
   30:Generated_Source\PSoC5/TimerRX_PM.c **** *
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 2
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 2
 
 
   31:Generated_Source\PSoC5/TimerRX_PM.c **** * Parameters:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
   59              		.align	2
   60              		.global	TimerRX_RestoreConfig
   61              		.thumb
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 3
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 3
 
 
   62              		.thumb_func
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
   87:Generated_Source\PSoC5/TimerRX_PM.c ****         #if(!TimerRX_UDB_CONTROL_REG_REMOVED)
   88:Generated_Source\PSoC5/TimerRX_PM.c ****             TimerRX_WriteControlRegister(TimerRX_backup.TimerControlRegister);
   83              		.loc 1 88 0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 4
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 4
 
 
   84 0010 6079     		ldrb	r0, [r4, #5]	@ zero_extendqisi2
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  115:Generated_Source\PSoC5/TimerRX_PM.c ****         /* Save Counter's enable state */
  116:Generated_Source\PSoC5/TimerRX_PM.c ****         if(TimerRX_CTRL_ENABLE == (TimerRX_CONTROL & TimerRX_CTRL_ENABLE))
  112              		.loc 1 116 0
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 5
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 5
 
 
  113 0002 084B     		ldr	r3, .L13
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  133:Generated_Source\PSoC5/TimerRX_PM.c **** * Function Name: TimerRX_Wakeup
  134:Generated_Source\PSoC5/TimerRX_PM.c **** ********************************************************************************
  135:Generated_Source\PSoC5/TimerRX_PM.c **** *
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 6
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 6
 
 
  136:Generated_Source\PSoC5/TimerRX_PM.c **** * Summary:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  184              	TimerRX_backup:
  185 0000 00000000 		.space	6
  185      0000
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 7
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 7
 
 
  186              		.text
@@ -372,25 +372,25 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  194 0006 00000000 		.4byte	.Ldebug_abbrev0
  195 000a 04       		.byte	0x4
  196 000b 01       		.uleb128 0x1
- 197 000c AC000000 		.4byte	.LASF32
+ 197 000c F2000000 		.4byte	.LASF32
  198 0010 0C       		.byte	0xc
- 199 0011 74000000 		.4byte	.LASF33
- 200 0015 D9010000 		.4byte	.LASF34
+ 199 0011 BA000000 		.4byte	.LASF33
+ 200 0015 6B000000 		.4byte	.LASF34
  201 0019 00000000 		.4byte	.Ldebug_ranges0+0
  202 001d 00000000 		.4byte	0
  203 0021 00000000 		.4byte	.Ldebug_line0
  204 0025 02       		.uleb128 0x2
  205 0026 01       		.byte	0x1
  206 0027 06       		.byte	0x6
- 207 0028 C2020000 		.4byte	.LASF0
+ 207 0028 AB020000 		.4byte	.LASF0
  208 002c 02       		.uleb128 0x2
  209 002d 01       		.byte	0x1
  210 002e 08       		.byte	0x8
- 211 002f 9E000000 		.4byte	.LASF1
+ 211 002f E4000000 		.4byte	.LASF1
  212 0033 02       		.uleb128 0x2
  213 0034 02       		.byte	0x2
  214 0035 05       		.byte	0x5
- 215 0036 76020000 		.4byte	.LASF2
+ 215 0036 5F020000 		.4byte	.LASF2
  216 003a 02       		.uleb128 0x2
  217 003b 02       		.byte	0x2
  218 003c 07       		.byte	0x7
@@ -398,19 +398,19 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  220 0041 02       		.uleb128 0x2
  221 0042 04       		.byte	0x4
  222 0043 05       		.byte	0x5
- 223 0044 A8020000 		.4byte	.LASF4
+ 223 0044 91020000 		.4byte	.LASF4
  224 0048 02       		.uleb128 0x2
  225 0049 04       		.byte	0x4
  226 004a 07       		.byte	0x7
- 227 004b 3F010000 		.4byte	.LASF5
+ 227 004b 85010000 		.4byte	.LASF5
  228 004f 02       		.uleb128 0x2
  229 0050 08       		.byte	0x8
  230 0051 05       		.byte	0x5
- 231 0052 36020000 		.4byte	.LASF6
+ 231 0052 1F020000 		.4byte	.LASF6
  232 0056 02       		.uleb128 0x2
  233 0057 08       		.byte	0x8
  234 0058 07       		.byte	0x7
- 235 0059 AA010000 		.4byte	.LASF7
+ 235 0059 F0010000 		.4byte	.LASF7
  236 005d 03       		.uleb128 0x3
  237 005e 04       		.byte	0x4
  238 005f 05       		.byte	0x5
@@ -418,34 +418,34 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  240 0064 02       		.uleb128 0x2
  241 0065 04       		.byte	0x4
  242 0066 07       		.byte	0x7
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 8
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 8
 
 
- 243 0067 9D010000 		.4byte	.LASF8
+ 243 0067 E3010000 		.4byte	.LASF8
  244 006b 04       		.uleb128 0x4
- 245 006c 51010000 		.4byte	.LASF9
+ 245 006c 97010000 		.4byte	.LASF9
  246 0070 02       		.byte	0x2
  247 0071 9201     		.2byte	0x192
  248 0073 2C000000 		.4byte	0x2c
  249 0077 04       		.uleb128 0x4
- 250 0078 96010000 		.4byte	.LASF10
+ 250 0078 DC010000 		.4byte	.LASF10
  251 007c 02       		.byte	0x2
  252 007d 9301     		.2byte	0x193
  253 007f 3A000000 		.4byte	0x3a
  254 0083 02       		.uleb128 0x2
  255 0084 04       		.byte	0x4
  256 0085 04       		.byte	0x4
- 257 0086 98000000 		.4byte	.LASF11
+ 257 0086 DE000000 		.4byte	.LASF11
  258 008a 02       		.uleb128 0x2
  259 008b 08       		.byte	0x8
  260 008c 04       		.byte	0x4
- 261 008d 66010000 		.4byte	.LASF12
+ 261 008d AC010000 		.4byte	.LASF12
  262 0091 02       		.uleb128 0x2
  263 0092 01       		.byte	0x1
  264 0093 08       		.byte	0x8
- 265 0094 B1020000 		.4byte	.LASF13
+ 265 0094 9A020000 		.4byte	.LASF13
  266 0098 04       		.uleb128 0x4
- 267 0099 3A010000 		.4byte	.LASF14
+ 267 0099 80010000 		.4byte	.LASF14
  268 009d 02       		.byte	0x2
  269 009e 3C02     		.2byte	0x23c
  270 00a0 A4000000 		.4byte	0xa4
@@ -454,11 +454,11 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  273 00a9 02       		.uleb128 0x2
  274 00aa 08       		.byte	0x8
  275 00ab 04       		.byte	0x4
- 276 00ac B6020000 		.4byte	.LASF15
+ 276 00ac 9F020000 		.4byte	.LASF15
  277 00b0 02       		.uleb128 0x2
  278 00b1 04       		.byte	0x4
  279 00b2 07       		.byte	0x7
- 280 00b3 D0010000 		.4byte	.LASF16
+ 280 00b3 16020000 		.4byte	.LASF16
  281 00b7 06       		.uleb128 0x6
  282 00b8 06       		.byte	0x6
  283 00b9 03       		.byte	0x3
@@ -471,14 +471,14 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  290 00c6 6B000000 		.4byte	0x6b
  291 00ca 00       		.byte	0
  292 00cb 07       		.uleb128 0x7
- 293 00cc 6B000000 		.4byte	.LASF18
+ 293 00cc B1000000 		.4byte	.LASF18
  294 00d0 03       		.byte	0x3
  295 00d1 48       		.byte	0x48
  296 00d2 77000000 		.4byte	0x77
  297 00d6 02       		.byte	0x2
  298 00d7 07       		.uleb128 0x7
- 299 00d8 CE020000 		.4byte	.LASF19
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 9
+ 299 00d8 B7020000 		.4byte	.LASF19
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 9
 
 
  300 00dc 03       		.byte	0x3
@@ -486,19 +486,19 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  302 00de 6B000000 		.4byte	0x6b
  303 00e2 04       		.byte	0x4
  304 00e3 07       		.uleb128 0x7
- 305 00e4 E1020000 		.4byte	.LASF20
+ 305 00e4 CA020000 		.4byte	.LASF20
  306 00e8 03       		.byte	0x3
  307 00e9 4F       		.byte	0x4f
  308 00ea 6B000000 		.4byte	0x6b
  309 00ee 05       		.byte	0x5
  310 00ef 00       		.byte	0
  311 00f0 08       		.uleb128 0x8
- 312 00f1 80020000 		.4byte	.LASF21
+ 312 00f1 69020000 		.4byte	.LASF21
  313 00f5 03       		.byte	0x3
  314 00f6 53       		.byte	0x53
  315 00f7 B7000000 		.4byte	0xb7
  316 00fb 09       		.uleb128 0x9
- 317 00fc 95020000 		.4byte	.LASF22
+ 317 00fc 7E020000 		.4byte	.LASF22
  318 0100 01       		.byte	0x1
  319 0101 2B       		.byte	0x2b
  320 0102 00000000 		.4byte	.LFB0
@@ -514,7 +514,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  330 011e B7010000 		.4byte	0x1b7
  331 0122 00       		.byte	0
  332 0123 09       		.uleb128 0x9
- 333 0124 44020000 		.4byte	.LASF23
+ 333 0124 2D020000 		.4byte	.LASF23
  334 0128 01       		.byte	0x1
  335 0129 4D       		.byte	0x4d
  336 012a 00000000 		.4byte	.LFB1
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  354 015a 01       		.uleb128 0x1
  355 015b 9C       		.byte	0x9c
  356 015c 73010000 		.4byte	0x173
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 10
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 10
 
 
  357 0160 0A       		.uleb128 0xa
@@ -549,7 +549,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  362 016e FB000000 		.4byte	0xfb
  363 0172 00       		.byte	0
  364 0173 09       		.uleb128 0x9
- 365 0174 C1010000 		.4byte	.LASF25
+ 365 0174 07020000 		.4byte	.LASF25
  366 0178 01       		.byte	0x1
  367 0179 96       		.byte	0x96
  368 017a 00000000 		.4byte	.LFB3
@@ -565,7 +565,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  378 0196 E3010000 		.4byte	0x1e3
  379 019a 00       		.byte	0
  380 019b 0B       		.uleb128 0xb
- 381 019c 57010000 		.4byte	.LASF35
+ 381 019c 9D010000 		.4byte	.LASF35
  382 01a0 01       		.byte	0x1
  383 01a1 15       		.byte	0x15
  384 01a2 F0000000 		.4byte	0xf0
@@ -573,18 +573,18 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  386 01a7 03       		.byte	0x3
  387 01a8 00000000 		.4byte	TimerRX_backup
  388 01ac 0C       		.uleb128 0xc
- 389 01ad 82010000 		.4byte	.LASF26
- 390 01b1 82010000 		.4byte	.LASF26
+ 389 01ad C8010000 		.4byte	.LASF26
+ 390 01b1 C8010000 		.4byte	.LASF26
  391 01b5 03       		.byte	0x3
  392 01b6 69       		.byte	0x69
  393 01b7 0C       		.uleb128 0xc
- 394 01b8 5A020000 		.4byte	.LASF27
- 395 01bc 5A020000 		.4byte	.LASF27
+ 394 01b8 43020000 		.4byte	.LASF27
+ 395 01bc 43020000 		.4byte	.LASF27
  396 01c0 03       		.byte	0x3
  397 01c1 63       		.byte	0x63
  398 01c2 0C       		.uleb128 0xc
- 399 01c3 6D010000 		.4byte	.LASF28
- 400 01c7 6D010000 		.4byte	.LASF28
+ 399 01c3 B3010000 		.4byte	.LASF28
+ 400 01c7 B3010000 		.4byte	.LASF28
  401 01cb 03       		.byte	0x3
  402 01cc 6A       		.byte	0x6a
  403 01cd 0C       		.uleb128 0xc
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  411 01e1 03       		.byte	0x3
  412 01e2 5B       		.byte	0x5b
  413 01e3 0C       		.uleb128 0xc
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 11
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 11
 
 
  414 01e4 3B000000 		.4byte	.LASF31
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  468 002f 0B       		.uleb128 0xb
  469 0030 3B       		.uleb128 0x3b
  470 0031 05       		.uleb128 0x5
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 12
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 12
 
 
  471 0032 49       		.uleb128 0x49
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  525 0068 01       		.byte	0x1
  526 0069 3F       		.uleb128 0x3f
  527 006a 19       		.uleb128 0x19
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 13
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 13
 
 
  528 006b 03       		.uleb128 0x3
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  582 00a4 0E       		.uleb128 0xe
  583 00a5 3A       		.uleb128 0x3a
  584 00a6 0B       		.uleb128 0xb
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 14
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 14
 
 
  585 00a7 3B       		.uleb128 0x3b
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  628 001e 54696D65 		.ascii	"TimerRX_WriteControlRegister\000"
  628      7252585F 
  628      57726974 
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 15
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 15
 
 
  628      65436F6E 
@@ -859,171 +859,171 @@ ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 1
  634      7252585F 
  634      536C6565 
  634      7000
- 635              	.LASF18:
- 636 006b 54696D65 		.ascii	"TimerUdb\000"
- 636      72556462 
- 636      00
- 637              	.LASF33:
- 638 0074 47656E65 		.ascii	"Generated_Source\\PSoC5\\TimerRX_PM.c\000"
- 638      72617465 
- 638      645F536F 
- 638      75726365 
- 638      5C50536F 
- 639              	.LASF11:
- 640 0098 666C6F61 		.ascii	"float\000"
- 640      7400
- 641              	.LASF1:
- 642 009e 756E7369 		.ascii	"unsigned char\000"
- 642      676E6564 
- 642      20636861 
- 642      7200
- 643              	.LASF32:
- 644 00ac 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 644      43313120 
- 644      352E342E 
- 644      31203230 
- 644      31363036 
- 645 00df 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 645      20726576 
- 645      6973696F 
- 645      6E203233 
- 645      37373135 
- 646 0112 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 646      66756E63 
- 646      74696F6E 
- 646      2D736563 
- 646      74696F6E 
- 647              	.LASF14:
- 648 013a 72656738 		.ascii	"reg8\000"
- 648      00
- 649              	.LASF5:
- 650 013f 6C6F6E67 		.ascii	"long unsigned int\000"
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 16
+ 635              	.LASF34:
+ 636 006b 433A5C32 		.ascii	"C:\\2018 Winter\\CE4950\\GroupProject\\ce4950lab1\\"
+ 636      30313820 
+ 636      57696E74 
+ 636      65725C43 
+ 636      45343935 
+ 637 0099 4E657477 		.ascii	"NetworkingProject.cydsn\000"
+ 637      6F726B69 
+ 637      6E675072 
+ 637      6F6A6563 
+ 637      742E6379 
+ 638              	.LASF18:
+ 639 00b1 54696D65 		.ascii	"TimerUdb\000"
+ 639      72556462 
+ 639      00
+ 640              	.LASF33:
+ 641 00ba 47656E65 		.ascii	"Generated_Source\\PSoC5\\TimerRX_PM.c\000"
+ 641      72617465 
+ 641      645F536F 
+ 641      75726365 
+ 641      5C50536F 
+ 642              	.LASF11:
+ 643 00de 666C6F61 		.ascii	"float\000"
+ 643      7400
+ 644              	.LASF1:
+ 645 00e4 756E7369 		.ascii	"unsigned char\000"
+ 645      676E6564 
+ 645      20636861 
+ 645      7200
+ 646              	.LASF32:
+ 647 00f2 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 647      43313120 
+ 647      352E342E 
+ 647      31203230 
+ 647      31363036 
+ 648 0125 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 648      20726576 
+ 648      6973696F 
+ 648      6E203233 
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 16
 
 
- 650      20756E73 
- 650      69676E65 
- 650      6420696E 
- 650      7400
- 651              	.LASF9:
- 652 0151 75696E74 		.ascii	"uint8\000"
- 652      3800
- 653              	.LASF35:
- 654 0157 54696D65 		.ascii	"TimerRX_backup\000"
- 654      7252585F 
- 654      6261636B 
- 654      757000
- 655              	.LASF12:
- 656 0166 646F7562 		.ascii	"double\000"
- 656      6C6500
- 657              	.LASF28:
- 658 016d 54696D65 		.ascii	"TimerRX_WriteCounter\000"
- 658      7252585F 
- 658      57726974 
- 658      65436F75 
- 658      6E746572 
- 659              	.LASF26:
- 660 0182 54696D65 		.ascii	"TimerRX_ReadCounter\000"
- 660      7252585F 
- 660      52656164 
- 660      436F756E 
- 660      74657200 
- 661              	.LASF10:
- 662 0196 75696E74 		.ascii	"uint16\000"
- 662      313600
- 663              	.LASF8:
- 664 019d 756E7369 		.ascii	"unsigned int\000"
- 664      676E6564 
- 664      20696E74 
- 664      00
- 665              	.LASF7:
- 666 01aa 6C6F6E67 		.ascii	"long long unsigned int\000"
- 666      206C6F6E 
- 666      6720756E 
- 666      7369676E 
- 666      65642069 
- 667              	.LASF25:
- 668 01c1 54696D65 		.ascii	"TimerRX_Wakeup\000"
- 668      7252585F 
- 668      57616B65 
- 668      757000
- 669              	.LASF16:
- 670 01d0 73697A65 		.ascii	"sizetype\000"
- 670      74797065 
- 670      00
- 671              	.LASF34:
- 672 01d9 433A5C55 		.ascii	"C:\\Users\\winstona\\Documents\\School Documents\\N"
- 672      73657273 
- 672      5C77696E 
- 672      73746F6E 
- 672      615C446F 
- 673 0207 6574776F 		.ascii	"etworking I\\ce4950lab1\\NetworkingProject.cydsn\000"
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 17
+ 648      37373135 
+ 649 0158 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 649      66756E63 
+ 649      74696F6E 
+ 649      2D736563 
+ 649      74696F6E 
+ 650              	.LASF14:
+ 651 0180 72656738 		.ascii	"reg8\000"
+ 651      00
+ 652              	.LASF5:
+ 653 0185 6C6F6E67 		.ascii	"long unsigned int\000"
+ 653      20756E73 
+ 653      69676E65 
+ 653      6420696E 
+ 653      7400
+ 654              	.LASF9:
+ 655 0197 75696E74 		.ascii	"uint8\000"
+ 655      3800
+ 656              	.LASF35:
+ 657 019d 54696D65 		.ascii	"TimerRX_backup\000"
+ 657      7252585F 
+ 657      6261636B 
+ 657      757000
+ 658              	.LASF12:
+ 659 01ac 646F7562 		.ascii	"double\000"
+ 659      6C6500
+ 660              	.LASF28:
+ 661 01b3 54696D65 		.ascii	"TimerRX_WriteCounter\000"
+ 661      7252585F 
+ 661      57726974 
+ 661      65436F75 
+ 661      6E746572 
+ 662              	.LASF26:
+ 663 01c8 54696D65 		.ascii	"TimerRX_ReadCounter\000"
+ 663      7252585F 
+ 663      52656164 
+ 663      436F756E 
+ 663      74657200 
+ 664              	.LASF10:
+ 665 01dc 75696E74 		.ascii	"uint16\000"
+ 665      313600
+ 666              	.LASF8:
+ 667 01e3 756E7369 		.ascii	"unsigned int\000"
+ 667      676E6564 
+ 667      20696E74 
+ 667      00
+ 668              	.LASF7:
+ 669 01f0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 669      206C6F6E 
+ 669      6720756E 
+ 669      7369676E 
+ 669      65642069 
+ 670              	.LASF25:
+ 671 0207 54696D65 		.ascii	"TimerRX_Wakeup\000"
+ 671      7252585F 
+ 671      57616B65 
+ 671      757000
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 17
 
 
- 673      726B696E 
- 673      6720495C 
- 673      63653439 
- 673      35306C61 
+ 672              	.LASF16:
+ 673 0216 73697A65 		.ascii	"sizetype\000"
+ 673      74797065 
+ 673      00
  674              	.LASF6:
- 675 0236 6C6F6E67 		.ascii	"long long int\000"
+ 675 021f 6C6F6E67 		.ascii	"long long int\000"
  675      206C6F6E 
  675      6720696E 
  675      7400
  676              	.LASF23:
- 677 0244 54696D65 		.ascii	"TimerRX_RestoreConfig\000"
+ 677 022d 54696D65 		.ascii	"TimerRX_RestoreConfig\000"
  677      7252585F 
  677      52657374 
  677      6F726543 
  677      6F6E6669 
  678              	.LASF27:
- 679 025a 54696D65 		.ascii	"TimerRX_ReadControlRegister\000"
+ 679 0243 54696D65 		.ascii	"TimerRX_ReadControlRegister\000"
  679      7252585F 
  679      52656164 
  679      436F6E74 
  679      726F6C52 
  680              	.LASF2:
- 681 0276 73686F72 		.ascii	"short int\000"
+ 681 025f 73686F72 		.ascii	"short int\000"
  681      7420696E 
  681      7400
  682              	.LASF21:
- 683 0280 54696D65 		.ascii	"TimerRX_backupStruct\000"
+ 683 0269 54696D65 		.ascii	"TimerRX_backupStruct\000"
  683      7252585F 
  683      6261636B 
  683      75705374 
  683      72756374 
  684              	.LASF22:
- 685 0295 54696D65 		.ascii	"TimerRX_SaveConfig\000"
+ 685 027e 54696D65 		.ascii	"TimerRX_SaveConfig\000"
  685      7252585F 
  685      53617665 
  685      436F6E66 
  685      696700
  686              	.LASF4:
- 687 02a8 6C6F6E67 		.ascii	"long int\000"
+ 687 0291 6C6F6E67 		.ascii	"long int\000"
  687      20696E74 
  687      00
  688              	.LASF13:
- 689 02b1 63686172 		.ascii	"char\000"
+ 689 029a 63686172 		.ascii	"char\000"
  689      00
  690              	.LASF15:
- 691 02b6 6C6F6E67 		.ascii	"long double\000"
+ 691 029f 6C6F6E67 		.ascii	"long double\000"
  691      20646F75 
  691      626C6500 
  692              	.LASF0:
- 693 02c2 7369676E 		.ascii	"signed char\000"
+ 693 02ab 7369676E 		.ascii	"signed char\000"
  693      65642063 
  693      68617200 
  694              	.LASF19:
- 695 02ce 496E7465 		.ascii	"InterruptMaskValue\000"
+ 695 02b7 496E7465 		.ascii	"InterruptMaskValue\000"
  695      72727570 
  695      744D6173 
  695      6B56616C 
-ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccYwnc0I.s 			page 18
+ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccgSMgVc.s 			page 18
 
 
  695      756500
  696              	.LASF20:
- 697 02e1 54696D65 		.ascii	"TimerControlRegister\000"
+ 697 02ca 54696D65 		.ascii	"TimerControlRegister\000"
  697      72436F6E 
  697      74726F6C 
  697      52656769 
