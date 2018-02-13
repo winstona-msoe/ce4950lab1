@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 1
 
 
    1              		.syntax unified
@@ -10,7 +10,7 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
@@ -19,15 +19,21 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.TimerTX_Enable,"ax",%progbits
-  20              		.align	2
-  21              		.global	TimerTX_Enable
-  22              		.thumb
-  23              		.thumb_func
-  24              		.type	TimerTX_Enable, %function
-  25              	TimerTX_Enable:
-  26              	.LFB1:
-  27              		.file 1 "Generated_Source\\PSoC5\\TimerTX.c"
+  19              		.global	TimerTX_initVar
+  20              		.bss
+  21              		.type	TimerTX_initVar, %object
+  22              		.size	TimerTX_initVar, 1
+  23              	TimerTX_initVar:
+  24 0000 00       		.space	1
+  25              		.section	.text.TimerTX_Init,"ax",%progbits
+  26              		.align	2
+  27              		.global	TimerTX_Init
+  28              		.thumb
+  29              		.thumb_func
+  30              		.type	TimerTX_Init, %function
+  31              	TimerTX_Init:
+  32              	.LFB0:
+  33              		.file 1 "Generated_Source\\PSoC5\\TimerTX.c"
    1:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
    2:Generated_Source\PSoC5/TimerTX.c **** * File Name: TimerTX.c
    3:Generated_Source\PSoC5/TimerTX.c **** * Version 2.70
@@ -52,15 +58,15 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
   22:Generated_Source\PSoC5/TimerTX.c **** ********************************************************************************/
   23:Generated_Source\PSoC5/TimerTX.c **** 
   24:Generated_Source\PSoC5/TimerTX.c **** #include "TimerTX.h"
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 2
+
+
   25:Generated_Source\PSoC5/TimerTX.c **** 
   26:Generated_Source\PSoC5/TimerTX.c **** uint8 TimerTX_initVar = 0u;
   27:Generated_Source\PSoC5/TimerTX.c **** 
   28:Generated_Source\PSoC5/TimerTX.c **** 
   29:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
   30:Generated_Source\PSoC5/TimerTX.c **** * Function Name: TimerTX_Init
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 2
-
-
   31:Generated_Source\PSoC5/TimerTX.c **** ********************************************************************************
   32:Generated_Source\PSoC5/TimerTX.c **** *
   33:Generated_Source\PSoC5/TimerTX.c **** * Summary:
@@ -75,6 +81,16 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
   42:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
   43:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_Init(void) 
   44:Generated_Source\PSoC5/TimerTX.c **** {
+  34              		.loc 1 44 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 00AF     		add	r7, sp, #0
+  43              		.cfi_def_cfa_register 7
   45:Generated_Source\PSoC5/TimerTX.c ****     #if(!TimerTX_UsingFixedFunction)
   46:Generated_Source\PSoC5/TimerTX.c ****             /* Interrupt State Backup for Critical Region*/
   47:Generated_Source\PSoC5/TimerTX.c ****             uint8 TimerTX_interruptState;
@@ -83,6 +99,14 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
   50:Generated_Source\PSoC5/TimerTX.c ****     #if (TimerTX_UsingFixedFunction)
   51:Generated_Source\PSoC5/TimerTX.c ****         /* Clear all bits but the enable bit (if it's already set) for Timer operation */
   52:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_CONTROL &= TimerTX_CTRL_ENABLE;
+  44              		.loc 1 52 0
+  45 0004 214A     		ldr	r2, .L2
+  46 0006 214B     		ldr	r3, .L2
+  47 0008 1B78     		ldrb	r3, [r3]
+  48 000a DBB2     		uxtb	r3, r3
+  49 000c 03F00103 		and	r3, r3, #1
+  50 0010 DBB2     		uxtb	r3, r3
+  51 0012 1370     		strb	r3, [r2]
   53:Generated_Source\PSoC5/TimerTX.c **** 
   54:Generated_Source\PSoC5/TimerTX.c ****         /* Clear the mode bits for continuous run mode */
   55:Generated_Source\PSoC5/TimerTX.c ****         #if (CY_PSOC5A)
@@ -91,6 +115,17 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
   58:Generated_Source\PSoC5/TimerTX.c **** 
   59:Generated_Source\PSoC5/TimerTX.c ****         #if (CY_PSOC3 || CY_PSOC5LP)
   60:Generated_Source\PSoC5/TimerTX.c ****             TimerTX_CONTROL3 &= ((uint8)(~TimerTX_CTRL_MODE_MASK));
+  52              		.loc 1 60 0
+  53 0014 1E4A     		ldr	r2, .L2+4
+  54 0016 1E4B     		ldr	r3, .L2+4
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 3
+
+
+  55 0018 1B78     		ldrb	r3, [r3]
+  56 001a DBB2     		uxtb	r3, r3
+  57 001c 23F00303 		bic	r3, r3, #3
+  58 0020 DBB2     		uxtb	r3, r3
+  59 0022 1370     		strb	r3, [r2]
   61:Generated_Source\PSoC5/TimerTX.c ****         #endif /* CONTROL3 register exists only in PSoC3 OR PSoC5LP */
   62:Generated_Source\PSoC5/TimerTX.c **** 
   63:Generated_Source\PSoC5/TimerTX.c ****         /* Check if One Shot mode is enabled i.e. RunMode !=0*/
@@ -118,9 +153,6 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
   85:Generated_Source\PSoC5/TimerTX.c ****             #if (CY_PSOC5A)
   86:Generated_Source\PSoC5/TimerTX.c ****                 /* Set the default Run Mode of the Timer to Continuous */
   87:Generated_Source\PSoC5/TimerTX.c ****                 TimerTX_CONTROL2 |= TimerTX_CTRL_MODE_PULSEWIDTH;
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 3
-
-
   88:Generated_Source\PSoC5/TimerTX.c ****             #endif /* Set Continuous Run Mode in CONTROL2 for PSoC5A */
   89:Generated_Source\PSoC5/TimerTX.c **** 
   90:Generated_Source\PSoC5/TimerTX.c ****             #if (CY_PSOC3 || CY_PSOC5LP)
@@ -140,23 +172,75 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  104:Generated_Source\PSoC5/TimerTX.c **** 
  105:Generated_Source\PSoC5/TimerTX.c ****         /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
  106:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_RT1 &= ((uint8)(~TimerTX_RT1_MASK));
+  60              		.loc 1 106 0
+  61 0024 1B4A     		ldr	r2, .L2+8
+  62 0026 1B4B     		ldr	r3, .L2+8
+  63 0028 1B78     		ldrb	r3, [r3]
+  64 002a DBB2     		uxtb	r3, r3
+  65 002c 23F03003 		bic	r3, r3, #48
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 4
+
+
+  66 0030 DBB2     		uxtb	r3, r3
+  67 0032 1370     		strb	r3, [r2]
  107:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_RT1 |= TimerTX_SYNC;
+  68              		.loc 1 107 0
+  69 0034 174A     		ldr	r2, .L2+8
+  70 0036 174B     		ldr	r3, .L2+8
+  71 0038 1B78     		ldrb	r3, [r3]
+  72 003a DBB2     		uxtb	r3, r3
+  73 003c 43F03003 		orr	r3, r3, #48
+  74 0040 DBB2     		uxtb	r3, r3
+  75 0042 1370     		strb	r3, [r2]
  108:Generated_Source\PSoC5/TimerTX.c **** 
  109:Generated_Source\PSoC5/TimerTX.c ****         /*Enable DSI Sync all all inputs of the Timer*/
  110:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_RT1 &= ((uint8)(~TimerTX_SYNCDSI_MASK));
+  76              		.loc 1 110 0
+  77 0044 134A     		ldr	r2, .L2+8
+  78 0046 134B     		ldr	r3, .L2+8
+  79 0048 1B78     		ldrb	r3, [r3]
+  80 004a DBB2     		uxtb	r3, r3
+  81 004c 23F00F03 		bic	r3, r3, #15
+  82 0050 DBB2     		uxtb	r3, r3
+  83 0052 1370     		strb	r3, [r2]
  111:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_RT1 |= TimerTX_SYNCDSI_EN;
+  84              		.loc 1 111 0
+  85 0054 0F4A     		ldr	r2, .L2+8
+  86 0056 0F4B     		ldr	r3, .L2+8
+  87 0058 1B78     		ldrb	r3, [r3]
+  88 005a DBB2     		uxtb	r3, r3
+  89 005c 43F00F03 		orr	r3, r3, #15
+  90 0060 DBB2     		uxtb	r3, r3
+  91 0062 1370     		strb	r3, [r2]
  112:Generated_Source\PSoC5/TimerTX.c **** 
  113:Generated_Source\PSoC5/TimerTX.c ****         /* Set the IRQ to use the status register interrupts */
  114:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_CONTROL2 |= TimerTX_CTRL2_IRQ_SEL;
+  92              		.loc 1 114 0
+  93 0064 0C4A     		ldr	r2, .L2+12
+  94 0066 0C4B     		ldr	r3, .L2+12
+  95 0068 1B78     		ldrb	r3, [r3]
+  96 006a DBB2     		uxtb	r3, r3
+  97 006c 43F00103 		orr	r3, r3, #1
+  98 0070 DBB2     		uxtb	r3, r3
+  99 0072 1370     		strb	r3, [r2]
  115:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Configuring registers of fixed function implementation */
  116:Generated_Source\PSoC5/TimerTX.c **** 
  117:Generated_Source\PSoC5/TimerTX.c ****     /* Set Initial values from Configuration */
  118:Generated_Source\PSoC5/TimerTX.c ****     TimerTX_WritePeriod(TimerTX_INIT_PERIOD);
+ 100              		.loc 1 118 0
+ 101 0074 3120     		movs	r0, #49
+ 102 0076 FFF7FEFF 		bl	TimerTX_WritePeriod
  119:Generated_Source\PSoC5/TimerTX.c ****     TimerTX_WriteCounter(TimerTX_INIT_PERIOD);
+ 103              		.loc 1 119 0
+ 104 007a 3120     		movs	r0, #49
+ 105 007c FFF7FEFF 		bl	TimerTX_WriteCounter
  120:Generated_Source\PSoC5/TimerTX.c **** 
  121:Generated_Source\PSoC5/TimerTX.c ****     #if (TimerTX_UsingHWCaptureCounter)/* Capture counter is enabled */
  122:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_CAPTURE_COUNT_CTRL |= TimerTX_CNTR_ENABLE;
  123:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_SetCaptureCount(TimerTX_INIT_CAPTURE_COUNT);
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 5
+
+
  124:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Configure capture counter value */
  125:Generated_Source\PSoC5/TimerTX.c **** 
  126:Generated_Source\PSoC5/TimerTX.c ****     #if (!TimerTX_UsingFixedFunction)
@@ -178,9 +262,6 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  142:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_interruptState = CyEnterCriticalSection();
  143:Generated_Source\PSoC5/TimerTX.c **** 
  144:Generated_Source\PSoC5/TimerTX.c ****         /* Use the interrupt output of the status register for IRQ output */
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 4
-
-
  145:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_STATUS_AUX_CTRL |= TimerTX_STATUS_ACTL_INT_EN_MASK;
  146:Generated_Source\PSoC5/TimerTX.c **** 
  147:Generated_Source\PSoC5/TimerTX.c ****         /* Exit Critical Region*/
@@ -199,7 +280,34 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  160:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Configure additional features of UDB implementation */
  161:Generated_Source\PSoC5/TimerTX.c **** 
  162:Generated_Source\PSoC5/TimerTX.c ****     TimerTX_SetInterruptMode(TimerTX_INIT_INTERRUPT_MODE);
+ 106              		.loc 1 162 0
+ 107 0080 0820     		movs	r0, #8
+ 108 0082 FFF7FEFF 		bl	TimerTX_SetInterruptMode
  163:Generated_Source\PSoC5/TimerTX.c **** }
+ 109              		.loc 1 163 0
+ 110 0086 00BF     		nop
+ 111 0088 80BD     		pop	{r7, pc}
+ 112              	.L3:
+ 113 008a 00BF     		.align	2
+ 114              	.L2:
+ 115 008c 004F0040 		.word	1073762048
+ 116 0090 024F0040 		.word	1073762050
+ 117 0094 0B4F0040 		.word	1073762059
+ 118 0098 014F0040 		.word	1073762049
+ 119              		.cfi_endproc
+ 120              	.LFE0:
+ 121              		.size	TimerTX_Init, .-TimerTX_Init
+ 122              		.section	.text.TimerTX_Enable,"ax",%progbits
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 6
+
+
+ 123              		.align	2
+ 124              		.global	TimerTX_Enable
+ 125              		.thumb
+ 126              		.thumb_func
+ 127              		.type	TimerTX_Enable, %function
+ 128              	TimerTX_Enable:
+ 129              	.LFB1:
  164:Generated_Source\PSoC5/TimerTX.c **** 
  165:Generated_Source\PSoC5/TimerTX.c **** 
  166:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -218,56 +326,80 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  179:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  180:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_Enable(void) 
  181:Generated_Source\PSoC5/TimerTX.c **** {
-  28              		.loc 1 181 0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
+ 130              		.loc 1 181 0
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 1, uses_anonymous_args = 0
+ 134              		@ link register save eliminated.
+ 135 0000 80B4     		push	{r7}
+ 136              		.cfi_def_cfa_offset 4
+ 137              		.cfi_offset 7, -4
+ 138 0002 00AF     		add	r7, sp, #0
+ 139              		.cfi_def_cfa_register 7
  182:Generated_Source\PSoC5/TimerTX.c ****     /* Globally Enable the Fixed Function Block chosen */
  183:Generated_Source\PSoC5/TimerTX.c ****     #if (TimerTX_UsingFixedFunction)
  184:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_GLOBAL_ENABLE |= TimerTX_BLOCK_EN_MASK;
-  33              		.loc 1 184 0
-  34 0000 084A     		ldr	r2, .L2
-  35 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  36 0004 43F00103 		orr	r3, r3, #1
-  37 0008 1370     		strb	r3, [r2]
+ 140              		.loc 1 184 0
+ 141 0004 0D4A     		ldr	r2, .L5
+ 142 0006 0D4B     		ldr	r3, .L5
+ 143 0008 1B78     		ldrb	r3, [r3]
+ 144 000a DBB2     		uxtb	r3, r3
+ 145 000c 43F00103 		orr	r3, r3, #1
+ 146 0010 DBB2     		uxtb	r3, r3
+ 147 0012 1370     		strb	r3, [r2]
  185:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_GLOBAL_STBY_ENABLE |= TimerTX_BLOCK_STBY_EN_MASK;
-  38              		.loc 1 185 0
-  39 000a 1032     		adds	r2, r2, #16
-  40 000c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  41 000e 43F00103 		orr	r3, r3, #1
-  42 0012 1370     		strb	r3, [r2]
+ 148              		.loc 1 185 0
+ 149 0014 0A4A     		ldr	r2, .L5+4
+ 150 0016 0A4B     		ldr	r3, .L5+4
+ 151 0018 1B78     		ldrb	r3, [r3]
+ 152 001a DBB2     		uxtb	r3, r3
+ 153 001c 43F00103 		orr	r3, r3, #1
+ 154 0020 DBB2     		uxtb	r3, r3
+ 155 0022 1370     		strb	r3, [r2]
  186:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Set Enable bit for enabling Fixed function timer*/
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 5
-
-
  187:Generated_Source\PSoC5/TimerTX.c **** 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 7
+
+
  188:Generated_Source\PSoC5/TimerTX.c ****     /* Remove assignment if control register is removed */
  189:Generated_Source\PSoC5/TimerTX.c ****     #if (!TimerTX_UDB_CONTROL_REG_REMOVED || TimerTX_UsingFixedFunction)
  190:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_CONTROL |= TimerTX_CTRL_ENABLE;
-  43              		.loc 1 190 0
-  44 0014 02F64D32 		addw	r2, r2, #2893
-  45 0018 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  46 001a 43F00103 		orr	r3, r3, #1
-  47 001e 1370     		strb	r3, [r2]
-  48 0020 7047     		bx	lr
-  49              	.L3:
-  50 0022 00BF     		.align	2
-  51              	.L2:
-  52 0024 A3430040 		.word	1073759139
-  53              		.cfi_endproc
-  54              	.LFE1:
-  55              		.size	TimerTX_Enable, .-TimerTX_Enable
-  56              		.section	.text.TimerTX_Stop,"ax",%progbits
-  57              		.align	2
-  58              		.global	TimerTX_Stop
-  59              		.thumb
-  60              		.thumb_func
-  61              		.type	TimerTX_Stop, %function
-  62              	TimerTX_Stop:
-  63              	.LFB3:
+ 156              		.loc 1 190 0
+ 157 0024 074A     		ldr	r2, .L5+8
+ 158 0026 074B     		ldr	r3, .L5+8
+ 159 0028 1B78     		ldrb	r3, [r3]
+ 160 002a DBB2     		uxtb	r3, r3
+ 161 002c 43F00103 		orr	r3, r3, #1
+ 162 0030 DBB2     		uxtb	r3, r3
+ 163 0032 1370     		strb	r3, [r2]
  191:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Remove assignment if control register is removed */
  192:Generated_Source\PSoC5/TimerTX.c **** }
+ 164              		.loc 1 192 0
+ 165 0034 00BF     		nop
+ 166 0036 BD46     		mov	sp, r7
+ 167              		.cfi_def_cfa_register 13
+ 168              		@ sp needed
+ 169 0038 80BC     		pop	{r7}
+ 170              		.cfi_restore 7
+ 171              		.cfi_def_cfa_offset 0
+ 172 003a 7047     		bx	lr
+ 173              	.L6:
+ 174              		.align	2
+ 175              	.L5:
+ 176 003c A3430040 		.word	1073759139
+ 177 0040 B3430040 		.word	1073759155
+ 178 0044 004F0040 		.word	1073762048
+ 179              		.cfi_endproc
+ 180              	.LFE1:
+ 181              		.size	TimerTX_Enable, .-TimerTX_Enable
+ 182              		.section	.text.TimerTX_Start,"ax",%progbits
+ 183              		.align	2
+ 184              		.global	TimerTX_Start
+ 185              		.thumb
+ 186              		.thumb_func
+ 187              		.type	TimerTX_Start, %function
+ 188              	TimerTX_Start:
+ 189              	.LFB2:
  193:Generated_Source\PSoC5/TimerTX.c **** 
  194:Generated_Source\PSoC5/TimerTX.c **** 
  195:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -286,25 +418,70 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  208:Generated_Source\PSoC5/TimerTX.c **** *  void
  209:Generated_Source\PSoC5/TimerTX.c **** *
  210:Generated_Source\PSoC5/TimerTX.c **** * Global variables:
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 8
+
+
  211:Generated_Source\PSoC5/TimerTX.c **** *  TimerTX_initVar: Is modified when this function is called for the
  212:Generated_Source\PSoC5/TimerTX.c **** *   first time. Is used to ensure that initialization happens only once.
  213:Generated_Source\PSoC5/TimerTX.c **** *
  214:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  215:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_Start(void) 
  216:Generated_Source\PSoC5/TimerTX.c **** {
+ 190              		.loc 1 216 0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 1, uses_anonymous_args = 0
+ 194 0000 80B5     		push	{r7, lr}
+ 195              		.cfi_def_cfa_offset 8
+ 196              		.cfi_offset 7, -8
+ 197              		.cfi_offset 14, -4
+ 198 0002 00AF     		add	r7, sp, #0
+ 199              		.cfi_def_cfa_register 7
  217:Generated_Source\PSoC5/TimerTX.c ****     if(TimerTX_initVar == 0u)
+ 200              		.loc 1 217 0
+ 201 0004 064B     		ldr	r3, .L9
+ 202 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 203 0008 002B     		cmp	r3, #0
+ 204 000a 04D1     		bne	.L8
  218:Generated_Source\PSoC5/TimerTX.c ****     {
  219:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_Init();
+ 205              		.loc 1 219 0
+ 206 000c FFF7FEFF 		bl	TimerTX_Init
  220:Generated_Source\PSoC5/TimerTX.c **** 
  221:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_initVar = 1u;   /* Clear this bit for Initialization */
+ 207              		.loc 1 221 0
+ 208 0010 034B     		ldr	r3, .L9
+ 209 0012 0122     		movs	r2, #1
+ 210 0014 1A70     		strb	r2, [r3]
+ 211              	.L8:
  222:Generated_Source\PSoC5/TimerTX.c ****     }
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 6
-
-
  223:Generated_Source\PSoC5/TimerTX.c **** 
  224:Generated_Source\PSoC5/TimerTX.c ****     /* Enable the Timer */
  225:Generated_Source\PSoC5/TimerTX.c ****     TimerTX_Enable();
+ 212              		.loc 1 225 0
+ 213 0016 FFF7FEFF 		bl	TimerTX_Enable
  226:Generated_Source\PSoC5/TimerTX.c **** }
+ 214              		.loc 1 226 0
+ 215 001a 00BF     		nop
+ 216 001c 80BD     		pop	{r7, pc}
+ 217              	.L10:
+ 218 001e 00BF     		.align	2
+ 219              	.L9:
+ 220 0020 00000000 		.word	TimerTX_initVar
+ 221              		.cfi_endproc
+ 222              	.LFE2:
+ 223              		.size	TimerTX_Start, .-TimerTX_Start
+ 224              		.section	.text.TimerTX_Stop,"ax",%progbits
+ 225              		.align	2
+ 226              		.global	TimerTX_Stop
+ 227              		.thumb
+ 228              		.thumb_func
+ 229              		.type	TimerTX_Stop, %function
+ 230              	TimerTX_Stop:
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 9
+
+
+ 231              	.LFB3:
  227:Generated_Source\PSoC5/TimerTX.c **** 
  228:Generated_Source\PSoC5/TimerTX.c **** 
  229:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -327,56 +504,80 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  246:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  247:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_Stop(void) 
  248:Generated_Source\PSoC5/TimerTX.c **** {
-  64              		.loc 1 248 0
-  65              		.cfi_startproc
-  66              		@ args = 0, pretend = 0, frame = 0
-  67              		@ frame_needed = 0, uses_anonymous_args = 0
-  68              		@ link register save eliminated.
+ 232              		.loc 1 248 0
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 0
+ 235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 236              		@ link register save eliminated.
+ 237 0000 80B4     		push	{r7}
+ 238              		.cfi_def_cfa_offset 4
+ 239              		.cfi_offset 7, -4
+ 240 0002 00AF     		add	r7, sp, #0
+ 241              		.cfi_def_cfa_register 7
  249:Generated_Source\PSoC5/TimerTX.c ****     /* Disable Timer */
  250:Generated_Source\PSoC5/TimerTX.c ****     #if(!TimerTX_UDB_CONTROL_REG_REMOVED || TimerTX_UsingFixedFunction)
  251:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_CONTROL &= ((uint8)(~TimerTX_CTRL_ENABLE));
-  69              		.loc 1 251 0
-  70 0000 084A     		ldr	r2, .L5
-  71 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  72 0004 03F0FE03 		and	r3, r3, #254
-  73 0008 1370     		strb	r3, [r2]
+ 242              		.loc 1 251 0
+ 243 0004 0D4A     		ldr	r2, .L12
+ 244 0006 0D4B     		ldr	r3, .L12
+ 245 0008 1B78     		ldrb	r3, [r3]
+ 246 000a DBB2     		uxtb	r3, r3
+ 247 000c 23F00103 		bic	r3, r3, #1
+ 248 0010 DBB2     		uxtb	r3, r3
+ 249 0012 1370     		strb	r3, [r2]
  252:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Remove assignment if control register is removed */
  253:Generated_Source\PSoC5/TimerTX.c **** 
  254:Generated_Source\PSoC5/TimerTX.c ****     /* Globally disable the Fixed Function Block chosen */
  255:Generated_Source\PSoC5/TimerTX.c ****     #if (TimerTX_UsingFixedFunction)
  256:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_GLOBAL_ENABLE &= ((uint8)(~TimerTX_BLOCK_EN_MASK));
-  74              		.loc 1 256 0
-  75 000a A2F65D32 		subw	r2, r2, #2909
-  76 000e 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  77 0010 03F0FE03 		and	r3, r3, #254
-  78 0014 1370     		strb	r3, [r2]
+ 250              		.loc 1 256 0
+ 251 0014 0A4A     		ldr	r2, .L12+4
+ 252 0016 0A4B     		ldr	r3, .L12+4
+ 253 0018 1B78     		ldrb	r3, [r3]
+ 254 001a DBB2     		uxtb	r3, r3
+ 255 001c 23F00103 		bic	r3, r3, #1
+ 256 0020 DBB2     		uxtb	r3, r3
+ 257 0022 1370     		strb	r3, [r2]
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 10
+
+
  257:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_GLOBAL_STBY_ENABLE &= ((uint8)(~TimerTX_BLOCK_STBY_EN_MASK));
-  79              		.loc 1 257 0
-  80 0016 1032     		adds	r2, r2, #16
-  81 0018 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  82 001a 03F0FE03 		and	r3, r3, #254
-  83 001e 1370     		strb	r3, [r2]
-  84 0020 7047     		bx	lr
-  85              	.L6:
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 7
-
-
-  86 0022 00BF     		.align	2
-  87              	.L5:
-  88 0024 004F0040 		.word	1073762048
-  89              		.cfi_endproc
-  90              	.LFE3:
-  91              		.size	TimerTX_Stop, .-TimerTX_Stop
-  92              		.section	.text.TimerTX_SetInterruptMode,"ax",%progbits
-  93              		.align	2
-  94              		.global	TimerTX_SetInterruptMode
-  95              		.thumb
-  96              		.thumb_func
-  97              		.type	TimerTX_SetInterruptMode, %function
-  98              	TimerTX_SetInterruptMode:
-  99              	.LFB4:
+ 258              		.loc 1 257 0
+ 259 0024 074A     		ldr	r2, .L12+8
+ 260 0026 074B     		ldr	r3, .L12+8
+ 261 0028 1B78     		ldrb	r3, [r3]
+ 262 002a DBB2     		uxtb	r3, r3
+ 263 002c 23F00103 		bic	r3, r3, #1
+ 264 0030 DBB2     		uxtb	r3, r3
+ 265 0032 1370     		strb	r3, [r2]
  258:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Disable global enable for the Timer Fixed function block to stop the Timer*/
  259:Generated_Source\PSoC5/TimerTX.c **** }
+ 266              		.loc 1 259 0
+ 267 0034 00BF     		nop
+ 268 0036 BD46     		mov	sp, r7
+ 269              		.cfi_def_cfa_register 13
+ 270              		@ sp needed
+ 271 0038 80BC     		pop	{r7}
+ 272              		.cfi_restore 7
+ 273              		.cfi_def_cfa_offset 0
+ 274 003a 7047     		bx	lr
+ 275              	.L13:
+ 276              		.align	2
+ 277              	.L12:
+ 278 003c 004F0040 		.word	1073762048
+ 279 0040 A3430040 		.word	1073759139
+ 280 0044 B3430040 		.word	1073759155
+ 281              		.cfi_endproc
+ 282              	.LFE3:
+ 283              		.size	TimerTX_Stop, .-TimerTX_Stop
+ 284              		.section	.text.TimerTX_SetInterruptMode,"ax",%progbits
+ 285              		.align	2
+ 286              		.global	TimerTX_SetInterruptMode
+ 287              		.thumb
+ 288              		.thumb_func
+ 289              		.type	TimerTX_SetInterruptMode, %function
+ 290              	TimerTX_SetInterruptMode:
+ 291              	.LFB4:
  260:Generated_Source\PSoC5/TimerTX.c **** 
  261:Generated_Source\PSoC5/TimerTX.c **** 
  262:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -397,37 +598,56 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  277:Generated_Source\PSoC5/TimerTX.c **** *
  278:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  279:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_SetInterruptMode(uint8 interruptMode) 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 11
+
+
  280:Generated_Source\PSoC5/TimerTX.c **** {
- 100              		.loc 1 280 0
- 101              		.cfi_startproc
- 102              		@ args = 0, pretend = 0, frame = 0
- 103              		@ frame_needed = 0, uses_anonymous_args = 0
- 104              		@ link register save eliminated.
- 105              	.LVL0:
+ 292              		.loc 1 280 0
+ 293              		.cfi_startproc
+ 294              		@ args = 0, pretend = 0, frame = 8
+ 295              		@ frame_needed = 1, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+ 297 0000 80B4     		push	{r7}
+ 298              		.cfi_def_cfa_offset 4
+ 299              		.cfi_offset 7, -4
+ 300 0002 83B0     		sub	sp, sp, #12
+ 301              		.cfi_def_cfa_offset 16
+ 302 0004 00AF     		add	r7, sp, #0
+ 303              		.cfi_def_cfa_register 7
+ 304 0006 0346     		mov	r3, r0
+ 305 0008 FB71     		strb	r3, [r7, #7]
  281:Generated_Source\PSoC5/TimerTX.c ****     TimerTX_STATUS_MASK = interruptMode;
- 106              		.loc 1 281 0
- 107 0000 014B     		ldr	r3, .L8
- 108 0002 1870     		strb	r0, [r3]
- 109 0004 7047     		bx	lr
- 110              	.L9:
- 111 0006 00BF     		.align	2
- 112              	.L8:
- 113 0008 034F0040 		.word	1073762051
- 114              		.cfi_endproc
- 115              	.LFE4:
- 116              		.size	TimerTX_SetInterruptMode, .-TimerTX_SetInterruptMode
- 117              		.section	.text.TimerTX_SoftwareCapture,"ax",%progbits
- 118              		.align	2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 8
-
-
- 119              		.global	TimerTX_SoftwareCapture
- 120              		.thumb
- 121              		.thumb_func
- 122              		.type	TimerTX_SoftwareCapture, %function
- 123              	TimerTX_SoftwareCapture:
- 124              	.LFB5:
+ 306              		.loc 1 281 0
+ 307 000a 044A     		ldr	r2, .L15
+ 308 000c FB79     		ldrb	r3, [r7, #7]
+ 309 000e 1370     		strb	r3, [r2]
  282:Generated_Source\PSoC5/TimerTX.c **** }
+ 310              		.loc 1 282 0
+ 311 0010 00BF     		nop
+ 312 0012 0C37     		adds	r7, r7, #12
+ 313              		.cfi_def_cfa_offset 4
+ 314 0014 BD46     		mov	sp, r7
+ 315              		.cfi_def_cfa_register 13
+ 316              		@ sp needed
+ 317 0016 80BC     		pop	{r7}
+ 318              		.cfi_restore 7
+ 319              		.cfi_def_cfa_offset 0
+ 320 0018 7047     		bx	lr
+ 321              	.L16:
+ 322 001a 00BF     		.align	2
+ 323              	.L15:
+ 324 001c 034F0040 		.word	1073762051
+ 325              		.cfi_endproc
+ 326              	.LFE4:
+ 327              		.size	TimerTX_SetInterruptMode, .-TimerTX_SetInterruptMode
+ 328              		.section	.text.TimerTX_SoftwareCapture,"ax",%progbits
+ 329              		.align	2
+ 330              		.global	TimerTX_SoftwareCapture
+ 331              		.thumb
+ 332              		.thumb_func
+ 333              		.type	TimerTX_SoftwareCapture, %function
+ 334              	TimerTX_SoftwareCapture:
+ 335              	.LFB5:
  283:Generated_Source\PSoC5/TimerTX.c **** 
  284:Generated_Source\PSoC5/TimerTX.c **** 
  285:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -438,6 +658,9 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  290:Generated_Source\PSoC5/TimerTX.c **** *  This function forces a capture independent of the capture signal.
  291:Generated_Source\PSoC5/TimerTX.c **** *
  292:Generated_Source\PSoC5/TimerTX.c **** * Parameters:
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 12
+
+
  293:Generated_Source\PSoC5/TimerTX.c **** *  void
  294:Generated_Source\PSoC5/TimerTX.c **** *
  295:Generated_Source\PSoC5/TimerTX.c **** * Return:
@@ -449,42 +672,55 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  301:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  302:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_SoftwareCapture(void) 
  303:Generated_Source\PSoC5/TimerTX.c **** {
- 125              		.loc 1 303 0
- 126              		.cfi_startproc
- 127              		@ args = 0, pretend = 0, frame = 0
- 128              		@ frame_needed = 0, uses_anonymous_args = 0
- 129              		@ link register save eliminated.
+ 336              		.loc 1 303 0
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 0
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340              		@ link register save eliminated.
+ 341 0000 80B4     		push	{r7}
+ 342              		.cfi_def_cfa_offset 4
+ 343              		.cfi_offset 7, -4
+ 344 0002 00AF     		add	r7, sp, #0
+ 345              		.cfi_def_cfa_register 7
  304:Generated_Source\PSoC5/TimerTX.c ****     /* Generate a software capture by reading the counter register */
  305:Generated_Source\PSoC5/TimerTX.c ****     #if(TimerTX_UsingFixedFunction)
  306:Generated_Source\PSoC5/TimerTX.c ****         (void)CY_GET_REG16(TimerTX_COUNTER_LSB_PTR);
- 130              		.loc 1 306 0
- 131 0000 014B     		ldr	r3, .L11
- 132 0002 1B88     		ldrh	r3, [r3]
- 133 0004 7047     		bx	lr
- 134              	.L12:
- 135 0006 00BF     		.align	2
- 136              	.L11:
- 137 0008 064F0040 		.word	1073762054
- 138              		.cfi_endproc
- 139              	.LFE5:
- 140              		.size	TimerTX_SoftwareCapture, .-TimerTX_SoftwareCapture
- 141              		.section	.text.TimerTX_ReadStatusRegister,"ax",%progbits
- 142              		.align	2
- 143              		.global	TimerTX_ReadStatusRegister
- 144              		.thumb
- 145              		.thumb_func
- 146              		.type	TimerTX_ReadStatusRegister, %function
- 147              	TimerTX_ReadStatusRegister:
- 148              	.LFB6:
+ 346              		.loc 1 306 0
+ 347 0004 024B     		ldr	r3, .L18
+ 348 0006 1B88     		ldrh	r3, [r3]	@ movhi
  307:Generated_Source\PSoC5/TimerTX.c ****     #else
  308:Generated_Source\PSoC5/TimerTX.c ****         (void)CY_GET_REG8(TimerTX_COUNTER_LSB_PTR_8BIT);
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 9
-
-
  309:Generated_Source\PSoC5/TimerTX.c ****     #endif/* (TimerTX_UsingFixedFunction) */
  310:Generated_Source\PSoC5/TimerTX.c ****     /* Capture Data is now in the FIFO */
  311:Generated_Source\PSoC5/TimerTX.c **** }
+ 349              		.loc 1 311 0
+ 350 0008 00BF     		nop
+ 351 000a BD46     		mov	sp, r7
+ 352              		.cfi_def_cfa_register 13
+ 353              		@ sp needed
+ 354 000c 80BC     		pop	{r7}
+ 355              		.cfi_restore 7
+ 356              		.cfi_def_cfa_offset 0
+ 357 000e 7047     		bx	lr
+ 358              	.L19:
+ 359              		.align	2
+ 360              	.L18:
+ 361 0010 064F0040 		.word	1073762054
+ 362              		.cfi_endproc
+ 363              	.LFE5:
+ 364              		.size	TimerTX_SoftwareCapture, .-TimerTX_SoftwareCapture
+ 365              		.section	.text.TimerTX_ReadStatusRegister,"ax",%progbits
+ 366              		.align	2
+ 367              		.global	TimerTX_ReadStatusRegister
+ 368              		.thumb
+ 369              		.thumb_func
+ 370              		.type	TimerTX_ReadStatusRegister, %function
+ 371              	TimerTX_ReadStatusRegister:
+ 372              	.LFB6:
  312:Generated_Source\PSoC5/TimerTX.c **** 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 13
+
+
  313:Generated_Source\PSoC5/TimerTX.c **** 
  314:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
  315:Generated_Source\PSoC5/TimerTX.c **** * Function Name: TimerTX_ReadStatusRegister
@@ -507,40 +743,53 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  332:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  333:Generated_Source\PSoC5/TimerTX.c **** uint8   TimerTX_ReadStatusRegister(void) 
  334:Generated_Source\PSoC5/TimerTX.c **** {
- 149              		.loc 1 334 0
- 150              		.cfi_startproc
- 151              		@ args = 0, pretend = 0, frame = 0
- 152              		@ frame_needed = 0, uses_anonymous_args = 0
- 153              		@ link register save eliminated.
+ 373              		.loc 1 334 0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 1, uses_anonymous_args = 0
+ 377              		@ link register save eliminated.
+ 378 0000 80B4     		push	{r7}
+ 379              		.cfi_def_cfa_offset 4
+ 380              		.cfi_offset 7, -4
+ 381 0002 00AF     		add	r7, sp, #0
+ 382              		.cfi_def_cfa_register 7
  335:Generated_Source\PSoC5/TimerTX.c ****     return (TimerTX_STATUS);
- 154              		.loc 1 335 0
- 155 0000 014B     		ldr	r3, .L14
- 156 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 383              		.loc 1 335 0
+ 384 0004 034B     		ldr	r3, .L22
+ 385 0006 1B78     		ldrb	r3, [r3]
+ 386 0008 DBB2     		uxtb	r3, r3
  336:Generated_Source\PSoC5/TimerTX.c **** }
- 157              		.loc 1 336 0
- 158 0004 7047     		bx	lr
- 159              	.L15:
- 160 0006 00BF     		.align	2
- 161              	.L14:
- 162 0008 034F0040 		.word	1073762051
- 163              		.cfi_endproc
- 164              	.LFE6:
- 165              		.size	TimerTX_ReadStatusRegister, .-TimerTX_ReadStatusRegister
- 166              		.section	.text.TimerTX_ReadControlRegister,"ax",%progbits
- 167              		.align	2
- 168              		.global	TimerTX_ReadControlRegister
- 169              		.thumb
- 170              		.thumb_func
- 171              		.type	TimerTX_ReadControlRegister, %function
- 172              	TimerTX_ReadControlRegister:
- 173              	.LFB7:
+ 387              		.loc 1 336 0
+ 388 000a 1846     		mov	r0, r3
+ 389 000c BD46     		mov	sp, r7
+ 390              		.cfi_def_cfa_register 13
+ 391              		@ sp needed
+ 392 000e 80BC     		pop	{r7}
+ 393              		.cfi_restore 7
+ 394              		.cfi_def_cfa_offset 0
+ 395 0010 7047     		bx	lr
+ 396              	.L23:
+ 397 0012 00BF     		.align	2
+ 398              	.L22:
+ 399 0014 034F0040 		.word	1073762051
+ 400              		.cfi_endproc
+ 401              	.LFE6:
+ 402              		.size	TimerTX_ReadStatusRegister, .-TimerTX_ReadStatusRegister
+ 403              		.section	.text.TimerTX_ReadControlRegister,"ax",%progbits
+ 404              		.align	2
+ 405              		.global	TimerTX_ReadControlRegister
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 14
+
+
+ 406              		.thumb
+ 407              		.thumb_func
+ 408              		.type	TimerTX_ReadControlRegister, %function
+ 409              	TimerTX_ReadControlRegister:
+ 410              	.LFB7:
  337:Generated_Source\PSoC5/TimerTX.c **** 
  338:Generated_Source\PSoC5/TimerTX.c **** 
  339:Generated_Source\PSoC5/TimerTX.c **** #if (!TimerTX_UDB_CONTROL_REG_REMOVED) /* Remove API if control register is unused */
  340:Generated_Source\PSoC5/TimerTX.c **** 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 10
-
-
  341:Generated_Source\PSoC5/TimerTX.c **** 
  342:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
  343:Generated_Source\PSoC5/TimerTX.c **** * Function Name: TimerTX_ReadControlRegister
@@ -558,37 +807,53 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  355:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  356:Generated_Source\PSoC5/TimerTX.c **** uint8 TimerTX_ReadControlRegister(void) 
  357:Generated_Source\PSoC5/TimerTX.c **** {
- 174              		.loc 1 357 0
- 175              		.cfi_startproc
- 176              		@ args = 0, pretend = 0, frame = 0
- 177              		@ frame_needed = 0, uses_anonymous_args = 0
- 178              		@ link register save eliminated.
+ 411              		.loc 1 357 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 1, uses_anonymous_args = 0
+ 415              		@ link register save eliminated.
+ 416 0000 80B4     		push	{r7}
+ 417              		.cfi_def_cfa_offset 4
+ 418              		.cfi_offset 7, -4
+ 419 0002 00AF     		add	r7, sp, #0
+ 420              		.cfi_def_cfa_register 7
  358:Generated_Source\PSoC5/TimerTX.c ****     #if (!TimerTX_UDB_CONTROL_REG_REMOVED) 
  359:Generated_Source\PSoC5/TimerTX.c ****         return ((uint8)TimerTX_CONTROL);
- 179              		.loc 1 359 0
- 180 0000 014B     		ldr	r3, .L17
- 181 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 421              		.loc 1 359 0
+ 422 0004 034B     		ldr	r3, .L26
+ 423 0006 1B78     		ldrb	r3, [r3]
+ 424 0008 DBB2     		uxtb	r3, r3
  360:Generated_Source\PSoC5/TimerTX.c ****     #else
  361:Generated_Source\PSoC5/TimerTX.c ****         return (0);
  362:Generated_Source\PSoC5/TimerTX.c ****     #endif /* (!TimerTX_UDB_CONTROL_REG_REMOVED) */
  363:Generated_Source\PSoC5/TimerTX.c **** }
- 182              		.loc 1 363 0
- 183 0004 7047     		bx	lr
- 184              	.L18:
- 185 0006 00BF     		.align	2
- 186              	.L17:
- 187 0008 004F0040 		.word	1073762048
- 188              		.cfi_endproc
- 189              	.LFE7:
- 190              		.size	TimerTX_ReadControlRegister, .-TimerTX_ReadControlRegister
- 191              		.section	.text.TimerTX_WriteControlRegister,"ax",%progbits
- 192              		.align	2
- 193              		.global	TimerTX_WriteControlRegister
- 194              		.thumb
- 195              		.thumb_func
- 196              		.type	TimerTX_WriteControlRegister, %function
- 197              	TimerTX_WriteControlRegister:
- 198              	.LFB8:
+ 425              		.loc 1 363 0
+ 426 000a 1846     		mov	r0, r3
+ 427 000c BD46     		mov	sp, r7
+ 428              		.cfi_def_cfa_register 13
+ 429              		@ sp needed
+ 430 000e 80BC     		pop	{r7}
+ 431              		.cfi_restore 7
+ 432              		.cfi_def_cfa_offset 0
+ 433 0010 7047     		bx	lr
+ 434              	.L27:
+ 435 0012 00BF     		.align	2
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 15
+
+
+ 436              	.L26:
+ 437 0014 004F0040 		.word	1073762048
+ 438              		.cfi_endproc
+ 439              	.LFE7:
+ 440              		.size	TimerTX_ReadControlRegister, .-TimerTX_ReadControlRegister
+ 441              		.section	.text.TimerTX_WriteControlRegister,"ax",%progbits
+ 442              		.align	2
+ 443              		.global	TimerTX_WriteControlRegister
+ 444              		.thumb
+ 445              		.thumb_func
+ 446              		.type	TimerTX_WriteControlRegister, %function
+ 447              	TimerTX_WriteControlRegister:
+ 448              	.LFB8:
  364:Generated_Source\PSoC5/TimerTX.c **** 
  365:Generated_Source\PSoC5/TimerTX.c **** 
  366:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -598,9 +863,6 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  370:Generated_Source\PSoC5/TimerTX.c **** * Summary:
  371:Generated_Source\PSoC5/TimerTX.c **** *  Sets the bit-field of the control register.
  372:Generated_Source\PSoC5/TimerTX.c **** *
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 11
-
-
  373:Generated_Source\PSoC5/TimerTX.c **** * Parameters:
  374:Generated_Source\PSoC5/TimerTX.c **** *  control: The contents of the control register
  375:Generated_Source\PSoC5/TimerTX.c **** *
@@ -609,37 +871,59 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  378:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  379:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_WriteControlRegister(uint8 control) 
  380:Generated_Source\PSoC5/TimerTX.c **** {
- 199              		.loc 1 380 0
- 200              		.cfi_startproc
- 201              		@ args = 0, pretend = 0, frame = 0
- 202              		@ frame_needed = 0, uses_anonymous_args = 0
- 203              		@ link register save eliminated.
- 204              	.LVL1:
+ 449              		.loc 1 380 0
+ 450              		.cfi_startproc
+ 451              		@ args = 0, pretend = 0, frame = 8
+ 452              		@ frame_needed = 1, uses_anonymous_args = 0
+ 453              		@ link register save eliminated.
+ 454 0000 80B4     		push	{r7}
+ 455              		.cfi_def_cfa_offset 4
+ 456              		.cfi_offset 7, -4
+ 457 0002 83B0     		sub	sp, sp, #12
+ 458              		.cfi_def_cfa_offset 16
+ 459 0004 00AF     		add	r7, sp, #0
+ 460              		.cfi_def_cfa_register 7
+ 461 0006 0346     		mov	r3, r0
+ 462 0008 FB71     		strb	r3, [r7, #7]
  381:Generated_Source\PSoC5/TimerTX.c ****     #if (!TimerTX_UDB_CONTROL_REG_REMOVED) 
  382:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_CONTROL = control;
- 205              		.loc 1 382 0
- 206 0000 014B     		ldr	r3, .L20
- 207 0002 1870     		strb	r0, [r3]
- 208 0004 7047     		bx	lr
- 209              	.L21:
- 210 0006 00BF     		.align	2
- 211              	.L20:
- 212 0008 004F0040 		.word	1073762048
- 213              		.cfi_endproc
- 214              	.LFE8:
- 215              		.size	TimerTX_WriteControlRegister, .-TimerTX_WriteControlRegister
- 216              		.section	.text.TimerTX_ReadPeriod,"ax",%progbits
- 217              		.align	2
- 218              		.global	TimerTX_ReadPeriod
- 219              		.thumb
- 220              		.thumb_func
- 221              		.type	TimerTX_ReadPeriod, %function
- 222              	TimerTX_ReadPeriod:
- 223              	.LFB9:
+ 463              		.loc 1 382 0
+ 464 000a 044A     		ldr	r2, .L29
+ 465 000c FB79     		ldrb	r3, [r7, #7]
+ 466 000e 1370     		strb	r3, [r2]
  383:Generated_Source\PSoC5/TimerTX.c ****     #else
  384:Generated_Source\PSoC5/TimerTX.c ****         control = 0u;
  385:Generated_Source\PSoC5/TimerTX.c ****     #endif /* (!TimerTX_UDB_CONTROL_REG_REMOVED) */
  386:Generated_Source\PSoC5/TimerTX.c **** }
+ 467              		.loc 1 386 0
+ 468 0010 00BF     		nop
+ 469 0012 0C37     		adds	r7, r7, #12
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 16
+
+
+ 470              		.cfi_def_cfa_offset 4
+ 471 0014 BD46     		mov	sp, r7
+ 472              		.cfi_def_cfa_register 13
+ 473              		@ sp needed
+ 474 0016 80BC     		pop	{r7}
+ 475              		.cfi_restore 7
+ 476              		.cfi_def_cfa_offset 0
+ 477 0018 7047     		bx	lr
+ 478              	.L30:
+ 479 001a 00BF     		.align	2
+ 480              	.L29:
+ 481 001c 004F0040 		.word	1073762048
+ 482              		.cfi_endproc
+ 483              	.LFE8:
+ 484              		.size	TimerTX_WriteControlRegister, .-TimerTX_WriteControlRegister
+ 485              		.section	.text.TimerTX_ReadPeriod,"ax",%progbits
+ 486              		.align	2
+ 487              		.global	TimerTX_ReadPeriod
+ 488              		.thumb
+ 489              		.thumb_func
+ 490              		.type	TimerTX_ReadPeriod, %function
+ 491              	TimerTX_ReadPeriod:
+ 492              	.LFB9:
  387:Generated_Source\PSoC5/TimerTX.c **** 
  388:Generated_Source\PSoC5/TimerTX.c **** #endif /* Remove API if control register is unused */
  389:Generated_Source\PSoC5/TimerTX.c **** 
@@ -658,43 +942,55 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  402:Generated_Source\PSoC5/TimerTX.c **** *  The present value of the counter.
  403:Generated_Source\PSoC5/TimerTX.c **** *
  404:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 12
-
-
  405:Generated_Source\PSoC5/TimerTX.c **** uint16 TimerTX_ReadPeriod(void) 
  406:Generated_Source\PSoC5/TimerTX.c **** {
- 224              		.loc 1 406 0
- 225              		.cfi_startproc
- 226              		@ args = 0, pretend = 0, frame = 0
- 227              		@ frame_needed = 0, uses_anonymous_args = 0
- 228              		@ link register save eliminated.
+ 493              		.loc 1 406 0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 1, uses_anonymous_args = 0
+ 497              		@ link register save eliminated.
+ 498 0000 80B4     		push	{r7}
+ 499              		.cfi_def_cfa_offset 4
+ 500              		.cfi_offset 7, -4
+ 501 0002 00AF     		add	r7, sp, #0
+ 502              		.cfi_def_cfa_register 7
  407:Generated_Source\PSoC5/TimerTX.c ****    #if(TimerTX_UsingFixedFunction)
  408:Generated_Source\PSoC5/TimerTX.c ****        return ((uint16)CY_GET_REG16(TimerTX_PERIOD_LSB_PTR));
- 229              		.loc 1 408 0
- 230 0000 014B     		ldr	r3, .L23
- 231 0002 1888     		ldrh	r0, [r3]
+ 503              		.loc 1 408 0
+ 504 0004 034B     		ldr	r3, .L33
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 17
+
+
+ 505 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 506 0008 9BB2     		uxth	r3, r3
  409:Generated_Source\PSoC5/TimerTX.c ****    #else
  410:Generated_Source\PSoC5/TimerTX.c ****        return (CY_GET_REG16(TimerTX_PERIOD_LSB_PTR));
  411:Generated_Source\PSoC5/TimerTX.c ****    #endif /* (TimerTX_UsingFixedFunction) */
  412:Generated_Source\PSoC5/TimerTX.c **** }
- 232              		.loc 1 412 0
- 233 0004 80B2     		uxth	r0, r0
- 234 0006 7047     		bx	lr
- 235              	.L24:
- 236              		.align	2
- 237              	.L23:
- 238 0008 044F0040 		.word	1073762052
- 239              		.cfi_endproc
- 240              	.LFE9:
- 241              		.size	TimerTX_ReadPeriod, .-TimerTX_ReadPeriod
- 242              		.section	.text.TimerTX_WritePeriod,"ax",%progbits
- 243              		.align	2
- 244              		.global	TimerTX_WritePeriod
- 245              		.thumb
- 246              		.thumb_func
- 247              		.type	TimerTX_WritePeriod, %function
- 248              	TimerTX_WritePeriod:
- 249              	.LFB10:
+ 507              		.loc 1 412 0
+ 508 000a 1846     		mov	r0, r3
+ 509 000c BD46     		mov	sp, r7
+ 510              		.cfi_def_cfa_register 13
+ 511              		@ sp needed
+ 512 000e 80BC     		pop	{r7}
+ 513              		.cfi_restore 7
+ 514              		.cfi_def_cfa_offset 0
+ 515 0010 7047     		bx	lr
+ 516              	.L34:
+ 517 0012 00BF     		.align	2
+ 518              	.L33:
+ 519 0014 044F0040 		.word	1073762052
+ 520              		.cfi_endproc
+ 521              	.LFE9:
+ 522              		.size	TimerTX_ReadPeriod, .-TimerTX_ReadPeriod
+ 523              		.section	.text.TimerTX_WritePeriod,"ax",%progbits
+ 524              		.align	2
+ 525              		.global	TimerTX_WritePeriod
+ 526              		.thumb
+ 527              		.thumb_func
+ 528              		.type	TimerTX_WritePeriod, %function
+ 529              	TimerTX_WritePeriod:
+ 530              	.LFB10:
  413:Generated_Source\PSoC5/TimerTX.c **** 
  414:Generated_Source\PSoC5/TimerTX.c **** 
  415:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -715,41 +1011,63 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  430:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  431:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_WritePeriod(uint16 period) 
  432:Generated_Source\PSoC5/TimerTX.c **** {
- 250              		.loc 1 432 0
- 251              		.cfi_startproc
- 252              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 13
+ 531              		.loc 1 432 0
+ 532              		.cfi_startproc
+ 533              		@ args = 0, pretend = 0, frame = 16
+ 534              		@ frame_needed = 1, uses_anonymous_args = 0
+ 535              		@ link register save eliminated.
+ 536 0000 80B4     		push	{r7}
+ 537              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 18
 
 
- 253              		@ frame_needed = 0, uses_anonymous_args = 0
- 254              		@ link register save eliminated.
- 255              	.LVL2:
+ 538              		.cfi_offset 7, -4
+ 539 0002 85B0     		sub	sp, sp, #20
+ 540              		.cfi_def_cfa_offset 24
+ 541 0004 00AF     		add	r7, sp, #0
+ 542              		.cfi_def_cfa_register 7
+ 543 0006 0346     		mov	r3, r0
+ 544 0008 FB80     		strh	r3, [r7, #6]	@ movhi
  433:Generated_Source\PSoC5/TimerTX.c ****     #if(TimerTX_UsingFixedFunction)
  434:Generated_Source\PSoC5/TimerTX.c ****         uint16 period_temp = (uint16)period;
+ 545              		.loc 1 434 0
+ 546 000a FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 547 000c FB81     		strh	r3, [r7, #14]	@ movhi
  435:Generated_Source\PSoC5/TimerTX.c ****         CY_SET_REG16(TimerTX_PERIOD_LSB_PTR, period_temp);
- 256              		.loc 1 435 0
- 257 0000 014B     		ldr	r3, .L26
- 258 0002 1880     		strh	r0, [r3]	@ movhi
- 259 0004 7047     		bx	lr
- 260              	.L27:
- 261 0006 00BF     		.align	2
- 262              	.L26:
- 263 0008 044F0040 		.word	1073762052
- 264              		.cfi_endproc
- 265              	.LFE10:
- 266              		.size	TimerTX_WritePeriod, .-TimerTX_WritePeriod
- 267              		.section	.text.TimerTX_ReadCapture,"ax",%progbits
- 268              		.align	2
- 269              		.global	TimerTX_ReadCapture
- 270              		.thumb
- 271              		.thumb_func
- 272              		.type	TimerTX_ReadCapture, %function
- 273              	TimerTX_ReadCapture:
- 274              	.LFB11:
+ 548              		.loc 1 435 0
+ 549 000e 044A     		ldr	r2, .L36
+ 550 0010 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 551 0012 1380     		strh	r3, [r2]	@ movhi
  436:Generated_Source\PSoC5/TimerTX.c ****     #else
  437:Generated_Source\PSoC5/TimerTX.c ****         CY_SET_REG16(TimerTX_PERIOD_LSB_PTR, period);
  438:Generated_Source\PSoC5/TimerTX.c ****     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed functi
  439:Generated_Source\PSoC5/TimerTX.c **** }
+ 552              		.loc 1 439 0
+ 553 0014 00BF     		nop
+ 554 0016 1437     		adds	r7, r7, #20
+ 555              		.cfi_def_cfa_offset 4
+ 556 0018 BD46     		mov	sp, r7
+ 557              		.cfi_def_cfa_register 13
+ 558              		@ sp needed
+ 559 001a 80BC     		pop	{r7}
+ 560              		.cfi_restore 7
+ 561              		.cfi_def_cfa_offset 0
+ 562 001c 7047     		bx	lr
+ 563              	.L37:
+ 564 001e 00BF     		.align	2
+ 565              	.L36:
+ 566 0020 044F0040 		.word	1073762052
+ 567              		.cfi_endproc
+ 568              	.LFE10:
+ 569              		.size	TimerTX_WritePeriod, .-TimerTX_WritePeriod
+ 570              		.section	.text.TimerTX_ReadCapture,"ax",%progbits
+ 571              		.align	2
+ 572              		.global	TimerTX_ReadCapture
+ 573              		.thumb
+ 574              		.thumb_func
+ 575              		.type	TimerTX_ReadCapture, %function
+ 576              	TimerTX_ReadCapture:
+ 577              	.LFB11:
  440:Generated_Source\PSoC5/TimerTX.c **** 
  441:Generated_Source\PSoC5/TimerTX.c **** 
  442:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -760,6 +1078,9 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  447:Generated_Source\PSoC5/TimerTX.c **** *  This function returns the last value captured.
  448:Generated_Source\PSoC5/TimerTX.c **** *
  449:Generated_Source\PSoC5/TimerTX.c **** * Parameters:
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 19
+
+
  450:Generated_Source\PSoC5/TimerTX.c **** *  void
  451:Generated_Source\PSoC5/TimerTX.c **** *
  452:Generated_Source\PSoC5/TimerTX.c **** * Return:
@@ -768,46 +1089,58 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  455:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  456:Generated_Source\PSoC5/TimerTX.c **** uint16 TimerTX_ReadCapture(void) 
  457:Generated_Source\PSoC5/TimerTX.c **** {
- 275              		.loc 1 457 0
- 276              		.cfi_startproc
- 277              		@ args = 0, pretend = 0, frame = 0
- 278              		@ frame_needed = 0, uses_anonymous_args = 0
- 279              		@ link register save eliminated.
+ 578              		.loc 1 457 0
+ 579              		.cfi_startproc
+ 580              		@ args = 0, pretend = 0, frame = 0
+ 581              		@ frame_needed = 1, uses_anonymous_args = 0
+ 582              		@ link register save eliminated.
+ 583 0000 80B4     		push	{r7}
+ 584              		.cfi_def_cfa_offset 4
+ 585              		.cfi_offset 7, -4
+ 586 0002 00AF     		add	r7, sp, #0
+ 587              		.cfi_def_cfa_register 7
  458:Generated_Source\PSoC5/TimerTX.c ****    #if(TimerTX_UsingFixedFunction)
  459:Generated_Source\PSoC5/TimerTX.c ****        return ((uint16)CY_GET_REG16(TimerTX_CAPTURE_LSB_PTR));
- 280              		.loc 1 459 0
- 281 0000 014B     		ldr	r3, .L29
- 282 0002 1888     		ldrh	r0, [r3]
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 14
-
-
+ 588              		.loc 1 459 0
+ 589 0004 034B     		ldr	r3, .L40
+ 590 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 591 0008 9BB2     		uxth	r3, r3
  460:Generated_Source\PSoC5/TimerTX.c ****    #else
  461:Generated_Source\PSoC5/TimerTX.c ****        return (CY_GET_REG16(TimerTX_CAPTURE_LSB_PTR));
  462:Generated_Source\PSoC5/TimerTX.c ****    #endif /* (TimerTX_UsingFixedFunction) */
  463:Generated_Source\PSoC5/TimerTX.c **** }
- 283              		.loc 1 463 0
- 284 0004 80B2     		uxth	r0, r0
- 285 0006 7047     		bx	lr
- 286              	.L30:
- 287              		.align	2
- 288              	.L29:
- 289 0008 084F0040 		.word	1073762056
- 290              		.cfi_endproc
- 291              	.LFE11:
- 292              		.size	TimerTX_ReadCapture, .-TimerTX_ReadCapture
- 293              		.section	.text.TimerTX_WriteCounter,"ax",%progbits
- 294              		.align	2
- 295              		.global	TimerTX_WriteCounter
- 296              		.thumb
- 297              		.thumb_func
- 298              		.type	TimerTX_WriteCounter, %function
- 299              	TimerTX_WriteCounter:
- 300              	.LFB12:
+ 592              		.loc 1 463 0
+ 593 000a 1846     		mov	r0, r3
+ 594 000c BD46     		mov	sp, r7
+ 595              		.cfi_def_cfa_register 13
+ 596              		@ sp needed
+ 597 000e 80BC     		pop	{r7}
+ 598              		.cfi_restore 7
+ 599              		.cfi_def_cfa_offset 0
+ 600 0010 7047     		bx	lr
+ 601              	.L41:
+ 602 0012 00BF     		.align	2
+ 603              	.L40:
+ 604 0014 084F0040 		.word	1073762056
+ 605              		.cfi_endproc
+ 606              	.LFE11:
+ 607              		.size	TimerTX_ReadCapture, .-TimerTX_ReadCapture
+ 608              		.section	.text.TimerTX_WriteCounter,"ax",%progbits
+ 609              		.align	2
+ 610              		.global	TimerTX_WriteCounter
+ 611              		.thumb
+ 612              		.thumb_func
+ 613              		.type	TimerTX_WriteCounter, %function
+ 614              	TimerTX_WriteCounter:
+ 615              	.LFB12:
  464:Generated_Source\PSoC5/TimerTX.c **** 
  465:Generated_Source\PSoC5/TimerTX.c **** 
  466:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
  467:Generated_Source\PSoC5/TimerTX.c **** * Function Name: TimerTX_WriteCounter
  468:Generated_Source\PSoC5/TimerTX.c **** ********************************************************************************
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 20
+
+
  469:Generated_Source\PSoC5/TimerTX.c **** *
  470:Generated_Source\PSoC5/TimerTX.c **** * Summary:
  471:Generated_Source\PSoC5/TimerTX.c **** *  This funtion is used to set the counter to a specific value
@@ -821,175 +1154,63 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  479:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  480:Generated_Source\PSoC5/TimerTX.c **** void TimerTX_WriteCounter(uint16 counter) 
  481:Generated_Source\PSoC5/TimerTX.c **** {
- 301              		.loc 1 481 0
- 302              		.cfi_startproc
- 303              		@ args = 0, pretend = 0, frame = 0
- 304              		@ frame_needed = 0, uses_anonymous_args = 0
- 305              		@ link register save eliminated.
- 306              	.LVL3:
+ 616              		.loc 1 481 0
+ 617              		.cfi_startproc
+ 618              		@ args = 0, pretend = 0, frame = 8
+ 619              		@ frame_needed = 1, uses_anonymous_args = 0
+ 620              		@ link register save eliminated.
+ 621 0000 80B4     		push	{r7}
+ 622              		.cfi_def_cfa_offset 4
+ 623              		.cfi_offset 7, -4
+ 624 0002 83B0     		sub	sp, sp, #12
+ 625              		.cfi_def_cfa_offset 16
+ 626 0004 00AF     		add	r7, sp, #0
+ 627              		.cfi_def_cfa_register 7
+ 628 0006 0346     		mov	r3, r0
+ 629 0008 FB80     		strh	r3, [r7, #6]	@ movhi
  482:Generated_Source\PSoC5/TimerTX.c ****    #if(TimerTX_UsingFixedFunction)
  483:Generated_Source\PSoC5/TimerTX.c ****         /* This functionality is removed until a FixedFunction HW update to
  484:Generated_Source\PSoC5/TimerTX.c ****          * allow this register to be written
  485:Generated_Source\PSoC5/TimerTX.c ****          */
  486:Generated_Source\PSoC5/TimerTX.c ****         CY_SET_REG16(TimerTX_COUNTER_LSB_PTR, (uint16)counter);
- 307              		.loc 1 486 0
- 308 0000 014B     		ldr	r3, .L32
- 309 0002 1880     		strh	r0, [r3]	@ movhi
- 310 0004 7047     		bx	lr
- 311              	.L33:
- 312 0006 00BF     		.align	2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 15
-
-
- 313              	.L32:
- 314 0008 064F0040 		.word	1073762054
- 315              		.cfi_endproc
- 316              	.LFE12:
- 317              		.size	TimerTX_WriteCounter, .-TimerTX_WriteCounter
- 318              		.section	.text.TimerTX_Init,"ax",%progbits
- 319              		.align	2
- 320              		.global	TimerTX_Init
- 321              		.thumb
- 322              		.thumb_func
- 323              		.type	TimerTX_Init, %function
- 324              	TimerTX_Init:
- 325              	.LFB0:
-  44:Generated_Source\PSoC5/TimerTX.c ****     #if(!TimerTX_UsingFixedFunction)
- 326              		.loc 1 44 0
- 327              		.cfi_startproc
- 328              		@ args = 0, pretend = 0, frame = 0
- 329              		@ frame_needed = 0, uses_anonymous_args = 0
- 330 0000 08B5     		push	{r3, lr}
- 331              		.cfi_def_cfa_offset 8
- 332              		.cfi_offset 3, -8
- 333              		.cfi_offset 14, -4
-  52:Generated_Source\PSoC5/TimerTX.c **** 
- 334              		.loc 1 52 0
- 335 0002 154A     		ldr	r2, .L36
- 336 0004 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 337 0006 03F00103 		and	r3, r3, #1
- 338 000a 1370     		strb	r3, [r2]
-  60:Generated_Source\PSoC5/TimerTX.c ****         #endif /* CONTROL3 register exists only in PSoC3 OR PSoC5LP */
- 339              		.loc 1 60 0
- 340 000c 0232     		adds	r2, r2, #2
- 341 000e 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 342 0010 03F0FC03 		and	r3, r3, #252
- 343 0014 1370     		strb	r3, [r2]
- 106:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_RT1 |= TimerTX_SYNC;
- 344              		.loc 1 106 0
- 345 0016 114B     		ldr	r3, .L36+4
- 346 0018 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 347 001a 02F0CF02 		and	r2, r2, #207
- 348 001e 1A70     		strb	r2, [r3]
- 107:Generated_Source\PSoC5/TimerTX.c **** 
- 349              		.loc 1 107 0
- 350 0020 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 351 0022 42F03002 		orr	r2, r2, #48
- 352 0026 1A70     		strb	r2, [r3]
- 110:Generated_Source\PSoC5/TimerTX.c ****         TimerTX_RT1 |= TimerTX_SYNCDSI_EN;
- 353              		.loc 1 110 0
- 354 0028 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 355 002a 02F0F002 		and	r2, r2, #240
- 356 002e 1A70     		strb	r2, [r3]
- 111:Generated_Source\PSoC5/TimerTX.c **** 
- 357              		.loc 1 111 0
- 358 0030 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 359 0032 42F00F02 		orr	r2, r2, #15
- 360 0036 1A70     		strb	r2, [r3]
- 114:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Configuring registers of fixed function implementation */
- 361              		.loc 1 114 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 16
-
-
- 362 0038 094A     		ldr	r2, .L36+8
- 363 003a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
- 364 003c 43F00103 		orr	r3, r3, #1
- 365 0040 1370     		strb	r3, [r2]
- 118:Generated_Source\PSoC5/TimerTX.c ****     TimerTX_WriteCounter(TimerTX_INIT_PERIOD);
- 366              		.loc 1 118 0
- 367 0042 3120     		movs	r0, #49
- 368 0044 FFF7FEFF 		bl	TimerTX_WritePeriod
- 369              	.LVL4:
- 119:Generated_Source\PSoC5/TimerTX.c **** 
- 370              		.loc 1 119 0
- 371 0048 3120     		movs	r0, #49
- 372 004a FFF7FEFF 		bl	TimerTX_WriteCounter
- 373              	.LVL5:
- 162:Generated_Source\PSoC5/TimerTX.c **** }
- 374              		.loc 1 162 0
- 375 004e 0820     		movs	r0, #8
- 376 0050 FFF7FEFF 		bl	TimerTX_SetInterruptMode
- 377              	.LVL6:
- 378 0054 08BD     		pop	{r3, pc}
- 379              	.L37:
- 380 0056 00BF     		.align	2
- 381              	.L36:
- 382 0058 004F0040 		.word	1073762048
- 383 005c 0B4F0040 		.word	1073762059
- 384 0060 014F0040 		.word	1073762049
- 385              		.cfi_endproc
- 386              	.LFE0:
- 387              		.size	TimerTX_Init, .-TimerTX_Init
- 388              		.section	.text.TimerTX_Start,"ax",%progbits
- 389              		.align	2
- 390              		.global	TimerTX_Start
- 391              		.thumb
- 392              		.thumb_func
- 393              		.type	TimerTX_Start, %function
- 394              	TimerTX_Start:
- 395              	.LFB2:
- 216:Generated_Source\PSoC5/TimerTX.c ****     if(TimerTX_initVar == 0u)
- 396              		.loc 1 216 0
- 397              		.cfi_startproc
- 398              		@ args = 0, pretend = 0, frame = 0
- 399              		@ frame_needed = 0, uses_anonymous_args = 0
- 400 0000 08B5     		push	{r3, lr}
- 401              		.cfi_def_cfa_offset 8
- 402              		.cfi_offset 3, -8
- 403              		.cfi_offset 14, -4
- 217:Generated_Source\PSoC5/TimerTX.c ****     {
- 404              		.loc 1 217 0
- 405 0002 054B     		ldr	r3, .L41
- 406 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 407 0006 23B9     		cbnz	r3, .L39
- 219:Generated_Source\PSoC5/TimerTX.c **** 
- 408              		.loc 1 219 0
- 409 0008 FFF7FEFF 		bl	TimerTX_Init
- 410              	.LVL7:
- 221:Generated_Source\PSoC5/TimerTX.c ****     }
- 411              		.loc 1 221 0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 17
-
-
- 412 000c 0122     		movs	r2, #1
- 413 000e 024B     		ldr	r3, .L41
- 414 0010 1A70     		strb	r2, [r3]
- 415              	.L39:
- 225:Generated_Source\PSoC5/TimerTX.c **** }
- 416              		.loc 1 225 0
- 417 0012 FFF7FEFF 		bl	TimerTX_Enable
- 418              	.LVL8:
- 419 0016 08BD     		pop	{r3, pc}
- 420              	.L42:
- 421              		.align	2
- 422              	.L41:
- 423 0018 00000000 		.word	.LANCHOR0
- 424              		.cfi_endproc
- 425              	.LFE2:
- 426              		.size	TimerTX_Start, .-TimerTX_Start
- 427              		.section	.text.TimerTX_ReadCounter,"ax",%progbits
- 428              		.align	2
- 429              		.global	TimerTX_ReadCounter
- 430              		.thumb
- 431              		.thumb_func
- 432              		.type	TimerTX_ReadCounter, %function
- 433              	TimerTX_ReadCounter:
- 434              	.LFB13:
+ 630              		.loc 1 486 0
+ 631 000a 044A     		ldr	r2, .L43
+ 632 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 633 000e 1380     		strh	r3, [r2]	@ movhi
  487:Generated_Source\PSoC5/TimerTX.c ****         
  488:Generated_Source\PSoC5/TimerTX.c ****     #else
  489:Generated_Source\PSoC5/TimerTX.c ****         CY_SET_REG16(TimerTX_COUNTER_LSB_PTR, counter);
  490:Generated_Source\PSoC5/TimerTX.c ****     #endif /* Set Write Counter only for the UDB implementation (Write Counter not available in fix
  491:Generated_Source\PSoC5/TimerTX.c **** }
+ 634              		.loc 1 491 0
+ 635 0010 00BF     		nop
+ 636 0012 0C37     		adds	r7, r7, #12
+ 637              		.cfi_def_cfa_offset 4
+ 638 0014 BD46     		mov	sp, r7
+ 639              		.cfi_def_cfa_register 13
+ 640              		@ sp needed
+ 641 0016 80BC     		pop	{r7}
+ 642              		.cfi_restore 7
+ 643              		.cfi_def_cfa_offset 0
+ 644 0018 7047     		bx	lr
+ 645              	.L44:
+ 646 001a 00BF     		.align	2
+ 647              	.L43:
+ 648 001c 064F0040 		.word	1073762054
+ 649              		.cfi_endproc
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 21
+
+
+ 650              	.LFE12:
+ 651              		.size	TimerTX_WriteCounter, .-TimerTX_WriteCounter
+ 652              		.section	.text.TimerTX_ReadCounter,"ax",%progbits
+ 653              		.align	2
+ 654              		.global	TimerTX_ReadCounter
+ 655              		.thumb
+ 656              		.thumb_func
+ 657              		.type	TimerTX_ReadCounter, %function
+ 658              	TimerTX_ReadCounter:
+ 659              	.LFB13:
  492:Generated_Source\PSoC5/TimerTX.c **** 
  493:Generated_Source\PSoC5/TimerTX.c **** 
  494:Generated_Source\PSoC5/TimerTX.c **** /*******************************************************************************
@@ -1008,22 +1229,24 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  507:Generated_Source\PSoC5/TimerTX.c **** *******************************************************************************/
  508:Generated_Source\PSoC5/TimerTX.c **** uint16 TimerTX_ReadCounter(void) 
  509:Generated_Source\PSoC5/TimerTX.c **** {
- 435              		.loc 1 509 0
- 436              		.cfi_startproc
- 437              		@ args = 0, pretend = 0, frame = 0
- 438              		@ frame_needed = 0, uses_anonymous_args = 0
- 439              		@ link register save eliminated.
+ 660              		.loc 1 509 0
+ 661              		.cfi_startproc
+ 662              		@ args = 0, pretend = 0, frame = 0
+ 663              		@ frame_needed = 1, uses_anonymous_args = 0
+ 664              		@ link register save eliminated.
+ 665 0000 80B4     		push	{r7}
+ 666              		.cfi_def_cfa_offset 4
+ 667              		.cfi_offset 7, -4
+ 668 0002 00AF     		add	r7, sp, #0
+ 669              		.cfi_def_cfa_register 7
  510:Generated_Source\PSoC5/TimerTX.c ****     /* Force capture by reading Accumulator */
  511:Generated_Source\PSoC5/TimerTX.c ****     /* Must first do a software capture to be able to read the counter */
  512:Generated_Source\PSoC5/TimerTX.c ****     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
  513:Generated_Source\PSoC5/TimerTX.c ****     #if(TimerTX_UsingFixedFunction)
  514:Generated_Source\PSoC5/TimerTX.c ****         (void)CY_GET_REG16(TimerTX_COUNTER_LSB_PTR);
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 18
-
-
- 440              		.loc 1 514 0
- 441 0000 024B     		ldr	r3, .L44
- 442 0002 1B88     		ldrh	r3, [r3]
+ 670              		.loc 1 514 0
+ 671 0004 044B     		ldr	r3, .L47
+ 672 0006 1B88     		ldrh	r3, [r3]	@ movhi
  515:Generated_Source\PSoC5/TimerTX.c ****     #else
  516:Generated_Source\PSoC5/TimerTX.c ****         (void)CY_GET_REG8(TimerTX_COUNTER_LSB_PTR_8BIT);
  517:Generated_Source\PSoC5/TimerTX.c ****     #endif/* (TimerTX_UsingFixedFunction) */
@@ -1031,942 +1254,866 @@ ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 1
  519:Generated_Source\PSoC5/TimerTX.c ****     /* Read the data from the FIFO (or capture register for Fixed Function)*/
  520:Generated_Source\PSoC5/TimerTX.c ****     #if(TimerTX_UsingFixedFunction)
  521:Generated_Source\PSoC5/TimerTX.c ****         return ((uint16)CY_GET_REG16(TimerTX_CAPTURE_LSB_PTR));
- 443              		.loc 1 521 0
- 444 0004 024B     		ldr	r3, .L44+4
- 445 0006 1888     		ldrh	r0, [r3]
+ 673              		.loc 1 521 0
+ 674 0008 044B     		ldr	r3, .L47+4
+ 675 000a 1B88     		ldrh	r3, [r3]	@ movhi
+ 676 000c 9BB2     		uxth	r3, r3
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 22
+
+
  522:Generated_Source\PSoC5/TimerTX.c ****     #else
  523:Generated_Source\PSoC5/TimerTX.c ****         return (CY_GET_REG16(TimerTX_CAPTURE_LSB_PTR));
  524:Generated_Source\PSoC5/TimerTX.c ****     #endif /* (TimerTX_UsingFixedFunction) */
  525:Generated_Source\PSoC5/TimerTX.c **** }
- 446              		.loc 1 525 0
- 447 0008 80B2     		uxth	r0, r0
- 448 000a 7047     		bx	lr
- 449              	.L45:
- 450              		.align	2
- 451              	.L44:
- 452 000c 064F0040 		.word	1073762054
- 453 0010 084F0040 		.word	1073762056
- 454              		.cfi_endproc
- 455              	.LFE13:
- 456              		.size	TimerTX_ReadCounter, .-TimerTX_ReadCounter
- 457              		.global	TimerTX_initVar
- 458              		.bss
- 459              		.set	.LANCHOR0,. + 0
- 460              		.type	TimerTX_initVar, %object
- 461              		.size	TimerTX_initVar, 1
- 462              	TimerTX_initVar:
- 463 0000 00       		.space	1
- 464              		.text
- 465              	.Letext0:
- 466              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
- 467              		.section	.debug_info,"",%progbits
- 468              	.Ldebug_info0:
- 469 0000 8F020000 		.4byte	0x28f
- 470 0004 0400     		.2byte	0x4
- 471 0006 00000000 		.4byte	.Ldebug_abbrev0
- 472 000a 04       		.byte	0x4
- 473 000b 01       		.uleb128 0x1
- 474 000c E0000000 		.4byte	.LASF36
- 475 0010 0C       		.byte	0xc
- 476 0011 E0020000 		.4byte	.LASF37
- 477 0015 2E000000 		.4byte	.LASF38
- 478 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 479 001d 00000000 		.4byte	0
- 480 0021 00000000 		.4byte	.Ldebug_line0
- 481 0025 02       		.uleb128 0x2
- 482 0026 01       		.byte	0x1
- 483 0027 06       		.byte	0x6
- 484 0028 D4020000 		.4byte	.LASF0
- 485 002c 02       		.uleb128 0x2
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 19
+ 677              		.loc 1 525 0
+ 678 000e 1846     		mov	r0, r3
+ 679 0010 BD46     		mov	sp, r7
+ 680              		.cfi_def_cfa_register 13
+ 681              		@ sp needed
+ 682 0012 80BC     		pop	{r7}
+ 683              		.cfi_restore 7
+ 684              		.cfi_def_cfa_offset 0
+ 685 0014 7047     		bx	lr
+ 686              	.L48:
+ 687 0016 00BF     		.align	2
+ 688              	.L47:
+ 689 0018 064F0040 		.word	1073762054
+ 690 001c 084F0040 		.word	1073762056
+ 691              		.cfi_endproc
+ 692              	.LFE13:
+ 693              		.size	TimerTX_ReadCounter, .-TimerTX_ReadCounter
+ 694              		.text
+ 695              	.Letext0:
+ 696              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 697              		.section	.debug_info,"",%progbits
+ 698              	.Ldebug_info0:
+ 699 0000 41020000 		.4byte	0x241
+ 700 0004 0400     		.2byte	0x4
+ 701 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 702 000a 04       		.byte	0x4
+ 703 000b 01       		.uleb128 0x1
+ 704 000c 14000000 		.4byte	.LASF36
+ 705 0010 0C       		.byte	0xc
+ 706 0011 F7020000 		.4byte	.LASF37
+ 707 0015 E6010000 		.4byte	.LASF38
+ 708 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 709 001d 00000000 		.4byte	0
+ 710 0021 00000000 		.4byte	.Ldebug_line0
+ 711 0025 02       		.uleb128 0x2
+ 712 0026 01       		.byte	0x1
+ 713 0027 06       		.byte	0x6
+ 714 0028 EB020000 		.4byte	.LASF0
+ 715 002c 02       		.uleb128 0x2
+ 716 002d 01       		.byte	0x1
+ 717 002e 08       		.byte	0x8
+ 718 002f 1A010000 		.4byte	.LASF1
+ 719 0033 02       		.uleb128 0x2
+ 720 0034 02       		.byte	0x2
+ 721 0035 05       		.byte	0x5
+ 722 0036 90020000 		.4byte	.LASF2
+ 723 003a 02       		.uleb128 0x2
+ 724 003b 02       		.byte	0x2
+ 725 003c 07       		.byte	0x7
+ 726 003d A9000000 		.4byte	.LASF3
+ 727 0041 02       		.uleb128 0x2
+ 728 0042 04       		.byte	0x4
+ 729 0043 05       		.byte	0x5
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 23
 
 
- 486 002d 01       		.byte	0x1
- 487 002e 08       		.byte	0x8
- 488 002f D2000000 		.4byte	.LASF1
- 489 0033 02       		.uleb128 0x2
- 490 0034 02       		.byte	0x2
- 491 0035 05       		.byte	0x5
- 492 0036 79020000 		.4byte	.LASF2
- 493 003a 02       		.uleb128 0x2
- 494 003b 02       		.byte	0x2
- 495 003c 07       		.byte	0x7
- 496 003d 1B000000 		.4byte	.LASF3
- 497 0041 02       		.uleb128 0x2
- 498 0042 04       		.byte	0x4
- 499 0043 05       		.byte	0x5
- 500 0044 BA020000 		.4byte	.LASF4
- 501 0048 02       		.uleb128 0x2
- 502 0049 04       		.byte	0x4
- 503 004a 07       		.byte	0x7
- 504 004b 73010000 		.4byte	.LASF5
- 505 004f 02       		.uleb128 0x2
- 506 0050 08       		.byte	0x8
- 507 0051 05       		.byte	0x5
- 508 0052 40020000 		.4byte	.LASF6
- 509 0056 02       		.uleb128 0x2
- 510 0057 08       		.byte	0x8
- 511 0058 07       		.byte	0x7
- 512 0059 00020000 		.4byte	.LASF7
- 513 005d 03       		.uleb128 0x3
- 514 005e 04       		.byte	0x4
- 515 005f 05       		.byte	0x5
- 516 0060 696E7400 		.ascii	"int\000"
- 517 0064 02       		.uleb128 0x2
- 518 0065 04       		.byte	0x4
- 519 0066 07       		.byte	0x7
- 520 0067 DA010000 		.4byte	.LASF8
- 521 006b 04       		.uleb128 0x4
- 522 006c 85010000 		.4byte	.LASF9
- 523 0070 02       		.byte	0x2
- 524 0071 9201     		.2byte	0x192
- 525 0073 2C000000 		.4byte	0x2c
- 526 0077 04       		.uleb128 0x4
- 527 0078 BF010000 		.4byte	.LASF10
- 528 007c 02       		.byte	0x2
- 529 007d 9301     		.2byte	0x193
- 530 007f 3A000000 		.4byte	0x3a
- 531 0083 02       		.uleb128 0x2
- 532 0084 04       		.byte	0x4
- 533 0085 04       		.byte	0x4
- 534 0086 C4000000 		.4byte	.LASF11
- 535 008a 02       		.uleb128 0x2
- 536 008b 08       		.byte	0x8
- 537 008c 04       		.byte	0x4
- 538 008d A3010000 		.4byte	.LASF12
- 539 0091 02       		.uleb128 0x2
- 540 0092 01       		.byte	0x1
- 541 0093 08       		.byte	0x8
- 542 0094 C3020000 		.4byte	.LASF13
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 20
+ 730 0044 D1020000 		.4byte	.LASF4
+ 731 0048 02       		.uleb128 0x2
+ 732 0049 04       		.byte	0x4
+ 733 004a 07       		.byte	0x7
+ 734 004b 2D010000 		.4byte	.LASF5
+ 735 004f 02       		.uleb128 0x2
+ 736 0050 08       		.byte	0x8
+ 737 0051 05       		.byte	0x5
+ 738 0052 57020000 		.4byte	.LASF6
+ 739 0056 02       		.uleb128 0x2
+ 740 0057 08       		.byte	0x8
+ 741 0058 07       		.byte	0x7
+ 742 0059 BA010000 		.4byte	.LASF7
+ 743 005d 03       		.uleb128 0x3
+ 744 005e 04       		.byte	0x4
+ 745 005f 05       		.byte	0x5
+ 746 0060 696E7400 		.ascii	"int\000"
+ 747 0064 02       		.uleb128 0x2
+ 748 0065 04       		.byte	0x4
+ 749 0066 07       		.byte	0x7
+ 750 0067 94010000 		.4byte	.LASF8
+ 751 006b 04       		.uleb128 0x4
+ 752 006c 3F010000 		.4byte	.LASF9
+ 753 0070 02       		.byte	0x2
+ 754 0071 9201     		.2byte	0x192
+ 755 0073 2C000000 		.4byte	0x2c
+ 756 0077 04       		.uleb128 0x4
+ 757 0078 79010000 		.4byte	.LASF10
+ 758 007c 02       		.byte	0x2
+ 759 007d 9301     		.2byte	0x193
+ 760 007f 3A000000 		.4byte	0x3a
+ 761 0083 02       		.uleb128 0x2
+ 762 0084 04       		.byte	0x4
+ 763 0085 04       		.byte	0x4
+ 764 0086 0C010000 		.4byte	.LASF11
+ 765 008a 02       		.uleb128 0x2
+ 766 008b 08       		.byte	0x8
+ 767 008c 04       		.byte	0x4
+ 768 008d 5D010000 		.4byte	.LASF12
+ 769 0091 02       		.uleb128 0x2
+ 770 0092 01       		.byte	0x1
+ 771 0093 08       		.byte	0x8
+ 772 0094 DA020000 		.4byte	.LASF13
+ 773 0098 04       		.uleb128 0x4
+ 774 0099 28010000 		.4byte	.LASF14
+ 775 009d 02       		.byte	0x2
+ 776 009e 3C02     		.2byte	0x23c
+ 777 00a0 A4000000 		.4byte	0xa4
+ 778 00a4 05       		.uleb128 0x5
+ 779 00a5 6B000000 		.4byte	0x6b
+ 780 00a9 04       		.uleb128 0x4
+ 781 00aa 00000000 		.4byte	.LASF15
+ 782 00ae 02       		.byte	0x2
+ 783 00af 3D02     		.2byte	0x23d
+ 784 00b1 B5000000 		.4byte	0xb5
+ 785 00b5 05       		.uleb128 0x5
+ 786 00b6 77000000 		.4byte	0x77
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 24
 
 
- 543 0098 04       		.uleb128 0x4
- 544 0099 6E010000 		.4byte	.LASF14
- 545 009d 02       		.byte	0x2
- 546 009e 3C02     		.2byte	0x23c
- 547 00a0 A4000000 		.4byte	0xa4
- 548 00a4 05       		.uleb128 0x5
- 549 00a5 6B000000 		.4byte	0x6b
- 550 00a9 04       		.uleb128 0x4
- 551 00aa 00000000 		.4byte	.LASF15
- 552 00ae 02       		.byte	0x2
- 553 00af 3D02     		.2byte	0x23d
- 554 00b1 B5000000 		.4byte	0xb5
- 555 00b5 05       		.uleb128 0x5
- 556 00b6 77000000 		.4byte	0x77
- 557 00ba 02       		.uleb128 0x2
- 558 00bb 08       		.byte	0x8
- 559 00bc 04       		.byte	0x4
- 560 00bd C8020000 		.4byte	.LASF16
- 561 00c1 02       		.uleb128 0x2
- 562 00c2 04       		.byte	0x4
- 563 00c3 07       		.byte	0x7
- 564 00c4 23020000 		.4byte	.LASF17
- 565 00c8 06       		.uleb128 0x6
- 566 00c9 83020000 		.4byte	.LASF18
- 567 00cd 01       		.byte	0x1
- 568 00ce B4       		.byte	0xb4
- 569 00cf 00000000 		.4byte	.LFB1
- 570 00d3 28000000 		.4byte	.LFE1-.LFB1
- 571 00d7 01       		.uleb128 0x1
- 572 00d8 9C       		.byte	0x9c
- 573 00d9 06       		.uleb128 0x6
- 574 00da 87000000 		.4byte	.LASF19
- 575 00de 01       		.byte	0x1
- 576 00df F7       		.byte	0xf7
- 577 00e0 00000000 		.4byte	.LFB3
- 578 00e4 28000000 		.4byte	.LFE3-.LFB3
- 579 00e8 01       		.uleb128 0x1
- 580 00e9 9C       		.byte	0x9c
- 581 00ea 07       		.uleb128 0x7
- 582 00eb E7010000 		.4byte	.LASF23
- 583 00ef 01       		.byte	0x1
- 584 00f0 1701     		.2byte	0x117
- 585 00f2 00000000 		.4byte	.LFB4
- 586 00f6 0C000000 		.4byte	.LFE4-.LFB4
- 587 00fa 01       		.uleb128 0x1
- 588 00fb 9C       		.byte	0x9c
- 589 00fc 0F010000 		.4byte	0x10f
- 590 0100 08       		.uleb128 0x8
- 591 0101 4E020000 		.4byte	.LASF25
- 592 0105 01       		.byte	0x1
- 593 0106 1701     		.2byte	0x117
- 594 0108 6B000000 		.4byte	0x6b
- 595 010c 01       		.uleb128 0x1
- 596 010d 50       		.byte	0x50
- 597 010e 00       		.byte	0
- 598 010f 09       		.uleb128 0x9
- 599 0110 01030000 		.4byte	.LASF20
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 21
+ 787 00ba 02       		.uleb128 0x2
+ 788 00bb 08       		.byte	0x8
+ 789 00bc 04       		.byte	0x4
+ 790 00bd DF020000 		.4byte	.LASF16
+ 791 00c1 02       		.uleb128 0x2
+ 792 00c2 04       		.byte	0x4
+ 793 00c3 07       		.byte	0x7
+ 794 00c4 DD010000 		.4byte	.LASF17
+ 795 00c8 06       		.uleb128 0x6
+ 796 00c9 A9020000 		.4byte	.LASF18
+ 797 00cd 01       		.byte	0x1
+ 798 00ce 2B       		.byte	0x2b
+ 799 00cf 00000000 		.4byte	.LFB0
+ 800 00d3 9C000000 		.4byte	.LFE0-.LFB0
+ 801 00d7 01       		.uleb128 0x1
+ 802 00d8 9C       		.byte	0x9c
+ 803 00d9 07       		.uleb128 0x7
+ 804 00da 9A020000 		.4byte	.LASF19
+ 805 00de 01       		.byte	0x1
+ 806 00df B4       		.byte	0xb4
+ 807 00e0 00000000 		.4byte	.LFB1
+ 808 00e4 48000000 		.4byte	.LFE1-.LFB1
+ 809 00e8 01       		.uleb128 0x1
+ 810 00e9 9C       		.byte	0x9c
+ 811 00ea 06       		.uleb128 0x6
+ 812 00eb 06000000 		.4byte	.LASF20
+ 813 00ef 01       		.byte	0x1
+ 814 00f0 D7       		.byte	0xd7
+ 815 00f1 00000000 		.4byte	.LFB2
+ 816 00f5 24000000 		.4byte	.LFE2-.LFB2
+ 817 00f9 01       		.uleb128 0x1
+ 818 00fa 9C       		.byte	0x9c
+ 819 00fb 07       		.uleb128 0x7
+ 820 00fc CF000000 		.4byte	.LASF21
+ 821 0100 01       		.byte	0x1
+ 822 0101 F7       		.byte	0xf7
+ 823 0102 00000000 		.4byte	.LFB3
+ 824 0106 48000000 		.4byte	.LFE3-.LFB3
+ 825 010a 01       		.uleb128 0x1
+ 826 010b 9C       		.byte	0x9c
+ 827 010c 08       		.uleb128 0x8
+ 828 010d A1010000 		.4byte	.LASF25
+ 829 0111 01       		.byte	0x1
+ 830 0112 1701     		.2byte	0x117
+ 831 0114 00000000 		.4byte	.LFB4
+ 832 0118 20000000 		.4byte	.LFE4-.LFB4
+ 833 011c 01       		.uleb128 0x1
+ 834 011d 9C       		.byte	0x9c
+ 835 011e 32010000 		.4byte	0x132
+ 836 0122 09       		.uleb128 0x9
+ 837 0123 65020000 		.4byte	.LASF27
+ 838 0127 01       		.byte	0x1
+ 839 0128 1701     		.2byte	0x117
+ 840 012a 6B000000 		.4byte	0x6b
+ 841 012e 02       		.uleb128 0x2
+ 842 012f 91       		.byte	0x91
+ 843 0130 77       		.sleb128 -9
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 25
 
 
- 600 0114 01       		.byte	0x1
- 601 0115 2E01     		.2byte	0x12e
- 602 0117 00000000 		.4byte	.LFB5
- 603 011b 0C000000 		.4byte	.LFE5-.LFB5
- 604 011f 01       		.uleb128 0x1
- 605 0120 9C       		.byte	0x9c
- 606 0121 0A       		.uleb128 0xa
- 607 0122 9F020000 		.4byte	.LASF21
- 608 0126 01       		.byte	0x1
- 609 0127 4D01     		.2byte	0x14d
- 610 0129 6B000000 		.4byte	0x6b
- 611 012d 00000000 		.4byte	.LFB6
- 612 0131 0C000000 		.4byte	.LFE6-.LFB6
- 613 0135 01       		.uleb128 0x1
- 614 0136 9C       		.byte	0x9c
- 615 0137 0A       		.uleb128 0xa
- 616 0138 A8000000 		.4byte	.LASF22
- 617 013c 01       		.byte	0x1
- 618 013d 6401     		.2byte	0x164
- 619 013f 6B000000 		.4byte	0x6b
- 620 0143 00000000 		.4byte	.LFB7
- 621 0147 0C000000 		.4byte	.LFE7-.LFB7
- 622 014b 01       		.uleb128 0x1
- 623 014c 9C       		.byte	0x9c
- 624 014d 07       		.uleb128 0x7
- 625 014e 5C020000 		.4byte	.LASF24
- 626 0152 01       		.byte	0x1
- 627 0153 7B01     		.2byte	0x17b
- 628 0155 00000000 		.4byte	.LFB8
- 629 0159 0C000000 		.4byte	.LFE8-.LFB8
- 630 015d 01       		.uleb128 0x1
- 631 015e 9C       		.byte	0x9c
- 632 015f 72010000 		.4byte	0x172
- 633 0163 08       		.uleb128 0x8
- 634 0164 8B010000 		.4byte	.LASF26
- 635 0168 01       		.byte	0x1
- 636 0169 7B01     		.2byte	0x17b
- 637 016b 6B000000 		.4byte	0x6b
- 638 016f 01       		.uleb128 0x1
- 639 0170 50       		.byte	0x50
- 640 0171 00       		.byte	0
- 641 0172 0A       		.uleb128 0xa
- 642 0173 74000000 		.4byte	.LASF27
- 643 0177 01       		.byte	0x1
- 644 0178 9501     		.2byte	0x195
- 645 017a 77000000 		.4byte	0x77
- 646 017e 00000000 		.4byte	.LFB9
- 647 0182 0C000000 		.4byte	.LFE9-.LFB9
- 648 0186 01       		.uleb128 0x1
- 649 0187 9C       		.byte	0x9c
- 650 0188 07       		.uleb128 0x7
- 651 0189 2C020000 		.4byte	.LASF28
- 652 018d 01       		.byte	0x1
- 653 018e AF01     		.2byte	0x1af
- 654 0190 00000000 		.4byte	.LFB10
- 655 0194 0C000000 		.4byte	.LFE10-.LFB10
- 656 0198 01       		.uleb128 0x1
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 22
+ 844 0131 00       		.byte	0
+ 845 0132 0A       		.uleb128 0xa
+ 846 0133 18030000 		.4byte	.LASF22
+ 847 0137 01       		.byte	0x1
+ 848 0138 2E01     		.2byte	0x12e
+ 849 013a 00000000 		.4byte	.LFB5
+ 850 013e 14000000 		.4byte	.LFE5-.LFB5
+ 851 0142 01       		.uleb128 0x1
+ 852 0143 9C       		.byte	0x9c
+ 853 0144 0B       		.uleb128 0xb
+ 854 0145 B6020000 		.4byte	.LASF23
+ 855 0149 01       		.byte	0x1
+ 856 014a 4D01     		.2byte	0x14d
+ 857 014c 6B000000 		.4byte	0x6b
+ 858 0150 00000000 		.4byte	.LFB6
+ 859 0154 18000000 		.4byte	.LFE6-.LFB6
+ 860 0158 01       		.uleb128 0x1
+ 861 0159 9C       		.byte	0x9c
+ 862 015a 0B       		.uleb128 0xb
+ 863 015b F0000000 		.4byte	.LASF24
+ 864 015f 01       		.byte	0x1
+ 865 0160 6401     		.2byte	0x164
+ 866 0162 6B000000 		.4byte	0x6b
+ 867 0166 00000000 		.4byte	.LFB7
+ 868 016a 18000000 		.4byte	.LFE7-.LFB7
+ 869 016e 01       		.uleb128 0x1
+ 870 016f 9C       		.byte	0x9c
+ 871 0170 08       		.uleb128 0x8
+ 872 0171 73020000 		.4byte	.LASF26
+ 873 0175 01       		.byte	0x1
+ 874 0176 7B01     		.2byte	0x17b
+ 875 0178 00000000 		.4byte	.LFB8
+ 876 017c 20000000 		.4byte	.LFE8-.LFB8
+ 877 0180 01       		.uleb128 0x1
+ 878 0181 9C       		.byte	0x9c
+ 879 0182 96010000 		.4byte	0x196
+ 880 0186 09       		.uleb128 0x9
+ 881 0187 45010000 		.4byte	.LASF28
+ 882 018b 01       		.byte	0x1
+ 883 018c 7B01     		.2byte	0x17b
+ 884 018e 6B000000 		.4byte	0x6b
+ 885 0192 02       		.uleb128 0x2
+ 886 0193 91       		.byte	0x91
+ 887 0194 77       		.sleb128 -9
+ 888 0195 00       		.byte	0
+ 889 0196 0B       		.uleb128 0xb
+ 890 0197 BC000000 		.4byte	.LASF29
+ 891 019b 01       		.byte	0x1
+ 892 019c 9501     		.2byte	0x195
+ 893 019e 77000000 		.4byte	0x77
+ 894 01a2 00000000 		.4byte	.LFB9
+ 895 01a6 18000000 		.4byte	.LFE9-.LFB9
+ 896 01aa 01       		.uleb128 0x1
+ 897 01ab 9C       		.byte	0x9c
+ 898 01ac 08       		.uleb128 0x8
+ 899 01ad 43020000 		.4byte	.LASF30
+ 900 01b1 01       		.byte	0x1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 26
 
 
- 657 0199 9C       		.byte	0x9c
- 658 019a BB010000 		.4byte	0x1bb
- 659 019e 08       		.uleb128 0x8
- 660 019f 14000000 		.4byte	.LASF29
- 661 01a3 01       		.byte	0x1
- 662 01a4 AF01     		.2byte	0x1af
- 663 01a6 77000000 		.4byte	0x77
- 664 01aa 01       		.uleb128 0x1
- 665 01ab 50       		.byte	0x50
- 666 01ac 0B       		.uleb128 0xb
- 667 01ad 17020000 		.4byte	.LASF39
- 668 01b1 01       		.byte	0x1
- 669 01b2 B201     		.2byte	0x1b2
- 670 01b4 77000000 		.4byte	0x77
- 671 01b8 01       		.uleb128 0x1
- 672 01b9 50       		.byte	0x50
- 673 01ba 00       		.byte	0
- 674 01bb 0A       		.uleb128 0xa
- 675 01bc 94000000 		.4byte	.LASF30
- 676 01c0 01       		.byte	0x1
- 677 01c1 C801     		.2byte	0x1c8
- 678 01c3 77000000 		.4byte	0x77
- 679 01c7 00000000 		.4byte	.LFB11
- 680 01cb 0C000000 		.4byte	.LFE11-.LFB11
- 681 01cf 01       		.uleb128 0x1
- 682 01d0 9C       		.byte	0x9c
- 683 01d1 07       		.uleb128 0x7
- 684 01d2 AA010000 		.4byte	.LASF31
- 685 01d6 01       		.byte	0x1
- 686 01d7 E001     		.2byte	0x1e0
- 687 01d9 00000000 		.4byte	.LFB12
- 688 01dd 0C000000 		.4byte	.LFE12-.LFB12
- 689 01e1 01       		.uleb128 0x1
- 690 01e2 9C       		.byte	0x9c
- 691 01e3 F6010000 		.4byte	0x1f6
- 692 01e7 08       		.uleb128 0x8
- 693 01e8 CA000000 		.4byte	.LASF32
- 694 01ec 01       		.byte	0x1
- 695 01ed E001     		.2byte	0x1e0
- 696 01ef 77000000 		.4byte	0x77
- 697 01f3 01       		.uleb128 0x1
- 698 01f4 50       		.byte	0x50
- 699 01f5 00       		.byte	0
- 700 01f6 0C       		.uleb128 0xc
- 701 01f7 92020000 		.4byte	.LASF33
- 702 01fb 01       		.byte	0x1
- 703 01fc 2B       		.byte	0x2b
- 704 01fd 00000000 		.4byte	.LFB0
- 705 0201 64000000 		.4byte	.LFE0-.LFB0
- 706 0205 01       		.uleb128 0x1
- 707 0206 9C       		.byte	0x9c
- 708 0207 43020000 		.4byte	0x243
- 709 020b 0D       		.uleb128 0xd
- 710 020c 48000000 		.4byte	.LVL4
- 711 0210 88010000 		.4byte	0x188
- 712 0214 1F020000 		.4byte	0x21f
- 713 0218 0E       		.uleb128 0xe
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 23
+ 901 01b2 AF01     		.2byte	0x1af
+ 902 01b4 00000000 		.4byte	.LFB10
+ 903 01b8 24000000 		.4byte	.LFE10-.LFB10
+ 904 01bc 01       		.uleb128 0x1
+ 905 01bd 9C       		.byte	0x9c
+ 906 01be E1010000 		.4byte	0x1e1
+ 907 01c2 09       		.uleb128 0x9
+ 908 01c3 A2000000 		.4byte	.LASF31
+ 909 01c7 01       		.byte	0x1
+ 910 01c8 AF01     		.2byte	0x1af
+ 911 01ca 77000000 		.4byte	0x77
+ 912 01ce 02       		.uleb128 0x2
+ 913 01cf 91       		.byte	0x91
+ 914 01d0 6E       		.sleb128 -18
+ 915 01d1 0C       		.uleb128 0xc
+ 916 01d2 D1010000 		.4byte	.LASF39
+ 917 01d6 01       		.byte	0x1
+ 918 01d7 B201     		.2byte	0x1b2
+ 919 01d9 77000000 		.4byte	0x77
+ 920 01dd 02       		.uleb128 0x2
+ 921 01de 91       		.byte	0x91
+ 922 01df 76       		.sleb128 -10
+ 923 01e0 00       		.byte	0
+ 924 01e1 0B       		.uleb128 0xb
+ 925 01e2 DC000000 		.4byte	.LASF32
+ 926 01e6 01       		.byte	0x1
+ 927 01e7 C801     		.2byte	0x1c8
+ 928 01e9 77000000 		.4byte	0x77
+ 929 01ed 00000000 		.4byte	.LFB11
+ 930 01f1 18000000 		.4byte	.LFE11-.LFB11
+ 931 01f5 01       		.uleb128 0x1
+ 932 01f6 9C       		.byte	0x9c
+ 933 01f7 08       		.uleb128 0x8
+ 934 01f8 64010000 		.4byte	.LASF33
+ 935 01fc 01       		.byte	0x1
+ 936 01fd E001     		.2byte	0x1e0
+ 937 01ff 00000000 		.4byte	.LFB12
+ 938 0203 20000000 		.4byte	.LFE12-.LFB12
+ 939 0207 01       		.uleb128 0x1
+ 940 0208 9C       		.byte	0x9c
+ 941 0209 1D020000 		.4byte	0x21d
+ 942 020d 09       		.uleb128 0x9
+ 943 020e 12010000 		.4byte	.LASF34
+ 944 0212 01       		.byte	0x1
+ 945 0213 E001     		.2byte	0x1e0
+ 946 0215 77000000 		.4byte	0x77
+ 947 0219 02       		.uleb128 0x2
+ 948 021a 91       		.byte	0x91
+ 949 021b 76       		.sleb128 -10
+ 950 021c 00       		.byte	0
+ 951 021d 0B       		.uleb128 0xb
+ 952 021e 80010000 		.4byte	.LASF35
+ 953 0222 01       		.byte	0x1
+ 954 0223 FC01     		.2byte	0x1fc
+ 955 0225 77000000 		.4byte	0x77
+ 956 0229 00000000 		.4byte	.LFB13
+ 957 022d 20000000 		.4byte	.LFE13-.LFB13
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 27
 
 
- 714 0219 01       		.uleb128 0x1
- 715 021a 50       		.byte	0x50
- 716 021b 02       		.uleb128 0x2
- 717 021c 08       		.byte	0x8
- 718 021d 31       		.byte	0x31
- 719 021e 00       		.byte	0
- 720 021f 0D       		.uleb128 0xd
- 721 0220 4E000000 		.4byte	.LVL5
- 722 0224 D1010000 		.4byte	0x1d1
- 723 0228 33020000 		.4byte	0x233
- 724 022c 0E       		.uleb128 0xe
- 725 022d 01       		.uleb128 0x1
- 726 022e 50       		.byte	0x50
- 727 022f 02       		.uleb128 0x2
- 728 0230 08       		.byte	0x8
- 729 0231 31       		.byte	0x31
- 730 0232 00       		.byte	0
- 731 0233 0F       		.uleb128 0xf
- 732 0234 54000000 		.4byte	.LVL6
- 733 0238 EA000000 		.4byte	0xea
- 734 023c 0E       		.uleb128 0xe
- 735 023d 01       		.uleb128 0x1
- 736 023e 50       		.byte	0x50
- 737 023f 01       		.uleb128 0x1
- 738 0240 38       		.byte	0x38
- 739 0241 00       		.byte	0
- 740 0242 00       		.byte	0
- 741 0243 0C       		.uleb128 0xc
- 742 0244 06000000 		.4byte	.LASF34
- 743 0248 01       		.byte	0x1
- 744 0249 D7       		.byte	0xd7
- 745 024a 00000000 		.4byte	.LFB2
- 746 024e 1C000000 		.4byte	.LFE2-.LFB2
- 747 0252 01       		.uleb128 0x1
- 748 0253 9C       		.byte	0x9c
- 749 0254 6B020000 		.4byte	0x26b
- 750 0258 10       		.uleb128 0x10
- 751 0259 0C000000 		.4byte	.LVL7
- 752 025d F6010000 		.4byte	0x1f6
- 753 0261 10       		.uleb128 0x10
- 754 0262 16000000 		.4byte	.LVL8
- 755 0266 C8000000 		.4byte	0xc8
- 756 026a 00       		.byte	0
- 757 026b 0A       		.uleb128 0xa
- 758 026c C6010000 		.4byte	.LASF35
- 759 0270 01       		.byte	0x1
- 760 0271 FC01     		.2byte	0x1fc
- 761 0273 77000000 		.4byte	0x77
- 762 0277 00000000 		.4byte	.LFB13
- 763 027b 14000000 		.4byte	.LFE13-.LFB13
- 764 027f 01       		.uleb128 0x1
- 765 0280 9C       		.byte	0x9c
- 766 0281 11       		.uleb128 0x11
- 767 0282 93010000 		.4byte	.LASF40
- 768 0286 01       		.byte	0x1
- 769 0287 1A       		.byte	0x1a
- 770 0288 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 24
+ 958 0231 01       		.uleb128 0x1
+ 959 0232 9C       		.byte	0x9c
+ 960 0233 0D       		.uleb128 0xd
+ 961 0234 4D010000 		.4byte	.LASF40
+ 962 0238 01       		.byte	0x1
+ 963 0239 1A       		.byte	0x1a
+ 964 023a 6B000000 		.4byte	0x6b
+ 965 023e 05       		.uleb128 0x5
+ 966 023f 03       		.byte	0x3
+ 967 0240 00000000 		.4byte	TimerTX_initVar
+ 968 0244 00       		.byte	0
+ 969              		.section	.debug_abbrev,"",%progbits
+ 970              	.Ldebug_abbrev0:
+ 971 0000 01       		.uleb128 0x1
+ 972 0001 11       		.uleb128 0x11
+ 973 0002 01       		.byte	0x1
+ 974 0003 25       		.uleb128 0x25
+ 975 0004 0E       		.uleb128 0xe
+ 976 0005 13       		.uleb128 0x13
+ 977 0006 0B       		.uleb128 0xb
+ 978 0007 03       		.uleb128 0x3
+ 979 0008 0E       		.uleb128 0xe
+ 980 0009 1B       		.uleb128 0x1b
+ 981 000a 0E       		.uleb128 0xe
+ 982 000b 55       		.uleb128 0x55
+ 983 000c 17       		.uleb128 0x17
+ 984 000d 11       		.uleb128 0x11
+ 985 000e 01       		.uleb128 0x1
+ 986 000f 10       		.uleb128 0x10
+ 987 0010 17       		.uleb128 0x17
+ 988 0011 00       		.byte	0
+ 989 0012 00       		.byte	0
+ 990 0013 02       		.uleb128 0x2
+ 991 0014 24       		.uleb128 0x24
+ 992 0015 00       		.byte	0
+ 993 0016 0B       		.uleb128 0xb
+ 994 0017 0B       		.uleb128 0xb
+ 995 0018 3E       		.uleb128 0x3e
+ 996 0019 0B       		.uleb128 0xb
+ 997 001a 03       		.uleb128 0x3
+ 998 001b 0E       		.uleb128 0xe
+ 999 001c 00       		.byte	0
+ 1000 001d 00       		.byte	0
+ 1001 001e 03       		.uleb128 0x3
+ 1002 001f 24       		.uleb128 0x24
+ 1003 0020 00       		.byte	0
+ 1004 0021 0B       		.uleb128 0xb
+ 1005 0022 0B       		.uleb128 0xb
+ 1006 0023 3E       		.uleb128 0x3e
+ 1007 0024 0B       		.uleb128 0xb
+ 1008 0025 03       		.uleb128 0x3
+ 1009 0026 08       		.uleb128 0x8
+ 1010 0027 00       		.byte	0
+ 1011 0028 00       		.byte	0
+ 1012 0029 04       		.uleb128 0x4
+ 1013 002a 16       		.uleb128 0x16
+ 1014 002b 00       		.byte	0
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 28
 
 
- 771 028c 05       		.uleb128 0x5
- 772 028d 03       		.byte	0x3
- 773 028e 00000000 		.4byte	TimerTX_initVar
- 774 0292 00       		.byte	0
- 775              		.section	.debug_abbrev,"",%progbits
- 776              	.Ldebug_abbrev0:
- 777 0000 01       		.uleb128 0x1
- 778 0001 11       		.uleb128 0x11
- 779 0002 01       		.byte	0x1
- 780 0003 25       		.uleb128 0x25
- 781 0004 0E       		.uleb128 0xe
- 782 0005 13       		.uleb128 0x13
- 783 0006 0B       		.uleb128 0xb
- 784 0007 03       		.uleb128 0x3
- 785 0008 0E       		.uleb128 0xe
- 786 0009 1B       		.uleb128 0x1b
- 787 000a 0E       		.uleb128 0xe
- 788 000b 55       		.uleb128 0x55
- 789 000c 17       		.uleb128 0x17
- 790 000d 11       		.uleb128 0x11
- 791 000e 01       		.uleb128 0x1
- 792 000f 10       		.uleb128 0x10
- 793 0010 17       		.uleb128 0x17
- 794 0011 00       		.byte	0
- 795 0012 00       		.byte	0
- 796 0013 02       		.uleb128 0x2
- 797 0014 24       		.uleb128 0x24
- 798 0015 00       		.byte	0
- 799 0016 0B       		.uleb128 0xb
- 800 0017 0B       		.uleb128 0xb
- 801 0018 3E       		.uleb128 0x3e
- 802 0019 0B       		.uleb128 0xb
- 803 001a 03       		.uleb128 0x3
- 804 001b 0E       		.uleb128 0xe
- 805 001c 00       		.byte	0
- 806 001d 00       		.byte	0
- 807 001e 03       		.uleb128 0x3
- 808 001f 24       		.uleb128 0x24
- 809 0020 00       		.byte	0
- 810 0021 0B       		.uleb128 0xb
- 811 0022 0B       		.uleb128 0xb
- 812 0023 3E       		.uleb128 0x3e
- 813 0024 0B       		.uleb128 0xb
- 814 0025 03       		.uleb128 0x3
- 815 0026 08       		.uleb128 0x8
- 816 0027 00       		.byte	0
- 817 0028 00       		.byte	0
- 818 0029 04       		.uleb128 0x4
- 819 002a 16       		.uleb128 0x16
- 820 002b 00       		.byte	0
- 821 002c 03       		.uleb128 0x3
- 822 002d 0E       		.uleb128 0xe
- 823 002e 3A       		.uleb128 0x3a
- 824 002f 0B       		.uleb128 0xb
- 825 0030 3B       		.uleb128 0x3b
- 826 0031 05       		.uleb128 0x5
- 827 0032 49       		.uleb128 0x49
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 25
+ 1015 002c 03       		.uleb128 0x3
+ 1016 002d 0E       		.uleb128 0xe
+ 1017 002e 3A       		.uleb128 0x3a
+ 1018 002f 0B       		.uleb128 0xb
+ 1019 0030 3B       		.uleb128 0x3b
+ 1020 0031 05       		.uleb128 0x5
+ 1021 0032 49       		.uleb128 0x49
+ 1022 0033 13       		.uleb128 0x13
+ 1023 0034 00       		.byte	0
+ 1024 0035 00       		.byte	0
+ 1025 0036 05       		.uleb128 0x5
+ 1026 0037 35       		.uleb128 0x35
+ 1027 0038 00       		.byte	0
+ 1028 0039 49       		.uleb128 0x49
+ 1029 003a 13       		.uleb128 0x13
+ 1030 003b 00       		.byte	0
+ 1031 003c 00       		.byte	0
+ 1032 003d 06       		.uleb128 0x6
+ 1033 003e 2E       		.uleb128 0x2e
+ 1034 003f 00       		.byte	0
+ 1035 0040 3F       		.uleb128 0x3f
+ 1036 0041 19       		.uleb128 0x19
+ 1037 0042 03       		.uleb128 0x3
+ 1038 0043 0E       		.uleb128 0xe
+ 1039 0044 3A       		.uleb128 0x3a
+ 1040 0045 0B       		.uleb128 0xb
+ 1041 0046 3B       		.uleb128 0x3b
+ 1042 0047 0B       		.uleb128 0xb
+ 1043 0048 27       		.uleb128 0x27
+ 1044 0049 19       		.uleb128 0x19
+ 1045 004a 11       		.uleb128 0x11
+ 1046 004b 01       		.uleb128 0x1
+ 1047 004c 12       		.uleb128 0x12
+ 1048 004d 06       		.uleb128 0x6
+ 1049 004e 40       		.uleb128 0x40
+ 1050 004f 18       		.uleb128 0x18
+ 1051 0050 9642     		.uleb128 0x2116
+ 1052 0052 19       		.uleb128 0x19
+ 1053 0053 00       		.byte	0
+ 1054 0054 00       		.byte	0
+ 1055 0055 07       		.uleb128 0x7
+ 1056 0056 2E       		.uleb128 0x2e
+ 1057 0057 00       		.byte	0
+ 1058 0058 3F       		.uleb128 0x3f
+ 1059 0059 19       		.uleb128 0x19
+ 1060 005a 03       		.uleb128 0x3
+ 1061 005b 0E       		.uleb128 0xe
+ 1062 005c 3A       		.uleb128 0x3a
+ 1063 005d 0B       		.uleb128 0xb
+ 1064 005e 3B       		.uleb128 0x3b
+ 1065 005f 0B       		.uleb128 0xb
+ 1066 0060 27       		.uleb128 0x27
+ 1067 0061 19       		.uleb128 0x19
+ 1068 0062 11       		.uleb128 0x11
+ 1069 0063 01       		.uleb128 0x1
+ 1070 0064 12       		.uleb128 0x12
+ 1071 0065 06       		.uleb128 0x6
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 29
 
 
- 828 0033 13       		.uleb128 0x13
- 829 0034 00       		.byte	0
- 830 0035 00       		.byte	0
- 831 0036 05       		.uleb128 0x5
- 832 0037 35       		.uleb128 0x35
- 833 0038 00       		.byte	0
- 834 0039 49       		.uleb128 0x49
- 835 003a 13       		.uleb128 0x13
- 836 003b 00       		.byte	0
- 837 003c 00       		.byte	0
- 838 003d 06       		.uleb128 0x6
- 839 003e 2E       		.uleb128 0x2e
- 840 003f 00       		.byte	0
- 841 0040 3F       		.uleb128 0x3f
- 842 0041 19       		.uleb128 0x19
- 843 0042 03       		.uleb128 0x3
- 844 0043 0E       		.uleb128 0xe
- 845 0044 3A       		.uleb128 0x3a
- 846 0045 0B       		.uleb128 0xb
- 847 0046 3B       		.uleb128 0x3b
- 848 0047 0B       		.uleb128 0xb
- 849 0048 27       		.uleb128 0x27
- 850 0049 19       		.uleb128 0x19
- 851 004a 11       		.uleb128 0x11
- 852 004b 01       		.uleb128 0x1
- 853 004c 12       		.uleb128 0x12
- 854 004d 06       		.uleb128 0x6
- 855 004e 40       		.uleb128 0x40
- 856 004f 18       		.uleb128 0x18
- 857 0050 9742     		.uleb128 0x2117
- 858 0052 19       		.uleb128 0x19
- 859 0053 00       		.byte	0
- 860 0054 00       		.byte	0
- 861 0055 07       		.uleb128 0x7
- 862 0056 2E       		.uleb128 0x2e
- 863 0057 01       		.byte	0x1
- 864 0058 3F       		.uleb128 0x3f
- 865 0059 19       		.uleb128 0x19
- 866 005a 03       		.uleb128 0x3
- 867 005b 0E       		.uleb128 0xe
- 868 005c 3A       		.uleb128 0x3a
- 869 005d 0B       		.uleb128 0xb
- 870 005e 3B       		.uleb128 0x3b
- 871 005f 05       		.uleb128 0x5
- 872 0060 27       		.uleb128 0x27
- 873 0061 19       		.uleb128 0x19
- 874 0062 11       		.uleb128 0x11
- 875 0063 01       		.uleb128 0x1
- 876 0064 12       		.uleb128 0x12
- 877 0065 06       		.uleb128 0x6
- 878 0066 40       		.uleb128 0x40
- 879 0067 18       		.uleb128 0x18
- 880 0068 9742     		.uleb128 0x2117
- 881 006a 19       		.uleb128 0x19
- 882 006b 01       		.uleb128 0x1
- 883 006c 13       		.uleb128 0x13
- 884 006d 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 26
+ 1072 0066 40       		.uleb128 0x40
+ 1073 0067 18       		.uleb128 0x18
+ 1074 0068 9742     		.uleb128 0x2117
+ 1075 006a 19       		.uleb128 0x19
+ 1076 006b 00       		.byte	0
+ 1077 006c 00       		.byte	0
+ 1078 006d 08       		.uleb128 0x8
+ 1079 006e 2E       		.uleb128 0x2e
+ 1080 006f 01       		.byte	0x1
+ 1081 0070 3F       		.uleb128 0x3f
+ 1082 0071 19       		.uleb128 0x19
+ 1083 0072 03       		.uleb128 0x3
+ 1084 0073 0E       		.uleb128 0xe
+ 1085 0074 3A       		.uleb128 0x3a
+ 1086 0075 0B       		.uleb128 0xb
+ 1087 0076 3B       		.uleb128 0x3b
+ 1088 0077 05       		.uleb128 0x5
+ 1089 0078 27       		.uleb128 0x27
+ 1090 0079 19       		.uleb128 0x19
+ 1091 007a 11       		.uleb128 0x11
+ 1092 007b 01       		.uleb128 0x1
+ 1093 007c 12       		.uleb128 0x12
+ 1094 007d 06       		.uleb128 0x6
+ 1095 007e 40       		.uleb128 0x40
+ 1096 007f 18       		.uleb128 0x18
+ 1097 0080 9742     		.uleb128 0x2117
+ 1098 0082 19       		.uleb128 0x19
+ 1099 0083 01       		.uleb128 0x1
+ 1100 0084 13       		.uleb128 0x13
+ 1101 0085 00       		.byte	0
+ 1102 0086 00       		.byte	0
+ 1103 0087 09       		.uleb128 0x9
+ 1104 0088 05       		.uleb128 0x5
+ 1105 0089 00       		.byte	0
+ 1106 008a 03       		.uleb128 0x3
+ 1107 008b 0E       		.uleb128 0xe
+ 1108 008c 3A       		.uleb128 0x3a
+ 1109 008d 0B       		.uleb128 0xb
+ 1110 008e 3B       		.uleb128 0x3b
+ 1111 008f 05       		.uleb128 0x5
+ 1112 0090 49       		.uleb128 0x49
+ 1113 0091 13       		.uleb128 0x13
+ 1114 0092 02       		.uleb128 0x2
+ 1115 0093 18       		.uleb128 0x18
+ 1116 0094 00       		.byte	0
+ 1117 0095 00       		.byte	0
+ 1118 0096 0A       		.uleb128 0xa
+ 1119 0097 2E       		.uleb128 0x2e
+ 1120 0098 00       		.byte	0
+ 1121 0099 3F       		.uleb128 0x3f
+ 1122 009a 19       		.uleb128 0x19
+ 1123 009b 03       		.uleb128 0x3
+ 1124 009c 0E       		.uleb128 0xe
+ 1125 009d 3A       		.uleb128 0x3a
+ 1126 009e 0B       		.uleb128 0xb
+ 1127 009f 3B       		.uleb128 0x3b
+ 1128 00a0 05       		.uleb128 0x5
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 30
 
 
- 885 006e 00       		.byte	0
- 886 006f 08       		.uleb128 0x8
- 887 0070 05       		.uleb128 0x5
- 888 0071 00       		.byte	0
- 889 0072 03       		.uleb128 0x3
- 890 0073 0E       		.uleb128 0xe
- 891 0074 3A       		.uleb128 0x3a
- 892 0075 0B       		.uleb128 0xb
- 893 0076 3B       		.uleb128 0x3b
- 894 0077 05       		.uleb128 0x5
- 895 0078 49       		.uleb128 0x49
- 896 0079 13       		.uleb128 0x13
- 897 007a 02       		.uleb128 0x2
- 898 007b 18       		.uleb128 0x18
- 899 007c 00       		.byte	0
- 900 007d 00       		.byte	0
- 901 007e 09       		.uleb128 0x9
- 902 007f 2E       		.uleb128 0x2e
- 903 0080 00       		.byte	0
- 904 0081 3F       		.uleb128 0x3f
- 905 0082 19       		.uleb128 0x19
- 906 0083 03       		.uleb128 0x3
- 907 0084 0E       		.uleb128 0xe
- 908 0085 3A       		.uleb128 0x3a
- 909 0086 0B       		.uleb128 0xb
- 910 0087 3B       		.uleb128 0x3b
- 911 0088 05       		.uleb128 0x5
- 912 0089 27       		.uleb128 0x27
- 913 008a 19       		.uleb128 0x19
- 914 008b 11       		.uleb128 0x11
- 915 008c 01       		.uleb128 0x1
- 916 008d 12       		.uleb128 0x12
- 917 008e 06       		.uleb128 0x6
- 918 008f 40       		.uleb128 0x40
- 919 0090 18       		.uleb128 0x18
- 920 0091 9742     		.uleb128 0x2117
- 921 0093 19       		.uleb128 0x19
- 922 0094 00       		.byte	0
- 923 0095 00       		.byte	0
- 924 0096 0A       		.uleb128 0xa
- 925 0097 2E       		.uleb128 0x2e
- 926 0098 00       		.byte	0
- 927 0099 3F       		.uleb128 0x3f
- 928 009a 19       		.uleb128 0x19
- 929 009b 03       		.uleb128 0x3
- 930 009c 0E       		.uleb128 0xe
- 931 009d 3A       		.uleb128 0x3a
- 932 009e 0B       		.uleb128 0xb
- 933 009f 3B       		.uleb128 0x3b
- 934 00a0 05       		.uleb128 0x5
- 935 00a1 27       		.uleb128 0x27
- 936 00a2 19       		.uleb128 0x19
- 937 00a3 49       		.uleb128 0x49
- 938 00a4 13       		.uleb128 0x13
- 939 00a5 11       		.uleb128 0x11
- 940 00a6 01       		.uleb128 0x1
- 941 00a7 12       		.uleb128 0x12
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 27
+ 1129 00a1 27       		.uleb128 0x27
+ 1130 00a2 19       		.uleb128 0x19
+ 1131 00a3 11       		.uleb128 0x11
+ 1132 00a4 01       		.uleb128 0x1
+ 1133 00a5 12       		.uleb128 0x12
+ 1134 00a6 06       		.uleb128 0x6
+ 1135 00a7 40       		.uleb128 0x40
+ 1136 00a8 18       		.uleb128 0x18
+ 1137 00a9 9742     		.uleb128 0x2117
+ 1138 00ab 19       		.uleb128 0x19
+ 1139 00ac 00       		.byte	0
+ 1140 00ad 00       		.byte	0
+ 1141 00ae 0B       		.uleb128 0xb
+ 1142 00af 2E       		.uleb128 0x2e
+ 1143 00b0 00       		.byte	0
+ 1144 00b1 3F       		.uleb128 0x3f
+ 1145 00b2 19       		.uleb128 0x19
+ 1146 00b3 03       		.uleb128 0x3
+ 1147 00b4 0E       		.uleb128 0xe
+ 1148 00b5 3A       		.uleb128 0x3a
+ 1149 00b6 0B       		.uleb128 0xb
+ 1150 00b7 3B       		.uleb128 0x3b
+ 1151 00b8 05       		.uleb128 0x5
+ 1152 00b9 27       		.uleb128 0x27
+ 1153 00ba 19       		.uleb128 0x19
+ 1154 00bb 49       		.uleb128 0x49
+ 1155 00bc 13       		.uleb128 0x13
+ 1156 00bd 11       		.uleb128 0x11
+ 1157 00be 01       		.uleb128 0x1
+ 1158 00bf 12       		.uleb128 0x12
+ 1159 00c0 06       		.uleb128 0x6
+ 1160 00c1 40       		.uleb128 0x40
+ 1161 00c2 18       		.uleb128 0x18
+ 1162 00c3 9742     		.uleb128 0x2117
+ 1163 00c5 19       		.uleb128 0x19
+ 1164 00c6 00       		.byte	0
+ 1165 00c7 00       		.byte	0
+ 1166 00c8 0C       		.uleb128 0xc
+ 1167 00c9 34       		.uleb128 0x34
+ 1168 00ca 00       		.byte	0
+ 1169 00cb 03       		.uleb128 0x3
+ 1170 00cc 0E       		.uleb128 0xe
+ 1171 00cd 3A       		.uleb128 0x3a
+ 1172 00ce 0B       		.uleb128 0xb
+ 1173 00cf 3B       		.uleb128 0x3b
+ 1174 00d0 05       		.uleb128 0x5
+ 1175 00d1 49       		.uleb128 0x49
+ 1176 00d2 13       		.uleb128 0x13
+ 1177 00d3 02       		.uleb128 0x2
+ 1178 00d4 18       		.uleb128 0x18
+ 1179 00d5 00       		.byte	0
+ 1180 00d6 00       		.byte	0
+ 1181 00d7 0D       		.uleb128 0xd
+ 1182 00d8 34       		.uleb128 0x34
+ 1183 00d9 00       		.byte	0
+ 1184 00da 03       		.uleb128 0x3
+ 1185 00db 0E       		.uleb128 0xe
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 31
 
 
- 942 00a8 06       		.uleb128 0x6
- 943 00a9 40       		.uleb128 0x40
- 944 00aa 18       		.uleb128 0x18
- 945 00ab 9742     		.uleb128 0x2117
- 946 00ad 19       		.uleb128 0x19
- 947 00ae 00       		.byte	0
- 948 00af 00       		.byte	0
- 949 00b0 0B       		.uleb128 0xb
- 950 00b1 34       		.uleb128 0x34
- 951 00b2 00       		.byte	0
- 952 00b3 03       		.uleb128 0x3
- 953 00b4 0E       		.uleb128 0xe
- 954 00b5 3A       		.uleb128 0x3a
- 955 00b6 0B       		.uleb128 0xb
- 956 00b7 3B       		.uleb128 0x3b
- 957 00b8 05       		.uleb128 0x5
- 958 00b9 49       		.uleb128 0x49
- 959 00ba 13       		.uleb128 0x13
- 960 00bb 02       		.uleb128 0x2
- 961 00bc 18       		.uleb128 0x18
- 962 00bd 00       		.byte	0
- 963 00be 00       		.byte	0
- 964 00bf 0C       		.uleb128 0xc
- 965 00c0 2E       		.uleb128 0x2e
- 966 00c1 01       		.byte	0x1
- 967 00c2 3F       		.uleb128 0x3f
- 968 00c3 19       		.uleb128 0x19
- 969 00c4 03       		.uleb128 0x3
- 970 00c5 0E       		.uleb128 0xe
- 971 00c6 3A       		.uleb128 0x3a
- 972 00c7 0B       		.uleb128 0xb
- 973 00c8 3B       		.uleb128 0x3b
- 974 00c9 0B       		.uleb128 0xb
- 975 00ca 27       		.uleb128 0x27
- 976 00cb 19       		.uleb128 0x19
- 977 00cc 11       		.uleb128 0x11
- 978 00cd 01       		.uleb128 0x1
- 979 00ce 12       		.uleb128 0x12
- 980 00cf 06       		.uleb128 0x6
- 981 00d0 40       		.uleb128 0x40
- 982 00d1 18       		.uleb128 0x18
- 983 00d2 9742     		.uleb128 0x2117
- 984 00d4 19       		.uleb128 0x19
- 985 00d5 01       		.uleb128 0x1
- 986 00d6 13       		.uleb128 0x13
- 987 00d7 00       		.byte	0
- 988 00d8 00       		.byte	0
- 989 00d9 0D       		.uleb128 0xd
- 990 00da 898201   		.uleb128 0x4109
- 991 00dd 01       		.byte	0x1
- 992 00de 11       		.uleb128 0x11
- 993 00df 01       		.uleb128 0x1
- 994 00e0 31       		.uleb128 0x31
- 995 00e1 13       		.uleb128 0x13
- 996 00e2 01       		.uleb128 0x1
- 997 00e3 13       		.uleb128 0x13
- 998 00e4 00       		.byte	0
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 28
+ 1186 00dc 3A       		.uleb128 0x3a
+ 1187 00dd 0B       		.uleb128 0xb
+ 1188 00de 3B       		.uleb128 0x3b
+ 1189 00df 0B       		.uleb128 0xb
+ 1190 00e0 49       		.uleb128 0x49
+ 1191 00e1 13       		.uleb128 0x13
+ 1192 00e2 3F       		.uleb128 0x3f
+ 1193 00e3 19       		.uleb128 0x19
+ 1194 00e4 02       		.uleb128 0x2
+ 1195 00e5 18       		.uleb128 0x18
+ 1196 00e6 00       		.byte	0
+ 1197 00e7 00       		.byte	0
+ 1198 00e8 00       		.byte	0
+ 1199              		.section	.debug_aranges,"",%progbits
+ 1200 0000 84000000 		.4byte	0x84
+ 1201 0004 0200     		.2byte	0x2
+ 1202 0006 00000000 		.4byte	.Ldebug_info0
+ 1203 000a 04       		.byte	0x4
+ 1204 000b 00       		.byte	0
+ 1205 000c 0000     		.2byte	0
+ 1206 000e 0000     		.2byte	0
+ 1207 0010 00000000 		.4byte	.LFB0
+ 1208 0014 9C000000 		.4byte	.LFE0-.LFB0
+ 1209 0018 00000000 		.4byte	.LFB1
+ 1210 001c 48000000 		.4byte	.LFE1-.LFB1
+ 1211 0020 00000000 		.4byte	.LFB2
+ 1212 0024 24000000 		.4byte	.LFE2-.LFB2
+ 1213 0028 00000000 		.4byte	.LFB3
+ 1214 002c 48000000 		.4byte	.LFE3-.LFB3
+ 1215 0030 00000000 		.4byte	.LFB4
+ 1216 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1217 0038 00000000 		.4byte	.LFB5
+ 1218 003c 14000000 		.4byte	.LFE5-.LFB5
+ 1219 0040 00000000 		.4byte	.LFB6
+ 1220 0044 18000000 		.4byte	.LFE6-.LFB6
+ 1221 0048 00000000 		.4byte	.LFB7
+ 1222 004c 18000000 		.4byte	.LFE7-.LFB7
+ 1223 0050 00000000 		.4byte	.LFB8
+ 1224 0054 20000000 		.4byte	.LFE8-.LFB8
+ 1225 0058 00000000 		.4byte	.LFB9
+ 1226 005c 18000000 		.4byte	.LFE9-.LFB9
+ 1227 0060 00000000 		.4byte	.LFB10
+ 1228 0064 24000000 		.4byte	.LFE10-.LFB10
+ 1229 0068 00000000 		.4byte	.LFB11
+ 1230 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1231 0070 00000000 		.4byte	.LFB12
+ 1232 0074 20000000 		.4byte	.LFE12-.LFB12
+ 1233 0078 00000000 		.4byte	.LFB13
+ 1234 007c 20000000 		.4byte	.LFE13-.LFB13
+ 1235 0080 00000000 		.4byte	0
+ 1236 0084 00000000 		.4byte	0
+ 1237              		.section	.debug_ranges,"",%progbits
+ 1238              	.Ldebug_ranges0:
+ 1239 0000 00000000 		.4byte	.LFB0
+ 1240 0004 9C000000 		.4byte	.LFE0
+ 1241 0008 00000000 		.4byte	.LFB1
+ 1242 000c 48000000 		.4byte	.LFE1
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 32
 
 
- 999 00e5 00       		.byte	0
- 1000 00e6 0E       		.uleb128 0xe
- 1001 00e7 8A8201   		.uleb128 0x410a
- 1002 00ea 00       		.byte	0
- 1003 00eb 02       		.uleb128 0x2
- 1004 00ec 18       		.uleb128 0x18
- 1005 00ed 9142     		.uleb128 0x2111
- 1006 00ef 18       		.uleb128 0x18
- 1007 00f0 00       		.byte	0
- 1008 00f1 00       		.byte	0
- 1009 00f2 0F       		.uleb128 0xf
- 1010 00f3 898201   		.uleb128 0x4109
- 1011 00f6 01       		.byte	0x1
- 1012 00f7 11       		.uleb128 0x11
- 1013 00f8 01       		.uleb128 0x1
- 1014 00f9 31       		.uleb128 0x31
- 1015 00fa 13       		.uleb128 0x13
- 1016 00fb 00       		.byte	0
- 1017 00fc 00       		.byte	0
- 1018 00fd 10       		.uleb128 0x10
- 1019 00fe 898201   		.uleb128 0x4109
- 1020 0101 00       		.byte	0
- 1021 0102 11       		.uleb128 0x11
- 1022 0103 01       		.uleb128 0x1
- 1023 0104 31       		.uleb128 0x31
- 1024 0105 13       		.uleb128 0x13
- 1025 0106 00       		.byte	0
- 1026 0107 00       		.byte	0
- 1027 0108 11       		.uleb128 0x11
- 1028 0109 34       		.uleb128 0x34
- 1029 010a 00       		.byte	0
- 1030 010b 03       		.uleb128 0x3
- 1031 010c 0E       		.uleb128 0xe
- 1032 010d 3A       		.uleb128 0x3a
- 1033 010e 0B       		.uleb128 0xb
- 1034 010f 3B       		.uleb128 0x3b
- 1035 0110 0B       		.uleb128 0xb
- 1036 0111 49       		.uleb128 0x49
- 1037 0112 13       		.uleb128 0x13
- 1038 0113 3F       		.uleb128 0x3f
- 1039 0114 19       		.uleb128 0x19
- 1040 0115 02       		.uleb128 0x2
- 1041 0116 18       		.uleb128 0x18
- 1042 0117 00       		.byte	0
- 1043 0118 00       		.byte	0
- 1044 0119 00       		.byte	0
- 1045              		.section	.debug_aranges,"",%progbits
- 1046 0000 84000000 		.4byte	0x84
- 1047 0004 0200     		.2byte	0x2
- 1048 0006 00000000 		.4byte	.Ldebug_info0
- 1049 000a 04       		.byte	0x4
- 1050 000b 00       		.byte	0
- 1051 000c 0000     		.2byte	0
- 1052 000e 0000     		.2byte	0
- 1053 0010 00000000 		.4byte	.LFB1
- 1054 0014 28000000 		.4byte	.LFE1-.LFB1
- 1055 0018 00000000 		.4byte	.LFB3
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 29
+ 1243 0010 00000000 		.4byte	.LFB2
+ 1244 0014 24000000 		.4byte	.LFE2
+ 1245 0018 00000000 		.4byte	.LFB3
+ 1246 001c 48000000 		.4byte	.LFE3
+ 1247 0020 00000000 		.4byte	.LFB4
+ 1248 0024 20000000 		.4byte	.LFE4
+ 1249 0028 00000000 		.4byte	.LFB5
+ 1250 002c 14000000 		.4byte	.LFE5
+ 1251 0030 00000000 		.4byte	.LFB6
+ 1252 0034 18000000 		.4byte	.LFE6
+ 1253 0038 00000000 		.4byte	.LFB7
+ 1254 003c 18000000 		.4byte	.LFE7
+ 1255 0040 00000000 		.4byte	.LFB8
+ 1256 0044 20000000 		.4byte	.LFE8
+ 1257 0048 00000000 		.4byte	.LFB9
+ 1258 004c 18000000 		.4byte	.LFE9
+ 1259 0050 00000000 		.4byte	.LFB10
+ 1260 0054 24000000 		.4byte	.LFE10
+ 1261 0058 00000000 		.4byte	.LFB11
+ 1262 005c 18000000 		.4byte	.LFE11
+ 1263 0060 00000000 		.4byte	.LFB12
+ 1264 0064 20000000 		.4byte	.LFE12
+ 1265 0068 00000000 		.4byte	.LFB13
+ 1266 006c 20000000 		.4byte	.LFE13
+ 1267 0070 00000000 		.4byte	0
+ 1268 0074 00000000 		.4byte	0
+ 1269              		.section	.debug_line,"",%progbits
+ 1270              	.Ldebug_line0:
+ 1271 0000 5B010000 		.section	.debug_str,"MS",%progbits,1
+ 1271      02004400 
+ 1271      00000201 
+ 1271      FB0E0D00 
+ 1271      01010101 
+ 1272              	.LASF15:
+ 1273 0000 72656731 		.ascii	"reg16\000"
+ 1273      3600
+ 1274              	.LASF20:
+ 1275 0006 54696D65 		.ascii	"TimerTX_Start\000"
+ 1275      7254585F 
+ 1275      53746172 
+ 1275      7400
+ 1276              	.LASF36:
+ 1277 0014 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1277      43313120 
+ 1277      352E342E 
+ 1277      31203230 
+ 1277      31363036 
+ 1278 0047 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1278      20726576 
+ 1278      6973696F 
+ 1278      6E203233 
+ 1278      37373135 
+ 1279 007a 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1279      66756E63 
+ 1279      74696F6E 
+ 1279      2D736563 
+ 1279      74696F6E 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 33
 
 
- 1056 001c 28000000 		.4byte	.LFE3-.LFB3
- 1057 0020 00000000 		.4byte	.LFB4
- 1058 0024 0C000000 		.4byte	.LFE4-.LFB4
- 1059 0028 00000000 		.4byte	.LFB5
- 1060 002c 0C000000 		.4byte	.LFE5-.LFB5
- 1061 0030 00000000 		.4byte	.LFB6
- 1062 0034 0C000000 		.4byte	.LFE6-.LFB6
- 1063 0038 00000000 		.4byte	.LFB7
- 1064 003c 0C000000 		.4byte	.LFE7-.LFB7
- 1065 0040 00000000 		.4byte	.LFB8
- 1066 0044 0C000000 		.4byte	.LFE8-.LFB8
- 1067 0048 00000000 		.4byte	.LFB9
- 1068 004c 0C000000 		.4byte	.LFE9-.LFB9
- 1069 0050 00000000 		.4byte	.LFB10
- 1070 0054 0C000000 		.4byte	.LFE10-.LFB10
- 1071 0058 00000000 		.4byte	.LFB11
- 1072 005c 0C000000 		.4byte	.LFE11-.LFB11
- 1073 0060 00000000 		.4byte	.LFB12
- 1074 0064 0C000000 		.4byte	.LFE12-.LFB12
- 1075 0068 00000000 		.4byte	.LFB0
- 1076 006c 64000000 		.4byte	.LFE0-.LFB0
- 1077 0070 00000000 		.4byte	.LFB2
- 1078 0074 1C000000 		.4byte	.LFE2-.LFB2
- 1079 0078 00000000 		.4byte	.LFB13
- 1080 007c 14000000 		.4byte	.LFE13-.LFB13
- 1081 0080 00000000 		.4byte	0
- 1082 0084 00000000 		.4byte	0
- 1083              		.section	.debug_ranges,"",%progbits
- 1084              	.Ldebug_ranges0:
- 1085 0000 00000000 		.4byte	.LFB1
- 1086 0004 28000000 		.4byte	.LFE1
- 1087 0008 00000000 		.4byte	.LFB3
- 1088 000c 28000000 		.4byte	.LFE3
- 1089 0010 00000000 		.4byte	.LFB4
- 1090 0014 0C000000 		.4byte	.LFE4
- 1091 0018 00000000 		.4byte	.LFB5
- 1092 001c 0C000000 		.4byte	.LFE5
- 1093 0020 00000000 		.4byte	.LFB6
- 1094 0024 0C000000 		.4byte	.LFE6
- 1095 0028 00000000 		.4byte	.LFB7
- 1096 002c 0C000000 		.4byte	.LFE7
- 1097 0030 00000000 		.4byte	.LFB8
- 1098 0034 0C000000 		.4byte	.LFE8
- 1099 0038 00000000 		.4byte	.LFB9
- 1100 003c 0C000000 		.4byte	.LFE9
- 1101 0040 00000000 		.4byte	.LFB10
- 1102 0044 0C000000 		.4byte	.LFE10
- 1103 0048 00000000 		.4byte	.LFB11
- 1104 004c 0C000000 		.4byte	.LFE11
- 1105 0050 00000000 		.4byte	.LFB12
- 1106 0054 0C000000 		.4byte	.LFE12
- 1107 0058 00000000 		.4byte	.LFB0
- 1108 005c 64000000 		.4byte	.LFE0
- 1109 0060 00000000 		.4byte	.LFB2
- 1110 0064 1C000000 		.4byte	.LFE2
- 1111 0068 00000000 		.4byte	.LFB13
- 1112 006c 14000000 		.4byte	.LFE13
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 30
+ 1280              	.LASF31:
+ 1281 00a2 70657269 		.ascii	"period\000"
+ 1281      6F6400
+ 1282              	.LASF3:
+ 1283 00a9 73686F72 		.ascii	"short unsigned int\000"
+ 1283      7420756E 
+ 1283      7369676E 
+ 1283      65642069 
+ 1283      6E7400
+ 1284              	.LASF29:
+ 1285 00bc 54696D65 		.ascii	"TimerTX_ReadPeriod\000"
+ 1285      7254585F 
+ 1285      52656164 
+ 1285      50657269 
+ 1285      6F6400
+ 1286              	.LASF21:
+ 1287 00cf 54696D65 		.ascii	"TimerTX_Stop\000"
+ 1287      7254585F 
+ 1287      53746F70 
+ 1287      00
+ 1288              	.LASF32:
+ 1289 00dc 54696D65 		.ascii	"TimerTX_ReadCapture\000"
+ 1289      7254585F 
+ 1289      52656164 
+ 1289      43617074 
+ 1289      75726500 
+ 1290              	.LASF24:
+ 1291 00f0 54696D65 		.ascii	"TimerTX_ReadControlRegister\000"
+ 1291      7254585F 
+ 1291      52656164 
+ 1291      436F6E74 
+ 1291      726F6C52 
+ 1292              	.LASF11:
+ 1293 010c 666C6F61 		.ascii	"float\000"
+ 1293      7400
+ 1294              	.LASF34:
+ 1295 0112 636F756E 		.ascii	"counter\000"
+ 1295      74657200 
+ 1296              	.LASF1:
+ 1297 011a 756E7369 		.ascii	"unsigned char\000"
+ 1297      676E6564 
+ 1297      20636861 
+ 1297      7200
+ 1298              	.LASF14:
+ 1299 0128 72656738 		.ascii	"reg8\000"
+ 1299      00
+ 1300              	.LASF5:
+ 1301 012d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1301      20756E73 
+ 1301      69676E65 
+ 1301      6420696E 
+ 1301      7400
+ 1302              	.LASF9:
+ 1303 013f 75696E74 		.ascii	"uint8\000"
+ 1303      3800
+ 1304              	.LASF28:
+ 1305 0145 636F6E74 		.ascii	"control\000"
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 34
 
 
- 1113 0070 00000000 		.4byte	0
- 1114 0074 00000000 		.4byte	0
- 1115              		.section	.debug_line,"",%progbits
- 1116              	.Ldebug_line0:
- 1117 0000 51010000 		.section	.debug_str,"MS",%progbits,1
- 1117      02004400 
- 1117      00000201 
- 1117      FB0E0D00 
- 1117      01010101 
- 1118              	.LASF15:
- 1119 0000 72656731 		.ascii	"reg16\000"
- 1119      3600
- 1120              	.LASF34:
- 1121 0006 54696D65 		.ascii	"TimerTX_Start\000"
- 1121      7254585F 
- 1121      53746172 
- 1121      7400
- 1122              	.LASF29:
- 1123 0014 70657269 		.ascii	"period\000"
- 1123      6F6400
- 1124              	.LASF3:
- 1125 001b 73686F72 		.ascii	"short unsigned int\000"
- 1125      7420756E 
- 1125      7369676E 
- 1125      65642069 
- 1125      6E7400
- 1126              	.LASF38:
- 1127 002e 433A5C32 		.ascii	"C:\\2018 Winter\\CE4950\\GroupProject\\ce4950lab1\\"
- 1127      30313820 
- 1127      57696E74 
- 1127      65725C43 
- 1127      45343935 
- 1128 005c 4E657477 		.ascii	"NetworkingProject.cydsn\000"
- 1128      6F726B69 
- 1128      6E675072 
- 1128      6F6A6563 
- 1128      742E6379 
- 1129              	.LASF27:
- 1130 0074 54696D65 		.ascii	"TimerTX_ReadPeriod\000"
- 1130      7254585F 
- 1130      52656164 
- 1130      50657269 
- 1130      6F6400
- 1131              	.LASF19:
- 1132 0087 54696D65 		.ascii	"TimerTX_Stop\000"
- 1132      7254585F 
- 1132      53746F70 
- 1132      00
- 1133              	.LASF30:
- 1134 0094 54696D65 		.ascii	"TimerTX_ReadCapture\000"
- 1134      7254585F 
- 1134      52656164 
- 1134      43617074 
- 1134      75726500 
- 1135              	.LASF22:
- 1136 00a8 54696D65 		.ascii	"TimerTX_ReadControlRegister\000"
- 1136      7254585F 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 31
+ 1305      726F6C00 
+ 1306              	.LASF40:
+ 1307 014d 54696D65 		.ascii	"TimerTX_initVar\000"
+ 1307      7254585F 
+ 1307      696E6974 
+ 1307      56617200 
+ 1308              	.LASF12:
+ 1309 015d 646F7562 		.ascii	"double\000"
+ 1309      6C6500
+ 1310              	.LASF33:
+ 1311 0164 54696D65 		.ascii	"TimerTX_WriteCounter\000"
+ 1311      7254585F 
+ 1311      57726974 
+ 1311      65436F75 
+ 1311      6E746572 
+ 1312              	.LASF10:
+ 1313 0179 75696E74 		.ascii	"uint16\000"
+ 1313      313600
+ 1314              	.LASF35:
+ 1315 0180 54696D65 		.ascii	"TimerTX_ReadCounter\000"
+ 1315      7254585F 
+ 1315      52656164 
+ 1315      436F756E 
+ 1315      74657200 
+ 1316              	.LASF8:
+ 1317 0194 756E7369 		.ascii	"unsigned int\000"
+ 1317      676E6564 
+ 1317      20696E74 
+ 1317      00
+ 1318              	.LASF25:
+ 1319 01a1 54696D65 		.ascii	"TimerTX_SetInterruptMode\000"
+ 1319      7254585F 
+ 1319      53657449 
+ 1319      6E746572 
+ 1319      72757074 
+ 1320              	.LASF7:
+ 1321 01ba 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1321      206C6F6E 
+ 1321      6720756E 
+ 1321      7369676E 
+ 1321      65642069 
+ 1322              	.LASF39:
+ 1323 01d1 70657269 		.ascii	"period_temp\000"
+ 1323      6F645F74 
+ 1323      656D7000 
+ 1324              	.LASF17:
+ 1325 01dd 73697A65 		.ascii	"sizetype\000"
+ 1325      74797065 
+ 1325      00
+ 1326              	.LASF38:
+ 1327 01e6 433A5C55 		.ascii	"C:\\Users\\winstona\\Documents\\School Documents\\N"
+ 1327      73657273 
+ 1327      5C77696E 
+ 1327      73746F6E 
+ 1327      615C446F 
+ 1328 0214 6574776F 		.ascii	"etworking I\\ce4950lab1\\NetworkingProject.cydsn\000"
+ 1328      726B696E 
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 35
 
 
- 1136      52656164 
- 1136      436F6E74 
- 1136      726F6C52 
- 1137              	.LASF11:
- 1138 00c4 666C6F61 		.ascii	"float\000"
- 1138      7400
- 1139              	.LASF32:
- 1140 00ca 636F756E 		.ascii	"counter\000"
- 1140      74657200 
- 1141              	.LASF1:
- 1142 00d2 756E7369 		.ascii	"unsigned char\000"
- 1142      676E6564 
- 1142      20636861 
- 1142      7200
- 1143              	.LASF36:
- 1144 00e0 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1144      43313120 
- 1144      352E342E 
- 1144      31203230 
- 1144      31363036 
- 1145 0113 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1145      20726576 
- 1145      6973696F 
- 1145      6E203233 
- 1145      37373135 
- 1146 0146 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1146      66756E63 
- 1146      74696F6E 
- 1146      2D736563 
- 1146      74696F6E 
- 1147              	.LASF14:
- 1148 016e 72656738 		.ascii	"reg8\000"
- 1148      00
- 1149              	.LASF5:
- 1150 0173 6C6F6E67 		.ascii	"long unsigned int\000"
- 1150      20756E73 
- 1150      69676E65 
- 1150      6420696E 
- 1150      7400
- 1151              	.LASF9:
- 1152 0185 75696E74 		.ascii	"uint8\000"
- 1152      3800
- 1153              	.LASF26:
- 1154 018b 636F6E74 		.ascii	"control\000"
- 1154      726F6C00 
- 1155              	.LASF40:
- 1156 0193 54696D65 		.ascii	"TimerTX_initVar\000"
- 1156      7254585F 
- 1156      696E6974 
- 1156      56617200 
- 1157              	.LASF12:
- 1158 01a3 646F7562 		.ascii	"double\000"
- 1158      6C6500
- 1159              	.LASF31:
- 1160 01aa 54696D65 		.ascii	"TimerTX_WriteCounter\000"
- 1160      7254585F 
- 1160      57726974 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 32
+ 1328      6720495C 
+ 1328      63653439 
+ 1328      35306C61 
+ 1329              	.LASF30:
+ 1330 0243 54696D65 		.ascii	"TimerTX_WritePeriod\000"
+ 1330      7254585F 
+ 1330      57726974 
+ 1330      65506572 
+ 1330      696F6400 
+ 1331              	.LASF6:
+ 1332 0257 6C6F6E67 		.ascii	"long long int\000"
+ 1332      206C6F6E 
+ 1332      6720696E 
+ 1332      7400
+ 1333              	.LASF27:
+ 1334 0265 696E7465 		.ascii	"interruptMode\000"
+ 1334      72727570 
+ 1334      744D6F64 
+ 1334      6500
+ 1335              	.LASF26:
+ 1336 0273 54696D65 		.ascii	"TimerTX_WriteControlRegister\000"
+ 1336      7254585F 
+ 1336      57726974 
+ 1336      65436F6E 
+ 1336      74726F6C 
+ 1337              	.LASF2:
+ 1338 0290 73686F72 		.ascii	"short int\000"
+ 1338      7420696E 
+ 1338      7400
+ 1339              	.LASF19:
+ 1340 029a 54696D65 		.ascii	"TimerTX_Enable\000"
+ 1340      7254585F 
+ 1340      456E6162 
+ 1340      6C6500
+ 1341              	.LASF18:
+ 1342 02a9 54696D65 		.ascii	"TimerTX_Init\000"
+ 1342      7254585F 
+ 1342      496E6974 
+ 1342      00
+ 1343              	.LASF23:
+ 1344 02b6 54696D65 		.ascii	"TimerTX_ReadStatusRegister\000"
+ 1344      7254585F 
+ 1344      52656164 
+ 1344      53746174 
+ 1344      75735265 
+ 1345              	.LASF4:
+ 1346 02d1 6C6F6E67 		.ascii	"long int\000"
+ 1346      20696E74 
+ 1346      00
+ 1347              	.LASF13:
+ 1348 02da 63686172 		.ascii	"char\000"
+ 1348      00
+ 1349              	.LASF16:
+ 1350 02df 6C6F6E67 		.ascii	"long double\000"
+ 1350      20646F75 
+ 1350      626C6500 
+ 1351              	.LASF0:
+ARM GAS  C:\Users\winstona\AppData\Local\Temp\ccE4X2NF.s 			page 36
 
 
- 1160      65436F75 
- 1160      6E746572 
- 1161              	.LASF10:
- 1162 01bf 75696E74 		.ascii	"uint16\000"
- 1162      313600
- 1163              	.LASF35:
- 1164 01c6 54696D65 		.ascii	"TimerTX_ReadCounter\000"
- 1164      7254585F 
- 1164      52656164 
- 1164      436F756E 
- 1164      74657200 
- 1165              	.LASF8:
- 1166 01da 756E7369 		.ascii	"unsigned int\000"
- 1166      676E6564 
- 1166      20696E74 
- 1166      00
- 1167              	.LASF23:
- 1168 01e7 54696D65 		.ascii	"TimerTX_SetInterruptMode\000"
- 1168      7254585F 
- 1168      53657449 
- 1168      6E746572 
- 1168      72757074 
- 1169              	.LASF7:
- 1170 0200 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1170      206C6F6E 
- 1170      6720756E 
- 1170      7369676E 
- 1170      65642069 
- 1171              	.LASF39:
- 1172 0217 70657269 		.ascii	"period_temp\000"
- 1172      6F645F74 
- 1172      656D7000 
- 1173              	.LASF17:
- 1174 0223 73697A65 		.ascii	"sizetype\000"
- 1174      74797065 
- 1174      00
- 1175              	.LASF28:
- 1176 022c 54696D65 		.ascii	"TimerTX_WritePeriod\000"
- 1176      7254585F 
- 1176      57726974 
- 1176      65506572 
- 1176      696F6400 
- 1177              	.LASF6:
- 1178 0240 6C6F6E67 		.ascii	"long long int\000"
- 1178      206C6F6E 
- 1178      6720696E 
- 1178      7400
- 1179              	.LASF25:
- 1180 024e 696E7465 		.ascii	"interruptMode\000"
- 1180      72727570 
- 1180      744D6F64 
- 1180      6500
- 1181              	.LASF24:
- 1182 025c 54696D65 		.ascii	"TimerTX_WriteControlRegister\000"
- 1182      7254585F 
- 1182      57726974 
- 1182      65436F6E 
-ARM GAS  C:\Users\wellst\AppData\Local\Temp\ccihVBZt.s 			page 33
-
-
- 1182      74726F6C 
- 1183              	.LASF2:
- 1184 0279 73686F72 		.ascii	"short int\000"
- 1184      7420696E 
- 1184      7400
- 1185              	.LASF18:
- 1186 0283 54696D65 		.ascii	"TimerTX_Enable\000"
- 1186      7254585F 
- 1186      456E6162 
- 1186      6C6500
- 1187              	.LASF33:
- 1188 0292 54696D65 		.ascii	"TimerTX_Init\000"
- 1188      7254585F 
- 1188      496E6974 
- 1188      00
- 1189              	.LASF21:
- 1190 029f 54696D65 		.ascii	"TimerTX_ReadStatusRegister\000"
- 1190      7254585F 
- 1190      52656164 
- 1190      53746174 
- 1190      75735265 
- 1191              	.LASF4:
- 1192 02ba 6C6F6E67 		.ascii	"long int\000"
- 1192      20696E74 
- 1192      00
- 1193              	.LASF13:
- 1194 02c3 63686172 		.ascii	"char\000"
- 1194      00
- 1195              	.LASF16:
- 1196 02c8 6C6F6E67 		.ascii	"long double\000"
- 1196      20646F75 
- 1196      626C6500 
- 1197              	.LASF0:
- 1198 02d4 7369676E 		.ascii	"signed char\000"
- 1198      65642063 
- 1198      68617200 
- 1199              	.LASF37:
- 1200 02e0 47656E65 		.ascii	"Generated_Source\\PSoC5\\TimerTX.c\000"
- 1200      72617465 
- 1200      645F536F 
- 1200      75726365 
- 1200      5C50536F 
- 1201              	.LASF20:
- 1202 0301 54696D65 		.ascii	"TimerTX_SoftwareCapture\000"
- 1202      7254585F 
- 1202      536F6674 
- 1202      77617265 
- 1202      43617074 
- 1203              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1352 02eb 7369676E 		.ascii	"signed char\000"
+ 1352      65642063 
+ 1352      68617200 
+ 1353              	.LASF37:
+ 1354 02f7 47656E65 		.ascii	"Generated_Source\\PSoC5\\TimerTX.c\000"
+ 1354      72617465 
+ 1354      645F536F 
+ 1354      75726365 
+ 1354      5C50536F 
+ 1355              	.LASF22:
+ 1356 0318 54696D65 		.ascii	"TimerTX_SoftwareCapture\000"
+ 1356      7254585F 
+ 1356      536F6674 
+ 1356      77617265 
+ 1356      43617074 
+ 1357              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

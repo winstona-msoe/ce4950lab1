@@ -1,5 +1,5 @@
 -- Project:   C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\NetworkingProject.cyprj
--- Generated: 02/12/2018 20:36:04
+-- Generated: 02/13/2018 13:23:57
 -- PSoC Creator  4.1 Update 1
 
 ENTITY NetworkingProject IS
@@ -16,7 +16,9 @@ ENTITY NetworkingProject IS
         \LCD:LCDPort(5)_PAD\ : OUT std_ulogic;
         \LCD:LCDPort(6)_PAD\ : OUT std_ulogic;
         TRANSMIT(0)_PAD : OUT std_ulogic;
-        RiseEdge(0)_PAD : OUT std_ulogic);
+        RiseEdge(0)_PAD : OUT std_ulogic;
+        FallEdge(0)_PAD : OUT std_ulogic;
+        ReceiveLight(0)_PAD : OUT std_ulogic);
     ATTRIBUTE voltage_VDDABUF OF __DEFAULT__ : ENTITY IS 5e0;
     ATTRIBUTE voltage_VDDA OF __DEFAULT__ : ENTITY IS 5e0;
     ATTRIBUTE voltage_VUSB OF __DEFAULT__ : ENTITY IS 5e0;
@@ -42,6 +44,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL ClockBlock_PLL_OUT : bit;
     SIGNAL ClockBlock_XTAL : bit;
     SIGNAL ClockBlock_XTAL_32KHZ : bit;
+    SIGNAL FallEdge(0)__PA : bit;
     SIGNAL IDLE(0)__PA : bit;
     SIGNAL Net_115 : bit;
     SIGNAL Net_124 : bit;
@@ -61,9 +64,9 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL Net_64_local : bit;
     SIGNAL Net_659 : bit;
     SIGNAL Net_66 : bit;
-    ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(3,1,A)2";
+    ATTRIBUTE placement_force OF Net_66 : SIGNAL IS "U(3,4,A)2";
     SIGNAL Net_71 : bit;
-    ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(3,1,A)0";
+    ATTRIBUTE placement_force OF Net_71 : SIGNAL IS "U(3,4,A)0";
     SIGNAL Net_95 : bit;
     ATTRIBUTE placement_force OF Net_95 : SIGNAL IS "U(3,0,A)0";
     SIGNAL Net_99 : bit;
@@ -71,6 +74,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE global_signal OF Net_99 : SIGNAL IS true;
     SIGNAL Net_99_local : bit;
     SIGNAL RECEIVE(0)__PA : bit;
+    SIGNAL ReceiveLight(0)__PA : bit;
     SIGNAL RiseEdge(0)__PA : bit;
     SIGNAL TRANSMIT(0)__PA : bit;
     SIGNAL \CollisionDelay:TimerUDB:control_0\ : bit;
@@ -100,7 +104,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \\\LCD:LCDPort(5)\\__PA\ : bit;
     SIGNAL \\\LCD:LCDPort(6)\\__PA\ : bit;
     SIGNAL \RISING_EDGE:last\ : bit;
-    ATTRIBUTE placement_force OF \RISING_EDGE:last\ : SIGNAL IS "U(3,1,A)1";
+    ATTRIBUTE placement_force OF \RISING_EDGE:last\ : SIGNAL IS "U(3,4,A)1";
     SIGNAL \Timer:TimerUDB:control_0\ : bit;
     SIGNAL \Timer:TimerUDB:control_1\ : bit;
     SIGNAL \Timer:TimerUDB:control_2\ : bit;
@@ -128,7 +132,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \TimerRX:TimerUDB:status_2\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_3\ : bit;
     SIGNAL \TimerRX:TimerUDB:status_tc\ : bit;
-    ATTRIBUTE placement_force OF \TimerRX:TimerUDB:status_tc\ : SIGNAL IS "U(2,1,A)0";
+    ATTRIBUTE placement_force OF \TimerRX:TimerUDB:status_tc\ : SIGNAL IS "U(2,4,A)0";
     SIGNAL \TimerTX:Net_261\ : bit;
     SIGNAL \TimerTX:Net_51\ : bit;
     SIGNAL \\\USBUART:Dm(0)\\__PA\ : bit;
@@ -156,7 +160,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     SIGNAL \USBUART:ep_int_7\ : bit;
     SIGNAL \USBUART:ep_int_8\ : bit;
     SIGNAL __ONE__ : bit;
-    ATTRIBUTE placement_force OF __ONE__ : SIGNAL IS "U(3,1,A)3";
+    ATTRIBUTE placement_force OF __ONE__ : SIGNAL IS "U(3,4,A)3";
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
     ATTRIBUTE GROUND OF __ZERO__ : SIGNAL IS true;
@@ -215,44 +219,48 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF \USBUART:Dp(0)\ : LABEL IS "iocell6";
     ATTRIBUTE Location OF \USBUART:Dp(0)\ : LABEL IS "P15[6]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(0)\ : LABEL IS "iocell7";
-    ATTRIBUTE Location OF \LCD:LCDPort(0)\ : LABEL IS "P4[0]";
+    ATTRIBUTE Location OF \LCD:LCDPort(0)\ : LABEL IS "P2[0]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(1)\ : LABEL IS "iocell8";
-    ATTRIBUTE Location OF \LCD:LCDPort(1)\ : LABEL IS "P4[1]";
+    ATTRIBUTE Location OF \LCD:LCDPort(1)\ : LABEL IS "P2[1]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(2)\ : LABEL IS "iocell9";
-    ATTRIBUTE Location OF \LCD:LCDPort(2)\ : LABEL IS "P4[2]";
+    ATTRIBUTE Location OF \LCD:LCDPort(2)\ : LABEL IS "P2[2]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(3)\ : LABEL IS "iocell10";
-    ATTRIBUTE Location OF \LCD:LCDPort(3)\ : LABEL IS "P4[3]";
+    ATTRIBUTE Location OF \LCD:LCDPort(3)\ : LABEL IS "P2[3]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(4)\ : LABEL IS "iocell11";
-    ATTRIBUTE Location OF \LCD:LCDPort(4)\ : LABEL IS "P4[4]";
+    ATTRIBUTE Location OF \LCD:LCDPort(4)\ : LABEL IS "P2[4]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(5)\ : LABEL IS "iocell12";
-    ATTRIBUTE Location OF \LCD:LCDPort(5)\ : LABEL IS "P4[5]";
+    ATTRIBUTE Location OF \LCD:LCDPort(5)\ : LABEL IS "P2[5]";
     ATTRIBUTE lib_model OF \LCD:LCDPort(6)\ : LABEL IS "iocell13";
-    ATTRIBUTE Location OF \LCD:LCDPort(6)\ : LABEL IS "P4[6]";
+    ATTRIBUTE Location OF \LCD:LCDPort(6)\ : LABEL IS "P2[6]";
     ATTRIBUTE lib_model OF TRANSMIT(0) : LABEL IS "iocell14";
     ATTRIBUTE Location OF TRANSMIT(0) : LABEL IS "P0[7]";
     ATTRIBUTE lib_model OF RiseEdge(0) : LABEL IS "iocell15";
-    ATTRIBUTE Location OF RiseEdge(0) : LABEL IS "P15[1]";
+    ATTRIBUTE Location OF RiseEdge(0) : LABEL IS "P0[0]";
+    ATTRIBUTE lib_model OF FallEdge(0) : LABEL IS "iocell16";
+    ATTRIBUTE Location OF FallEdge(0) : LABEL IS "P0[2]";
+    ATTRIBUTE lib_model OF ReceiveLight(0) : LABEL IS "iocell17";
+    ATTRIBUTE Location OF ReceiveLight(0) : LABEL IS "P0[1]";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "macrocell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:status_tc\ : LABEL IS "U(2,4)";
     ATTRIBUTE lib_model OF Net_66 : LABEL IS "macrocell2";
-    ATTRIBUTE Location OF Net_66 : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF Net_66 : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF Net_71 : LABEL IS "macrocell3";
-    ATTRIBUTE Location OF Net_71 : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF Net_71 : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:status_tc\ : LABEL IS "macrocell4";
     ATTRIBUTE Location OF \Timer:TimerUDB:status_tc\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "macrocell5";
     ATTRIBUTE Location OF \CollisionDelay:TimerUDB:status_tc\ : LABEL IS "U(2,2)";
     ATTRIBUTE Location OF ReceiveISR : LABEL IS "[IntrContainer=(0)][IntrId=(2)]";
     ATTRIBUTE lib_model OF __ONE__ : LABEL IS "macrocell6";
-    ATTRIBUTE Location OF __ONE__ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF __ONE__ : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,4)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:rstSts:stsreg\ : LABEL IS "U(2,4)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell1";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u0\ : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF \TimerRX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell2";
-    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \TimerRX:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,4)";
     ATTRIBUTE Location OF RisingEdgeISR : LABEL IS "[IntrContainer=(0)][IntrId=(3)]";
     ATTRIBUTE Location OF FallingEdgeISR : LABEL IS "[IntrContainer=(0)][IntrId=(1)]";
     ATTRIBUTE Location OF \USBUART:dp_int\ : LABEL IS "[IntrContainer=(0)][IntrId=(12)]";
@@ -268,7 +276,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE Location OF \TimerTX:TimerHW\ : LABEL IS "F(Timer,0)";
     ATTRIBUTE Location OF TransmitISR : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "controlcell2";
-    ATTRIBUTE Location OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(2,0)";
+    ATTRIBUTE Location OF \Timer:TimerUDB:sCTRLReg:SyncCtl:ctrlreg\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "statusicell2";
     ATTRIBUTE Location OF \Timer:TimerUDB:rstSts:stsreg\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \Timer:TimerUDB:sT16:timerdp:u0\ : LABEL IS "datapathcell3";
@@ -286,7 +294,7 @@ ARCHITECTURE __DEFAULT__ OF NetworkingProject IS
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "datapathcell6";
     ATTRIBUTE Location OF \CollisionDelay:TimerUDB:sT16:timerdp:u1\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \RISING_EDGE:last\ : LABEL IS "macrocell7";
-    ATTRIBUTE Location OF \RISING_EDGE:last\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \RISING_EDGE:last\ : LABEL IS "U(3,4)";
     ATTRIBUTE lib_model OF Net_95 : LABEL IS "macrocell8";
     ATTRIBUTE Location OF Net_95 : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \CollisionDelay:TimerUDB:run_mode\ : LABEL IS "macrocell9";
@@ -1561,6 +1569,190 @@ BEGIN
             pin_input => Net_66,
             pad_out => RiseEdge(0)_PAD,
             pad_in => RiseEdge(0)_PAD,
+            in_clock => open,
+            in_clock_en => '1',
+            in_reset => '0',
+            out_clock => open,
+            out_clock_en => '1',
+            out_reset => '0');
+
+    FallEdge:logicalport
+        GENERIC MAP(
+            drive_mode => "110",
+            ibuf_enabled => "1",
+            id => "e851a3b9-efb8-48be-bbb8-b303b216c393",
+            init_dr_st => "0",
+            input_buffer_sel => "00",
+            input_clk_en => 0,
+            input_sync => "1",
+            input_sync_mode => "0",
+            intr_mode => "00",
+            invert_in_clock => 0,
+            invert_in_clock_en => 0,
+            invert_in_reset => 0,
+            invert_out_clock => 0,
+            invert_out_clock_en => 0,
+            invert_out_reset => 0,
+            io_voltage => "",
+            layout_mode => "CONTIGUOUS",
+            oe_conn => "0",
+            oe_reset => 0,
+            oe_sync => "0",
+            output_clk_en => 0,
+            output_clock_mode => "0",
+            output_conn => "1",
+            output_mode => "0",
+            output_reset => 0,
+            output_sync => "0",
+            ovt_hyst_trim => "0",
+            ovt_needed => "0",
+            ovt_slew_control => "00",
+            pa_in_clock => -1,
+            pa_in_clock_en => -1,
+            pa_in_reset => -1,
+            pa_out_clock => -1,
+            pa_out_clock_en => -1,
+            pa_out_reset => -1,
+            pin_aliases => "",
+            pin_mode => "O",
+            por_state => 4,
+            port_alias_group => "",
+            port_alias_required => 0,
+            sio_group_cnt => 0,
+            sio_hifreq => "00000000",
+            sio_hyst => "1",
+            sio_ibuf => "00000000",
+            sio_info => "00",
+            sio_obuf => "00000000",
+            sio_refsel => "00000000",
+            sio_vohsel => "00000000",
+            sio_vtrip => "00000000",
+            slew_rate => "0",
+            spanning => 0,
+            sw_only => 0,
+            use_annotation => "0",
+            vtrip => "10",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0)
+        PORT MAP(
+            in_clock_en => open,
+            in_reset => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    FallEdge(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "FallEdge",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
+        PORT MAP(
+            pa_out => FallEdge(0)__PA,
+            oe => open,
+            pin_input => Net_71,
+            pad_out => FallEdge(0)_PAD,
+            pad_in => FallEdge(0)_PAD,
+            in_clock => open,
+            in_clock_en => '1',
+            in_reset => '0',
+            out_clock => open,
+            out_clock_en => '1',
+            out_reset => '0');
+
+    ReceiveLight:logicalport
+        GENERIC MAP(
+            drive_mode => "110",
+            ibuf_enabled => "1",
+            id => "34a4d25f-c58e-468e-9678-68185a4cfc35",
+            init_dr_st => "0",
+            input_buffer_sel => "00",
+            input_clk_en => 0,
+            input_sync => "1",
+            input_sync_mode => "0",
+            intr_mode => "00",
+            invert_in_clock => 0,
+            invert_in_clock_en => 0,
+            invert_in_reset => 0,
+            invert_out_clock => 0,
+            invert_out_clock_en => 0,
+            invert_out_reset => 0,
+            io_voltage => "",
+            layout_mode => "CONTIGUOUS",
+            oe_conn => "0",
+            oe_reset => 0,
+            oe_sync => "0",
+            output_clk_en => 0,
+            output_clock_mode => "0",
+            output_conn => "1",
+            output_mode => "0",
+            output_reset => 0,
+            output_sync => "0",
+            ovt_hyst_trim => "0",
+            ovt_needed => "0",
+            ovt_slew_control => "00",
+            pa_in_clock => -1,
+            pa_in_clock_en => -1,
+            pa_in_reset => -1,
+            pa_out_clock => -1,
+            pa_out_clock_en => -1,
+            pa_out_reset => -1,
+            pin_aliases => "",
+            pin_mode => "O",
+            por_state => 4,
+            port_alias_group => "",
+            port_alias_required => 0,
+            sio_group_cnt => 0,
+            sio_hifreq => "00000000",
+            sio_hyst => "1",
+            sio_ibuf => "00000000",
+            sio_info => "00",
+            sio_obuf => "00000000",
+            sio_refsel => "00000000",
+            sio_vohsel => "00000000",
+            sio_vtrip => "00000000",
+            slew_rate => "0",
+            spanning => 0,
+            sw_only => 0,
+            use_annotation => "0",
+            vtrip => "10",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0)
+        PORT MAP(
+            in_clock_en => open,
+            in_reset => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    ReceiveLight(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "ReceiveLight",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000101")
+        PORT MAP(
+            pa_out => ReceiveLight(0)__PA,
+            oe => open,
+            pin_input => Net_172,
+            pad_out => ReceiveLight(0)_PAD,
+            pad_in => ReceiveLight(0)_PAD,
             in_clock => open,
             in_clock_en => '1',
             in_reset => '0',

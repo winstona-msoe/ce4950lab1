@@ -6,7 +6,7 @@
 
 #Build Date:         Jul 19 2017 14:31:00
 
-#File Generated:     Feb 12 2018 20:36:01
+#File Generated:     Feb 13 2018 13:23:54
 
 #Purpose:            
 
@@ -55,7 +55,7 @@ Design Statistics after Packing
 Device Utilization Summary after Packing
     Macrocells                  :	11/192
     UDBS                        :	7/24
-    IOs                         :	15/72
+    IOs                         :	17/72
 
 
 D2088: Phase 3, elapsed time : 0.0 (sec)
@@ -98,25 +98,7 @@ Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
 D2088: Phase 6, elapsed time : 0.0 (sec)
 
 Phase 7
-######################################################################
-                     Clock Summary 
-======================================================================
-Number of clocks: 10
-Clock: CLOCK1               | Frequency:  59.7 MHz | Target:   0.1 MHz
-Clock: CLOCK2               | Frequency: N/A       | Target:   0.1 MHz
-Clock: CLOCK2(fixed-function) | Frequency: N/A       | Target:   0.1 MHz
-Clock: CLOCK3               | Frequency: N/A       | Target:   0.1 MHz
-Clock: CollisionDelayClk    | Frequency:  59.7 MHz | Target:   0.0 MHz
-Clock: CyBUS_CLK            | Frequency: N/A       | Target:  24.0 MHz
-Clock: CyILO                | Frequency: N/A       | Target:   0.1 MHz
-Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
-Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
-Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
-
-======================================================================
-                     End of Clock Summary
-######################################################################
-D2088: Phase 7, elapsed time : 0.1 (sec)
+D2088: Phase 7, elapsed time : 0.0 (sec)
 
 Final Design Statistics
     Number of Combinational MCs 	:	6
@@ -126,11 +108,11 @@ Final Design Statistics
     Number of Status            	:	3
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
-    Number of IOs       	:	15
+    Number of IOs       	:	17
 
 Device Utilization Summary
     Macrocells                  :	11/192
-    IOs                         :	15/72
+    IOs                         :	17/72
 
 
 
@@ -222,11 +204,11 @@ Final Design Statistics
     Number of Status            	:	3
     Number of SyncCells         	:	0
     Number of count7cells       	:	0
-    Number of IOs       	:	15
+    Number of IOs       	:	17
 
 Device Utilization Summary
     Macrocells                  :	11/192
-    IOs                         :	15/72
+    IOs                         :	17/72
 
 
 
@@ -263,5 +245,5 @@ D2088: Phase 8, elapsed time : 0.0 (sec)
 
 D2054: Placement of the design completed successfully
 
-I2076: Total run-time: 0.9 sec.
+I2076: Total run-time: 0.7 sec.
 

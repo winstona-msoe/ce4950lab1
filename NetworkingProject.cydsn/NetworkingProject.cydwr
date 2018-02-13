@@ -301,6 +301,7 @@
       <Data key="884e37dc-0b53-42cc-a9f0-b459c917bf38" value="CLOCK1" />
     </Group>
     <Group key="Pin">
+      <Data key="34a4d25f-c58e-468e-9678-68185a4cfc35" value="ReceiveLight" />
       <Data key="264be2d3-9481-494b-8d9c-c1905a45e9cc" value="RECEIVE" />
       <Data key="284a59ed-5866-4630-9eec-41db5954099e" value="COLLISION" />
       <Data key="50137ab5-3bdc-4f10-bb11-a8bb7aa7c876/ed092b9b-d398-4703-be89-cebf998501f6" value="LCD_LCDPort" />
@@ -308,6 +309,8 @@
       <Data key="c39ef993-d787-4c0c-8ad6-c0c81f866442/8b77a6c4-10a0-4390-971c-672353e2a49c" value="USBUART_Dm" />
       <Data key="c39ef993-d787-4c0c-8ad6-c0c81f866442/618a72fc-5ddd-4df5-958f-a3d55102db42" value="USBUART_Dp" />
       <Data key="c936bb4f-653d-4801-81c0-eb475c8e77dc" value="TRANSMIT" />
+      <Data key="c7205184-884b-414a-a267-34694b1e0a1d" value="RiseEdge" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="FallEdge" />
       <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="IDLE" />
     </Group>
   </Group>
@@ -3395,6 +3398,11 @@
     </Group>
   </Group>
   <Group key="Pin2">
+    <Group key="34a4d25f-c58e-468e-9678-68185a4cfc35">
+      <Group key="0">
+        <Data key="Port Format" value="0,1" />
+      </Group>
+    </Group>
     <Group key="264be2d3-9481-494b-8d9c-c1905a45e9cc">
       <Group key="0">
         <Data key="Port Format" value="3,7" />
@@ -3413,6 +3421,16 @@
     <Group key="c936bb4f-653d-4801-81c0-eb475c8e77dc">
       <Group key="0">
         <Data key="Port Format" value="0,7" />
+      </Group>
+    </Group>
+    <Group key="c7205184-884b-414a-a267-34694b1e0a1d">
+      <Group key="0">
+        <Data key="Port Format" value="0,0" />
+      </Group>
+    </Group>
+    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+      <Group key="0">
+        <Data key="Port Format" value="0,2" />
       </Group>
     </Group>
     <Group key="ed092b9b-d398-4703-be89-cebf998501f6">

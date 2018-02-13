@@ -39,7 +39,7 @@
 #define TRANSMIT_COUNTER    46 
 #define BUFFER_SIZE 500
 //student assigned addressses
-#define ADDR1Start 0x60 //46
+#define ADDR1Start 46
 #define ADDR2Start 55
 #define ADDR3Start 124 //Kamith didn't have one listed so gave him 124
 #define ADDRLength 2
@@ -89,6 +89,10 @@ bool transmitMode = true; // Whether currently transmitting or receiving
 
 void checkForNewData(); 
 void stateDiagram(); 
+void nothing() {
+    int junk = 1;
+    return;
+}
 
 /*******************************************************************************
 * Define Interrupt service routine and allocate an vector to the Interrupt
@@ -124,6 +128,12 @@ CY_ISR(ReceiveInterruptHandler){
     
     if(systemState != COLLISION){
         TimerRX_Start();
+        if (receiveBitCount % 2) {
+            
+        } 
+        else {
+            nothing();
+        }
         receiveData[receiveBitCount] = RECEIVE_Read(); 
         ++receiveBitCount;
         
@@ -228,7 +238,7 @@ CY_ISR(TimerInterruptHandler)
 {     
    	Timer_STATUS; 
     
-    if (!(lowFlag) ){
+    if (!RECEIVE_Read() ){
         systemState = IDLE;
          transmitLock = 1;
     } else {
@@ -265,7 +275,7 @@ CY_ISR(TimerInterruptHandler)
 // This is the reason why code didn't work well at higher speeds.
 CY_ISR(RisingEdgeInterruptHandler)
 {
-    if ((!lowFlag)){
+    if (RECEIVE_Read()){
         Timer_WritePeriod(COLLISION_PERIOD);
         Timer_WriteCounter(COLLISION_COUNTER);
         Timer_Start();
@@ -276,6 +286,8 @@ CY_ISR(RisingEdgeInterruptHandler)
         TimerRX_Start();
         receiveLock = 1;
         
+    } else {
+        nothing();
     }
 }
  
@@ -294,7 +306,7 @@ CY_ISR(RisingEdgeInterruptHandler)
 // TODO This could also contribute to the "race against time" issue.
 CY_ISR(FallingEdgeInterruptHandler)
 {
-    if (lowFlag){
+    if (!RECEIVE_Read()){
         Timer_WritePeriod(IDLE_PERIOD);
         Timer_WriteCounter(IDLE_COUNTER);
         Timer_Start();
@@ -383,7 +395,7 @@ int main(void)
                 if(inCount == 0){
                     if (toupper(input) == 'R') {
                         transmitMode = false;
-                        TimerRX_Start();
+                        // TimerRX_Start();
                         while(!USBUART_CDCIsReady());
                         USBUART_PutChar(input);
                         while(!USBUART_CDCIsReady());
@@ -502,7 +514,7 @@ void stateDiagram(){
 */
 void checkForNewData(){
     if(USBUART_CDCIsReady() != 0){
-        while(dataBitsRead != receivePosition){
+        while(dataBitsRead < receivePosition){
             if(dataBitsRead <= 6){
     //            if(receiveBuffer[0] == 0x00){
     //                startHeaderReceieved = 1;
@@ -516,11 +528,12 @@ void checkForNewData(){
                 crcUsage = receiveBuffer[5];
                 headerCRC = receiveBuffer[6];            
             } else {
+//                if (true) {
                 if(destinationAddress == BROADCAST_ADDRESS || 
                 ((destinationAddress >= ADDR1Start) && (destinationAddress <= ADDR1Start+ADDRLength)) ||
                 ((destinationAddress >= ADDR2Start) && (destinationAddress <= ADDR2Start+ADDRLength)) ||
                 ((destinationAddress >= ADDR3Start) && (destinationAddress <= ADDR3Start+ADDRLength))){
-                    if(addressZeroReceive == 0){
+                   if(addressZeroReceive == 0){
                         while(!USBUART_CDCIsReady());
                         USBUART_PutCRLF();
                         while(!USBUART_CDCIsReady());
@@ -575,7 +588,8 @@ void checkForNewData(){
                         while(!USBUART_CDCIsReady());
                         addressZeroReceive = 1;
                     }
-                    if(dataBitsRead > 6 && dataBitsRead < receiveBuffer[4] + 7){
+                    if(
+                        6 && dataBitsRead < receiveBuffer[4] + 7){
                         USBUART_PutChar(receiveBuffer[dataBitsRead]);
                     }
                     

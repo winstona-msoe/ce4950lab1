@@ -94,6 +94,12 @@
   <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\CollisionDelay_PM.c" value="SOURCE_C;CortexM3;;;;CollisionDelay" />
   <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\CollisionDelayClk.c" value="SOURCE_C;CortexM3;;;;CollisionDelayClk" />
   <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\CollisionDelayClk.h" value="HEADER;;;;;CollisionDelayClk" />
+  <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\FallEdge_aliases.h" value="HEADER;;;;;FallEdge" />
+  <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\FallEdge.c" value="SOURCE_C;CortexM3;;;;FallEdge" />
+  <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\FallEdge.h" value="HEADER;;;;;FallEdge" />
+  <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\ReceiveLight_aliases.h" value="HEADER;;;;;ReceiveLight" />
+  <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\ReceiveLight.c" value="SOURCE_C;CortexM3;;;;ReceiveLight" />
+  <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\ReceiveLight.h" value="HEADER;;;;;ReceiveLight" />
   <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\USBUART_Dm_aliases.h" value="HEADER;;;;;USBUART_Dm" />
   <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\USBUART_Dm.c" value="SOURCE_C;CortexM3;;;;USBUART_Dm" />
   <file name="C:\Users\winstona\Documents\School Documents\Networking I\ce4950lab1\NetworkingProject.cydsn\codegentemp\USBUART_Dm.h" value="HEADER;;;;;USBUART_Dm" />
